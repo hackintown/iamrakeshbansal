@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "../button";
@@ -43,6 +43,19 @@ const Navbar: React.FC = () => {
   const handleCloseSidebar = () => {
     setIsOpen(false); // Close sidebar when a link is clicked
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        // adjust the breakpoint to your needs
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <nav className="bg-white py-2 border-b-gray-200 shadow-md relative">
       <div className="container mx-auto px-4 flex justify-between items-center">
