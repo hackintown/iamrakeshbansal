@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
             width={140}
             height={140}
             alt="Logo"
-            className="w-full h-auto mr-3"
+            className="w-auto h-auto max-w-[120px] lg:max-w-[160px] xl:max-w-[180px]"
           />
         </Link>
 
@@ -145,7 +145,7 @@ const Navbar: React.FC = () => {
         {/* Desktop Button */}
         <div className="hidden lg:block">
           <Link href="/contact-us" passHref>
-            <Button>Free Trail</Button>
+            <Button>Enroll Now</Button>
           </Link>
         </div>
 
@@ -153,11 +153,11 @@ const Navbar: React.FC = () => {
         <div className="lg:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="text-gray-600 hover:text-green-500 focus:outline-none"
+            className="text-primary hover:text-accent focus:outline-none"
           >
             {isOpen ? (
               <svg
-                className="w-6 h-6"
+                className="w-7 h-7"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -172,7 +172,7 @@ const Navbar: React.FC = () => {
               </svg>
             ) : (
               <svg
-                className="w-6 h-6"
+                className="w-7 h-7"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -197,21 +197,34 @@ const Navbar: React.FC = () => {
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
-            transition={{ duration: 0.4 }}
-            className="fixed inset-0 bg-white z-50 flex flex-col px-4 py-6"
+            transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
+            className="fixed inset-0 bg-white z-50 flex flex-col px-6 py-6 overflow-y-auto"
+            style={{ boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
           >
             {/* Close Button */}
-            <div className="flex justify-between items-center mb-6">
-              <span className="text-lg font-bold">Menu</span>
-              <button onClick={() => setIsOpen(false)}>
-                <XIcon className="w-6 h-6 text-green-600" />
+            <div className="flex justify-between items-center">
+              <span className="text-2xl font-bold text-accent">Menu</span>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition"
+              >
+                <XIcon className="w-7 h-7 text-green-600" />
               </button>
             </div>
 
+            {/* Home */}
+            <Link
+              href="/home"
+              onClick={handleCloseSidebar}
+              className="block py-4 text-base font-medium text-primary hover:text-accent transition-all"
+            >
+              Home
+            </Link>
+
             {/* Services Menu */}
-            <div>
+            <div className="">
               <button
-                className="w-full flex items-center justify-between text-left text-foreground py-2"
+                className="w-full flex items-center justify-between text-left text-base font-medium text-primary py-4 hover:text-accent transition-all"
                 onClick={() => toggleMenu("services")}
               >
                 <span>Services</span>
@@ -229,103 +242,111 @@ const Navbar: React.FC = () => {
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="pl-4"
+                  transition={{ duration: 0.4, ease: [0.42, 0, 0.58, 1] }}
+                  className="grid w-full gap-2 p-4 rounded-2xl  bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
                 >
                   <Link
-                    href="/web-development"
+                    href="/intraday-btst-plan"
                     onClick={handleCloseSidebar}
-                    className="block py-2"
+                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
                   >
-                    Web Development
+                    Intraday/BTST Plan
                   </Link>
                   <Link
-                    href="/agile-development"
+                    href="/options-plan"
                     onClick={handleCloseSidebar}
-                    className="block py-2"
+                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
                   >
-                    Agile Development
+                    Options Plan
                   </Link>
                   <Link
-                    href="/cloud-devops"
+                    href="/futures-plan"
                     onClick={handleCloseSidebar}
-                    className="block py-2"
+                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
                   >
-                    Cloud & DevOps
+                    Futures Plan
                   </Link>
                   <Link
-                    href="/application-development"
+                    href="/mentorship-plan"
                     onClick={handleCloseSidebar}
-                    className="block py-2"
+                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
                   >
-                    Application Development
+                    Mentorship Plan
+                  </Link>
+                  <Link
+                    href="/commodity-plan"
+                    onClick={handleCloseSidebar}
+                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
+                  >
+                    Commodity Plan
+                  </Link>
+                  <Link
+                    href="/hni-plan"
+                    onClick={handleCloseSidebar}
+                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
+                  >
+                    HNI Plan
                   </Link>
                 </motion.div>
               )}
             </div>
 
-            {/* Technologies Menu */}
-            <div>
+            {/* Courses Menu */}
+            <div className="">
               <button
-                className="w-full flex items-center justify-between text-left text-foreground py-2"
-                onClick={() => toggleMenu("technologies")}
+                className="w-full flex items-center justify-between text-left text-base font-medium text-primary py-4 hover:text-accent transition-all"
+                onClick={() => toggleMenu("courses")}
               >
-                <span>Technologies</span>
+                <span>Courses</span>
                 <motion.div
                   animate={{
-                    rotate: activeMenu === "technologies" ? 180 : 0,
+                    rotate: activeMenu === "courses" ? 180 : 0,
                   }}
                   transition={{ duration: 0.3 }}
                 >
                   <ChevronDownIcon className="h-6 w-6 text-green-600" />
                 </motion.div>
               </button>
-              {activeMenu === "technologies" && (
+              {activeMenu === "courses" && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
-                  className="pl-4"
+                  transition={{ duration: 0.4, ease: [0.42, 0, 0.58, 1] }}
+                  className="grid w-full gap-2 p-4 rounded-2xl  bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
                 >
-                  {NavigationItems.map((item) => (
-                    <Link
-                      key={item.title}
-                      href={item.href}
-                      className="block py-2"
-                      onClick={handleCloseSidebar}
-                    >
-                      {item.title}
-                    </Link>
-                  ))}
+                  <Link
+                    href="/kurukshetra"
+                    onClick={handleCloseSidebar}
+                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
+                  >
+                    Kurukshetra - Win the Battle
+                  </Link>
                 </motion.div>
               )}
             </div>
 
             {/* Static Links */}
             <Link
-              href="/work"
+              href="/blogs"
               onClick={handleCloseSidebar}
-              className="block py-2 text-foreground"
+              className="block py-4 text-base font-medium text-primary hover:text-accent transition-all"
             >
-              Work
+              Blogs
             </Link>
             <Link
-              href="/company"
+              href="/about-us"
               onClick={handleCloseSidebar}
-              className="block py-2 text-foreground"
+              className="block py-4 text-base font-medium text-primary hover:text-accent transition-all"
             >
-              Company
-            </Link>
-            <Link
-              href="/hire-developer"
-              onClick={handleCloseSidebar}
-              className="block py-2 text-foreground"
-            >
-              Hire Developer
+              About Us
             </Link>
 
             {/* Mobile Button */}
-            <div className="mt-4">
-              <Button>Start a Project</Button>
+            <div className="mt-3">
+              <Link href="/contact-us" passHref>
+                <Button>Enroll Now</Button>
+              </Link>
             </div>
           </motion.div>
         )}
