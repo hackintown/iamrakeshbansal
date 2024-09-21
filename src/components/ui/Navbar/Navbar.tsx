@@ -15,7 +15,6 @@ import {
   navigationMenuTriggerStyle,
 } from "../navigation.menu";
 import { ChevronDownIcon, XIcon } from "lucide-react";
-import { NavigationItems } from "./constant";
 
 const servicesData = [
   { title: "Intraday/BTST Plan", href: "/services/intraday-btst" },
