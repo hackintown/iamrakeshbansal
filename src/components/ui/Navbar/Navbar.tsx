@@ -1,9 +1,10 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Button } from "../button";
-import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -14,7 +15,7 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "../navigation.menu";
-import { ChevronDownIcon, XIcon } from "lucide-react";
+import { ChevronDownIcon } from "lucide-react";
 
 const servicesData = [
   { title: "Intraday/BTST Plan", href: "/services/intraday-btst" },
@@ -28,26 +29,105 @@ const servicesData = [
 const coursesData = [
   { title: "Kurukshetra- win the battle", href: "/courses/kurukshetra" },
 ];
+interface AnimatedHamburgerButtonProps {
+  active: boolean;
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AnimatedHamburgerButton: React.FC<AnimatedHamburgerButtonProps> = ({
+  active,
+  setActive,
+}) => {
+  return (
+    <MotionConfig
+      transition={{
+        duration: 0.5,
+        ease: "easeInOut",
+      }}
+    >
+      <motion.button
+        initial={false}
+        animate={active ? "open" : "closed"}
+        onClick={() => setActive((pv) => !pv)}
+        className="relative w-[60px] h-[68px] rounded-full bg-white/0 transition-colors hover:bg-white/20"
+      >
+        <motion.span
+          variants={VARIANTS.top}
+          className="absolute h-1 w-9 bg-primary"
+          style={{ y: "-50%", left: "50%", x: "-50%", top: "35%" }}
+        />
+        <motion.span
+          variants={VARIANTS.middle}
+          className="absolute h-1 w-8 bg-primary"
+          style={{ left: "50%", x: "-50%", top: "50%", y: "-50%" }}
+        />
+        <motion.span
+          variants={VARIANTS.bottom}
+          className="absolute h-1 w-3 bg-primary"
+          style={{
+            x: "-50%",
+            y: "50%",
+            bottom: "35%",
+            left: "calc(50% + 10px)",
+          }}
+        />
+      </motion.button>
+    </MotionConfig>
+  );
+};
+
+const VARIANTS = {
+  top: {
+    open: {
+      rotate: ["0deg", "0deg", "45deg"],
+      top: ["35%", "50%", "50%"],
+    },
+    closed: {
+      rotate: ["45deg", "0deg", "0deg"],
+      top: ["50%", "50%", "35%"],
+    },
+  },
+  middle: {
+    open: {
+      rotate: ["0deg", "0deg", "-45deg"],
+    },
+    closed: {
+      rotate: ["-45deg", "0deg", "0deg"],
+    },
+  },
+  bottom: {
+    open: {
+      rotate: ["0deg", "0deg", "45deg"],
+      bottom: ["35%", "50%", "50%"],
+      left: "50%",
+    },
+    closed: {
+      rotate: ["45deg", "0deg", "0deg"],
+      bottom: ["50%", "50%", "35%"],
+      left: "calc(50% + 10px)",
+    },
+  },
+};
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeMenu, setActiveMenu] = useState<string | null>(null); // For tracking active submenus
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   const toggleMenu = (menu: string) => {
     if (activeMenu === menu) {
-      setActiveMenu(null); // Close the menu if already open
+      setActiveMenu(null);
     } else {
-      setActiveMenu(menu); // Open the selected menu
+      setActiveMenu(menu);
     }
   };
+
   const handleCloseSidebar = () => {
-    setIsOpen(false); // Close sidebar when a link is clicked
+    setIsOpen(false);
   };
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
-        // adjust the breakpoint to your needs
         setIsOpen(false);
       }
     };
@@ -56,8 +136,9 @@ const Navbar: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
-    <nav className="bg-white py-2 border-b-gray-200 shadow-md relative">
+    <nav className="bg-white py-2 border-b-gray-200 shadow-md relative z-50">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/">
           <Image
@@ -71,7 +152,7 @@ const Navbar: React.FC = () => {
 
         {/* Desktop Links */}
         <div className="hidden lg:block">
-          <NavigationMenu style={{ zIndex: 1000 }}>
+          <NavigationMenu>
             <NavigationMenuList>
               {/* Home */}
               <NavigationMenuItem>
@@ -93,7 +174,7 @@ const Navbar: React.FC = () => {
                   Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="flex flex-row">
-                  <ul className="grid max-w-[300px] w-full gap-2 p-4  bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
+                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
                     {servicesData.map((service) => (
                       <ListItem
                         key={service.title}
@@ -111,7 +192,7 @@ const Navbar: React.FC = () => {
                   Courses
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid max-w-[300px] w-full gap-2 p-4  bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
+                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
                     {coursesData.map((course) => (
                       <ListItem
                         key={course.title}
@@ -163,42 +244,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden">
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-primary hover:text-accent focus:outline-none"
-          >
-            {isOpen ? (
-              <svg
-                className="w-7 h-7"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            ) : (
-              <svg
-                className="w-7 h-7"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            )}
-          </button>
+          <AnimatedHamburgerButton active={isOpen} setActive={setIsOpen} />
         </div>
       </div>
 
@@ -209,21 +255,10 @@ const Navbar: React.FC = () => {
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
-            transition={{ duration: 0.6, ease: [0.42, 0, 0.58, 1] }}
-            className="fixed inset-0 bg-white z-50 flex flex-col px-6 py-6 overflow-y-auto"
+            transition={{ duration: 0.3, ease: [0.42, 0, 0.58, 1] }}
+            className="absolute top-full inset-0 min-h-screen bg-white z-50 flex flex-col px-6 py-6 overflow-y-auto"
             style={{ boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)" }}
           >
-            {/* Close Button */}
-            <div className="flex justify-between items-center">
-              <span className="text-2xl font-bold text-accent">Menu</span>
-              <button
-                onClick={() => setIsOpen(false)}
-                className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition"
-              >
-                <XIcon className="w-7 h-7 text-green-600" />
-              </button>
-            </div>
-
             {/* Home */}
             <Link
               href="/home"
@@ -255,50 +290,18 @@ const Navbar: React.FC = () => {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.4, ease: [0.42, 0, 0.58, 1] }}
-                  className="grid w-full gap-2 p-4 rounded-2xl  bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
+                  className="grid w-full gap-2 p-4 rounded-2xl bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
                 >
-                  <Link
-                    href="/intraday-btst-plan"
-                    onClick={handleCloseSidebar}
-                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
-                  >
-                    Intraday/BTST Plan
-                  </Link>
-                  <Link
-                    href="/options-plan"
-                    onClick={handleCloseSidebar}
-                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
-                  >
-                    Options Plan
-                  </Link>
-                  <Link
-                    href="/futures-plan"
-                    onClick={handleCloseSidebar}
-                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
-                  >
-                    Futures Plan
-                  </Link>
-                  <Link
-                    href="/mentorship-plan"
-                    onClick={handleCloseSidebar}
-                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
-                  >
-                    Mentorship Plan
-                  </Link>
-                  <Link
-                    href="/commodity-plan"
-                    onClick={handleCloseSidebar}
-                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
-                  >
-                    Commodity Plan
-                  </Link>
-                  <Link
-                    href="/hni-plan"
-                    onClick={handleCloseSidebar}
-                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
-                  >
-                    HNI Plan
-                  </Link>
+                  {servicesData.map((service) => (
+                    <Link
+                      key={service.title}
+                      href={service.href}
+                      onClick={handleCloseSidebar}
+                      className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
+                    >
+                      {service.title}
+                    </Link>
+                  ))}
                 </motion.div>
               )}
             </div>
@@ -325,15 +328,18 @@ const Navbar: React.FC = () => {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.4, ease: [0.42, 0, 0.58, 1] }}
-                  className="grid w-full gap-2 p-4 rounded-2xl  bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
+                  className="grid w-full gap-2 p-4 rounded-2xl bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
                 >
-                  <Link
-                    href="/kurukshetra"
-                    onClick={handleCloseSidebar}
-                    className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
-                  >
-                    Kurukshetra - Win the Battle
-                  </Link>
+                  {coursesData.map((course) => (
+                    <Link
+                      key={course.title}
+                      href={course.href}
+                      onClick={handleCloseSidebar}
+                      className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
+                    >
+                      {course.title}
+                    </Link>
+                  ))}
                 </motion.div>
               )}
             </div>
@@ -383,7 +389,7 @@ const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
             ref={ref}
             href={href}
             className={cn(
-              "block select-none space-y-1 text-nowrap shadow-md bg-[#D9D9D9] rounded-xl text-center p-3 leading-none no-underline outline-none transition-colors  hover:text-primary",
+              "block select-none space-y-1 text-nowrap shadow-md bg-[#D9D9D9] rounded-xl text-center p-3 leading-none no-underline outline-none transition-colors hover:text-primary",
               className
             )}
             {...props}

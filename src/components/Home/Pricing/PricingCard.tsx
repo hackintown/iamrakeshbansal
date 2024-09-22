@@ -1,7 +1,8 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { RiCheckboxCircleFill } from "react-icons/ri";
-
+import { motion } from "framer-motion";
 // Define only the required props for CardHeader and CardFooter components
 interface CardHeaderProps {
   title: string;
@@ -80,7 +81,14 @@ const PricingCard = ({
   buttonText,
   popular = false,
 }: PricingPlan) => (
-  <div className="rounded-lg border-2 border-[#852B83] bg-transparent w-[300px] text-primary hover:shadow-lg transition-shadow relative">
+  <motion.div
+    className="rounded-lg border-2 border-[#852B83] bg-transparent w-[300px] text-primary hover:shadow-lg 
+  transition-shadow relative flex flex-col justify-between"
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.1)" }}
+  >
     <CardHeader
       title={title}
       price={price}
@@ -89,7 +97,7 @@ const PricingCard = ({
     />
     <FeatureList features={features} />
     <CardFooter buttonText={buttonText} />
-  </div>
+  </motion.div>
 );
 
 export default PricingCard;

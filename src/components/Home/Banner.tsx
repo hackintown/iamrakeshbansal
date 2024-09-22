@@ -9,17 +9,23 @@ const Banner = () => {
   const words = ["Success", "Mastery", "Excellence", "Confidence"];
   const router = useRouter();
   return (
-    <div className="relative w-full bg-gradient-to-b from-[#EAFFEA] to-[rgba(255, 255, 255, 0.00)] py-5 lg:py-10 h-full overflow-hidden">
+    <div className="relative w-full py-5 lg:py-10 h-full overflow-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="md:flex items-center justify-between">
           {/* Text Section */}
           <div className="flex flex-col items-center md:items-start w-full">
-            <h1 className="text-center md:text-left text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight lg:leading-tight xl:leading-tight text-primary">
+            <h1
+              className="text-center md:text-left text-3xl sm:text-4xl lg:text-5xl xl:text-6xl
+             font-bold leading-tight lg:leading-tight xl:leading-tight text-cyan-300"
+            >
               Unlock <br className="hidden md:block" /> the Path to Trading
               <br className="md:hidden" />
               <br className="hidden md:block" />
               and
-              <FlipWords className="text-accent font-bold" words={words} />
+              <FlipWords
+                className="text-secondary-foreground font-bold"
+                words={words}
+              />
               <br />
             </h1>
             <Button
