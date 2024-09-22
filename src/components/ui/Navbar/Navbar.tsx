@@ -18,16 +18,39 @@ import {
 import { ChevronDownIcon } from "lucide-react";
 
 const servicesData = [
-  { title: "Intraday/BTST Plan", href: "/services/intraday-btst" },
-  { title: "Options Plan", href: "/services/options" },
-  { title: "Futures Plan", href: "/services/futures" },
-  { title: "Mentorship Plan", href: "/services/mentorship" },
-  { title: "Commodity Plan", href: "/services/commodity" },
-  { title: "HNI", href: "/services/hni" },
+  {
+    title: "Intraday/BTST Plan",
+    href: "https://rakeshbansal.rpy.club/g/KbkzwwjCcO",
+  },
+  {
+    title: "Options Plan",
+    href: "https://rakeshbansal.rpy.club/jcp/3vKH8YQCjS",
+  },
+  {
+    title: "Option & IntraDay",
+    href: "https://rakeshbansal.rpy.club/pick-package?id=65bba85ec908731d0d764b39&type=RigiChannelChat&redirectBackUrl=%2Fjcp%2F3vKH8YQCjS ",
+  },
+  {
+    title: "Futures Plan",
+    href: "https://rakeshbansal.rpy.club/jcp/Z3WkEvk1L6",
+  },
+  {
+    title: "Mentorship Plan",
+    href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
+  },
+  {
+    title: "Commodity Plan",
+    href: "https://rakeshbansal.rpy.club/jcp/atcYbhpxGM",
+  },
+  { title: "HNI", href: "https://forms.gle/WGLoiPKDFfinfMj57" },
 ];
 
-const coursesData = [
-  { title: "Kurukshetra- win the battle", href: "/courses/kurukshetra" },
+const coursesData = [{ title: "KURUKSHETRA - Win The Battle", href: "#" }];
+const aboutusData = [
+  {
+    title: "About Dr. Rakesh Bansal",
+    href: "#",
+  },
 ];
 interface AnimatedHamburgerButtonProps {
   active: boolean;
@@ -220,16 +243,20 @@ const Navbar: React.FC = () => {
 
               {/* About Us */}
               <NavigationMenuItem>
-                <Link href="/about-us" passHref legacyBehavior>
-                  <NavigationMenuLink
-                    className={cn(
-                      navigationMenuTriggerStyle(),
-                      "text-base text-primary"
-                    )}
-                  >
-                    About Us
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuTrigger className="text-base text-primary">
+                  About Us
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
+                    {aboutusData.map((about) => (
+                      <ListItem
+                        key={about.title}
+                        title={about.title}
+                        href={about.href}
+                      />
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
               </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
