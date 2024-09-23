@@ -169,7 +169,7 @@ const Navbar: React.FC = () => {
             width={140}
             height={140}
             alt="Logo"
-            className="w-auto h-auto max-w-[120px] lg:max-w-[160px] xl:max-w-[180px]"
+            className="w-auto h-auto max-w-[120px] lg:max-w-[130px]"
           />
         </Link>
 

@@ -1,5 +1,5 @@
 import About from "@/components/Home/About/About";
-import Banner from "@/components/Home/Banner";
+import Banner from "@/components/Home/Banner/Banner";
 import Pricing from "@/components/Home/Pricing/Pricing";
 import TrustedBy from "@/components/Home/TrustedBy";
 import SocialMedia from "@/components/ui/SocialMedia";

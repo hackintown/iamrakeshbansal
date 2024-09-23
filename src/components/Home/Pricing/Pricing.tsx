@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, X } from "lucide-react";
+import { CheckCircle, ChevronRight, X } from "lucide-react";
+import Slider from "react-slick";
 
 interface Feature {
   name: string;
@@ -192,10 +193,10 @@ const PricingCard = ({
 
   return (
     <motion.div
-      className={`rounded-lg border-2 ${
+      className={`rounded-lg border-2 grid grid-cols-1 justify-between ${
         plan.popular ? "border-accent" : "border-border"
       } bg-card w-full max-w-sm text-card-foreground shadow-sm hover:shadow-lg 
-      transition-shadow relative flex flex-col justify-between`}
+      transition-shadow relative`}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -235,8 +236,48 @@ const Switch = ({
   </button>
 );
 
+const CustomNextArrow: React.FC<{ onClick?: () => void }> = ({ onClick }) => (
+  <div
+    className="custom-slick-next absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer z-10 bg-white rounded-full p-2 shadow-md"
+    onClick={onClick}
+  >
+    <ChevronRight className="w-6 h-6 text-primary" />
+  </div>
+);
+
 export default function Pricing() {
   const [duration, setDuration] = useState<PlanDuration>("monthly");
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: false,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <></>,
+    className: "right-side-visible-slider",
+    responsive: [
+      { breakpoint: 1024, settings: { slidesToShow: 3 } },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2.1,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1.1,
+          centerMode: true,
+          centerPadding: "20px",
+        },
+      },
+    ],
+  };
 
   const handleDurationChange = (newDuration: PlanDuration) => {
     setDuration(newDuration);
@@ -305,12 +346,13 @@ export default function Pricing() {
             Save 20%
           </span>
         </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        <Slider {...settings}>
           {pricingData.map((plan, index) => (
-            <PricingCard key={index} plan={plan} duration={duration} />
+            <div key={index} className="outline-none px-2 py-2">
+              <PricingCard plan={plan} duration={duration} />
+            </div>
           ))}
-        </div>
+        </Slider>
       </div>
     </div>
   );
