@@ -1,17 +1,41 @@
-"use client"
+"use client";
 
-import React from "react"
-import Image from "next/image"
-import { motion } from "framer-motion"
-import { TrendingUp, DollarSign, BarChart2, BookOpen, Users, Zap, Clock, Briefcase } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  TrendingUp,
+  DollarSign,
+  BarChart2,
+  Users,
+  Zap,
+  Clock,
+  Briefcase,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const services = [
-  { icon: Clock, title: "Intraday Trading", description: "Master short-term market movements" },
-  { icon: Briefcase, title: "Options Trading", description: "Leverage advanced derivatives strategies" },
-  { icon: TrendingUp, title: "Futures Trading", description: "Navigate the world of futures contracts" },
-  { icon: Users, title: "Mentorship Program", description: "One-on-one guidance for serious traders" },
-]
+  {
+    icon: Clock,
+    title: "Intraday Trading",
+    description: "Master short-term market movements",
+  },
+  {
+    icon: Briefcase,
+    title: "Options Trading",
+    description: "Leverage advanced derivatives strategies",
+  },
+  {
+    icon: TrendingUp,
+    title: "Futures Trading",
+    description: "Navigate the world of futures contracts",
+  },
+  {
+    icon: Users,
+    title: "Mentorship Program",
+    description: "One-on-one guidance for serious traders",
+  },
+];
 
 export default function FifthSlide() {
   return (
@@ -34,7 +58,8 @@ export default function FifthSlide() {
             Elevate Your Trading Journey
           </h1>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Join our expert-led community and unlock the secrets of successful trading strategies across various markets.
+            Join our expert-led community and unlock the secrets of successful
+            trading strategies across various markets.
           </p>
         </motion.div>
 
@@ -55,13 +80,20 @@ export default function FifthSlide() {
                   className="w-full h-auto"
                 />
                 <div className="p-6">
-                  <h2 className="text-2xl font-bold text-white mb-2">Rakesh Bansal</h2>
-                  <p className="text-gray-300">Author of "Mastering the Markets: A Comprehensive Guide to Trading Success"</p>
+                  <h2 className="text-2xl font-bold text-white mb-2">
+                    Rakesh Bansal
+                  </h2>
+                  <p className="text-gray-300">
+                    Author of "Mastering the Markets: A Comprehensive Guide to
+                    Trading Success"
+                  </p>
                 </div>
               </div>
             </div>
 
-            <h3 className="text-3xl font-bold text-white mb-6">Our Comprehensive Services</h3>
+            <h3 className="text-3xl font-bold text-white mb-6">
+              Our Comprehensive Services
+            </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {services.map((service, index) => (
                 <motion.div
@@ -72,7 +104,9 @@ export default function FifthSlide() {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                 >
                   <service.icon className="w-12 h-12 text-purple-400 mb-4" />
-                  <h4 className="text-xl font-semibold text-white mb-2">{service.title}</h4>
+                  <h4 className="text-xl font-semibold text-white mb-2">
+                    {service.title}
+                  </h4>
                   <p className="text-gray-300">{service.description}</p>
                 </motion.div>
               ))}
@@ -117,8 +151,12 @@ export default function FifthSlide() {
                     className="text-white text-center"
                   >
                     <TrendingUp className="w-16 h-16 mx-auto mb-4" />
-                    <h2 className="text-2xl font-bold mb-2">Live Market Insights</h2>
-                    <p className="text-gray-300">Real-time analysis and expert commentary</p>
+                    <h2 className="text-2xl font-bold mb-2">
+                      Live Market Insights
+                    </h2>
+                    <p className="text-gray-300">
+                      Real-time analysis and expert commentary
+                    </p>
                   </motion.div>
                 </div>
               </motion.div>
@@ -152,8 +190,13 @@ export default function FifthSlide() {
               transition={{ duration: 0.5, delay: 1.4 }}
               className="mt-12 text-center"
             >
-              <h3 className="text-2xl font-bold text-white mb-4">Ready to Transform Your Trading?</h3>
-              <p className="text-gray-300 mb-6">Join our community of successful traders and take your skills to the next level.</p>
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Ready to Transform Your Trading?
+              </h3>
+              <p className="text-gray-300 mb-6">
+                Join our community of successful traders and take your skills to
+                the next level.
+              </p>
               <Button
                 size="lg"
                 className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0 text-lg font-semibold hover:from-purple-600 hover:to-pink-600 px-8 py-4"
@@ -166,5 +209,5 @@ export default function FifthSlide() {
         </div>
       </div>
     </div>
-  )
+  );
 }

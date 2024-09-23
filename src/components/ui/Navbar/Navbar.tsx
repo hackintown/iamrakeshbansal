@@ -72,7 +72,7 @@ const AnimatedHamburgerButton: React.FC<AnimatedHamburgerButtonProps> = ({
         initial={false}
         animate={active ? "open" : "closed"}
         onClick={() => setActive((pv) => !pv)}
-        className="relative w-[60px] h-[68px] rounded-full bg-white/0 transition-colors hover:bg-white/20"
+        className="relative w-[60px] h-[55px] rounded-full bg-white/0 transition-colors hover:bg-white/20"
       >
         <motion.span
           variants={VARIANTS.top}

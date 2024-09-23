@@ -27,7 +27,7 @@ export default function Banner() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    }, 50000); // Change slide every 5 seconds
+    }, 500000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
   }, []);
@@ -43,7 +43,10 @@ export default function Banner() {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-purple-900 via-black to-green-900">
+    <div
+      className="relative w-full  overflow-hidden bg-gradient-to-br
+     from-purple-900 via-black to-green-900"
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -51,7 +54,7 @@ export default function Banner() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="w-full h-full flex items-center justify-center"
+          className="w-full h-full flex items-center justify-center max-h-max  lg:min-h-[600px] lg:max-h-[600px]"
         >
           {React.createElement(slides[currentSlide].component)}
         </motion.div>
@@ -59,14 +62,14 @@ export default function Banner() {
 
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-200 ease-in-out focus:outline-none"
+        className="absolute z-30 left-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-200 ease-in-out focus:outline-none"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-6 h-6 text-white" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-200 ease-in-out focus:outline-none"
+        className="absolute z-30 right-4 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-200 ease-in-out focus:outline-none"
         aria-label="Next slide"
       >
         <ChevronRight className="w-6 h-6 text-white" />

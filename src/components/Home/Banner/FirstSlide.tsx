@@ -37,7 +37,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="w-full min-h-screen flex items-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <section className="w-full min-h-screen flex lg:items-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl"></div>
@@ -51,16 +51,16 @@ export default function HeroSection() {
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:items-center w-full h-full"
         >
-          <motion.div variants={itemVariants}>
-            <h1 className="text-4xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight">
-              Master the Markets with{" "}
+          <motion.div variants={itemVariants} className="mt-6 lg:mt-20">
+            <h1 className="text-4xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-tight">
+              Master <br className="hidden xl:block" /> the Markets with&nbsp;
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400">
                 Rakesh Bansal
               </span>
             </h1>
-            <p className="mt-5 text-xl text-gray-300">
+            <p className="mt-5 text-sm md:text-base lg:text-xl text-gray-300">
               Empowering traders with expert insights and proven strategies for
               success in the dynamic world of financial markets.
             </p>
@@ -71,7 +71,8 @@ export default function HeroSection() {
             >
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-purple-500 to-green-500 text-white border-0 text-lg font-semibold hover:from-purple-600 hover:to-green-600 px-8 py-4"
+                className="bg-gradient-to-r from-purple-500 to-green-500 text-white border-0 text-sm md:text-base text-nowrap
+                 lg:text-lg font-semibold hover:from-purple-600 hover:to-green-600 px-4 md:px-6 lg:px-8 py-4"
               >
                 Start Your Journey
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -79,45 +80,54 @@ export default function HeroSection() {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-accent text-base border-white hover:text-gray-900"
+                className="text-accent border-white hover:text-gray-900 text-sm text-nowrap px-2 py-4 md:px-6 lg:px-8 md:font-semibold"
               >
                 Subscribe Now
               </Button>
             </motion.div>
+
             <motion.div
               variants={itemVariants}
-              className="mt-12 flex items-center space-x-8"
+              className="mt-8 sm:mt-10 flex items-center space-x-8"
             >
               <div className="flex items-center">
                 <TrendingUp className="h-6 w-6 text-purple-400 mr-2" />
-                <span className="text-gray-300">Expert Analysis</span>
+                <span className="text-gray-300 text-xs md:text-sm">
+                  Expert Analysis
+                </span>
               </div>
               <div className="flex items-center">
                 <DollarSign className="h-6 w-6 text-green-400 mr-2" />
-                <span className="text-gray-300">Profit Strategies</span>
+                <span className="text-gray-300 text-xs md:text-sm">
+                  Market Strategies
+                </span>
               </div>
               <div className="flex items-center">
                 <BarChart2 className="h-6 w-6 text-blue-400 mr-2" />
-                <span className="text-gray-300">Market Insights</span>
+                <span className="text-gray-300 text-xs md:text-sm">
+                  Market Insights
+                </span>
               </div>
             </motion.div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-green-500 rounded-full blur-3xl opacity-30"></div>
+          <motion.div
+            variants={itemVariants}
+            className="relative overflow-hidden"
+          >
             <motion.div
-              className="relative rounded-lg overflow-hidden shadow-2xl"
+              className="relative rounded-lg overflow-hidden h-full max-w-[500px] mx-auto lg:max-h-[650px]"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <Image
                 className="w-full h-auto"
-                src="/images/avatar2.webp"
+                src="/hero/banner-img6.webp"
                 alt="Rakesh Bansal"
-                width={600}
-                height={600}
+                width={500}
+                height={500}
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-6">
+              <div className="absolute bottom-8 md:bottom-16 left-6 to-transparent p-6">
                 <h2 className="text-2xl font-bold text-white">Rakesh Bansal</h2>
                 <p className="text-gray-300">Trading Mentor & Market Analyst</p>
               </div>
@@ -127,25 +137,6 @@ export default function HeroSection() {
       </div>
 
       {/* Floating Elements */}
-      <motion.div
-        className="absolute top-20 right-20 z-0 opacity-15"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 5, 0],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      >
-        <Image
-          src="/images/stock-chart.svg"
-          alt="Stock Chart"
-          width={500}
-          height={500}
-        />
-      </motion.div>
       <motion.div
         className="absolute bottom-20 left-20 z-0 opacity-15"
         animate={{
