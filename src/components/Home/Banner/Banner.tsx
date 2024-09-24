@@ -7,7 +7,7 @@ import FirstSlide from "./FirstSlide";
 import SecondSlide from "./SecondSlide";
 import ThirdSlide from "./ThirdSlide";
 import FourthSlide from "./FourthSlide";
-import FifthSlide from "./FifthSlide";
+// import FifthSlide from "./FifthSlide";
 import SixthSlide from "./SixthSlide";
 import SeventhSlide from "./SeventhSlide";
 
@@ -16,7 +16,7 @@ const slides = [
   { id: 2, component: SecondSlide },
   { id: 3, component: ThirdSlide },
   { id: 4, component: FourthSlide },
-  { id: 5, component: FifthSlide },
+  // { id: 5, component: FifthSlide },
   { id: 6, component: SixthSlide },
   { id: 7, component: SeventhSlide },
 ];

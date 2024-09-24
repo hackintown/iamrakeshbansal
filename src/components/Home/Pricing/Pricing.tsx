@@ -1,123 +1,122 @@
-"use client";
+'use client'
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { CheckCircle, ChevronRight, X } from "lucide-react";
-import Slider from "react-slick";
+import React, { useState, useRef } from 'react'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { CheckCircle, ChevronRight, ChevronLeft, X } from 'lucide-react'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 
 interface Feature {
-  name: string;
-  included: boolean;
+  name: string
+  included: boolean
 }
 
 interface PricingPlan {
-  title: string;
-  monthlyPrice: string;
-  quarterlyPrice: string;
-  yearlyPrice: string;
-  description: string;
-  features: Feature[];
-  buttonText: string;
-  popular?: boolean;
+  title: string
+  monthlyPrice: string
+  quarterlyPrice: string
+  yearlyPrice: string
+  description: string
+  features: Feature[]
+  buttonText: string
+  popular?: boolean
 }
 
-type PlanDuration = "monthly" | "quarterly" | "yearly";
+type PlanDuration = 'monthly' | 'quarterly' | 'yearly'
 
 const pricingData: PricingPlan[] = [
   {
-    title: "Intraday/BTST",
-    monthlyPrice: "999",
-    quarterlyPrice: "4500",
-    yearlyPrice: "15999",
-    description: "For beginners",
+    title: 'Intraday/BTST',
+    monthlyPrice: '999',
+    quarterlyPrice: '4500',
+    yearlyPrice: '15999',
+    description: 'For beginners',
     features: [
-      { name: "Monthly 15-20 Calls", included: true },
-      { name: "Entry Price", included: true },
-      { name: "Exit Price", included: true },
-      { name: "Stop Loss", included: true },
-      { name: "First Target", included: true },
-      { name: "Capital Required 20k to 50k", included: true },
-      { name: "Top Nifty 50 Companies", included: true },
-      { name: "Index & Equity", included: true },
+      { name: 'Monthly 15-20 Calls', included: true },
+      { name: 'Entry Price', included: true },
+      { name: 'Exit Price', included: true },
+      { name: 'Stop Loss', included: true },
+      { name: 'First Target', included: true },
+      { name: 'Capital Required 20k to 50k', included: true },
+      { name: 'Top Nifty 50 Companies', included: true },
+      { name: 'Index & Equity', included: true },
     ],
-    buttonText: "Start Trading",
+    buttonText: 'Start Trading',
   },
   {
-    title: "Mentorship Service",
-    monthlyPrice: "1999",
-    quarterlyPrice: "5700",
-    yearlyPrice: "19999",
-    description: "Most popular",
+    title: 'Mentorship Service',
+    monthlyPrice: '1999',
+    quarterlyPrice: '5700',
+    yearlyPrice: '19999',
+    description: 'Most popular',
     features: [
-      { name: "Monthly 10-15 Calls", included: true },
-      { name: "Entry Price", included: true },
-      { name: "Exit Price", included: true },
-      { name: "Stop Loss", included: true },
-      { name: "Capital Required 100k to 500k", included: true },
-      { name: "Short Medium & Long Term", included: true },
-      { name: "Swing Trade", included: true },
-      { name: "Live Market Support", included: true },
+      { name: 'Monthly 10-15 Calls', included: true },
+      { name: 'Entry Price', included: true },
+      { name: 'Exit Price', included: true },
+      { name: 'Stop Loss', included: true },
+      { name: 'Capital Required 100k to 500k', included: true },
+      { name: 'Short Medium & Long Term', included: true },
+      { name: 'Swing Trade', included: true },
+      { name: 'Live Market Support', included: true },
     ],
-    buttonText: "Get Started",
+    buttonText: 'Get Started',
     popular: true,
   },
   {
-    title: "Future Service",
-    monthlyPrice: "3999",
-    quarterlyPrice: "11400",
-    yearlyPrice: "39999",
-    description: "For professionals",
+    title: 'Future Service',
+    monthlyPrice: '3999',
+    quarterlyPrice: '11400',
+    yearlyPrice: '39999',
+    description: 'For professionals',
     features: [
-      { name: "Monthly 10-15 Calls", included: true },
-      { name: "Entry Price", included: true },
-      { name: "Exit Price", included: true },
-      { name: "Stop Loss", included: true },
-      { name: "Performance Reports", included: true },
-      { name: "Capital Required 500k to 10000k", included: true },
-      { name: "Top Nifty 50 Companies", included: true },
+      { name: 'Monthly 10-15 Calls', included: true },
+      { name: 'Entry Price', included: true },
+      { name: 'Exit Price', included: true },
+      { name: 'Stop Loss', included: true },
+      { name: 'Performance Reports', included: true },
+      { name: 'Capital Required 500k to 10000k', included: true },
+      { name: 'Top Nifty 50 Companies', included: true },
     ],
-    buttonText: "Contact Sales",
+    buttonText: 'Contact Sales',
   },
   {
-    title: "Commodity Service",
-    monthlyPrice: "3999",
-    quarterlyPrice: "11400",
-    yearlyPrice: "39999",
-    description: "For professionals",
+    title: 'Commodity Service',
+    monthlyPrice: '3999',
+    quarterlyPrice: '11400',
+    yearlyPrice: '39999',
+    description: 'For professionals',
     features: [
-      { name: "Monthly 10-15 Calls", included: true },
-      { name: "Entry Price", included: true },
-      { name: "Exit Price", included: true },
-      { name: "Stop Loss", included: true },
-      { name: "Performance Reports", included: true },
-      { name: "Capital Required 500k to 10000k", included: true },
-      {
-        name: "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil",
-        included: true,
-      },
+      { name: 'Monthly 10-15 Calls', included: true },
+      { name: 'Entry Price', included: true },
+      { name: 'Exit Price', included: true },
+      { name: 'Stop Loss', included: true },
+      { name: 'Performance Reports', included: true },
+      { name: 'Capital Required 500k to 10000k', included: true },
+      { name: 'Silver, Zinc, Aluminium, Gold, Copper and Crude Oil', included: true },
     ],
-    buttonText: "Contact Sales",
+    buttonText: 'Contact Sales',
   },
   {
-    title: "Index/Option",
-    monthlyPrice: "3999",
-    quarterlyPrice: "11400",
-    yearlyPrice: "39999",
-    description: "For professionals",
+    title: 'Index/Option',
+    monthlyPrice: '3999',
+    quarterlyPrice: '11400',
+    yearlyPrice: '39999',
+    description: 'For professionals',
     features: [
-      { name: "Monthly 10-15 Calls", included: true },
-      { name: "Entry Price", included: true },
-      { name: "Exit Price", included: true },
-      { name: "Stop Loss", included: true },
-      { name: "Capital Required 55k to 100k", included: true },
-      { name: "Top Nifty 50 Companies", included: true },
-      { name: "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY", included: true },
+      { name: 'Monthly 10-15 Calls', included: true },
+      { name: 'Entry Price', included: true },
+      { name: 'Exit Price', included: true },
+      { name: 'Stop Loss', included: true },
+      { name: 'Capital Required 55k to 100k', included: true },
+      { name: 'Top Nifty 50 Companies', included: true },
+      { name: 'Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY', included: true },
     ],
-    buttonText: "Contact Sales",
+    buttonText: 'Contact Sales',
   },
-];
+]
 
 const CardHeader = ({
   title,
@@ -126,80 +125,66 @@ const CardHeader = ({
   popular,
   duration,
 }: {
-  title: string;
-  price: string;
-  description: string;
-  popular?: boolean;
-  duration: PlanDuration;
+  title: string
+  price: string
+  description: string
+  popular?: boolean
+  duration: PlanDuration
 }) => (
   <div className="p-6 relative">
     <div className="mb-2">
-      <h2 className="text-xl font-sans font-semibold text-primary mb-3 text-left">
-        {title}
-      </h2>
+      <h2 className="text-xl font-sans font-semibold text-purple-700 mb-3 text-left">{title}</h2>
       <div className="text-center">
-        <span className="text-3xl font-bold text-primary">₹{price}</span>
-        <span className="text-sm text-muted-foreground">/{duration}</span>
+        <span className="text-3xl font-bold text-purple-700">₹{price}</span>
+        <span className="text-sm text-gray-600">/{duration}</span>
       </div>
     </div>
 
     {popular && (
-      <span className="absolute top-0 right-0 bg-accent text-accent-foreground text-xs font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">
+      <span className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">
         Most Popular
       </span>
     )}
 
-    <p className="text-sm text-muted-foreground hidden">{description}</p>
+    <p className="text-sm text-gray-600 hidden">{description}</p>
   </div>
-);
+)
 
 const FeatureList = ({ features }: { features: Feature[] }) => (
   <ul className="space-y-3 p-6">
     {features.map((feature, index) => (
       <li key={index} className="flex items-center">
         {feature.included ? (
-          <CheckCircle className="w-5 h-5 mr-2 text-accent" />
+          <CheckCircle className="w-5 h-5 mr-2 text-green-500" />
         ) : (
-          <X className="w-5 h-5 mr-2 text-muted-foreground" />
+          <X className="w-5 h-5 mr-2 text-gray-400" />
         )}
-        <span
-          className={
-            feature.included ? "text-primary" : "text-muted-foreground"
-          }
-        >
-          {feature.name}
-        </span>
+        <span className={feature.included ? 'text-black' : 'text-gray-500'}>{feature.name}</span>
       </li>
     ))}
   </ul>
-);
+)
 
 const CardFooter = ({ buttonText }: { buttonText: string }) => (
   <div className="p-6 pt-0">
-    <Button className="w-full" size="lg">
+    <Button className="w-full bg-purple-700 hover:bg-purple-800 text-white" size="lg">
       {buttonText}
     </Button>
   </div>
-);
+)
 
-const PricingCard = ({
-  plan,
-  duration,
-}: {
-  plan: PricingPlan;
-  duration: PlanDuration;
-}) => {
-  const price = plan[`${duration}Price`];
+const PricingCard = ({ plan, duration }: { plan: PricingPlan; duration: PlanDuration }) => {
+  const price = plan[`${duration}Price`]
 
   return (
     <motion.div
       className={`rounded-lg border-2 grid grid-cols-1 justify-between ${
-        plan.popular ? "border-accent" : "border-border"
-      } bg-card w-full max-w-sm text-card-foreground shadow-sm hover:shadow-lg 
-      transition-shadow relative`}
+        plan.popular ? 'border-green-500' : 'border-gray-200'
+      } bg-white w-full max-w-sm text-black shadow-sm hover:shadow-lg 
+      transition-shadow relative h-full`}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
       whileHover={{ scale: 1.03, transition: { duration: 0.2 } }}
     >
       <CardHeader
@@ -212,20 +197,13 @@ const PricingCard = ({
       <FeatureList features={plan.features} />
       <CardFooter buttonText={plan.buttonText} />
     </motion.div>
-  );
-};
+  )
+}
 
-// Custom Switch component
-const Switch = ({
-  checked,
-  onCheckedChange,
-}: {
-  checked: boolean;
-  onCheckedChange: () => void;
-}) => (
+const Switch = ({ checked, onCheckedChange }: { checked: boolean; onCheckedChange: () => void }) => (
   <button
     className={`w-14 h-7 flex items-center rounded-full p-1 shadow-sm ${
-      checked ? "bg-accent" : "bg-gray-400"
+      checked ? 'bg-green-500' : 'bg-gray-400'
     }`}
     onClick={onCheckedChange}
   >
@@ -234,19 +212,26 @@ const Switch = ({
       animate={{ x: checked ? 28 : 0 }}
     />
   </button>
-);
+)
 
-const CustomNextArrow: React.FC<{ onClick?: () => void }> = ({ onClick }) => (
+const CustomArrow = ({ onClick, direction }: { onClick?: () => void; direction: 'left' | 'right' }) => (
   <div
-    className="custom-slick-next absolute right-0 top-1/2 transform -translate-y-1/2 cursor-pointer z-10 bg-white rounded-full p-2 shadow-md"
+    className={`custom-slick-arrow absolute ${
+      direction === 'left' ? 'left-0' : 'right-0'
+    } top-1/2 transform -translate-y-1/2 cursor-pointer z-10 bg-white rounded-full p-2 shadow-md`}
     onClick={onClick}
   >
-    <ChevronRight className="w-6 h-6 text-primary" />
+    {direction === 'left' ? (
+      <ChevronLeft className="w-6 h-6 text-purple-700" />
+    ) : (
+      <ChevronRight className="w-6 h-6 text-purple-700" />
+    )}
   </div>
-);
+)
 
 export default function Pricing() {
-  const [duration, setDuration] = useState<PlanDuration>("monthly");
+  const [duration, setDuration] = useState<PlanDuration>('monthly')
+  const sliderRef = useRef<Slider>(null)
 
   const settings = {
     dots: false,
@@ -255,36 +240,29 @@ export default function Pricing() {
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: false,
-    nextArrow: <CustomNextArrow />,
-    prevArrow: <></>,
-    className: "right-side-visible-slider",
+    nextArrow: <CustomArrow direction="right" />,
+    prevArrow: <CustomArrow direction="left" />,
+    className: 'right-side-visible-slider',
     responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
+      { breakpoint: 1280, settings: { slidesToShow: 3 } },
+      { breakpoint: 1024, settings: { slidesToShow: 2 } },
       {
-        breakpoint: 768,
+        breakpoint: 640,
         settings: {
-          slidesToShow: 2.1,
+          slidesToShow: 1,
           centerMode: true,
-          centerPadding: "20px",
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1.1,
-          centerMode: true,
-          centerPadding: "20px",
+          centerPadding: '20px',
         },
       },
     ],
-  };
+  }
 
   const handleDurationChange = (newDuration: PlanDuration) => {
-    setDuration(newDuration);
-  };
+    setDuration(newDuration)
+  }
 
   return (
-    <div className="relative z-10 py-16 sm:py-24 lg:py-32 bg-background overflow-hidden">
+    <div className="relative z-10 py-6 md:py-8 lg:py-10 bg-gray-300 overflow-hidden">
       <Image
         src="/images/pricing.webp"
         alt="Background"
@@ -298,15 +276,14 @@ export default function Pricing() {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl uppercase font-bold text-[#852B83] mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl uppercase font-bold text-purple-700 mb-4">
             Our Services
           </h2>
-          <p className="max-w-2xl mx-auto text-xs md:text-sm text-[#323232] font-light">
-            Unlock your trading potential with our flexible pricing options.
-            Choose the plan that best fits your needs and start your journey to
-            financial success.
+          <p className="max-w-2xl mx-auto text-xs md:text-sm text-gray-700 font-light">
+            Unlock your trading potential with our flexible pricing options. Choose the plan that best fits
+            your needs and start your journey to financial success.
           </p>
         </motion.div>
 
@@ -317,28 +294,16 @@ export default function Pricing() {
           className="flex justify-center items-center space-x-4 mb-12"
         >
           <span
-            className={`text-lg ${
-              duration === "monthly"
-                ? "text-accent"
-                : "text-[#323232] opacity-50"
-            }`}
+            className={`text-lg ${duration === 'monthly' ? 'text-purple-700' : 'text-gray-500 opacity-50'}`}
           >
             Monthly
           </span>
           <Switch
-            checked={duration !== "monthly"}
-            onCheckedChange={() =>
-              handleDurationChange(
-                duration === "monthly" ? "yearly" : "monthly"
-              )
-            }
+            checked={duration !== 'monthly'}
+            onCheckedChange={() => handleDurationChange(duration === 'monthly' ? 'yearly' : 'monthly')}
           />
           <span
-            className={`text-lg ${
-              duration === "yearly"
-                ? "text-accent"
-                : "text-[#323232] opacity-50"
-            }`}
+            className={`text-lg ${duration === 'yearly' ? 'text-purple-700' : 'text-gray-500 opacity-50'}`}
           >
             Yearly
           </span>
@@ -346,14 +311,16 @@ export default function Pricing() {
             Save 20%
           </span>
         </motion.div>
-        <Slider {...settings}>
-          {pricingData.map((plan, index) => (
-            <div key={index} className="outline-none px-2 py-2">
-              <PricingCard plan={plan} duration={duration} />
-            </div>
-          ))}
-        </Slider>
+        <div className="relative">
+          <Slider ref={sliderRef} {...settings}>
+            {pricingData.map((plan, index) => (
+              <div key={index} className="outline-none px-2 py-2">
+                <PricingCard plan={plan} duration={duration} />
+              </div>
+            ))}
+          </Slider>
+        </div>
       </div>
     </div>
-  );
+  )
 }

@@ -1,7 +1,9 @@
 import About from "@/components/Home/About/About";
 import Banner from "@/components/Home/Banner/Banner";
 import Pricing from "@/components/Home/Pricing/Pricing";
-import TrustedBy from "@/components/Home/TrustedBy";
+import WhyJoinUs from "@/components/Home/WhyJoin";
+import Faq from "@/components/ui/Faq";
+import Footer from "@/components/ui/Footer/Footer";
 import SocialMedia from "@/components/ui/SocialMedia";
 import Testimonials from "@/components/ui/Testimonial/Testimonial";
 import Image from "next/image";
@@ -20,13 +22,15 @@ export default function Home() {
         />
         <div className="relative z-20">
           <Banner />
-          <TrustedBy />
+          <WhyJoinUs/>
           <About />
         </div>
       </div>
       <Pricing />
       <SocialMedia />
       <Testimonials />
+      <Faq/>
+      <Footer/>
     </main>
   );
 }

@@ -1,117 +1,174 @@
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+"use client"
 
-export default function About() {
+import Image from "next/image"
+import Link from "next/link"
+import { motion, useViewportScroll, useTransform } from "framer-motion"
+import { Star, ChevronRight } from "lucide-react"
+
+export default function EnhancedAboutSection() {
+  const { scrollYProgress } = useViewportScroll()
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
+
+  const books = [
+    {
+      title: "Stock Market Mastery",
+      coverImage: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg",
+      rating: 5,
+      reviews: 128,
+      description: "A comprehensive guide to understanding and navigating the stock market.",
+      tags: ["Investing", "Finance"]
+    },
+    {
+      title: "Technical Analysis Simplified",
+      coverImage: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg",
+      rating: 5,
+      reviews: 95,
+      description: "Learn the art of reading charts and predicting market trends.",
+      tags: ["Trading", "Analysis"]
+    },
+    {
+      title: "Wealth Management Strategies",
+      coverImage: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg",
+      rating: 4,
+      reviews: 76,
+      description: "Expert advice on managing and growing your wealth effectively.",
+      tags: ["Finance", "Planning"]
+    },
+  ]
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100
+      }
+    }
+  }
+
   return (
-    <div className="p-4 md:p-8 text-white">
-      <div className="container px-4">
-        <div className="relative">
+    <section className="relative py-16 overflow-hidden">
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/abstract-finance-background.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          y: backgroundY
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/90 via-black/80 to-green-900/90 z-10" />
+      <div className="container relative mx-auto px-4 z-20 text-white">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+            <h1 className="text-4xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-tight">
+              About&nbsp;
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400">
+                Rakesh Bansal
+              </span>
+            </h1>
+          
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-cyan-300">
-                Let's Dream Big Together
-              </h1>
-              <p className="mb-4 font-light leading-normal">
-                Dr. Rakesh Bansal, a post-graduate in International Business
-                Management, has been a prominent figure in the stock market
-                since 1998 and is now a full-time trader and mentor. With over
-                two decades of extensive experience, he specializes in technical
-                analysis, wealth management, investment analysis, and portfolio
-                management.
-              </p>
-              <p>
-                As the founder of Rakesh Bansal Ventures, he is a
-                SEBI-registered Research Analyst (INH100008984), offering
-                high-quality market insights and educational resources to
-                traders and investors across the country.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              {[
-                "Heading",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-              ].map((text, index) => (
-                <div
-                  key={index}
-                  className={`p-4 rounded-lg ${
-                    index === 0
-                      ? "bg-purple-600"
-                      : index === 1
-                      ? "bg-cyan-500"
-                      : "bg-pink-500"
-                  }`}
-                >
-                  {text}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="absolute w-full h-[2px] bg-gray-300 my-8"></div>
-        </div>
-
-        <div className="py-20">
-          <div className="flex items-center justify-between mb-10">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-cyan-300">
-              About Us
-            </h2>
-            <Button
-              variant="default"
-              className="bg-transparent border border-[#71B4C5] px-8"
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="relative overflow-hidden rounded-lg shadow-2xl"
             >
-              Book a Free Demo
-            </Button>
-          </div>
-          <div className="mb-6">
-            <p className="font-light leading-normal">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-              laoreet sapien vel malesuada auctor. Curabitur venenatis ex ac
-              semper posuere. Integer consequat consequat sapien. Pellentesque
-              sed dolor ut ex aliquam efficitur. Sed scelerisque odio et rutrum
-              lacinia. In accumsan magna et dui tristique, eget congue dui
-              egestas. Duis eget lectus felis. Integer diam diam, vulputate ac
-              massa tempor, elementum vehicula risus. Suspendisse eget volutpat
-              enim. Nullam mollis augue in orci scelerisque, ac congue libero
-              blandit. In dignissim viverra eros, at luctus metus volutpat
-              tempus. Nulla facilisis sodales metus at faucibus.
-            </p>
-          </div>
-
-          <div className="relative">
+              <Image
+                src="/hero/banner-img3.webp"
+                alt="Dr. Rakesh Bansal"
+                width={400}
+                height={350}
+                className="w-full h-auto overflow-hidden transition-transform duration-300 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60" />
+            </motion.div>
             <div>
-              <p className="font-light leading-normal">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-                laoreet sapien vel malesuada auctor. Curabitur venenatis ex ac
-                semper posuere. Integer consequat consequat sapien. Pellentesque
-                sed dolor ut ex aliquam efficitur. Sed scelerisque odio et
-                rutrum lacinia. In accumsan magna et dui tristique, eget congue
-                dui egestas. Duis eget lectus felis. Integer diam diam,
-                vulputate ac massa tempor, elementum vehicula risus. Suspendisse
-                eget volutpat enim. Nullam mollis augue in orci scelerisque, ac
-                congue libero blandit. In dignissim viverra eros, at luctus
-                metus volutpat tempus. Nulla facilisis sodales metus at
-                faucibus.
+              <p className="text-lg mb-4 text-gray-300 leading-relaxed">
+                Dr. Rakesh Bansal, a post-graduate in International Business Management, has been a prominent figure in the stock market since 1998. With over two decades of extensive experience, he specializes in technical analysis, wealth management, investment analysis, and portfolio management.
               </p>
-              <Button
-                variant="default"
-                size="lg"
-                className="bg-[#71B4C5] mt-8 font-normal text-base"
+              <p className="text-lg mb-6 text-gray-300 leading-relaxed">
+                As the founder of Rakesh Bansal Ventures, he is a SEBI-registered Research Analyst (INH100008984), offering high-quality market insights and educational resources to traders and investors across the country.
+              </p>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Enroll Now
-              </Button>
-              <div className="absolute right-0 w-full">
-                <Image
-                  src="/images/avatar3.png"
-                  alt="Dr. Rakesh Bansal"
-                  width={500}
-                  height={500}
-                  className="w-full h-full object-cover max-w-[500px]"
-                />
-              </div>
+                <Link href="/about" className="inline-block">
+                  <button className="bg-gradient-to-r from-green-500 to-purple-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 hover:shadow-lg hover:from-green-600 hover:to-purple-700 flex items-center">
+                    Learn More <ChevronRight className="ml-2 h-5 w-5" />
+                  </button>
+                </Link>
+              </motion.div>
             </div>
           </div>
-        </div>
+
+          <h3 className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-green-300 bg-clip-text text-transparent">
+            Published Books
+          </h3>
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {books.map((book, index) => (
+              <motion.div 
+                key={index} 
+                variants={itemVariants} 
+                className="bg-gradient-to-br from-purple-900 to-green-900 rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              >
+                <div className="relative h-64">
+                  <Image
+                    src={book.coverImage}
+                    alt={`Cover of ${book.title}`}
+                    fill
+                    className="transition-transform duration-300 hover:scale-105 object-cover object-[top,center]"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70" />
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-semibold mb-2 bg-gradient-to-r from-green-400 to-purple-400 bg-clip-text text-transparent">
+                    {book.title}
+                  </h4>
+                  <p className="text-gray-300 mb-4">{book.description}</p>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center">
+                      {[...Array(book.rating)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                      ))}
+                      <span className="ml-2 text-gray-400">({book.reviews} reviews)</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {book.tags.map((tag, i) => (
+                      <span key={i} className="bg-gradient-to-r from-purple-600 to-green-600 text-white px-2 py-1 rounded-full text-xs">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
       </div>
-    </div>
-  );
+    </section>
+  )
 }

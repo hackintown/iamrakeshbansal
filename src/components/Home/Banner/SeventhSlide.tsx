@@ -1,51 +1,40 @@
-"use client";
+"use client"
 
-import React from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import React from "react"
+import Image from "next/image"
+import { motion } from "framer-motion"
+import { ArrowRight} from "lucide-react"
 
-const SeventhSlide = () => {
+export default function Component() {
   return (
     <section className="overflow-hidden">
-      <div className="flex flex-col lg:flex-row lg:items-stretch lg:max-h-[900px] lg:min-h-[900px]">
+      <div className="px-4 py-12 lg:py-0 lg:h-[650px] flex flex-col lg:flex-row items-center justify-between">
         <motion.div
-          className="flex items-center justify-center w-full lg:order-2 lg:w-7/12"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
+          className="lg:w-1/2 mb-8 lg:mb-0"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="h-full px-4 pt-24 pb-16 sm:px-6 lg:px-24 2xl:px-32 lg:pt-40 lg:pb-14">
-            <div className="flex flex-col justify-between flex-1 h-full">
-              <div>
-                <h1 className="text-4xl font-bold text-secondary-foreground sm:text-6xl xl:text-7xl">
-                  Take control <br />
-                  on your daily expenses
-                </h1>
-                <p className="mt-6 text-base text-secondary-foreground sm:text-xl">
-                  Our A.I helps you to predict your expenses based on your
-                  previous activity and shares how you should manage your money.
-                </p>
-                <motion.a
-                  href="#"
-                  title=""
-                  className="inline-flex items-center px-6 py-5 text-base font-semibold text-secondary-foreground transition-all duration-200 bg-green-300 mt-9 hover:bg-green-400 focus:bg-green-400"
-                  role="button"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Get started for free
-                  <ChevronRight className="w-5 h-5 ml-2" />
-                </motion.a>
-              </div>
-
-              <div className="mt-8 border-t-2 border-border lg:mt-auto sm:mt-14">
-                <div className="pt-8 sm:flex sm:items-center sm:justify-between sm:pt-14">
-                  <p className="text-base font-semibold text-secondary-foreground">
-                    App available on
-                  </p>
-
-                  <div className="flex items-center mt-5 space-x-5 sm:mt-0">
+          <h1 className="text-4xl lg:text-5xl font-bold text-secondary-foreground mb-6">
+            Take control of your daily expenses
+          </h1>
+          <p className="text-lg text-[#eee] mb-8">
+            Our AI helps you predict expenses based on your previous activity and guides you in managing your money effectively.
+          </p>
+          <motion.a
+            href="#"
+            className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-purple-600 rounded-full hover:bg-purple-700 transition-colors duration-300"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Get started for free
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </motion.a>
+          <div className="mt-12">
+            <p className="text-sm font-medium text-purple-900 mb-4">
+              Available on
+            </p>
+            <div className="flex items-center mt-5 space-x-5 sm:mt-0">
                     {[
                       "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/app-store-button.png",
                       "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/play-store-button.png",
@@ -73,32 +62,25 @@ const SeventhSlide = () => {
                       </motion.a>
                     ))}
                   </div>
-                </div>
-              </div>
-            </div>
           </div>
         </motion.div>
-
         <motion.div
-          className="relative w-full overflow-hidden lg:w-5/12 lg:order-1"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
+          className="lg:w-1/2 relative"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-green-200 to-green-100 opacity-40"></div>
-          <div className="lg:absolute lg:bottom-0 lg:left-0">
+          <div className="relative w-full h-[400px] lg:h-[580px]">
             <Image
-              className="w-full"
-              src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/phone-mockup.png"
-              alt="Phone mockup"
-              width={600}
-              height={900}
+              src="/hero/app-img.webp"
+              alt="Expense tracking app interface"
+              layout="fill"
+              objectFit="contain"
+              priority
             />
           </div>
         </motion.div>
       </div>
     </section>
-  );
-};
-
-export default SeventhSlide;
+  )
+}
