@@ -51,7 +51,7 @@ export default function HeroSection() {
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:items-center w-full h-full"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:items-center xl:items-start w-full h-full"
         >
           <motion.div variants={itemVariants} className="mt-6 lg:mt-20">
             <h1 className="text-4xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-tight">
