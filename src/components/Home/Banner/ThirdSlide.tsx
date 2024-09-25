@@ -167,12 +167,12 @@ export default function ThirdSlide() {
                       ({book.reviews})
                     </span>
                   </div>
-                  <div className="mt-2 flex justify-between items-center">
+                  <div className="mt-2 flex flex-col sm:flex-row space-y-1 justify-between items-center">
                     <span className="text-white font-semibold">{book.price}</span>
                     <Button
                       variant="gradient"
-                      size="custom"
-                      className="text-white border-white hover:bg-white hover:text-purple-500"
+                      size="sm"
+                      className=""
                     >
                       Buy Now
                     </Button>
@@ -242,9 +242,8 @@ export default function ThirdSlide() {
                 goals. His books have become essential reading for both novice
                 and experienced traders alike.
               </p>
-              <Button className="w-full px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+              <Button variant="gradient" size="custom" showArrow className="w-full">
                 Schedule a Free Consultation
-                <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </motion.div>
           </motion.div>

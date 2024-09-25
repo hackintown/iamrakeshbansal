@@ -11,6 +11,7 @@ import {
   Cloud,
   Zap,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 type Particle = {
   x: number;
@@ -153,15 +154,15 @@ export default function AppDownloadSlide() {
           </motion.p>
           <motion.a
             href="#"
-            className="inline-flex items-center px-6 py-3 text-lg font-semibold text-white bg-purple-600 rounded-full hover:bg-purple-700 transition-colors duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Get started for free
-            <ArrowRight className="ml-2 h-5 w-5" />
+            <Button variant="gradient" size="custom" showArrow className="">
+              Get started for free
+            </Button>
           </motion.a>
           <motion.div variants={itemVariants} className="mt-12">
-            <p className="text-sm font-medium text-purple-300 mb-4">
+            <p className="text-sm font-medium text-purple-400 mb-4">
               Available on
             </p>
             <div className="flex items-center mt-5 space-x-5 sm:mt-0">
