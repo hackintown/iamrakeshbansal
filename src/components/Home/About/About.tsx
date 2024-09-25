@@ -3,7 +3,8 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useViewportScroll, useTransform } from "framer-motion"
-import { Star, ChevronRight } from "lucide-react"
+import { Star} from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 export default function EnhancedAboutSection() {
   const { scrollYProgress } = useViewportScroll()
@@ -76,8 +77,8 @@ export default function EnhancedAboutSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-            <h1 className="text-4xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-tight">
-              About&nbsp;
+            <h1 className="text-4xl font-bold text-white sm:text-5xl  leading-tight xl:leading-tight">
+              About Dr.&nbsp;
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400">
                 Rakesh Bansal
               </span>
@@ -111,15 +112,15 @@ export default function EnhancedAboutSection() {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link href="/about" className="inline-block">
-                  <button className="bg-gradient-to-r from-green-500 to-purple-600 text-white font-bold py-3 px-6 rounded-full transition-all duration-300 hover:shadow-lg hover:from-green-600 hover:to-purple-700 flex items-center">
-                    Learn More <ChevronRight className="ml-2 h-5 w-5" />
-                  </button>
+                  <Button variant="gradient" size="custom">
+                    Read More
+                  </Button>
                 </Link>
               </motion.div>
             </div>
           </div>
 
-          <h3 className="text-4xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-green-300 bg-clip-text text-transparent">
+          <h3 className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-purple-400 to-green-300 bg-clip-text text-transparent">
             Published Books
           </h3>
           <motion.div

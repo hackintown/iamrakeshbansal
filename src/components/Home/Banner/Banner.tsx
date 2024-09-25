@@ -7,18 +7,14 @@ import FirstSlide from "./FirstSlide";
 import SecondSlide from "./SecondSlide";
 import ThirdSlide from "./ThirdSlide";
 import FourthSlide from "./FourthSlide";
-// import FifthSlide from "./FifthSlide";
-import SixthSlide from "./SixthSlide";
 import SeventhSlide from "./SeventhSlide";
 
 const slides = [
   { id: 1, component: FirstSlide },
-  { id: 2, component: SecondSlide },
-  { id: 3, component: ThirdSlide },
-  { id: 4, component: FourthSlide },
-  // { id: 5, component: FifthSlide },
-  { id: 6, component: SixthSlide },
-  { id: 7, component: SeventhSlide },
+  { id: 2, component: ThirdSlide },
+  { id: 3, component: FourthSlide },
+  { id: 4, component: SeventhSlide },
+  { id: 5, component: SecondSlide },
 ];
 
 export default function Banner() {

@@ -4,12 +4,14 @@ import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
-  Search,
   TrendingUp,
   DollarSign,
   BarChart2,
   Award,
   Users,
+  ChevronUp,
+  ChevronDown,
+  Activity,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -38,8 +40,63 @@ export default function ExpertiseSlide() {
   ];
 
   return (
-    <section className="w-full flex items-center bg-gradient-to-br from-gray-900 to-black py-8 lg:py-0 overflow-y-auto lg:overflow-y-hidden lg:h-[650px]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full flex items-center bg-gradient-to-br from-gray-900 via-purple-900 to-green-900 py-8 lg:py-0 overflow-y-auto lg:overflow-y-hidden lg:h-[650px] relative">
+      {/* Complex Background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {/* Grid Lines */}
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1"/>
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+
+        {/* Animated Chart Lines */}
+        {[...Array(5)].map((_, index) => (
+          <motion.div
+            key={index}
+            className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500 to-transparent"
+            style={{ top: `${index * 20}%` }}
+            animate={{
+              scaleX: [0, 1, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              delay: index * 0.5,
+            }}
+          />
+        ))}
+
+        {/* Floating Icons */}
+        {[ChevronUp, ChevronDown, Activity].map((Icon, index) => (
+          <motion.div
+            key={index}
+            className="absolute text-gray-600 opacity-20"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              fontSize: `${Math.random() * 40 + 20}px`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              rotate: [0, 360],
+            }}
+            transition={{
+              duration: Math.random() * 5 + 5,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          >
+            <Icon />
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -59,20 +116,9 @@ export default function ExpertiseSlide() {
               transformed their approach to the markets.
             </p>
 
-            <div className="relative">
-              <div className="absolute left-0 top-2 flex items-center pl-3 pointer-events-none">
-                <Search className="w-5 h-5 text-gray-400" />
-              </div>
-              <input
-                type="text"
-                placeholder="Search for trading strategies"
-                className="block w-full py-2 pl-10 pr-3 text-sm text-white placeholder-gray-400 bg-white 
-                bg-opacity-10 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              />
-              <Button className="mt-2 w-full sm:w-auto px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-500 to-blue-500 rounded-lg hover:from-green-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
-                Explore Strategies
-              </Button>
-            </div>
+            <Button className="mt-2 w-full sm:w-auto px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-green-500 to-blue-500 rounded-lg hover:from-green-600 hover:to-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+              Explore Strategies
+            </Button>
 
             <div className="space-y-2">
               <div className="flex items-center">
@@ -104,7 +150,7 @@ export default function ExpertiseSlide() {
             className="relative"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl blur-3xl opacity-30"></div>
-            <div className="relative bg-gray-800 rounded-2xl p-4 sm:p-6 shadow-2xl">
+            <div className="relative bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-2xl p-4 sm:p-6 shadow-2xl">
               <h3 className="text-xl font-bold text-white mb-4">
                 Areas of Expertise
               </h3>
@@ -112,7 +158,7 @@ export default function ExpertiseSlide() {
                 {expertiseAreas.map((area, index) => (
                   <motion.div
                     key={index}
-                    className="bg-gray-700 rounded-lg p-3 flex items-start space-x-2"
+                    className="bg-gray-700 bg-opacity-50 backdrop-filter backdrop-blur-sm rounded-lg p-3 flex items-start space-x-2"
                     whileHover={{ scale: 1.05 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
@@ -128,7 +174,7 @@ export default function ExpertiseSlide() {
                   </motion.div>
                 ))}
               </div>
-              <div className="mt-4">
+              <div className="mt-4 relative">
                 <Image
                   src="/images/candle-stick.svg"
                   alt="Advanced Trading Chart"
@@ -136,6 +182,7 @@ export default function ExpertiseSlide() {
                   height={500}
                   className="rounded-lg w-full lg:h-[200px]"
                 />
+
               </div>
             </div>
           </motion.div>

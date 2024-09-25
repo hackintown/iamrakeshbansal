@@ -44,7 +44,7 @@ const pricingData: PricingPlan[] = [
       { name: 'Top Nifty 50 Companies', included: true },
       { name: 'Index & Equity', included: true },
     ],
-    buttonText: 'Start Trading',
+    buttonText: 'See More',
   },
   {
     title: 'Mentorship Service',
@@ -62,7 +62,7 @@ const pricingData: PricingPlan[] = [
       { name: 'Swing Trade', included: true },
       { name: 'Live Market Support', included: true },
     ],
-    buttonText: 'Get Started',
+    buttonText: 'See More',
     popular: true,
   },
   {
@@ -80,7 +80,7 @@ const pricingData: PricingPlan[] = [
       { name: 'Capital Required 500k to 10000k', included: true },
       { name: 'Top Nifty 50 Companies', included: true },
     ],
-    buttonText: 'Contact Sales',
+    buttonText: 'See More',
   },
   {
     title: 'Commodity Service',
@@ -97,7 +97,7 @@ const pricingData: PricingPlan[] = [
       { name: 'Capital Required 500k to 10000k', included: true },
       { name: 'Silver, Zinc, Aluminium, Gold, Copper and Crude Oil', included: true },
     ],
-    buttonText: 'Contact Sales',
+    buttonText: 'See More',
   },
   {
     title: 'Index/Option',
@@ -114,7 +114,7 @@ const pricingData: PricingPlan[] = [
       { name: 'Top Nifty 50 Companies', included: true },
       { name: 'Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY', included: true },
     ],
-    buttonText: 'Contact Sales',
+    buttonText: 'See More',
   },
 ]
 
@@ -167,7 +167,7 @@ const FeatureList = ({ features }: { features: Feature[] }) => (
 
 const CardFooter = ({ buttonText }: { buttonText: string }) => (
   <div className="p-6 pt-0">
-    <Button className="w-full bg-purple-700 hover:bg-purple-800 text-white" size="lg">
+    <Button variant="gradient" size="custom" className='w-full'>
       {buttonText}
     </Button>
   </div>

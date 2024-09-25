@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import React, { useEffect, useRef } from "react";
-import Image from "next/image";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { ArrowRight, TrendingUp, DollarSign, BarChart2 } from "lucide-react";
+import React, { useEffect, useRef } from "react"
+import Image from "next/image"
+import { motion, useAnimation, useInView } from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { TrendingUp, DollarSign, BarChart2 } from "lucide-react"
 
 export default function HeroSection() {
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const isInView = useInView(ref);
+  const controls = useAnimation()
+  const ref = useRef(null)
+  const isInView = useInView(ref)
 
   useEffect(() => {
     if (isInView) {
-      controls.start("visible");
+      controls.start("visible")
     }
-  }, [controls, isInView]);
+  }, [controls, isInView])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -26,7 +26,7 @@ export default function HeroSection() {
         staggerChildren: 0.2,
       },
     },
-  };
+  }
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -34,16 +34,68 @@ export default function HeroSection() {
       y: 0,
       opacity: 1,
     },
-  };
+  }
 
   return (
-    <section className="w-full min-h-screen flex lg:items-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-black">
-      {/* Background Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl"></div>
-        <div className="absolute bottom-20 right-10 w-72 h-72 bg-green-500 rounded-full mix-blend-multiply filter blur-xl"></div>
+    <section className="w-full min-h-screen flex lg:items-center relative overflow-hidden">
+      {/* Advanced Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900 to-green-900">
+        <svg
+          className="absolute inset-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgba(139, 92, 246, 0.1)" />
+              <stop offset="50%" stopColor="rgba(16, 185, 129, 0.1)" />
+              <stop offset="100%" stopColor="rgba(139, 92, 246, 0.1)" />
+            </linearGradient>
+            <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="rgba(16, 185, 129, 0.05)" />
+              <stop offset="50%" stopColor="rgba(139, 92, 246, 0.05)" />
+              <stop offset="100%" stopColor="rgba(16, 185, 129, 0.05)" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#grad1)"
+            fillOpacity="1"
+            d="M0,32L48,53.3C96,75,192,117,288,122.7C384,128,480,96,576,85.3C672,75,768,85,864,101.3C960,117,1056,139,1152,133.3C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+          <path
+            fill="url(#grad2)"
+            fillOpacity="1"
+            d="M0,160L48,170.7C96,181,192,203,288,213.3C384,224,480,224,576,213.3C672,203,768,181,864,181.3C960,181,1056,203,1152,213.3C1248,224,1344,224,1392,224L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
       </div>
-      <div className="absolute inset-0 bg-[url('/images/graph-pattern.svg')] opacity-5"></div>
+
+      {/* Animated particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full bg-white opacity-20"
+            style={{
+              width: Math.random() * 5 + 1 + "px",
+              height: Math.random() * 5 + 1 + "px",
+              left: Math.random() * 100 + "%",
+              top: Math.random() * 100 + "%",
+            }}
+            animate={{
+              y: [0, Math.random() * 100 - 50],
+              x: [0, Math.random() * 100 - 50],
+              scale: [1, Math.random() + 0.5, 1],
+            }}
+            transition={{
+              duration: Math.random() * 10 + 10,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+          />
+        ))}
+      </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -66,23 +118,11 @@ export default function HeroSection() {
             </p>
             <motion.div
               className="mt-8 flex items-center space-x-4"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-purple-500 to-green-500 text-white border-0 text-sm md:text-base text-nowrap
-                 lg:text-lg font-semibold hover:from-purple-600 hover:to-green-600 px-4 md:px-6 lg:px-8 py-4"
-              >
+              <Button variant="gradient" size="custom" showArrow>
                 Start Your Journey
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-accent border-white hover:text-gray-900 text-sm text-nowrap px-2 py-4 md:px-6 lg:px-8 md:font-semibold"
-              >
-                Subscribe Now
               </Button>
             </motion.div>
 
@@ -157,5 +197,5 @@ export default function HeroSection() {
         />
       </motion.div>
     </section>
-  );
+  )
 }

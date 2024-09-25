@@ -1,4 +1,6 @@
 import { Shield, Lightbulb, TrendingUp, GraduationCap, CheckCircle } from "lucide-react"
+import Link from "next/link"
+import { Button } from "../ui/button"
 
 export default function WhyJoinUs() {
   const reasons = [
@@ -67,12 +69,11 @@ export default function WhyJoinUs() {
             At Rakesh Bansal Ventures, we believe in a simple yet powerful approach to achieving success in the stock market. 
             Join us and experience the difference with our SEBI-registered expertise.
           </p>
-          <a
-            href="#join-now"
-            className="inline-block bg-gradient-to-r from-purple-500 to-green-500 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 hover:shadow-lg"
-          >
-            Join Now
-          </a>
+         <Link href="/">
+        <Button variant="gradient" size="custom">
+          Start Your Journey
+        </Button>
+         </Link>
         </div>
       </div>
     </section>
