@@ -39,10 +39,7 @@ export default function Banner() {
   };
 
   return (
-    <div
-      className="relative w-full  overflow-hidden bg-gradient-to-br
-     from-purple-900 via-black to-green-900"
-    >
+    <div className="relative w-full  overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}

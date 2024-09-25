@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import React, { useEffect, useRef } from "react"
-import Image from "next/image"
-import { motion, useAnimation, useInView } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { TrendingUp, DollarSign, BarChart2 } from "lucide-react"
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import { motion, useAnimation, useInView } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { TrendingUp, DollarSign, BarChart2 } from "lucide-react";
 
 export default function HeroSection() {
-  const controls = useAnimation()
-  const ref = useRef(null)
-  const isInView = useInView(ref)
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref);
 
   useEffect(() => {
     if (isInView) {
-      controls.start("visible")
+      controls.start("visible");
     }
-  }, [controls, isInView])
+  }, [controls, isInView]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -26,7 +26,7 @@ export default function HeroSection() {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -34,7 +34,7 @@ export default function HeroSection() {
       y: 0,
       opacity: 1,
     },
-  }
+  };
 
   return (
     <section className="w-full min-h-screen flex lg:items-center relative overflow-hidden">
@@ -197,5 +197,5 @@ export default function HeroSection() {
         />
       </motion.div>
     </section>
-  )
+  );
 }

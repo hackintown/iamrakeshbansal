@@ -46,6 +46,20 @@ const servicesData = [
 ];
 
 const coursesData = [{ title: "KURUKSHETRA - Win The Battle", href: "#" }];
+const disclaimerData = [
+  {
+    title: "Control Policy",
+    href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
+  },
+  {
+    title: "Privacy Policy",
+    href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
+  },
+  {
+    title: "Terms and Conditions",
+    href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
+  },
+];
 const aboutusData = [
   {
     title: "About Dr. Rakesh Bansal",
@@ -258,15 +272,26 @@ const Navbar: React.FC = () => {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
+
+              {/* Disclaimer */}
+              <NavigationMenuItem>
+                <NavigationMenuTrigger className="text-base text-primary">
+                  Disclaimer
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
+                    {disclaimerData.map((disclaimer) => (
+                      <ListItem
+                        key={disclaimer.title}
+                        title={disclaimer.title}
+                        href={disclaimer.href}
+                      />
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
             </NavigationMenuList>
           </NavigationMenu>
-        </div>
-
-        {/* Desktop Button */}
-        <div className="hidden lg:block">
-          <Link href="/contact-us" passHref>
-            <Button>Enroll Now</Button>
-          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -387,11 +412,42 @@ const Navbar: React.FC = () => {
               About Us
             </Link>
 
-            {/* Mobile Button */}
-            <div className="mt-3">
-              <Link href="/contact-us" passHref>
-                <Button>Enroll Now</Button>
-              </Link>
+            {/* Disclaimer */}
+            <div className="">
+              <button
+                className="w-full flex items-center justify-between text-left text-base font-medium text-primary py-4 hover:text-accent transition-all"
+                onClick={() => toggleMenu("disclaimer")}
+              >
+                <span>Disclaimer</span>
+                <motion.div
+                  animate={{
+                    rotate: activeMenu === "" ? 180 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ChevronDownIcon className="h-6 w-6 text-green-600" />
+                </motion.div>
+              </button>
+              {activeMenu === "disclaimer" && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4, ease: [0.42, 0, 0.58, 1] }}
+                  className="grid w-full gap-2 p-4 rounded-2xl bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
+                >
+                  {disclaimerData.map((disclaimer) => (
+                    <Link
+                      key={disclaimer.title}
+                      href={disclaimer.href}
+                      onClick={handleCloseSidebar}
+                      className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
+                    >
+                      {disclaimer.title}
+                    </Link>
+                  ))}
+                </motion.div>
+              )}
             </div>
           </motion.div>
         )}

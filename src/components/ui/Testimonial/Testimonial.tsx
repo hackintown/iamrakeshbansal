@@ -146,12 +146,12 @@ export default function Testimonials() {
             className="w-10 h-10 md:w-14 md:h-14"
           />
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-[30%,70%] xl:grid-cols-[20%,80%] lg:gap-x-5 items-center lg:justify-between py-20 lg:pb-28 xl:pb-36">
-          <div className="flex flex-col space-y-3 mb-5">
-            <h2 className="text-4xl font-bold text-primary text-center lg:text-left">
+        <div className="grid grid-cols-1 lg:gap-x-5 items-center lg:justify-between py-16 lg:pb-28 xl:pb-36">
+          <div className="flex flex-col space-y-3 mb-5 sm:mb-8">
+            <h2 className="text-4xl font-bold text-primary text-center">
               Testimonials
             </h2>
-            <p className="font-light text-xs text-center lg:text-left text-foreground">
+            <p className="max-w-2xl text-center mx-auto text-xs md:text-sm text-gray-700 font-light">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
               laoreet sapien vel malesuada auctor. Curabitur venenatis ex ac
               semper posuere.

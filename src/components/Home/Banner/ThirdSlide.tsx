@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import React, { useEffect, useRef } from "react"
-import Image from "next/image"
-import { motion, useAnimation, useInView } from "framer-motion"
+import React, { useEffect, useRef } from "react";
+import Image from "next/image";
+import { motion, useAnimation, useInView } from "framer-motion";
 import {
   ArrowRight,
   Download,
@@ -10,8 +10,8 @@ import {
   Users,
   Coffee,
   BookOpen,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const books = [
   {
@@ -38,18 +38,18 @@ const books = [
     reviews: 1500,
     price: "$39.99",
   },
-]
+];
 
 export default function ThirdSlide() {
-  const controls = useAnimation()
-  const ref = useRef(null)
-  const isInView = useInView(ref)
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref);
 
   useEffect(() => {
     if (isInView) {
-      controls.start("visible")
+      controls.start("visible");
     }
-  }, [controls, isInView])
+  }, [controls, isInView]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -60,7 +60,7 @@ export default function ThirdSlide() {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -68,7 +68,7 @@ export default function ThirdSlide() {
       y: 0,
       opacity: 1,
     },
-  }
+  };
 
   return (
     <section className="w-full min-h-screen flex items-center relative overflow-hidden bg-gradient-to-br from-gray-900 via-purple-900 to-green-900">
@@ -81,7 +81,12 @@ export default function ThirdSlide() {
           preserveAspectRatio="none"
         >
           <defs>
-            <pattern id="book-pattern" patternUnits="userSpaceOnUse" width="100" height="100">
+            <pattern
+              id="book-pattern"
+              patternUnits="userSpaceOnUse"
+              width="100"
+              height="100"
+            >
               <path d="M0 0h100v100H0z" fill="none" />
               <path d="M30 20h40v60H30z" fill="rgba(139, 92, 246, 0.1)" />
               <path d="M20 30h60v40H20z" fill="rgba(16, 185, 129, 0.1)" />
@@ -162,18 +167,18 @@ export default function ThirdSlide() {
                   </h3>
                   <div className="flex items-center mt-1">
                     <Star className="w-3 h-3 text-yellow-400 mr-1" />
-                    <span className="text-yellow-400 text-xs">{book.rating}</span>
+                    <span className="text-yellow-400 text-xs">
+                      {book.rating}
+                    </span>
                     <span className="text-gray-400 text-xs ml-1">
                       ({book.reviews})
                     </span>
                   </div>
                   <div className="mt-2 flex flex-col sm:flex-row space-y-1 justify-between items-center">
-                    <span className="text-white font-semibold">{book.price}</span>
-                    <Button
-                      variant="gradient"
-                      size="sm"
-                      className=""
-                    >
+                    <span className="text-white font-semibold">
+                      {book.price}
+                    </span>
+                    <Button variant="gradient" size="sm" className="">
                       Buy Now
                     </Button>
                   </div>
@@ -208,18 +213,13 @@ export default function ThirdSlide() {
                 <Coffee className="w-6 h-6 text-yellow-400" />
                 <div className="ml-2">
                   <p className="text-xl font-bold text-white">15+</p>
-                  <p className="text-xs text-gray-400">
-                    Years of experience
-                  </p>
+                  <p className="text-xs text-gray-400">Years of experience</p>
                 </div>
               </motion.div>
             </div>
           </motion.div>
 
-          <motion.div
-            variants={itemVariants}
-            className="relative mt-8 lg:mt-0"
-          >
+          <motion.div variants={itemVariants} className="relative mt-8 lg:mt-0">
             <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur-3xl opacity-30"></div>
             <motion.div
               className="relative bg-gray-800 rounded-2xl p-4 shadow-2xl"
@@ -242,7 +242,12 @@ export default function ThirdSlide() {
                 goals. His books have become essential reading for both novice
                 and experienced traders alike.
               </p>
-              <Button variant="gradient" size="custom" showArrow className="w-full">
+              <Button
+                variant="gradient"
+                size="custom"
+                showArrow
+                className="w-full"
+              >
                 Schedule a Free Consultation
               </Button>
             </motion.div>
@@ -280,5 +285,5 @@ export default function ThirdSlide() {
         <BookOpen className="w-48 h-48 text-green-400" />
       </motion.div>
     </section>
-  )
+  );
 }
