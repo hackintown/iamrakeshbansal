@@ -1,8 +1,10 @@
 "use client";
 
-import React, {  useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Swiper as SwiperType } from 'swiper';
+import { Swiper as SwiperType } from "swiper";
+import { IoArrowBackCircle } from "react-icons/io5";
+import { FaCircleArrowRight } from "react-icons/fa6";
 import {
   EffectCoverflow,
   Navigation,
@@ -18,15 +20,51 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const slides = [
-  { imageUrl: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg", alt: "Project 1" },
-  { imageUrl: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg", alt: "Project 3" },
-  { imageUrl: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg", alt: "Project 4" },
-  { imageUrl: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg", alt: "Project 1" },
-  { imageUrl: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg", alt: "Project 3" },
-  { imageUrl: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg", alt: "Project 4" },
-  { imageUrl: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg", alt: "Project 1" },
-  { imageUrl: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg", alt: "Project 3" },
-  { imageUrl: "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg", alt: "Project 4" },
+  {
+    imageUrl:
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg",
+    alt: "Project 1",
+  },
+  {
+    imageUrl:
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg",
+    alt: "Project 3",
+  },
+  {
+    imageUrl:
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg",
+    alt: "Project 4",
+  },
+  {
+    imageUrl:
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg",
+    alt: "Project 1",
+  },
+  {
+    imageUrl:
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg",
+    alt: "Project 3",
+  },
+  {
+    imageUrl:
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg",
+    alt: "Project 4",
+  },
+  {
+    imageUrl:
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg",
+    alt: "Project 1",
+  },
+  {
+    imageUrl:
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg",
+    alt: "Project 3",
+  },
+  {
+    imageUrl:
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg",
+    alt: "Project 4",
+  },
 ];
 
 export default function BookPublished() {
@@ -55,38 +93,37 @@ export default function BookPublished() {
 
   return (
     <div className="relative">
-      <div
-        className="absolute inset-0 bg-cover bg-bottom"
-        style={{ backgroundImage: `url('/images/services-tab-bg.png')` }}
-        aria-hidden="true"
-      />
-      <div className="container pt-10 relative">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl lg:text-6xl font-bold text-green-100 relative">
-          PUBLISHED BOOK
-            <span
-              className="absolute inset-0 text-green-200 text-opacity-10"
-              aria-hidden="true"
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-purple-900 to-green-900"></div>
+      <div className="absolute inset-0 opacity-20">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern
+              id="blog-dots"
+              x="0"
+              y="0"
+              width="20"
+              height="20"
+              patternUnits="userSpaceOnUse"
             >
-             PUBLISHED BOOK
-            </span>
-          </h2>
-          <h3 className="text-accent text-xs md:text-sm mb-1.5 font-semibold -mt-5 relative">
-            PUBLISHED BOOK
-          </h3>
-          <h4 className="text-2xl font-semibold mt-2">
-            The Best Projects That We
-            <br />
-            <span className="text-accent">Have Delivered</span>
-          </h4>
-          <p className="text-tertiary-foreground mt-2 lg:max-w-[590px] lg:mx-auto">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry&apos;s standard.
-          </p>
-        </div>
-
+              <circle cx="2" cy="2" r="1" fill="rgba(255,255,255,0.3)" />
+            </pattern>
+          </defs>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#blog-dots)" />
+        </svg>
+      </div>
+      <div className="container pt-10 relative z-10">
+        <h2 className="text-4xl md:text-5xl font-bold text-center mb-3">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-400">
+            Published Book
+          </span>
+        </h2>
+        <p className="max-w-2xl mx-auto text-xs sm:text-sm md:text-base text-center text-secondary-foreground font-light">
+          Unlock your trading potential with our flexible pricing options.
+          Choose the plan that best fits your needs and start your journey to
+          financial success.
+        </p>
         <div className="mt-10">
-          <div className="relative w-full max-w-5xl mx-auto py-16">
+          <div className="relative w-full max-w-5xl mx-auto py-10 lg:py-14">
             <Swiper
               onSwiper={setSwiperInstance}
               effect={"coverflow"}
@@ -94,7 +131,6 @@ export default function BookPublished() {
               centeredSlides={true}
               slidesPerView={2.5}
               spaceBetween={0}
-              initialSlide={3}
               coverflowEffect={{
                 rotate: 50,
                 stretch: 0,
@@ -120,10 +156,10 @@ export default function BookPublished() {
               onSlideChange={handleSlideChange}
               breakpoints={{
                 320: {
-                  slidesPerView: 1.5,
+                  slidesPerView: 1,
                 },
                 500: {
-                  slidesPerView: 2,
+                  slidesPerView: 1.5,
                 },
                 768: {
                   slidesPerView: 2,
@@ -135,7 +171,7 @@ export default function BookPublished() {
             >
               {slides.map((slide, index) => (
                 <SwiperSlide key={index} className="swiper-slide">
-                  <div className="relative w-full h-[300px]  sm:h-[400px] md:h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl">
+                  <div className="relative w-full h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl">
                     <Image
                       src={slide.imageUrl}
                       alt={slide.alt}
@@ -157,17 +193,7 @@ export default function BookPublished() {
               aria-label="Previous slide"
               disabled={isBeginning}
             >
-              <Image
-                src={
-                  isBeginning
-                    ? "/images/portfolio-prev.webp"
-                    : "/images/portfolio-prev.webp"
-                }
-                alt="Previous"
-                width={45}
-                height={45}
-                className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
-              />
+              <IoArrowBackCircle className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white" />
             </button>
             <button
               onClick={handleNext}
@@ -177,17 +203,7 @@ export default function BookPublished() {
               aria-label="Next slide"
               disabled={isEnd}
             >
-              <Image
-                src={
-                  isEnd
-                    ? "/images/portfolio-next.webp"
-                    : "/images/portfolio-next.webp"
-                }
-                alt="Next"
-                width={45}
-                height={45}
-                className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10"
-              />
+              <FaCircleArrowRight className="w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 text-white" />
             </button>
           </div>
         </div>

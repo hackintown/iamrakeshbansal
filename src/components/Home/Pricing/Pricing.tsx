@@ -1,32 +1,32 @@
-"use client"
+"use client";
 
-import React, { useState, useRef, useEffect } from "react"
-import { motion} from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { CheckCircle, ChevronRight, ChevronLeft, Info } from "lucide-react"
-import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
+import React, { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { CheckCircle, ChevronRight, ChevronLeft, Info } from "lucide-react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 interface Feature {
-  name: string
-  included: boolean
-  info?: string
+  name: string;
+  included: boolean;
+  info?: string;
 }
 
 interface PricingPlan {
-  title: string
-  monthlyPrice: string
-  quarterlyPrice: string
-  yearlyPrice: string
-  description: string
-  features: Feature[]
-  buttonText: string
-  popular?: boolean
-  icon: React.ReactNode
+  title: string;
+  monthlyPrice: string;
+  quarterlyPrice: string;
+  yearlyPrice: string;
+  description: string;
+  features: Feature[];
+  buttonText: string;
+  popular?: boolean;
+  icon: React.ReactNode;
 }
 
-type PlanDuration = "monthly" | "quarterly" | "yearly"
+type PlanDuration = "monthly" | "quarterly" | "yearly";
 
 const pricingData: PricingPlan[] = [
   {
@@ -36,17 +36,38 @@ const pricingData: PricingPlan[] = [
     yearlyPrice: "15999",
     description: "For beginners",
     features: [
-      { name: "Monthly 15-20 Calls", included: true, info: "Receive up to 20 trading calls per month" },
+      {
+        name: "Monthly 15-20 Calls",
+        included: true,
+        info: "Receive up to 20 trading calls per month",
+      },
       { name: "Entry Price", included: true },
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
       { name: "First Target", included: true },
-      { name: "Capital Required 20k to 50k", included: true, info: "Recommended capital range for optimal trading" },
+      {
+        name: "Capital Required 20k to 50k",
+        included: true,
+        info: "Recommended capital range for optimal trading",
+      },
       { name: "Top Nifty 50 Companies", included: true },
       { name: "Index & Equity", included: true },
     ],
-    buttonText: "Start Trading",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>,
+    buttonText: "See More",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8 text-purple-600"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
   },
   {
     title: "Mentorship Service",
@@ -62,11 +83,24 @@ const pricingData: PricingPlan[] = [
       { name: "Capital Required 100k to 500k", included: true },
       { name: "Short Medium & Long Term", included: true },
       { name: "Swing Trade", included: true },
-      { name: "Live Market Support", included: true, info: "Get real-time assistance during market hours" },
+      {
+        name: "Live Market Support",
+        included: true,
+        info: "Get real-time assistance during market hours",
+      },
     ],
-    buttonText: "Get Mentored",
+    buttonText: "See More",
     popular: true,
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" /></svg>,
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8 text-green-600"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+      </svg>
+    ),
   },
   {
     title: "Future Service",
@@ -79,12 +113,29 @@ const pricingData: PricingPlan[] = [
       { name: "Entry Price", included: true },
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
-      { name: "Performance Reports", included: true, info: "Detailed monthly performance analysis" },
+      {
+        name: "Performance Reports",
+        included: true,
+        info: "Detailed monthly performance analysis",
+      },
       { name: "Capital Required 500k to 10000k", included: true },
       { name: "Top Nifty 50 Companies", included: true },
     ],
-    buttonText: "Trade Futures",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>,
+    buttonText: "See More",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8 text-purple-600"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
   },
   {
     title: "Commodity Service",
@@ -99,10 +150,27 @@ const pricingData: PricingPlan[] = [
       { name: "Stop Loss", included: true },
       { name: "Performance Reports", included: true },
       { name: "Capital Required 500k to 10000k", included: true },
-      { name: "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil", included: true, info: "Diverse commodity options" },
+      {
+        name: "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil",
+        included: true,
+        info: "Diverse commodity options",
+      },
     ],
-    buttonText: "Trade Commodities",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" /></svg>,
+    buttonText: "See More",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8 text-green-600"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
   },
   {
     title: "Index/Option",
@@ -117,12 +185,29 @@ const pricingData: PricingPlan[] = [
       { name: "Stop Loss", included: true },
       { name: "Capital Required 55k to 100k", included: true },
       { name: "Top Nifty 50 Companies", included: true },
-      { name: "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY", included: true, info: "Comprehensive index coverage" },
+      {
+        name: "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY",
+        included: true,
+        info: "Comprehensive index coverage",
+      },
     ],
-    buttonText: "Trade Options",
-    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z" clipRule="evenodd" /></svg>,
+    buttonText: "See More",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8 text-purple-600"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
   },
-]
+];
 
 const CardHeader = ({
   title,
@@ -132,12 +217,12 @@ const CardHeader = ({
   duration,
   icon,
 }: {
-  title: string
-  price: string
-  description: string
-  popular?: boolean
-  duration: PlanDuration
-  icon: React.ReactNode
+  title: string;
+  price: string;
+  description: string;
+  popular?: boolean;
+  duration: PlanDuration;
+  icon: React.ReactNode;
 }) => (
   <div className="p-6 relative bg-gradient-to-br from-purple-100 to-green-100 rounded-t-lg">
     <div className="mb-4 flex items-center justify-between">
@@ -159,16 +244,14 @@ const CardHeader = ({
 
     <p className="text-sm text-gray-600 mt-2">{description}</p>
   </div>
-)
+);
 
 const FeatureList = ({ features }: { features: Feature[] }) => (
   <ul className="space-y-3 p-6 flex-grow bg-white">
     {features.map((feature, index) => (
       <li key={index} className="flex items-center">
         <CheckCircle className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" />
-        <span className="text-black text-sm flex-grow">
-          {feature.name}
-        </span>
+        <span className="text-black text-sm flex-grow">{feature.name}</span>
         {feature.info && (
           <div className="group relative">
             <Info className="w-4 h-4 text-gray-400 cursor-pointer" />
@@ -180,31 +263,31 @@ const FeatureList = ({ features }: { features: Feature[] }) => (
       </li>
     ))}
   </ul>
-)
+);
 
 const CardFooter = ({ buttonText }: { buttonText: string }) => (
   <div className="p-6 bg-gradient-to-br from-purple-100 to-green-100 rounded-b-lg">
-    <Button variant="outline" size="lg" className="w-full bg-white hover:bg-purple-50 text-purple-700 border-purple-300 hover:border-purple-400 transition-all duration-300">
+    <Button variant="gradient" size="custom" className="w-full">
       {buttonText}
     </Button>
   </div>
-)
+);
 
 const PricingCard = ({
   plan,
   duration,
 }: {
-  plan: PricingPlan
-  duration: PlanDuration
+  plan: PricingPlan;
+  duration: PlanDuration;
 }) => {
-  const price = plan[`${duration}Price`]
+  const price = plan[`${duration}Price`];
 
   return (
     <motion.div
-      className={`rounded-lg overflow-hidden flex flex-col ${
+      className={`rounded-lg overflow-hidden flex-grow h-[583px]  flex flex-col justify-between ${
         plan.popular ? "border-2 border-green-500" : "border border-gray-200"
-      } bg-white w-full max-w-sm text-black shadow-lg hover:shadow-xl 
-      transition-all duration-300 relative h-full`}
+      } bg-white w-full max-w-sm text-black shadow-md hover:shadow-xl 
+      transition-all duration-300 relative h-full flex-grow`}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -221,17 +304,17 @@ const PricingCard = ({
       <FeatureList features={plan.features} />
       <CardFooter buttonText={plan.buttonText} />
     </motion.div>
-  )
-}
+  );
+};
 
 const Switch = ({
   options,
   selectedOption,
   onOptionChange,
 }: {
-  options: PlanDuration[]
-  selectedOption: PlanDuration
-  onOptionChange: (option: PlanDuration) => void
+  options: PlanDuration[];
+  selectedOption: PlanDuration;
+  onOptionChange: (option: PlanDuration) => void;
 }) => (
   <div className="flex items-center justify-center space-x-2 bg-gray-100 p-1 rounded-full">
     {options.map((option) => (
@@ -248,14 +331,14 @@ const Switch = ({
       </button>
     ))}
   </div>
-)
+);
 
 const CustomArrow = ({
   onClick,
   direction,
 }: {
-  onClick?: () => void
-  direction: "left" | "right"
+  onClick?: () => void;
+  direction: "left" | "right";
 }) => (
   <button
     className={`custom-slick-arrow absolute ${
@@ -269,11 +352,11 @@ const CustomArrow = ({
       <ChevronRight className="w-6 h-6 text-purple-700" />
     )}
   </button>
-)
+);
 
 export default function Pricing() {
-  const [duration, setDuration] = useState<PlanDuration>("monthly")
-  const sliderRef = useRef<Slider>(null)
+  const [duration, setDuration] = useState<PlanDuration>("monthly");
+  const sliderRef = useRef<Slider>(null);
 
   const settings = {
     dots: false,
@@ -295,33 +378,44 @@ export default function Pricing() {
         settings: {
           slidesToShow: 1,
           centerMode: true,
-          centerPadding: "20px",
+          centerPadding: "10px",
         },
       },
     ],
-  }
+  };
 
   const handleDurationChange = (newDuration: PlanDuration) => {
-    setDuration(newDuration)
-  }
+    setDuration(newDuration);
+  };
 
   useEffect(() => {
     const handleResize = () => {
       if (sliderRef.current) {
-        sliderRef.current.slickGoTo(0)
+        sliderRef.current.slickGoTo(0);
       }
-    }
+    };
 
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
-    <div className="relative z-10 py-16 md:py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-purple-50 to-green-50">
+    <div className="relative z-10 py-10  overflow-hidden bg-gradient-to-br from-purple-50 to-green-50">
       <div className="absolute inset-0 bg-gradient-to-bl from-purple-900/10 to-green-900/10">
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg
+          className="absolute inset-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
           <defs>
-            <linearGradient id="pricing-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient
+              id="pricing-grad"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
               <stop offset="0%" stopColor="rgba(139, 92, 246, 0.05)" />
               <stop offset="50%" stopColor="rgba(16, 185, 129, 0.05)" />
               <stop offset="100%" stopColor="rgba(139, 92, 246, 0.05)" />
@@ -332,8 +426,20 @@ export default function Pricing() {
       </div>
       <div className="absolute inset-0">
         {[...Array(5)].map((_, i) => (
-          <svg key={i} className="absolute" style={{left: `${i * 25}%`, top: '20%'}} width="40" height="40" viewBox="0 0 40 40">
-            <path d="M20 2 L38 38 L2 38 Z" fill="none" stroke="rgba(139, 92, 246, 0.1)" strokeWidth="1">
+          <svg
+            key={i}
+            className="absolute"
+            style={{ left: `${i * 25}%`, top: "20%" }}
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
+          >
+            <path
+              d="M20 2 L38 38 L2 38 Z"
+              fill="none"
+              stroke="rgba(139, 92, 246, 0.1)"
+              strokeWidth="1"
+            >
               <animateTransform
                 attributeName="transform"
                 type="rotate"
@@ -351,12 +457,12 @@ export default function Pricing() {
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-6"
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-green-600 mb-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-green-600 mb-3 lg:mb-6">
             Our Services
           </h2>
-          <p className="max-w-2xl mx-auto text-sm md:text-base text-gray-700 font-light">
+          <p className="max-w-2xl mx-auto text-xs sm:text-sm md:text-base text-gray-700 font-light">
             Unlock your trading potential with our flexible pricing options.
             Choose the plan that best fits your needs and start your journey to
             financial success.
@@ -367,7 +473,7 @@ export default function Pricing() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center justify-center space-y-8 mb-16"
+          className="flex flex-col items-center justify-center space-y-8 mb-14"
         >
           <Switch
             options={["monthly", "quarterly", "yearly"]}
@@ -380,10 +486,10 @@ export default function Pricing() {
             </span>
           )}
         </motion.div>
-        <div className="relative px-8">
+        <div className="relative w-full">
           <Slider ref={sliderRef} {...settings}>
             {pricingData.map((plan, index) => (
-              <div key={index} className="outline-none px-2 py-2 h-full">
+              <div key={index} className="outline-none px-2 py-2 w-full h-full">
                 <PricingCard plan={plan} duration={duration} />
               </div>
             ))}
@@ -391,5 +497,5 @@ export default function Pricing() {
         </div>
       </div>
     </div>
-  )
+  );
 }
