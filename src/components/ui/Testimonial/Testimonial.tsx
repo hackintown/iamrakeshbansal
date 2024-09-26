@@ -1,104 +1,152 @@
-"use client";
+'use client'
 
-import React, { useRef } from "react";
-import Slider from "react-slick";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import React, { useRef, useState } from "react"
+import Slider from "react-slick"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { PlayCircle, Pause, ChevronLeft, ChevronRight, Star, Quote } from "lucide-react"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 const testimonials = [
   {
-    quote:
-      "I have been using Rakesh Bansal Ventures advisory services for the past 2 years, and I am thoroughly impressed with the quality of insights and recommendations they have provided. Their team demonstrates a deep understanding of market trends and employs advanced analytical techniques that have significantly improved my trading strategies and outcomes.",
+    quote: "I have been using Rakesh Bansal Ventures advisory services for the past 2 years, and I am thoroughly impressed with the quality of insights and recommendations they have provided.",
     name: "Prakash Choudhary",
     title: "Self-Investor",
+    rating: 5,
+    imageUrl: "/hero/banner-img3.webp",
+    videoUrl: "https://www.youtube.com/embed/pBl745TrRdc?si=6D3Enb_cLIt4xCbg",
   },
   {
-    quote:
-      "Your tips are excellent available market sometime trade you are over traded in that condition increase the margin of error you can't control the market but you can control Sanjeev bhasin type allegations if you provide helpline number for member that's very helpful.",
+    quote: "Your tips are excellent available market sometime trade you are over traded in that condition increase the margin of error you can't control the market but you can control Sanjeev bhasin type allegations.",
     name: "Nitish Trama",
     title: "Self-Investor",
+    rating: 4,
+    imageUrl: "/hero/banner-img3.webp",
+    videoUrl: "https://www.youtube.com/embed/pBl745TrRdc?si=6D3Enb_cLIt4xCbg",
   },
   {
-    quote:
-      "Your stock performance is good but I would suggest give only 2-3 stock monthly which may give 25 % plus return ( over weight ). Note : Rakesh Bansal Ventures performance is very high. 50 % profit shared with you because of high price.",
+    quote: "Your stock performance is good but I would suggest give only 2-3 stock monthly which may give 25 % plus return ( over weight ). Note : Rakesh Bansal Ventures performance is very high.",
     name: "Ganesh Jagtap",
     title: "Self-Investor",
+    rating: 5,
+    imageUrl: "/hero/banner-img3.webp",
+    videoUrl: "https://www.youtube.com/embed/pBl745TrRdc?si=6D3Enb_cLIt4xCbg",
   },
-];
+]
 
 const CustomArrow = ({
   direction,
   onClick,
 }: {
-  direction: "prev" | "next";
-  onClick?: () => void;
+  direction: "prev" | "next"
+  onClick?: () => void
 }) => (
   <Button
     variant="outline"
     size="icon"
     className={cn(
-      "absolute top-1/2 -translate-y-1/2 z-10 bg-[#852B83] text-foreground rounded-none hover:bg-transparent",
-      direction === "prev"
-        ? "left-0 -translate-x-1/2"
-        : "left-0 translate-x-1/2 bg-[#F3A0F1]"
+      "absolute top-1/2 -translate-y-1/2 z-10 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300",
+      direction === "prev" ? "-left-4 md:-left-6" : "-right-4 md:-right-6"
     )}
     onClick={onClick}
     aria-label={direction === "prev" ? "Previous slide" : "Next slide"}
   >
-    <Image
-      src={`/images/${direction}-arrow.webp`}
-      width={16}
-      height={16}
-      alt={`${direction} arrow`}
-      className="w-4 h-4"
-    />
+    {direction === "prev" ? (
+      <ChevronLeft className="w-6 h-6" />
+    ) : (
+      <ChevronRight className="w-6 h-6" />
+    )}
   </Button>
-);
+)
 
 interface TestimonialCardProps {
-  quote: string;
-  name: string;
-  title: string;
+  quote: string
+  name: string
+  title: string
+  rating: number
+  imageUrl: string
+  videoUrl: string
 }
 
-const TestimonialCard = ({ quote, name, title }: TestimonialCardProps) => (
-  <div className="bg-[#D9D9D9] h-full flex flex-col justify-between rounded-2xl shadow-md overflow-hidden">
-    <div className="bg-[#BABABA] relative h-[200px] lg:h-[250px] rounded-b-xl">
-      <div className="absolute bg-primary rounded-full w-14 h-14 flex items-center justify-center left-6 -bottom-6 z-20">
-        <Image
-          src="/images/testimonial-icon.webp"
-          width={28}
-          height={28}
-          alt="Testimonial icon"
-          className="w-7 h-7"
-        />
-      </div>
-    </div>
-    <div className="px-4 md:px-8 py-6 mt-7 md:mt-10 flex flex-col flex-grow">
-      <p className="text-foreground font-light leading-5 text-xs mb-4 flex-grow">
-        {quote}
-      </p>
-      <div className="flex justify-between items-end">
-        <div>
-          <h3 className="text-primary font-semibold text-xs">{name}</h3>
-          <p className="text-muted-foreground text-xs font-normal">{title}</p>
-        </div>
+const TestimonialCard = ({ quote, name, title, rating, imageUrl, videoUrl }: TestimonialCardProps) => {
+  const [showVideo, setShowVideo] = useState(false)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
+
+  const toggleVideo = () => {
+    setShowVideo(!showVideo)
+    if (!showVideo && iframeRef.current) {
+      iframeRef.current.src = `${videoUrl}${videoUrl.includes('?') ? '&' : '?'}autoplay=1`
+    }
+  }
+
+  return (
+    <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 h-full flex flex-col">
+      <div className="relative h-64 md:h-80">
+        {showVideo ? (
+          <iframe
+            ref={iframeRef}
+            width="100%"
+            height="100%"
+            src={videoUrl}
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+            className="absolute inset-0"
+          ></iframe>
+        ) : (
+          <Image
+            src={imageUrl}
+            alt={`${name}'s testimonial`}
+           fill
+           className="object-cover"
+          />
+        )}
+        <div className={cn("absolute inset-0 bg-gradient-to-t from-black/60 to-transparent", showVideo && "hidden")} />
         <Button
           variant="outline"
-          className="bg-primary text-primary-foreground hover:bg-primary/90 border-none rounded-full text-xs whitespace-nowrap transition-colors duration-200"
+          size="icon"
+          className="absolute bottom-4 right-4 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300"
+          onClick={toggleVideo}
+          aria-label={showVideo ? "Show image" : "Play video"}
         >
-          Continue Reading
+          {showVideo ? (
+            <Pause className="w-6 h-6" />
+          ) : (
+            <PlayCircle className="w-6 h-6" />
+          )}
         </Button>
       </div>
+      <div className="p-6 flex flex-col flex-grow bg-gradient-to-br from-purple-50 to-green-50">
+        <Quote className="w-10 h-10 text-purple-600 mb-4" />
+        <p className="text-gray-700 font-light leading-relaxed mb-4 flex-grow">{quote}</p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-purple-600 font-semibold">{name}</h3>
+            <p className="text-gray-500 text-sm">{title}</p>
+          </div>
+          <div className="flex items-center">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className={cn(
+                  "w-5 h-5",
+                  i < rating ? "text-yellow-400 fill-current" : "text-gray-300"
+                )}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-);
+  )
+}
 
 export default function Testimonials() {
-  const sliderRef = useRef<Slider>(null);
+  const sliderRef = useRef<Slider>(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const settings = {
     dots: false,
@@ -107,6 +155,7 @@ export default function Testimonials() {
     arrows: false,
     slidesToShow: 3,
     slidesToScroll: 1,
+    beforeChange: (current: number, next: number) => setCurrentSlide(next),
     responsive: [
       {
         breakpoint: 1240,
@@ -116,68 +165,80 @@ export default function Testimonials() {
         },
       },
       {
-        breakpoint: 640,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
     ],
-  };
+  }
 
   return (
-    <div className="relative overflow-hidden py-32">
-      <Image
-        src="/images/testi-bg.webp"
-        alt="Background"
-        fill
-        sizes="100vw"
-        className="object-cover object-[left,right]"
-        priority
-      />
-      <div className="absolute inset-0 bg-black bg-opacity-30 z-0" />
-      <div className="container mx-auto px-4 lg:px-8 xl:px-10 relative z-20 bg-[#71B4C5]">
-        <div className="absolute bg-primary rounded-full w-24 h-24 md:w-28 md:h-28 flex items-center justify-center left-1/2 -top-16 lg:left-24 z-20 -translate-x-1/2">
-          <Image
-            src="/images/testimonial-icon.webp"
-            width={56}
-            height={56}
-            alt="Testimonial icon"
-            className="w-10 h-10 md:w-14 md:h-14"
+    <div className="relative overflow-hidden py-16 md:py-24 lg:py-32">
+      <div className="absolute inset-0 bg-gradient-to-tl from-gray-900 via-green-900 to-purple-900">
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="testimonial-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgba(16, 185, 129, 0.05)" />
+              <stop offset="50%" stopColor="rgba(139, 92, 246, 0.05)" />
+              <stop offset="100%" stopColor="rgba(16, 185, 129, 0.05)" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#testimonial-grad)"
+            fillOpacity="1"
+            d="M0,32L48,53.3C96,75,192,117,288,122.7C384,128,480,96,576,85.3C672,75,768,85,864,101.3C960,117,1056,139,1152,133.3C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
+      </div>
+      <div className="absolute inset-0 opacity-30">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <filter id="testimonial-noise">
+            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
+            <feColorMatrix type="saturate" values="0" />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#testimonial-noise)" />
+        </svg>
+      </div>
+      <div className="container mx-auto px-4 lg:px-8 xl:px-10 relative z-10">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">What Our Clients Say</h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            Discover how our services have transformed the investment strategies of our valued clients.
+          </p>
+        </div>
+        <div className="relative px-4 md:px-8">
+          <Slider ref={sliderRef} {...settings}>
+            {testimonials.map((testimonial, index) => (
+              <div key={index} className="px-2 h-full">
+                <TestimonialCard {...testimonial} />
+              </div>
+            ))}
+          </Slider>
+          <CustomArrow
+            direction="prev"
+            onClick={() => sliderRef.current?.slickPrev()}
+          />
+          <CustomArrow
+            direction="next"
+            onClick={() => sliderRef.current?.slickNext()}
           />
         </div>
-        <div className="grid grid-cols-1 lg:gap-x-5 items-center lg:justify-between py-16 lg:pb-28 xl:pb-36">
-          <div className="flex flex-col space-y-3 mb-5 sm:mb-8">
-            <h2 className="text-4xl font-bold text-primary text-center">
-              Testimonials
-            </h2>
-            <p className="max-w-2xl text-center mx-auto text-xs md:text-sm text-gray-700 font-light">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In
-              laoreet sapien vel malesuada auctor. Curabitur venenatis ex ac
-              semper posuere.
-            </p>
-          </div>
-          <div className="relative">
-            <Slider ref={sliderRef} {...settings}>
-              {testimonials.map((testimonial, index) => (
-                <div key={index} className="px-1 h-full">
-                  <TestimonialCard {...testimonial} />
-                </div>
-              ))}
-            </Slider>
-            <div className="absolute -bottom-10 left-8">
-              <CustomArrow
-                direction="prev"
-                onClick={() => sliderRef.current?.slickPrev()}
-              />
-              <CustomArrow
-                direction="next"
-                onClick={() => sliderRef.current?.slickNext()}
-              />
-            </div>
-          </div>
+        <div className="mt-8 flex justify-center items-center">
+          {testimonials.map((_, index) => (
+            <button
+              key={index}
+              className={cn(
+                "w-3 h-3 rounded-full mx-1 transition-all duration-300",
+                currentSlide === index ? "bg-purple-600 scale-125" : "bg-gray-400"
+              )}
+              onClick={() => sliderRef.current?.slickGoTo(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
         </div>
       </div>
     </div>
-  );
+  )
 }

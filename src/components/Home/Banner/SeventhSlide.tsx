@@ -4,7 +4,6 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import {
-  ArrowRight,
   Download,
   Smartphone,
   Wifi,
@@ -205,8 +204,7 @@ export default function AppDownloadSlide() {
             <Image
               src="/hero/app-img.webp"
               alt="Expense tracking app interface"
-              layout="fill"
-              objectFit="contain"
+              fill
               priority
             />
             {/* Decorative elements */}

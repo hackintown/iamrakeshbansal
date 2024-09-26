@@ -2,80 +2,59 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
-import { Star } from "lucide-react";
+import { motion} from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export default function EnhancedAboutSection() {
-  const { scrollYProgress } = useViewportScroll();
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-
-  const books = [
-    {
-      title: "Stock Market Mastery",
-      coverImage:
-        "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg",
-      rating: 5,
-      reviews: 128,
-      description:
-        "A comprehensive guide to understanding and navigating the stock market.",
-      tags: ["Investing", "Finance"],
-    },
-    {
-      title: "Technical Analysis Simplified",
-      coverImage:
-        "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg",
-      rating: 5,
-      reviews: 95,
-      description:
-        "Learn the art of reading charts and predicting market trends.",
-      tags: ["Trading", "Analysis"],
-    },
-    {
-      title: "Wealth Management Strategies",
-      coverImage:
-        "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg",
-      rating: 4,
-      reviews: 76,
-      description:
-        "Expert advice on managing and growing your wealth effectively.",
-      tags: ["Finance", "Planning"],
-    },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-      },
-    },
-  };
 
   return (
-    <section className="relative py-16 overflow-hidden bg-gradient-to-br from-purple-900 via-green-800 to-black">
-      <motion.div className="absolute inset-0 z-0" />
-      <div className="absolute inset-0  z-10" />
-      <div className="container relative mx-auto px-4 z-20 text-white">
+    <section className="relative py-14 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 via-green-900 to-purple-900">
+        <svg
+          className="absolute top-0 right-0 w-full h-64 transform rotate-180 z-0"
+          viewBox="0 0 1440 320"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <linearGradient
+              id="about-us-grad"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="rgba(16, 185, 129, 0.1)" />
+              <stop offset="50%" stopColor="rgba(139, 92, 246, 0.1)" />
+              <stop offset="100%" stopColor="rgba(16, 185, 129, 0.1)" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#about-us-grad)"
+            fillOpacity="1"
+            d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,149.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+          ></path>
+        </svg>
+      </div>
+      <div className="absolute inset-0 opacity-10">
+        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <filter id="noise">
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.65"
+              numOctaves="3"
+              stitchTiles="stitch"
+            />
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noise)" />
+        </svg>
+      </div>
+      <div className="container relative mx-auto px-4 z-10 text-white">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl font-bold text-white sm:text-5xl  leading-tight xl:leading-tight mb-3">
+          <h1 className="text-3xl font-bold text-white text-center sm:text-5xl leading-tight xl:leading-tight mb-3">
             About Dr.&nbsp;
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400">
               Rakesh Bansal
@@ -87,16 +66,16 @@ export default function EnhancedAboutSection() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative overflow-hidden rounded-lg shadow-2xl"
+              className="relative overflow-hidden rounded-lg shadow-2xl z-50 w-full h-64 md:h-auto"
             >
               <Image
                 src="/hero/banner-img3.webp"
                 alt="Dr. Rakesh Bansal"
-                width={400}
-                height={350}
-                className="w-full h-auto overflow-hidden transition-transform duration-300 hover:scale-105"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-300 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-30" />
             </motion.div>
             <div>
               <p className="text-sm lg:text-base mb-4 text-gray-300 leading-relaxed font-light text-center md:text-left">
@@ -129,63 +108,6 @@ export default function EnhancedAboutSection() {
               </motion.div>
             </div>
           </div>
-
-          <h3 className="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-purple-400 to-green-300 bg-clip-text text-transparent">
-            Published Books
-          </h3>
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {books.map((book, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className="bg-gradient-to-br from-purple-900 to-green-900 rounded-lg overflow-hidden shadow-lg transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-              >
-                <div className="relative h-64">
-                  <Image
-                    src={book.coverImage}
-                    alt={`Cover of ${book.title}`}
-                    fill
-                    className="transition-transform duration-300 hover:scale-105 object-cover object-[top,center]"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70" />
-                </div>
-                <div className="p-6">
-                  <h4 className="text-xl font-semibold mb-2 bg-gradient-to-r from-green-400 to-purple-400 bg-clip-text text-transparent">
-                    {book.title}
-                  </h4>
-                  <p className="text-gray-300 mb-4">{book.description}</p>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center">
-                      {[...Array(book.rating)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="w-5 h-5 text-yellow-400 fill-current"
-                        />
-                      ))}
-                      <span className="ml-2 text-gray-400">
-                        ({book.reviews} reviews)
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {book.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="bg-gradient-to-r from-purple-600 to-green-600 text-white px-2 py-1 rounded-full text-xs"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
         </motion.div>
       </div>
     </section>

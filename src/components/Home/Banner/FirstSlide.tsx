@@ -103,7 +103,7 @@ export default function HeroSection() {
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:items-center xl:items-start w-full h-full"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-5 xl:items-start w-full h-full"
         >
           <motion.div variants={itemVariants} className="mt-6 lg:mt-20">
             <h1 className="text-4xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-tight">
@@ -155,13 +155,9 @@ export default function HeroSection() {
             variants={itemVariants}
             className="relative overflow-hidden"
           >
-            <motion.div
-              className="relative rounded-lg overflow-hidden h-full max-w-[500px] mx-auto lg:max-h-[650px]"
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
+            <div className="relative rounded-lg overflow-hidden h-full max-w-[500px] mx-auto lg:max-h-[650px]">
               <Image
-                className="w-full h-auto"
+                className="w-full h-auto -mt-12 lg:mt-0"
                 src="/hero/banner-img6.webp"
                 alt="Rakesh Bansal"
                 width={500}
@@ -171,7 +167,7 @@ export default function HeroSection() {
                 <h2 className="text-2xl font-bold text-white">Rakesh Bansal</h2>
                 <p className="text-gray-300">Trading Mentor & Market Analyst</p>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
       </div>

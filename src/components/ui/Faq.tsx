@@ -4,77 +4,107 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import {
   ChevronDownIcon,
-  TrendingUpIcon,
-  BookOpenIcon,
-  DollarSignIcon,
-  UserIcon,
-  ClockIcon,
-  BarChartIcon,
-  ShieldIcon,
-  GlobeIcon,
-  HelpCircleIcon,
+  Briefcase,
+  MousePointer,
+  HelpCircle,
+  Clock,
+  Bookmark,
+  DollarSign,
+  BarChart2,
+  Users,
+  MessageCircle,
+  Globe,
+  XCircle,
+  Bell,
+  TrendingUp,
+  Lock,
 } from "lucide-react";
 
 const faqs = [
   {
-    question: "What trading strategies do you teach?",
-    answer:
-      "We cover a wide range of strategies including day trading, swing trading, options trading, and long-term investing. Our mentors tailor the approach based on your goals and risk tolerance.",
-    icon: <TrendingUpIcon className="w-6 h-6 text-purple-500" />,
+    question: "What services does Rakesh Bansal Ventures offer?",
+    answer: "We provide multiple services including Intraday/BTST, Options, Futures, Delivery, Commodity, and HNI services.",
+    icon: <Briefcase className="w-6 h-6 text-purple-500" />,
   },
   {
-    question: "How long does the mentorship program last?",
-    answer:
-      "Our standard program lasts for 12 weeks, but we offer flexible options ranging from 4 weeks to 6 months depending on your needs and experience level.",
-    icon: <ClockIcon className="w-6 h-6 text-green-500" />,
+    question: "How can I subscribe to your services?",
+    answer: "You can subscribe to our services through our website. Simply visit the services page and choose the plan that suits you best.",
+    icon: <MousePointer className="w-6 h-6 text-green-500" />,
   },
   {
-    question: "What's included in the mentorship package?",
-    answer:
-      "Our comprehensive package includes one-on-one sessions, live trading rooms, educational materials, market analysis, and access to our proprietary trading tools.",
-    icon: <BookOpenIcon className="w-6 h-6 text-purple-500" />,
+    question: "Is there a free trial available?",
+    answer: "Currently, we do not offer a free trial. However, our competitive pricing and expert-backed signals ensure that you get value for your subscription.",
+    icon: <HelpCircle className="w-6 h-6 text-purple-500" />,
   },
   {
-    question: "How much capital do I need to start trading?",
-    answer:
-      "While you can start with as little as $500, we recommend having at least $5,000 to $10,000 for a more comfortable trading experience and better risk management.",
-    icon: <DollarSignIcon className="w-6 h-6 text-green-500" />,
+    question: "What is the Intraday/BTST service?",
+    answer: "Our Intraday/BTST service provides 5-6 trade signals every week. These signals are for short-term trades that are squared off the same day or the next day.",
+    icon: <Clock className="w-6 h-6 text-green-500" />,
   },
   {
-    question: "Can I choose my own mentor?",
-    answer:
-      "Yes, you can select a mentor based on their expertise and trading style. We'll also help match you with the best fit for your goals and personality.",
-    icon: <UserIcon className="w-6 h-6 text-purple-500" />,
+    question: "What does the Options Plan include?",
+    answer: "The Options Plan includes signals for top Nifty 50 companies & index signals.",
+    icon: <Bookmark className="w-6 h-6 text-purple-500" />,
   },
   {
-    question: "Do you offer a money-back guarantee?",
-    answer:
-      "We offer a 30-day satisfaction guarantee. If you're not happy with the program, we'll refund your investment, no questions asked.",
-    icon: <ShieldIcon className="w-6 h-6 text-green-500" />,
+    question: "Can I get a discount on subscriptions?",
+    answer: "We occasionally offer discounts and special promotions. Please keep an eye on our website and communications for any ongoing offers.",
+    icon: <DollarSign className="w-6 h-6 text-green-500" />,
   },
   {
-    question: "What markets can I trade with your strategies?",
-    answer:
-      "Our strategies are applicable to various markets including stocks, forex, cryptocurrencies, and commodities. We'll help you focus on the markets that best suit your interests and goals.",
-    icon: <GlobeIcon className="w-6 h-6 text-purple-500" />,
+    question: "How do I know the performance of your recommendations?",
+    answer: "We provide detailed performance reports on our website. These reports include the rationale behind each recommendation and track our performance.",
+    icon: <BarChart2 className="w-6 h-6 text-purple-500" />,
   },
   {
-    question: "How do I track my progress during the mentorship?",
-    answer:
-      "We provide regular performance assessments, trading journals, and analytics tools to help you track your progress and identify areas for improvement.",
-    icon: <BarChartIcon className="w-6 h-6 text-green-500" />,
+    question: "What is the HNI service?",
+    answer: "Our HNI service is tailored for high-net-worth individuals with a subscription fee of ₹5 lakh +18% GST. This service includes an initial meeting with Rakesh Bansal, along with exclusive future and delivery calls.",
+    icon: <Users className="w-6 h-6 text-green-500" />,
   },
   {
-    question: "Is there ongoing support after the program ends?",
-    answer:
-      "We offer alumni programs, advanced courses, and a community platform where you can continue to learn and interact with fellow traders and mentors.",
-    icon: <HelpCircleIcon className="w-6 h-6 text-purple-500" />,
+    question: "Do you provide support for your services?",
+    answer: "Yes, we offer support for all our services. You can reach out to our service team for any assistance.",
+    icon: <MessageCircle className="w-6 h-6 text-purple-500" />,
   },
   {
-    question: "How do I get started?",
-    answer:
-      "Simply book a free consultation call through our website. We'll discuss your goals, assess your current level, and recommend the best mentorship path for you.",
-    icon: <TrendingUpIcon className="w-6 h-6 text-green-500" />,
+    question: "How can I contact Rakesh Bansal Ventures?",
+    answer: "You can contact us through the following:\n• Payment & joining related: (+91) 95608 84223\n• Enquiries: (+91) 88514 75191\n• Email: wecare@iamrakeshbansal.com",
+    icon: <Globe className="w-6 h-6 text-green-500" />,
+  },
+  {
+    question: "Can I use the services while traveling abroad?",
+    answer: "Yes, our services can be accessed from anywhere. If you are traveling, make sure to have internet access to receive our signals and updates.",
+    icon: <Globe className="w-6 h-6 text-purple-500" />,
+  },
+  {
+    question: "What is the refund policy?",
+    answer: "Generally, we do not offer refunds for any subscription plans unless there are exceptional circumstances.",
+    icon: <XCircle className="w-6 h-6 text-green-500" />,
+  },
+  {
+    question: "How do I cancel my subscription?",
+    answer: "You can cancel your subscription at any time by visiting your account settings on our website. Please note that cancellations will take effect at the end of your current billing cycle.",
+    icon: <XCircle className="w-6 h-6 text-purple-500" />,
+  },
+  {
+    question: "Are the signals shared via WhatsApp?",
+    answer: "No, we do not provide any services via WhatsApp. All signals and updates are shared through our App platforms as mentioned on our website.",
+    icon: <Bell className="w-6 h-6 text-green-500" />,
+  },
+  {
+    question: "Where do you provide calls and trading updates?",
+    answer: "As soon as you subscribe to our plan, you will be automatically added to the group chat on our app where we provide all the calls and alerts.",
+    icon: <Bell className="w-6 h-6 text-purple-500" />,
+  },
+  {
+    question: "Why did the market price change after I took the call?",
+    answer: "We apologize for the inconvenience. The market prices are highly volatile, and our calls are based on real-time updates.",
+    icon: <TrendingUp className="w-6 h-6 text-green-500" />,
+  },
+  {
+    question: "Is there any way to connect with other subscribers? Or how safe is my identity?",
+    answer: "No, we do not facilitate direct connections between subscribers. We prioritize the privacy and security of our subscribers above all else. This policy is in place to protect your personal information and ensure a secure environment for all our clients.",
+    icon: <Lock className="w-6 h-6 text-purple-500" />,
   },
 ];
 
@@ -149,7 +179,7 @@ export default function Component() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <div className="bg-gradient-to-br from-purple-50 to-green-50 py-12  px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-br from-purple-50 to-green-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="text-4xl font-extrabold text-gray-900 text-center mb-12"
@@ -161,7 +191,7 @@ export default function Component() {
         </motion.h2>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           <div className="space-y-4">
-            {faqs.slice(0, 5).map((faq, index) => (
+            {faqs.slice(0, Math.ceil(faqs.length / 2)).map((faq, index) => (
               <FAQItem
                 key={index}
                 faq={faq}
@@ -172,12 +202,12 @@ export default function Component() {
             ))}
           </div>
           <div className="space-y-4">
-            {faqs.slice(5).map((faq, index) => (
+            {faqs.slice(Math.ceil(faqs.length / 2)).map((faq, index) => (
               <FAQItem
-                key={index + 5}
+                key={index + Math.ceil(faqs.length / 2)}
                 faq={faq}
-                index={index + 5}
-                isActive={activeIndex === index + 5}
+                index={index + Math.ceil(faqs.length / 2)}
+                isActive={activeIndex === index + Math.ceil(faqs.length / 2)}
                 setActiveIndex={setActiveIndex}
               />
             ))}

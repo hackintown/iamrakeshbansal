@@ -1,31 +1,32 @@
-"use client";
+"use client"
 
-import React, { useState, useRef } from "react";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { CheckCircle, ChevronRight, ChevronLeft, X } from "lucide-react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import React, { useState, useRef, useEffect } from "react"
+import { motion} from "framer-motion"
+import { Button } from "@/components/ui/button"
+import { CheckCircle, ChevronRight, ChevronLeft, Info } from "lucide-react"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 interface Feature {
-  name: string;
-  included: boolean;
+  name: string
+  included: boolean
+  info?: string
 }
 
 interface PricingPlan {
-  title: string;
-  monthlyPrice: string;
-  quarterlyPrice: string;
-  yearlyPrice: string;
-  description: string;
-  features: Feature[];
-  buttonText: string;
-  popular?: boolean;
+  title: string
+  monthlyPrice: string
+  quarterlyPrice: string
+  yearlyPrice: string
+  description: string
+  features: Feature[]
+  buttonText: string
+  popular?: boolean
+  icon: React.ReactNode
 }
 
-type PlanDuration = "monthly" | "quarterly" | "yearly";
+type PlanDuration = "monthly" | "quarterly" | "yearly"
 
 const pricingData: PricingPlan[] = [
   {
@@ -35,16 +36,17 @@ const pricingData: PricingPlan[] = [
     yearlyPrice: "15999",
     description: "For beginners",
     features: [
-      { name: "Monthly 15-20 Calls", included: true },
+      { name: "Monthly 15-20 Calls", included: true, info: "Receive up to 20 trading calls per month" },
       { name: "Entry Price", included: true },
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
       { name: "First Target", included: true },
-      { name: "Capital Required 20k to 50k", included: true },
+      { name: "Capital Required 20k to 50k", included: true, info: "Recommended capital range for optimal trading" },
       { name: "Top Nifty 50 Companies", included: true },
       { name: "Index & Equity", included: true },
     ],
-    buttonText: "See More",
+    buttonText: "Start Trading",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11.707 4.707a1 1 0 00-1.414-1.414L10 9.586 8.707 8.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>,
   },
   {
     title: "Mentorship Service",
@@ -60,10 +62,11 @@ const pricingData: PricingPlan[] = [
       { name: "Capital Required 100k to 500k", included: true },
       { name: "Short Medium & Long Term", included: true },
       { name: "Swing Trade", included: true },
-      { name: "Live Market Support", included: true },
+      { name: "Live Market Support", included: true, info: "Get real-time assistance during market hours" },
     ],
-    buttonText: "See More",
+    buttonText: "Get Mentored",
     popular: true,
+    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" /></svg>,
   },
   {
     title: "Future Service",
@@ -76,11 +79,12 @@ const pricingData: PricingPlan[] = [
       { name: "Entry Price", included: true },
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
-      { name: "Performance Reports", included: true },
+      { name: "Performance Reports", included: true, info: "Detailed monthly performance analysis" },
       { name: "Capital Required 500k to 10000k", included: true },
       { name: "Top Nifty 50 Companies", included: true },
     ],
-    buttonText: "See More",
+    buttonText: "Trade Futures",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" /></svg>,
   },
   {
     title: "Commodity Service",
@@ -95,12 +99,10 @@ const pricingData: PricingPlan[] = [
       { name: "Stop Loss", included: true },
       { name: "Performance Reports", included: true },
       { name: "Capital Required 500k to 10000k", included: true },
-      {
-        name: "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil",
-        included: true,
-      },
+      { name: "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil", included: true, info: "Diverse commodity options" },
     ],
-    buttonText: "See More",
+    buttonText: "Trade Commodities",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clipRule="evenodd" /></svg>,
   },
   {
     title: "Index/Option",
@@ -115,11 +117,12 @@ const pricingData: PricingPlan[] = [
       { name: "Stop Loss", included: true },
       { name: "Capital Required 55k to 100k", included: true },
       { name: "Top Nifty 50 Companies", included: true },
-      { name: "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY", included: true },
+      { name: "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY", included: true, info: "Comprehensive index coverage" },
     ],
-    buttonText: "See More",
+    buttonText: "Trade Options",
+    icon: <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-600" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z" clipRule="evenodd" /></svg>,
   },
-];
+]
 
 const CardHeader = ({
   title,
@@ -127,22 +130,25 @@ const CardHeader = ({
   description,
   popular,
   duration,
+  icon,
 }: {
-  title: string;
-  price: string;
-  description: string;
-  popular?: boolean;
-  duration: PlanDuration;
+  title: string
+  price: string
+  description: string
+  popular?: boolean
+  duration: PlanDuration
+  icon: React.ReactNode
 }) => (
-  <div className="p-6 relative">
-    <div className="mb-2">
+  <div className="p-6 relative bg-gradient-to-br from-purple-100 to-green-100 rounded-t-lg">
+    <div className="mb-4 flex items-center justify-between">
       <h2 className="text-xl font-sans font-semibold text-purple-700 mb-3 text-left">
         {title}
       </h2>
-      <div className="text-center">
-        <span className="text-3xl font-bold text-purple-700">₹{price}</span>
-        <span className="text-sm text-gray-600">/{duration}</span>
-      </div>
+      {icon}
+    </div>
+    <div className="text-center mb-4">
+      <span className="text-4xl font-bold text-purple-700">₹{price}</span>
+      <span className="text-sm text-gray-600">/{duration}</span>
     </div>
 
     {popular && (
@@ -151,50 +157,54 @@ const CardHeader = ({
       </span>
     )}
 
-    <p className="text-sm text-gray-600 hidden">{description}</p>
+    <p className="text-sm text-gray-600 mt-2">{description}</p>
   </div>
-);
+)
 
 const FeatureList = ({ features }: { features: Feature[] }) => (
-  <ul className="space-y-3 p-6">
+  <ul className="space-y-3 p-6 flex-grow bg-white">
     {features.map((feature, index) => (
       <li key={index} className="flex items-center">
-        {feature.included ? (
-          <CheckCircle className="w-5 h-5 mr-2 text-green-500" />
-        ) : (
-          <X className="w-5 h-5 mr-2 text-gray-400" />
-        )}
-        <span className={feature.included ? "text-black" : "text-gray-500"}>
+        <CheckCircle className="w-5 h-5 mr-2 text-green-500 flex-shrink-0" />
+        <span className="text-black text-sm flex-grow">
           {feature.name}
         </span>
+        {feature.info && (
+          <div className="group relative">
+            <Info className="w-4 h-4 text-gray-400 cursor-pointer" />
+            <div className="absolute bottom-full right-0 mb-2 w-48 bg-black text-white text-xs rounded p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+              {feature.info}
+            </div>
+          </div>
+        )}
       </li>
     ))}
   </ul>
-);
+)
 
 const CardFooter = ({ buttonText }: { buttonText: string }) => (
-  <div className="p-6 pt-0">
-    <Button variant="gradient" size="custom" className="w-full">
+  <div className="p-6 bg-gradient-to-br from-purple-100 to-green-100 rounded-b-lg">
+    <Button variant="outline" size="lg" className="w-full bg-white hover:bg-purple-50 text-purple-700 border-purple-300 hover:border-purple-400 transition-all duration-300">
       {buttonText}
     </Button>
   </div>
-);
+)
 
 const PricingCard = ({
   plan,
   duration,
 }: {
-  plan: PricingPlan;
-  duration: PlanDuration;
+  plan: PricingPlan
+  duration: PlanDuration
 }) => {
-  const price = plan[`${duration}Price`];
+  const price = plan[`${duration}Price`]
 
   return (
     <motion.div
-      className={`rounded-lg border-2 grid grid-cols-1 justify-between ${
-        plan.popular ? "border-green-500" : "border-gray-200"
-      } bg-white w-full max-w-sm text-black shadow-sm hover:shadow-lg 
-      transition-shadow relative h-full`}
+      className={`rounded-lg overflow-hidden flex flex-col ${
+        plan.popular ? "border-2 border-green-500" : "border border-gray-200"
+      } bg-white w-full max-w-sm text-black shadow-lg hover:shadow-xl 
+      transition-all duration-300 relative h-full`}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
@@ -206,44 +216,51 @@ const PricingCard = ({
         description={plan.description}
         popular={plan.popular}
         duration={duration}
+        icon={plan.icon}
       />
       <FeatureList features={plan.features} />
       <CardFooter buttonText={plan.buttonText} />
     </motion.div>
-  );
-};
+  )
+}
 
 const Switch = ({
-  checked,
-  onCheckedChange,
+  options,
+  selectedOption,
+  onOptionChange,
 }: {
-  checked: boolean;
-  onCheckedChange: () => void;
+  options: PlanDuration[]
+  selectedOption: PlanDuration
+  onOptionChange: (option: PlanDuration) => void
 }) => (
-  <button
-    className={`w-14 h-7 flex items-center rounded-full p-1 shadow-sm ${
-      checked ? "bg-green-500" : "bg-gray-400"
-    }`}
-    onClick={onCheckedChange}
-  >
-    <motion.div
-      className="w-5 h-5 bg-white rounded-full shadow-sm"
-      animate={{ x: checked ? 28 : 0 }}
-    />
-  </button>
-);
+  <div className="flex items-center justify-center space-x-2 bg-gray-100 p-1 rounded-full">
+    {options.map((option) => (
+      <button
+        key={option}
+        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
+          selectedOption === option
+            ? "bg-purple-600 text-white"
+            : "text-gray-600 hover:bg-gray-200"
+        }`}
+        onClick={() => onOptionChange(option)}
+      >
+        {option.charAt(0).toUpperCase() + option.slice(1)}
+      </button>
+    ))}
+  </div>
+)
 
 const CustomArrow = ({
   onClick,
   direction,
 }: {
-  onClick?: () => void;
-  direction: "left" | "right";
+  onClick?: () => void
+  direction: "left" | "right"
 }) => (
-  <div
+  <button
     className={`custom-slick-arrow absolute ${
-      direction === "left" ? "left-0" : "right-0"
-    } top-1/2 transform -translate-y-1/2 cursor-pointer z-10 bg-white rounded-full p-2 shadow-md`}
+      direction === "left" ? "-left-4" : "-right-4"
+    } top-1/2 transform -translate-y-1/2 cursor-pointer z-10 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow duration-300`}
     onClick={onClick}
   >
     {direction === "left" ? (
@@ -251,20 +268,22 @@ const CustomArrow = ({
     ) : (
       <ChevronRight className="w-6 h-6 text-purple-700" />
     )}
-  </div>
-);
+  </button>
+)
 
 export default function Pricing() {
-  const [duration, setDuration] = useState<PlanDuration>("monthly");
-  const sliderRef = useRef<Slider>(null);
+  const [duration, setDuration] = useState<PlanDuration>("monthly")
+  const sliderRef = useRef<Slider>(null)
 
   const settings = {
     dots: false,
-    infinite: false,
+    infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    autoplay: false,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true,
     nextArrow: <CustomArrow direction="right" />,
     prevArrow: <CustomArrow direction="left" />,
     className: "right-side-visible-slider",
@@ -280,33 +299,64 @@ export default function Pricing() {
         },
       },
     ],
-  };
+  }
 
   const handleDurationChange = (newDuration: PlanDuration) => {
-    setDuration(newDuration);
-  };
+    setDuration(newDuration)
+  }
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (sliderRef.current) {
+        sliderRef.current.slickGoTo(0)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   return (
-    <div className="relative z-10 py-6 md:py-8 lg:py-10 bg-gray-300 overflow-hidden">
-      <Image
-        src="/images/pricing.webp"
-        alt="Background"
-        fill
-        sizes="100vw"
-        className="object-cover object-[top,center] opacity-90"
-        priority
-      />
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="relative z-10 py-16 md:py-24 lg:py-32 overflow-hidden bg-gradient-to-br from-purple-50 to-green-50">
+      <div className="absolute inset-0 bg-gradient-to-bl from-purple-900/10 to-green-900/10">
+        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="pricing-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgba(139, 92, 246, 0.05)" />
+              <stop offset="50%" stopColor="rgba(16, 185, 129, 0.05)" />
+              <stop offset="100%" stopColor="rgba(139, 92, 246, 0.05)" />
+            </linearGradient>
+          </defs>
+          <path fill="url(#pricing-grad)" d="M0 0 C 50 100, 80 100, 100 0 Z" />
+        </svg>
+      </div>
+      <div className="absolute inset-0">
+        {[...Array(5)].map((_, i) => (
+          <svg key={i} className="absolute" style={{left: `${i * 25}%`, top: '20%'}} width="40" height="40" viewBox="0 0 40 40">
+            <path d="M20 2 L38 38 L2 38 Z" fill="none" stroke="rgba(139, 92, 246, 0.1)" strokeWidth="1">
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="0 20 20"
+                to="360 20 20"
+                dur={`${10 + i * 2}s`}
+                repeatCount="indefinite"
+              />
+            </path>
+          </svg>
+        ))}
+      </div>
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <motion.div
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8"
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl uppercase font-bold text-purple-700 mb-4">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-green-600 mb-6">
             Our Services
           </h2>
-          <p className="max-w-2xl mx-auto text-xs md:text-sm text-gray-700 font-light">
+          <p className="max-w-2xl mx-auto text-sm md:text-base text-gray-700 font-light">
             Unlock your trading potential with our flexible pricing options.
             Choose the plan that best fits your needs and start your journey to
             financial success.
@@ -317,42 +367,23 @@ export default function Pricing() {
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="flex justify-center items-center space-x-4 mb-12"
+          className="flex flex-col items-center justify-center space-y-8 mb-16"
         >
-          <span
-            className={`text-lg ${
-              duration === "monthly"
-                ? "text-purple-700"
-                : "text-gray-500 opacity-50"
-            }`}
-          >
-            Monthly
-          </span>
           <Switch
-            checked={duration !== "monthly"}
-            onCheckedChange={() =>
-              handleDurationChange(
-                duration === "monthly" ? "yearly" : "monthly"
-              )
-            }
+            options={["monthly", "quarterly", "yearly"]}
+            selectedOption={duration}
+            onOptionChange={handleDurationChange}
           />
-          <span
-            className={`text-lg ${
-              duration === "yearly"
-                ? "text-purple-700"
-                : "text-gray-500 opacity-50"
-            }`}
-          >
-            Yearly
-          </span>
-          <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-green-100 text-green-800">
-            Save 20%
-          </span>
+          {duration === "yearly" && (
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-green-100 text-green-800">
+              Save 20% with yearly billing
+            </span>
+          )}
         </motion.div>
-        <div className="relative">
+        <div className="relative px-8">
           <Slider ref={sliderRef} {...settings}>
             {pricingData.map((plan, index) => (
-              <div key={index} className="outline-none px-2 py-2">
+              <div key={index} className="outline-none px-2 py-2 h-full">
                 <PricingCard plan={plan} duration={duration} />
               </div>
             ))}
@@ -360,5 +391,5 @@ export default function Pricing() {
         </div>
       </div>
     </div>
-  );
+  )
 }
