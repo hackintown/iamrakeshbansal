@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import Slider from "react-slick"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -74,6 +74,17 @@ const TestimonialCard = ({ quote, name, title, rating, imageUrl, videoUrl }: Tes
   const [showVideo, setShowVideo] = useState(false)
   const iframeRef = useRef<HTMLIFrameElement>(null)
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowVideo(true)
+      if (iframeRef.current) {
+        iframeRef.current.src = `${videoUrl}${videoUrl.includes('?') ? '&' : '?'}autoplay=1`
+      }
+    }, 5000)
+
+    return () => clearTimeout(timer)
+  }, [videoUrl])
+
   const toggleVideo = () => {
     setShowVideo(!showVideo)
     if (!showVideo && iframeRef.current) {
@@ -100,8 +111,8 @@ const TestimonialCard = ({ quote, name, title, rating, imageUrl, videoUrl }: Tes
           <Image
             src={imageUrl}
             alt={`${name}'s testimonial`}
-           fill
-           className="object-cover"
+            fill
+            className="object-cover"
           />
         )}
         <div className={cn("absolute inset-0 bg-gradient-to-t from-black/60 to-transparent", showVideo && "hidden")} />
@@ -121,7 +132,7 @@ const TestimonialCard = ({ quote, name, title, rating, imageUrl, videoUrl }: Tes
       </div>
       <div className="p-6 flex flex-col flex-grow bg-gradient-to-br from-purple-50 to-green-50">
         <Quote className="w-10 h-10 text-purple-600 mb-4" />
-        <p className="text-gray-700 font-light leading-relaxed mb-4 flex-grow">{quote}</p>
+        <p className="text-gray-700 font-light leading-relaxed mb-4 flex-grow text-sm lg:text-base">{quote}</p>
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-purple-600 font-semibold">{name}</h3>
@@ -175,7 +186,7 @@ export default function Testimonials() {
   }
 
   return (
-    <div className="relative overflow-hidden py-16 md:py-24 lg:py-32">
+    <div className="relative overflow-hidden py-10  lg:py-20">
       <div className="absolute inset-0 bg-gradient-to-tl from-gray-900 via-green-900 to-purple-900">
         <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -203,12 +214,12 @@ export default function Testimonials() {
       </div>
       <div className="container mx-auto px-4 lg:px-8 xl:px-10 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">What Our Clients Say</h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">What Our Clients Say</h2>
+          <p className="text-sm md:text-base text-gray-300 max-w-2xl mx-auto">
             Discover how our services have transformed the investment strategies of our valued clients.
           </p>
         </div>
-        <div className="relative px-4 md:px-8">
+        <div className="relative px-2 md:px-4">
           <Slider ref={sliderRef} {...settings}>
             {testimonials.map((testimonial, index) => (
               <div key={index} className="px-2 h-full">
@@ -238,6 +249,11 @@ export default function Testimonials() {
             />
           ))}
         </div>
+      </div>
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-0 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+        <div className="absolute top-0 right-0 w-64 h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
     </div>
   )
