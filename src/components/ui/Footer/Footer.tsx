@@ -1,34 +1,45 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import Image from 'next/image'
-import Link from 'next/link'
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa'
-import { MdEmail, MdLocationOn, MdPhone } from 'react-icons/md';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+  FaWhatsapp,
+  FaYoutube,
+} from "react-icons/fa";
+import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
 export default function Footer() {
   const socialIcons = [
-    { Icon: FaLinkedinIn, href: '#', label: 'LinkedIn' },
-    { Icon: FaInstagram, href: '#', label: 'Instagram' },
-    { Icon: FaYoutube, href: '#', label: 'YouTube' },
-    { Icon: FaFacebookF, href: '#', label: 'Facebook' },
-    { Icon: FaWhatsapp, href: '#', label: 'WhatsApp' },
-    { Icon: FaTwitter, href: '#', label: 'Twitter' },
-  ]
+    { Icon: FaLinkedinIn, href: "#", label: "LinkedIn" },
+    { Icon: FaInstagram, href: "#", label: "Instagram" },
+    { Icon: FaYoutube, href: "#", label: "YouTube" },
+    { Icon: FaFacebookF, href: "#", label: "Facebook" },
+    { Icon: FaWhatsapp, href: "#", label: "WhatsApp" },
+    { Icon: FaTwitter, href: "#", label: "Twitter" },
+  ];
 
   const usefulLinks = [
-    { text: 'About Us', href: '#' },
-    { text: 'Services', href: '#' },
-    { text: 'Contact', href: '#' },
-    { text: 'Blog', href: '#' },
-    { text: 'FAQ', href: '#' },
-  ]
+    { text: "About Us", href: "#" },
+    { text: "Services", href: "#" },
+    { text: "Contact", href: "#" },
+    { text: "Blog", href: "#" },
+    { text: "FAQ", href: "#" },
+  ];
 
   const contactInfo = [
-    { Icon: MdPhone, text: '+1 (555) 123-4567', href: 'tel:+15551234567' },
-    { Icon: MdEmail, text: 'info@example.com', href: 'mailto:info@example.com' },
-    { Icon: MdLocationOn, text: '123 Main St, City, Country', href: '#' },
-  ]
+    { Icon: MdPhone, text: "+1 (555) 123-4567", href: "tel:+15551234567" },
+    {
+      Icon: MdEmail,
+      text: "info@example.com",
+      href: "mailto:info@example.com",
+    },
+    { Icon: MdLocationOn, text: "123 Main St, City, Country", href: "#" },
+  ];
 
   return (
     <footer className="relative bg-gradient-to-br from-purple-900 via-green-800 to-black text-white overflow-hidden">
@@ -49,9 +60,16 @@ export default function Footer() {
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center md:items-start"
           >
-            <Image src="/images/logo.webp" alt="Logo" width={180} height={60} className="mb-6" />
+            <Image
+              src="/images/logo.webp"
+              alt="Logo"
+              width={180}
+              height={60}
+              className="mb-6"
+            />
             <p className="text-sm mb-6 text-center md:text-left">
-              Empowering your digital journey with innovative solutions and unparalleled service.
+              Empowering your digital journey with innovative solutions and
+              unparalleled service.
             </p>
             <div className="flex space-x-4">
               {socialIcons.map(({ Icon, href, label }, index) => (
@@ -80,9 +98,12 @@ export default function Footer() {
                 <motion.li
                   key={index}
                   whileHover={{ x: 5 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
                 >
-                  <Link href={link.href} className="hover:text-green-400 transition-colors">
+                  <Link
+                    href={link.href}
+                    className="hover:text-green-400 transition-colors"
+                  >
                     {link.text}
                   </Link>
                 </motion.li>
@@ -104,7 +125,10 @@ export default function Footer() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <Icon className="w-5 h-5 text-green-400" />
-                  <a href={href} className="hover:text-green-400 transition-colors">
+                  <a
+                    href={href}
+                    className="hover:text-green-400 transition-colors"
+                  >
                     {text}
                   </a>
                 </motion.li>
@@ -119,33 +143,33 @@ export default function Footer() {
           >
             <h3 className="text-xl font-semibold mb-6">Download Our App</h3>
             <div className="flex flex-col gap-4">
-                    {[
-                      "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/app-store-button.png",
-                      "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/play-store-button.png",
-                    ].map((src, index) => (
-                      <motion.a
-                        key={index}
-                        href="#"
-                        title=""
-                        className="block transition-all duration-200 hover:opacity-80 focus:opacity-80"
-                        role="button"
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                      >
-                        <Image
-                          className="w-auto rounded h-14 sm:h-16"
-                          src={src}
-                          alt={
-                            index === 0
-                              ? "Download on App Store"
-                              : "Get it on Google Play"
-                          }
-                          width={135}
-                          height={40}
-                        />
-                      </motion.a>
-                    ))}
-                  </div>
+              {[
+                "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/app-store-button.png",
+                "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/play-store-button.png",
+              ].map((src, index) => (
+                <motion.a
+                  key={index}
+                  href="#"
+                  title=""
+                  className="block transition-all duration-200 hover:opacity-80 focus:opacity-80"
+                  role="button"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Image
+                    className="w-auto rounded h-14 sm:h-16"
+                    src={src}
+                    alt={
+                      index === 0
+                        ? "Download on App Store"
+                        : "Get it on Google Play"
+                    }
+                    width={135}
+                    height={40}
+                  />
+                </motion.a>
+              ))}
+            </div>
           </motion.div>
         </div>
 
@@ -157,16 +181,26 @@ export default function Footer() {
         >
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm mb-4 md:mb-0">
-              &copy; {new Date().getFullYear()} Your Company Name. All rights reserved.
+              &copy; {new Date().getFullYear()} Your Company Name. All rights
+              reserved.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-sm hover:text-green-400 transition-colors">
+              <Link
+                href="#"
+                className="text-sm hover:text-green-400 transition-colors"
+              >
                 Privacy Policy
               </Link>
-              <Link href="#" className="text-sm hover:text-green-400 transition-colors">
+              <Link
+                href="#"
+                className="text-sm hover:text-green-400 transition-colors"
+              >
                 Terms of Service
               </Link>
-              <Link href="#" className="text-sm hover:text-green-400 transition-colors">
+              <Link
+                href="#"
+                className="text-sm hover:text-green-400 transition-colors"
+              >
                 Cookie Policy
               </Link>
             </div>
@@ -174,5 +208,5 @@ export default function Footer() {
         </motion.div>
       </div>
     </footer>
-  )
+  );
 }

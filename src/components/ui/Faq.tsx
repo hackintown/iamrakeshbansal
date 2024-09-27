@@ -182,7 +182,7 @@ export default function Component() {
     <div className="bg-gradient-to-br from-purple-50 to-green-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.h2
-          className="text-4xl font-extrabold text-gray-900 text-center mb-12"
+          className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-green-400 text-center mb-12"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
