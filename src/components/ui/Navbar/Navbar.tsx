@@ -15,56 +15,20 @@ import {
   navigationMenuTriggerStyle,
 } from "../navigation.menu";
 import { ChevronDownIcon } from "lucide-react";
+import { NAVBAR_CONSTANT } from "./constant";
 
-const servicesData = [
-  {
-    title: "Intraday/BTST Plan",
-    href: "https://rakeshbansal.rpy.club/g/KbkzwwjCcO",
-  },
-  {
-    title: "Options Plan",
-    href: "https://rakeshbansal.rpy.club/jcp/3vKH8YQCjS",
-  },
-  {
-    title: "Option & IntraDay",
-    href: "https://rakeshbansal.rpy.club/pick-package?id=65bba85ec908731d0d764b39&type=RigiChannelChat&redirectBackUrl=%2Fjcp%2F3vKH8YQCjS ",
-  },
-  {
-    title: "Futures Plan",
-    href: "https://rakeshbansal.rpy.club/jcp/Z3WkEvk1L6",
-  },
-  {
-    title: "Mentorship Plan",
-    href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
-  },
-  {
-    title: "Commodity Plan",
-    href: "https://rakeshbansal.rpy.club/jcp/atcYbhpxGM",
-  },
-  { title: "HNI", href: "https://forms.gle/WGLoiPKDFfinfMj57" },
-];
+const servicesData =
+  NAVBAR_CONSTANT.find((group) => group.title === "Services")?.items || [];
 
-const coursesData = [{ title: "KURUKSHETRA - Win The Battle", href: "#" }];
-const disclaimerData = [
-  {
-    title: "Control Policy",
-    href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
-  },
-  {
-    title: "Privacy Policy",
-    href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
-  },
-  {
-    title: "Terms and Conditions",
-    href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
-  },
-];
-const aboutusData = [
-  {
-    title: "About Dr. Rakesh Bansal",
-    href: "#",
-  },
-];
+const coursesData =
+  NAVBAR_CONSTANT.find((group) => group.title === "Courses")?.items || [];
+
+const aboutusData =
+  NAVBAR_CONSTANT.find((group) => group.title === "About Us")?.items || [];
+
+const disclaimerData =
+  NAVBAR_CONSTANT.find((group) => group.title === "Disclaimer")?.items || [];
+
 interface AnimatedHamburgerButtonProps {
   active: boolean;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
@@ -203,25 +167,23 @@ const Navbar: React.FC = () => {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
-
               {/* Services */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-base text-primary">
-                  Services
+                  Advisory Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="flex flex-row">
                   <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
                     {servicesData.map((service) => (
                       <ListItem
-                        key={service.title}
-                        title={service.title}
+                        key={service.id}
+                        title={service.name}
                         href={service.href}
                       />
                     ))}
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
-
               {/* Courses */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-base text-primary">
@@ -231,15 +193,14 @@ const Navbar: React.FC = () => {
                   <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
                     {coursesData.map((course) => (
                       <ListItem
-                        key={course.title}
-                        title={course.title}
+                        key={course.id}
+                        title={course.name}
                         href={course.href}
                       />
                     ))}
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
-
               {/* Blogs */}
               <NavigationMenuItem>
                 <Link href="/blogs" passHref legacyBehavior>
@@ -253,7 +214,6 @@ const Navbar: React.FC = () => {
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>
-
               {/* About Us */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-base text-primary">
@@ -263,15 +223,27 @@ const Navbar: React.FC = () => {
                   <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
                     {aboutusData.map((about) => (
                       <ListItem
-                        key={about.title}
-                        title={about.title}
+                        key={about.id}
+                        title={about.name}
                         href={about.href}
                       />
                     ))}
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
-
+              {/* Contact Us */}
+              <NavigationMenuItem>
+                <Link href="/contact-us" passHref legacyBehavior>
+                  <NavigationMenuLink
+                    className={cn(
+                      navigationMenuTriggerStyle(),
+                      "text-base text-primary"
+                    )}
+                  >
+                    Contact Us
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
               {/* Disclaimer */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-base text-primary">
@@ -281,8 +253,8 @@ const Navbar: React.FC = () => {
                   <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
                     {disclaimerData.map((disclaimer) => (
                       <ListItem
-                        key={disclaimer.title}
-                        title={disclaimer.title}
+                        key={disclaimer.id}
+                        title={disclaimer.name}
                         href={disclaimer.href}
                       />
                     ))}
@@ -312,7 +284,7 @@ const Navbar: React.FC = () => {
           >
             {/* Home */}
             <Link
-              href="/home"
+              href="/"
               onClick={handleCloseSidebar}
               className="block py-4 text-base font-medium text-primary hover:text-accent transition-all"
             >
@@ -345,12 +317,12 @@ const Navbar: React.FC = () => {
                 >
                   {servicesData.map((service) => (
                     <Link
-                      key={service.title}
+                      key={service.id}
                       href={service.href}
                       onClick={handleCloseSidebar}
                       className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
                     >
-                      {service.title}
+                      {service.name}
                     </Link>
                   ))}
                 </motion.div>
@@ -383,12 +355,12 @@ const Navbar: React.FC = () => {
                 >
                   {coursesData.map((course) => (
                     <Link
-                      key={course.title}
+                      key={course.id}
                       href={course.href}
                       onClick={handleCloseSidebar}
                       className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
                     >
-                      {course.title}
+                      {course.name}
                     </Link>
                   ))}
                 </motion.div>
@@ -409,6 +381,13 @@ const Navbar: React.FC = () => {
               className="block py-4 text-base font-medium text-primary hover:text-accent transition-all"
             >
               About Us
+            </Link>
+            <Link
+              href="/contact-us"
+              onClick={handleCloseSidebar}
+              className="block py-4 text-base font-medium text-primary hover:text-accent transition-all"
+            >
+              Contact Us
             </Link>
 
             {/* Disclaimer */}
@@ -437,12 +416,12 @@ const Navbar: React.FC = () => {
                 >
                   {disclaimerData.map((disclaimer) => (
                     <Link
-                      key={disclaimer.title}
+                      key={disclaimer.id}
                       href={disclaimer.href}
                       onClick={handleCloseSidebar}
                       className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
                     >
-                      {disclaimer.title}
+                      {disclaimer.name}
                     </Link>
                   ))}
                 </motion.div>

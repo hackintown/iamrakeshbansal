@@ -7,6 +7,7 @@ import { CheckCircle, ChevronRight, ChevronLeft, Info } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Link from "next/link";
 
 interface Feature {
   name: string;
@@ -23,6 +24,7 @@ interface PricingPlan {
   features: Feature[];
   buttonText: string;
   popular?: boolean;
+  href: string;
   icon: React.ReactNode;
 }
 
@@ -35,6 +37,7 @@ const pricingData: PricingPlan[] = [
     quarterlyPrice: "4500",
     yearlyPrice: "15999",
     description: "For beginners",
+    href: "/subscriptions/intraday-btst-plan",
     features: [
       {
         name: "Monthly 15-20 Calls",
@@ -75,6 +78,7 @@ const pricingData: PricingPlan[] = [
     quarterlyPrice: "5700",
     yearlyPrice: "19999",
     description: "Most popular",
+    href: "/subscriptions/mentorship-plan",
     features: [
       { name: "Monthly 10-15 Calls", included: true },
       { name: "Entry Price", included: true },
@@ -108,6 +112,7 @@ const pricingData: PricingPlan[] = [
     quarterlyPrice: "11400",
     yearlyPrice: "39999",
     description: "For professionals",
+    href: "/subscriptions/futures-plan",
     features: [
       { name: "Monthly 10-15 Calls", included: true },
       { name: "Entry Price", included: true },
@@ -143,6 +148,7 @@ const pricingData: PricingPlan[] = [
     quarterlyPrice: "11400",
     yearlyPrice: "39999",
     description: "For professionals",
+    href: "/subscriptions/commodity-plan",
     features: [
       { name: "Monthly 10-15 Calls", included: true },
       { name: "Entry Price", included: true },
@@ -178,6 +184,7 @@ const pricingData: PricingPlan[] = [
     quarterlyPrice: "11400",
     yearlyPrice: "39999",
     description: "For professionals",
+    href: "/subscriptions/options-plan",
     features: [
       { name: "Monthly 10-15 Calls", included: true },
       { name: "Entry Price", included: true },
@@ -265,11 +272,19 @@ const FeatureList = ({ features }: { features: Feature[] }) => (
   </ul>
 );
 
-const CardFooter = ({ buttonText }: { buttonText: string }) => (
+const CardFooter = ({
+  buttonText,
+  href,
+}: {
+  buttonText: string;
+  href: string;
+}) => (
   <div className="p-6 bg-gradient-to-br from-purple-100 to-green-100 rounded-b-lg">
-    <Button variant="gradient" size="custom" className="w-full">
-      {buttonText}
-    </Button>
+    <Link href={href}>
+      <Button variant="gradient" size="custom" className="w-full">
+        {buttonText}
+      </Button>
+    </Link>
   </div>
 );
 
@@ -302,7 +317,7 @@ const PricingCard = ({
         icon={plan.icon}
       />
       <FeatureList features={plan.features} />
-      <CardFooter buttonText={plan.buttonText} />
+      <CardFooter buttonText={plan.buttonText} href={plan.href} />
     </motion.div>
   );
 };
@@ -359,13 +374,13 @@ export default function Pricing() {
   const sliderRef = useRef<Slider>(null);
 
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     pauseOnHover: true,
     nextArrow: <CustomArrow direction="right" />,
     prevArrow: <CustomArrow direction="left" />,
@@ -400,7 +415,10 @@ export default function Pricing() {
   }, []);
 
   return (
-    <div className="relative z-10 py-10  overflow-hidden bg-gradient-to-br from-purple-50 to-green-50">
+    <div
+      className="relative z-10 py-10  overflow-hidden bg-gradient-to-br from-purple-50 to-green-50"
+      id="services-sec"
+    >
       <div className="absolute inset-0 bg-gradient-to-bl from-purple-900/10 to-green-900/10">
         <svg
           className="absolute inset-0 w-full h-full"
@@ -459,21 +477,16 @@ export default function Pricing() {
           transition={{ duration: 0.5 }}
           className="text-center mb-6"
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-green-600 mb-3 lg:mb-6">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-green-600 mb-3 lg:mb-5">
             Our Services
           </h2>
-          <p className="max-w-2xl mx-auto text-xs sm:text-sm md:text-base text-gray-700 font-light">
-            Unlock your trading potential with our flexible pricing options.
-            Choose the plan that best fits your needs and start your journey to
-            financial success.
-          </p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center justify-center space-y-8 mb-14"
+          className="flex flex-col items-center justify-center space-y-8 mb-10"
         >
           <Switch
             options={["monthly", "quarterly", "yearly"]}

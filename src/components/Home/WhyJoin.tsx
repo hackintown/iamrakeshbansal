@@ -4,11 +4,37 @@ import {
   Lightbulb,
   TrendingUp,
   GraduationCap,
-  CheckCircle,
+  // CheckCircle,
 } from "lucide-react";
-import Link from "next/link";
-import { Button } from "../ui/button";
-
+// import Link from "next/link";
+// import { Button } from "../ui/button";
+// import Image from "next/image";
+// const CustomCard = ({
+//   color,
+//   children,
+// }: {
+//   color: string;
+//   children?: React.ReactNode;
+// }) => (
+//   <div className="relative h-40 w-full">
+//     <svg
+//       className="absolute inset-0 w-full h-full"
+//       viewBox="0 0 300 200"
+//       preserveAspectRatio="none"
+//     >
+//       <path
+//         d="M0 20 C0 8.954 8.954 0 20 0 H280 C291.046 0 300 8.954 300 20 V180 C300 191.046 291.046 200 280 200 H20 C8.954 200 0 191.046 0 180 Z"
+//         fill={color}
+//       />
+//       <path
+//         d="M280 0 C291.046 0 300 8.954 300 20 V40 C300 20 291.046 0 280 0 Z"
+//         fill={color}
+//         fillOpacity="0.5"
+//       />
+//     </svg>
+//     <div className="relative z-10 h-full p-6">{children}</div>
+//   </div>
+// );
 export default function WhyJoinUs() {
   const reasons = [
     {
@@ -83,14 +109,62 @@ export default function WhyJoinUs() {
         </svg>
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
-        <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-[30%,65%] gap-4">
+          <div className="space-y-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-12">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-400">
+                Let&apos;s Dream <br />
+                Big Together
+              </span>
+            </h2>
+            <p className="text-sm">
+              Dr. Rakesh Bansal's aim is to revolutionize stock market research
+              services by bringing technology assisted analysis accessible to
+              retail investors.
+            </p>
+            <p className="text-sm">
+              With your support, it is our endeavour to build India's largest
+              Stock research ecosystem.
+            </p>
+          </div>
+          <div className="space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+              {reasons.map((reason, index) => (
+                <div
+                  key={index}
+                  className="bg-black/50 backdrop-blur-lg rounded-lg p-4 transform transition duration-500 hover:scale-105 hover:bg-purple-900/50 border border-green-500/30"
+                >
+                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-green-500 rounded-full mb-6 mx-auto">
+                    <reason.icon className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-sm font-semibold text-center mb-4">
+                    {reason.title}
+                  </h3>
+                  <p className="text-gray-300 text-center text-xs">
+                    {reason.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+            {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <p className="text-sm">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+              <p className="text-sm">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </p>
+            </div> */}
+          </div>
+        </div>
+
+        {/* <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-12 mt-20">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-400">
             Why Join Us?
           </span>
-        </h2>
+        </h2> */}
 
         {/* SEBI Registration Highlight */}
-        <div className="bg-black/50 backdrop-blur-lg rounded-lg p-6 mb-12 transform transition duration-500 hover:scale-105 border border-purple-500/30">
+        {/* <div className="bg-black/50 backdrop-blur-lg rounded-lg p-6 mb-12 transform transition duration-500 hover:scale-105 border border-purple-500/30">
           <div className="flex items-center justify-center mb-4">
             <CheckCircle className="w-8 h-8 text-green-400 mr-2" />
             <h3 className="text-2xl font-semibold text-center">
@@ -105,9 +179,9 @@ export default function WhyJoinUs() {
             Analyst) Regulations, 2014, ensuring compliance with the highest
             regulatory standards in the industry.
           </p>
-        </div>
+        </div> */}
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => (
             <div
               key={index}
@@ -122,8 +196,8 @@ export default function WhyJoinUs() {
               <p className="text-gray-300 text-center">{reason.description}</p>
             </div>
           ))}
-        </div>
-        <div className="mt-16 text-center">
+        </div> */}
+        {/* <div className="mt-16 text-center">
           <p className="text-base text-gray-300 max-w-3xl mx-auto mb-6">
             At Rakesh Bansal Ventures, we believe in a simple yet powerful
             approach to achieving success in the stock market. Join us and
@@ -134,7 +208,7 @@ export default function WhyJoinUs() {
               Start Your Journey
             </Button>
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );

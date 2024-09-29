@@ -3,13 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
-import {
-  Download,
-  Smartphone,
-  Wifi,
-  Cloud,
-  Zap,
-} from "lucide-react";
+import { Download, Smartphone, Wifi, Cloud, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type Particle = {
@@ -200,39 +194,17 @@ export default function AppDownloadSlide() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="relative w-full h-[400px] lg:h-[580px]">
-            <Image
-              src="/hero/app-img.webp"
-              alt="Expense tracking app interface"
-              fill
-              priority
-            />
-            {/* Decorative elements */}
-            <motion.div
-              className="absolute -top-10 -left-10 w-20 h-20 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.7, 0.9, 0.7],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-            />
-            <motion.div
-              className="absolute -bottom-10 -right-10 w-20 h-20 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-70"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.7, 0.9, 0.7],
-              }}
-              transition={{
-                duration: 4,
-                delay: 2,
-                repeat: Infinity,
-                repeatType: "reverse",
-              }}
-            />
+          <div className="w-2/3 lg:w-1/2 relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-green-400 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
+            <div className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 ease-in-out">
+              <Image
+                src="/images/download-app.webp"
+                alt="Trading App Mockup"
+                width={500}
+                height={500}
+                className="w-full max-w-md mx-auto rounded-3xl shadow-2xl"
+              />
+            </div>
           </div>
         </motion.div>
       </div>

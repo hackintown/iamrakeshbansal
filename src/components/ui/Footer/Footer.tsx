@@ -15,63 +15,99 @@ import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
 export default function Footer() {
   const socialIcons = [
-    { Icon: FaLinkedinIn, href: "#", label: "LinkedIn" },
-    { Icon: FaInstagram, href: "#", label: "Instagram" },
-    { Icon: FaYoutube, href: "#", label: "YouTube" },
-    { Icon: FaFacebookF, href: "#", label: "Facebook" },
-    { Icon: FaWhatsapp, href: "#", label: "WhatsApp" },
-    { Icon: FaTwitter, href: "#", label: "Twitter" },
+    {
+      Icon: FaLinkedinIn,
+      href: "https://www.linkedin.com/in/drrakeshbansal/",
+      label: "LinkedIn",
+    },
+    {
+      Icon: FaInstagram,
+      href: "https://www.instagram.com/therakeshbansal/",
+      label: "Instagram",
+    },
+    {
+      Icon: FaYoutube,
+      href: "https://www.youtube.com/@RakeshBansal",
+      label: "YouTube",
+    },
+    {
+      Icon: FaFacebookF,
+      href: "https://www.facebook.com/IAMRAKESHBANSAL/",
+      label: "Facebook",
+    },
+    {
+      Icon: FaWhatsapp,
+      href: "https://www.whatsapp.com/channel/0029…",
+      label: "WhatsApp",
+    },
+    {
+      Icon: FaTwitter,
+      href: "https://x.com/iamrakeshbansal",
+      label: "Twitter",
+    },
   ];
 
   const usefulLinks = [
-    { text: "About Us", href: "#" },
-    { text: "Services", href: "#" },
-    { text: "Contact", href: "#" },
-    { text: "Blog", href: "#" },
-    { text: "FAQ", href: "#" },
+    { text: "About Us", href: "/about-us" },
+    { text: "Services", href: "#services-sec" },
+    { text: "Contact", href: "/contact-us" },
+    { text: "Blog", href: "/blog" },
+    { text: "FAQ", href: "#faq-sec" },
   ];
 
   const contactInfo = [
-    { Icon: MdPhone, text: "+1 (555) 123-4567", href: "tel:+15551234567" },
+    { Icon: MdPhone, text: "+91  88514-75191", href: "tel:+918851475191" },
     {
       Icon: MdEmail,
-      text: "info@example.com",
-      href: "mailto:info@example.com",
+      text: "wecare@iamrakeshbansal.com",
+      href: "mailto:wecare@iamrakeshbansal.com",
     },
     { Icon: MdLocationOn, text: "123 Main St, City, Country", href: "#" },
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-purple-900 via-green-800 to-black text-white overflow-hidden">
-      <svg
+    <footer className="relative bg-background overflow-hidden">
+      {/* <svg
         className="absolute top-0 w-full h-24 -mt-1 -rotate-180"
         preserveAspectRatio="none"
         viewBox="0 0 1440 120"
-        fill="white"
+        fill="white"bg-gradient-to-br from-purple-900 via-green-800 to-black text-white
       >
         <path d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 36.7C840 27 960 13 1080 16.3C1200 20 1320 40 1380 50L1440 60V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z" />
+      </svg> */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        className="absolute bottom-0 w-full h-[420px] lg:h-[250px] -mt-1 z-0"
+      >
+        <path
+          fill="#800080"
+          fill-opacity="1"
+          d="M0,80L80,80C160,80,320,80,480,128C640,160,800,224,960,218.7C1120,213,1280,139,1360,101.3L1440,64L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"
+        ></path>
       </svg>
 
-      <div className="container px-4 pt-32 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="container relative px-4 pt-10 z-10">
+        <div className="grid grid-cols-1 sm:grid-cols-[35%,15%,40%] lg:grid-cols-[20%,10%,30%,15%] gap-12 sm:gap-8 justify-center lg:justify-between">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex flex-col items-center md:items-start"
+            className="flex flex-col items-center sm:items-start"
           >
             <Image
               src="/images/logo.webp"
               alt="Logo"
-              width={180}
+              width={150}
               height={60}
-              className="mb-6"
+              className="mb-4"
             />
-            <p className="text-sm mb-6 text-center md:text-left">
+            <p className="text-xs lg:text-sm mb-6 text-center sm:text-left">
               Empowering your digital journey with innovative solutions and
               unparalleled service.
             </p>
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               {socialIcons.map(({ Icon, href, label }, index) => (
                 <motion.a
                   key={index}
@@ -84,16 +120,17 @@ export default function Footer() {
                   <Icon className="w-5 h-5" />
                 </motion.a>
               ))}
-            </div>
+            </div> */}
           </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center sm:text-left"
           >
-            <h3 className="text-xl font-semibold mb-6">Useful Links</h3>
-            <ul className="space-y-3">
+            <h3 className="text-xl font-semibold mb-6">Explore</h3>
+            <ul className="space-y-1">
               {usefulLinks.map((link, index) => (
                 <motion.li
                   key={index}
@@ -102,7 +139,7 @@ export default function Footer() {
                 >
                   <Link
                     href={link.href}
-                    className="hover:text-green-400 transition-colors"
+                    className="hover:text-green-400 transition-colors text-sm xl:text-base"
                   >
                     {link.text}
                   </Link>
@@ -115,22 +152,23 @@ export default function Footer() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-center sm:text-left"
           >
             <h3 className="text-xl font-semibold mb-6">Contact Us</h3>
             <ul className="space-y-4">
               {contactInfo.map(({ Icon, text, href }, index) => (
                 <motion.li
                   key={index}
-                  className="flex items-center space-x-3"
+                  className="flex items-center sm:text-left space-x-3 justify-center sm:justify-start"
                   whileHover={{ scale: 1.05 }}
                 >
                   <Icon className="w-5 h-5 text-green-400" />
-                  <a
+                  <Link
                     href={href}
-                    className="hover:text-green-400 transition-colors"
+                    className="hover:text-green-400 transition-colors text-sm xl:text-base"
                   >
                     {text}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>
@@ -141,29 +179,35 @@ export default function Footer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <h3 className="text-xl font-semibold mb-6">Download Our App</h3>
-            <div className="flex flex-col gap-4">
+            <h3 className="text-xl font-semibold mb-6 text-center sm:text-left">
+              Download Our App
+            </h3>
+            <div className="flex flex-col items-center sm:items-start gap-4">
               {[
-                "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/app-store-button.png",
-                "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/play-store-button.png",
-              ].map((src, index) => (
+                {
+                  src: "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/app-store-button.png",
+                  href: "https://apps.apple.com/us/app/rakesh-bansal-ventures/id6474428694?mt=8",
+                  alt: "Download on App Store",
+                },
+                {
+                  src: "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/play-store-button.png",
+                  href: "https://play.google.com/store/apps/details?id=com.rpy.rakeshplhrwc",
+                  alt: "Get it on Google Play",
+                },
+              ].map((icon, index) => (
                 <motion.a
                   key={index}
-                  href="#"
+                  href={icon.href}
                   title=""
-                  className="block transition-all duration-200 hover:opacity-80 focus:opacity-80"
+                  className="block transition-all duration-200"
                   role="button"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Image
-                    className="w-auto rounded h-14 sm:h-16"
-                    src={src}
-                    alt={
-                      index === 0
-                        ? "Download on App Store"
-                        : "Get it on Google Play"
-                    }
+                    className="w-auto rounded h-12"
+                    src={icon.src}
+                    alt={icon.alt}
                     width={135}
                     height={40}
                   />
@@ -174,32 +218,46 @@ export default function Footer() {
         </div>
 
         <motion.div
-          className="mt-12 pt-8 border-t border-white/20"
+          className="mt-20 xl:mt-28 pb-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm mb-4 md:mb-0">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-5 md:gap-x-5">
+            <div className="flex gap-2 md:gap-3 lg:gap-4">
+              {socialIcons.map(({ Icon, href, label }, index) => (
+                <motion.a
+                  key={index}
+                  href={href}
+                  aria-label={label}
+                  className="bg-white text-purple-900 p-2 rounded-full hover:bg-green-400 transition-colors"
+                  whileHover={{ scale: 1.1, rotate: 360 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Icon className="w-3 h-3 lg:w-5 lg:h-5" />
+                </motion.a>
+              ))}
+            </div>
+            <p className="text-xs lg:text-sm text-white">
               &copy; {new Date().getFullYear()} Your Company Name. All rights
               reserved.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 text-white">
               <Link
-                href="#"
-                className="text-sm hover:text-green-400 transition-colors"
+                href="/privacy-policy"
+                className="text-xs lg:text-sm hover:text-green-400 transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
-                href="#"
-                className="text-sm hover:text-green-400 transition-colors"
+                href="/terms-conditions"
+                className="text-xs lg:text-sm hover:text-green-400 transition-colors"
               >
                 Terms of Service
               </Link>
               <Link
-                href="#"
-                className="text-sm hover:text-green-400 transition-colors"
+                href="/cookie-policy"
+                className="text-xs lg:text-sm hover:text-green-400 transition-colors"
               >
                 Cookie Policy
               </Link>

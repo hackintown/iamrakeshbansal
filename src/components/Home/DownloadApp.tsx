@@ -1,9 +1,9 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from "next/image";
+import Link from "next/link";
 
 export default function DownloadApp() {
   return (
-    <section className="relative overflow-hidden py-10 sm:py-16">
+    <section className="relative overflow-hidden py-10">
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900 via-indigo-900 to-green-900">
         <svg
           className="absolute inset-0 w-full h-full opacity-30"
@@ -60,29 +60,39 @@ export default function DownloadApp() {
               <span className="text-green-400">Anytime, Anywhere</span>
             </h2>
             <p className="text-sm lg:text-lg text-gray-300 mb-8">
-              Access real-time market data, execute trades on-the-go, and receive personalized mentoring notifications. Our mobile app is designed to enhance your trading performance and keep you connected to the markets 24/7.
+              Access real-time market data, execute trades on-the-go, and
+              receive personalized mentoring notifications. Our mobile app is
+              designed to enhance your trading performance and keep you
+              connected to the markets 24/7.
             </p>
             <div className="flex flex-row items-center mt-8 space-x-4 lg:mt-12">
-            <Link href="#" className="flex" role="button">
-              <Image
-                src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/app-store-button.png"
-                alt="Download on the App Store"
-                width={140}
-                height={42}
-                className="w-auto h-14"
-              />
-            </Link>
-
-            <Link href="#" className="flex" role="button">
-              <Image
-                src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/play-store-button.png"
-                alt="Get it on Google Play"
-                width={140}
-                height={42}
-                className="w-auto h-14"
-              />
-            </Link>
-          </div>
+              <Link
+                href=" https://play.google.com/store/apps/details?id=com.rpy.rakeshplhrwc"
+                className="flex"
+                role="button"
+              >
+                <Image
+                  src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/play-store-button.png"
+                  alt="Get it on Google Play"
+                  width={140}
+                  height={42}
+                  className="w-auto h-14"
+                />
+              </Link>
+              <Link
+                href="https://apps.apple.com/us/app/rakesh-bansal-ventures/id6474428694?mt=8 "
+                className="flex"
+                role="button"
+              >
+                <Image
+                  src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/app-store-button.png"
+                  alt="Download on the App Store"
+                  width={140}
+                  height={42}
+                  className="w-auto h-14"
+                />
+              </Link>
+            </div>
           </div>
           <div className="w-full lg:w-1/2 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-green-400 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
@@ -99,5 +109,5 @@ export default function DownloadApp() {
         </div>
       </div>
     </section>
-  )
+  );
 }

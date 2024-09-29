@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, DollarSign, BarChart2 } from "lucide-react";
+import Link from "next/link";
 
 export default function HeroSection() {
   const controls = useAnimation();
@@ -106,7 +107,7 @@ export default function HeroSection() {
           className="grid grid-cols-1 lg:grid-cols-2 gap-5 xl:items-start w-full h-full"
         >
           <motion.div variants={itemVariants} className="mt-6 lg:mt-20">
-            <h1 className="text-4xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-tight">
+            <h1 className="text-3xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-tight">
               Master <br className="hidden xl:block" /> the Markets with&nbsp;
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400">
                 Rakesh Bansal
@@ -121,9 +122,11 @@ export default function HeroSection() {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button variant="gradient" size="custom" showArrow>
-                Start Your Journey
-              </Button>
+              <Link href="/#services-sec">
+                <Button variant="gradient" size="custom" showArrow>
+                  Start Your Journey
+                </Button>
+              </Link>
             </motion.div>
 
             <motion.div

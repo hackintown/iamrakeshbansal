@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 
 export default function EnhancedAboutSection() {
-
   return (
     <section className="relative py-14 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 via-green-900 to-purple-900">
@@ -89,16 +88,17 @@ export default function EnhancedAboutSection() {
                 investment analysis.
               </p>
               <p className="text-sm lg:text-base mb-6 text-gray-300 leading-relaxed font-light text-center md:text-left">
-                He is SEBI registered research anyst (INH100008984), offering
-                high-quality market insights and educational resources to
-                traders and investors across the country.
+                He is SEBI registered research anyst&nbsp;
+                <span className="font-bold inline-block">(INH100008984),</span>
+                offering high-quality market insights and educational resources
+                to traders and investors across the country.
               </p>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  href="/about"
+                  href="/about-us"
                   className="flex justify-center md:justify-start"
                 >
                   <Button variant="gradient" size="custom">

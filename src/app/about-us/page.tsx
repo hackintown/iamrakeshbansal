@@ -1,14 +1,16 @@
-import AboutUs from '@/components/About/AboutUs'
-import React from 'react'
-
-
+import AboutUs from "@/components/About/AboutUs";
+import FAQ from "@/components/ui/Faq";
+import Footer from "@/components/ui/Footer/Footer";
+import React from "react";
 
 const page = () => {
   return (
     <main>
-        <AboutUs/>
+      <AboutUs />
+      <FAQ />
+      <Footer />
     </main>
-  )
-}
+  );
+};
 
-export default page
+export default page;

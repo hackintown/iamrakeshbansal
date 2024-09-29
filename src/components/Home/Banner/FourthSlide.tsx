@@ -136,12 +136,11 @@ export default function PortfolioAchievementSlide() {
   }, [controls]);
 
   return (
-    <div className="w-full h-screen lg:h-[650px] flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 relative overflow-hidden">
+    <div className="w-full lg:h-[650px] flex items-center justify-center px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 relative overflow-hidden">
       {/* Complex Background Elements */}
       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
 
       <div className="absolute inset-0 overflow-hidden">
-        {/* Animated stock chart */}
         <svg
           className="absolute bottom-0 left-0 w-full h-64"
           viewBox="0 0 1440 320"

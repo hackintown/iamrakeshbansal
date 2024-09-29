@@ -117,13 +117,13 @@ export default function BookPublished() {
             Published Book
           </span>
         </h2>
-        <p className="max-w-2xl mx-auto text-xs sm:text-sm md:text-base text-center text-secondary-foreground font-light">
+        <p className="max-w-2xl mx-auto text-xs sm:text-sm text-center text-secondary-foreground font-light">
           Unlock your trading potential with our flexible pricing options.
           Choose the plan that best fits your needs and start your journey to
           financial success.
         </p>
-        <div className="mt-10">
-          <div className="relative w-full max-w-5xl mx-auto py-10 lg:py-14">
+        <div className="">
+          <div className="relative w-full max-w-5xl mx-auto py-10 lg:py-12">
             <Swiper
               onSwiper={setSwiperInstance}
               effect={"coverflow"}
@@ -171,13 +171,13 @@ export default function BookPublished() {
             >
               {slides.map((slide, index) => (
                 <SwiperSlide key={index} className="swiper-slide">
-                  <div className="relative w-full h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-xl">
+                  <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-xl">
                     <Image
                       src={slide.imageUrl}
                       alt={slide.alt}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      className="object-cover transition-transform duration-300 hover:scale-105"
+                      className="object-fit transition-transform duration-300 hover:scale-105"
                     />
                   </div>
                 </SwiperSlide>

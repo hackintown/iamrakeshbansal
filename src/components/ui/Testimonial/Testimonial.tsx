@@ -1,96 +1,120 @@
-'use client'
+"use client";
 
-import React, { useRef, useState, useEffect } from "react"
-import Slider from "react-slick"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
-import { PlayCircle, Pause, ChevronLeft, ChevronRight, Star, Quote } from "lucide-react"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
+import React, { useRef, useState, useEffect } from "react";
+import Slider from "react-slick";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import {
+  PlayCircle,
+  Pause,
+  ChevronLeft,
+  ChevronRight,
+  Star,
+  Quote,
+} from "lucide-react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const testimonials = [
   {
-    quote: "I have been using Rakesh Bansal Ventures advisory services for the past 2 years, and I am thoroughly impressed with the quality of insights and recommendations they have provided.",
+    quote:
+      "I have been using Rakesh Bansal Ventures advisory services for the past 2 years, and I am thoroughly impressed with the quality of insights and recommendations they have provided.",
     name: "Prakash Choudhary",
     title: "Self-Investor",
     rating: 5,
     imageUrl: "/hero/banner-img3.webp",
-    videoUrl: "https://www.youtube.com/embed/pBl745TrRdc?si=6D3Enb_cLIt4xCbg",
+    videoUrl:
+      "https://www.youtube-nocookie.com/embed/CtyL7s_8-cE?rel=0&autoplay=0",
   },
   {
-    quote: "Your tips are excellent available market sometime trade you are over traded in that condition increase the margin of error you can't control the market but you can control Sanjeev bhasin type allegations.",
+    quote:
+      "Your tips are excellent available market sometime trade you are over traded in that condition increase the margin of error you can't control the market but you can control Sanjeev bhasin type allegations.",
     name: "Nitish Trama",
     title: "Self-Investor",
     rating: 4,
     imageUrl: "/hero/banner-img3.webp",
-    videoUrl: "https://www.youtube.com/embed/pBl745TrRdc?si=6D3Enb_cLIt4xCbg",
+    videoUrl:
+      "https://www.youtube-nocookie.com/embed/CtyL7s_8-cE?rel=0&autoplay=0",
   },
   {
-    quote: "Your stock performance is good but I would suggest give only 2-3 stock monthly which may give 25 % plus return ( over weight ). Note : Rakesh Bansal Ventures performance is very high.",
+    quote:
+      "Your stock performance is good but I would suggest give only 2-3 stock monthly which may give 25 % plus return ( over weight ). Note : Rakesh Bansal Ventures performance is very high.",
     name: "Ganesh Jagtap",
     title: "Self-Investor",
     rating: 5,
     imageUrl: "/hero/banner-img3.webp",
-    videoUrl: "https://www.youtube.com/embed/pBl745TrRdc?si=6D3Enb_cLIt4xCbg",
+    videoUrl:
+      "https://www.youtube-nocookie.com/embed/CtyL7s_8-cE?rel=0&autoplay=0",
   },
-]
+];
 
-const CustomArrow = ({
-  direction,
-  onClick,
-}: {
-  direction: "prev" | "next"
-  onClick?: () => void
-}) => (
-  <Button
-    variant="outline"
-    size="icon"
-    className={cn(
-      "absolute top-1/2 -translate-y-1/2 z-10 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300",
-      direction === "prev" ? "-left-4 md:-left-6" : "-right-4 md:-right-6"
-    )}
-    onClick={onClick}
-    aria-label={direction === "prev" ? "Previous slide" : "Next slide"}
-  >
-    {direction === "prev" ? (
-      <ChevronLeft className="w-6 h-6" />
-    ) : (
-      <ChevronRight className="w-6 h-6" />
-    )}
-  </Button>
-)
+// const CustomArrow = ({
+//   direction,
+//   onClick,
+// }: {
+//   direction: "prev" | "next";
+//   onClick?: () => void;
+// }) => (
+//   <Button
+//     variant="outline"
+//     size="icon"
+//     className={cn(
+//       "absolute top-1/2 -translate-y-1/2 z-10 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300",
+//       direction === "prev" ? "-left-4 md:-left-6" : "-right-4 md:-right-6"
+//     )}
+//     onClick={onClick}
+//     aria-label={direction === "prev" ? "Previous slide" : "Next slide"}
+//   >
+//     {direction === "prev" ? (
+//       <ChevronLeft className="w-6 h-6" />
+//     ) : (
+//       <ChevronRight className="w-6 h-6" />
+//     )}
+//   </Button>
+// );
 
 interface TestimonialCardProps {
-  quote: string
-  name: string
-  title: string
-  rating: number
-  imageUrl: string
-  videoUrl: string
+  quote: string;
+  name: string;
+  title: string;
+  rating: number;
+  imageUrl: string;
+  videoUrl: string;
 }
 
-const TestimonialCard = ({ quote, name, title, rating, imageUrl, videoUrl }: TestimonialCardProps) => {
-  const [showVideo, setShowVideo] = useState(false)
-  const iframeRef = useRef<HTMLIFrameElement>(null)
+const TestimonialCard = ({
+  quote,
+  name,
+  title,
+  rating,
+  imageUrl,
+  videoUrl,
+}: TestimonialCardProps) => {
+  const [showVideo, setShowVideo] = useState(false);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowVideo(true)
+      setShowVideo(true);
       if (iframeRef.current) {
-        iframeRef.current.src = `${videoUrl}${videoUrl.includes('?') ? '&' : '?'}autoplay=1`
+        iframeRef.current.src = `${videoUrl}${
+          videoUrl.includes("?") ? "&" : "?"
+        }autoplay=1`;
       }
-    }, 5000)
+    }, 5000);
 
-    return () => clearTimeout(timer)
-  }, [videoUrl])
+    return () => clearTimeout(timer);
+  }, [videoUrl]);
 
   const toggleVideo = () => {
-    setShowVideo(!showVideo)
+    setShowVideo(!showVideo);
     if (!showVideo && iframeRef.current) {
-      iframeRef.current.src = `${videoUrl}${videoUrl.includes('?') ? '&' : '?'}autoplay=1`
+      iframeRef.current.src = `${videoUrl}${
+        videoUrl.includes("?") ? "&" : "?"
+      }autoplay=1`;
     }
-  }
+  };
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden transform transition-all duration-300 hover:scale-105 h-full flex flex-col">
@@ -115,7 +139,12 @@ const TestimonialCard = ({ quote, name, title, rating, imageUrl, videoUrl }: Tes
             className="object-cover"
           />
         )}
-        <div className={cn("absolute inset-0 bg-gradient-to-t from-black/60 to-transparent", showVideo && "hidden")} />
+        <div
+          className={cn(
+            "absolute inset-0 bg-gradient-to-t from-black/60 to-transparent",
+            showVideo && "hidden"
+          )}
+        />
         <Button
           variant="outline"
           size="icon"
@@ -132,7 +161,9 @@ const TestimonialCard = ({ quote, name, title, rating, imageUrl, videoUrl }: Tes
       </div>
       <div className="p-6 flex flex-col flex-grow bg-gradient-to-br from-purple-50 to-green-50">
         <Quote className="w-10 h-10 text-purple-600 mb-4" />
-        <p className="text-gray-700 font-light leading-relaxed mb-4 flex-grow text-sm lg:text-base">{quote}</p>
+        <p className="text-gray-700 font-light leading-relaxed mb-4 flex-grow text-sm lg:text-base">
+          {quote}
+        </p>
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-purple-600 font-semibold">{name}</h3>
@@ -152,18 +183,20 @@ const TestimonialCard = ({ quote, name, title, rating, imageUrl, videoUrl }: Tes
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default function Testimonials() {
-  const sliderRef = useRef<Slider>(null)
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const sliderRef = useRef<Slider>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
     arrows: false,
+    autoplay: true,
+    AutoplaySpeed: 3000,
     slidesToShow: 3,
     slidesToScroll: 1,
     beforeChange: (current: number, next: number) => setCurrentSlide(next),
@@ -183,14 +216,23 @@ export default function Testimonials() {
         },
       },
     ],
-  }
+  };
 
   return (
-    <div className="relative overflow-hidden py-10  lg:py-20">
+    <div className="relative overflow-hidden py-10">
       <div className="absolute inset-0 bg-gradient-to-tl from-gray-900 via-green-900 to-purple-900">
-        <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <svg
+          className="absolute inset-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+        >
           <defs>
-            <linearGradient id="testimonial-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient
+              id="testimonial-grad"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
               <stop offset="0%" stopColor="rgba(16, 185, 129, 0.05)" />
               <stop offset="50%" stopColor="rgba(139, 92, 246, 0.05)" />
               <stop offset="100%" stopColor="rgba(16, 185, 129, 0.05)" />
@@ -206,7 +248,12 @@ export default function Testimonials() {
       <div className="absolute inset-0 opacity-30">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <filter id="testimonial-noise">
-            <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
+            <feTurbulence
+              type="fractalNoise"
+              baseFrequency="0.8"
+              numOctaves="4"
+              stitchTiles="stitch"
+            />
             <feColorMatrix type="saturate" values="0" />
           </filter>
           <rect width="100%" height="100%" filter="url(#testimonial-noise)" />
@@ -214,9 +261,12 @@ export default function Testimonials() {
       </div>
       <div className="container mx-auto px-4 lg:px-8 xl:px-10 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">What Our Clients Say</h2>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+            What Our Clients Say
+          </h2>
           <p className="text-sm md:text-base text-gray-300 max-w-2xl mx-auto">
-            Discover how our services have transformed the investment strategies of our valued clients.
+            Discover how our services have transformed the investment strategies
+            of our valued clients.
           </p>
         </div>
         <div className="relative px-2 md:px-4">
@@ -227,14 +277,26 @@ export default function Testimonials() {
               </div>
             ))}
           </Slider>
-          <CustomArrow
-            direction="prev"
-            onClick={() => sliderRef.current?.slickPrev()}
-          />
-          <CustomArrow
-            direction="next"
-            onClick={() => sliderRef.current?.slickNext()}
-          />
+          <div className="absolute -bottom-16 right-5 flex space-x-2 mt-4">
+            <Button
+              variant="outline"
+              size="icon"
+              className="bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300"
+              onClick={() => sliderRef.current?.slickPrev()}
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </Button>
+            <Button
+              variant="outline"
+              size="icon"
+              className="bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300"
+              onClick={() => sliderRef.current?.slickNext()}
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </Button>
+          </div>
         </div>
         <div className="mt-8 flex justify-center items-center">
           {testimonials.map((_, index) => (
@@ -242,7 +304,9 @@ export default function Testimonials() {
               key={index}
               className={cn(
                 "w-3 h-3 rounded-full mx-1 transition-all duration-300",
-                currentSlide === index ? "bg-purple-600 scale-125" : "bg-gray-400"
+                currentSlide === index
+                  ? "bg-purple-600 scale-125"
+                  : "bg-gray-400"
               )}
               onClick={() => sliderRef.current?.slickGoTo(index)}
               aria-label={`Go to slide ${index + 1}`}
@@ -256,5 +320,5 @@ export default function Testimonials() {
         <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
     </div>
-  )
+  );
 }

@@ -3,43 +3,40 @@
 import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useAnimation, useInView } from "framer-motion";
-import {
-  Download,
-  Star,
-  Users,
-  Coffee,
-  BookOpen,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const books = [
   {
-    title: "Mastering Market Trends",
+    title: "Profitable Short Term Trading Strategies",
+    href: "https://www.amazon.in/Profitable-Short-Term-Trading-Strategies/dp/817094905X/ref=as_li_ss_tl?_encoding=UTF8&qid=1598112345&sr=8-3&linkCode=sl1&tag=mylink05d-21&linkId=615bc48b7c7f3fc566275dd0c8095fdf",
     cover:
       "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg",
     rating: 4.8,
     reviews: 1250,
-    price: "$29.99",
+    price: "₹491",
   },
   {
-    title: "The Psychology of Trading",
+    title: "Profitable Elliott Wave Trading Strategies",
+    href: "https://www.amazon.in/Profitable-Elliott-Wave-Trading-Strategies/dp/938626837X/ref=as_li_ss_tl?dchild=1&keywords=rakesh+bansal&qid=1598112345&sr=8-1&linkCode=sl1&tag=mylink05d-21&linkId=18dd0da516336b7f178d635f32de5f78",
     cover:
       "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg",
     rating: 4.9,
     reviews: 980,
-    price: "$34.99",
+    price: "₹491",
   },
   {
-    title: "Advanced Technical Analysis",
+    title: "Profitable Trading with Dow Theory",
+    href: "https://www.amazon.in/dp/B08GQV8L43/ref=as_li_ss_tl?_encoding=UTF8&qid=1598605294&sr=8-1&linkCode=sl1&tag=mylink05d-21&linkId=7d6c1920b81d0bd0e1c0613a8cdad63d",
     cover:
       "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg",
     rating: 4.7,
     reviews: 1500,
-    price: "$39.99",
+    price: "₹448",
   },
 ];
 
-export default function ThirdSlide() {
+export default function BookShowcase() {
   const controls = useAnimation();
   const ref = useRef(null);
   const isInView = useInView(ref);
@@ -128,128 +125,125 @@ export default function ThirdSlide() {
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+          className="flex flex-col items-center"
         >
-          <motion.div
-            variants={itemVariants}
-            className="space-y-6 lg:space-y-4"
-          >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              Learn from the&nbsp;
+          <motion.div variants={itemVariants} className="text-center mb-8">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
+              Learn from the
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                Best-Selling&nbsp;
+                Best-Selling
               </span>
               Author
             </h2>
-            <p className="text-lg text-gray-300">
+            <p className="text-sm md:text-base lg:text-lg text-gray-300">
               Dive deep into the world of trading with Rakesh Bansal's acclaimed
               books.
             </p>
-
-            <div className="grid grid-cols-3 gap-4">
-              {books.map((book, index) => (
-                <motion.div
-                  key={index}
-                  className="bg-gray-800 rounded-lg p-3 shadow-lg relative overflow-hidden"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
-                  <Image
-                    src={book.cover}
-                    alt={book.title}
-                    width={150}
-                    height={200}
-                    className="w-full h-24 sm:h-32 lg:h-44 object-cover rounded-md mb-2"
-                  />
-                  <h3 className="text-xs sm:text-sm font-semibold text-white line-clamp-2">
-                    {book.title}
-                  </h3>
-                  <div className="flex items-center mt-1">
-                    <Star className="w-3 h-3 text-yellow-400 mr-1" />
-                    <span className="text-yellow-400 text-xs">
-                      {book.rating}
-                    </span>
-                    <span className="text-gray-400 text-xs ml-1">
-                      ({book.reviews})
-                    </span>
-                  </div>
-                  <div className="mt-2 flex flex-col sm:flex-row space-y-1 justify-between items-center">
-                    <span className="text-white font-semibold">
-                      {book.price}
-                    </span>
-                    <Button variant="gradient" size="sm" className="">
-                      Buy Now
-                    </Button>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-4 sm:gap-8">
-              <motion.div
-                className="flex items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Users className="w-6 h-6 text-purple-400" />
-                <div className="ml-2">
-                  <p className="text-xl font-bold text-white">50,000+</p>
-                  <p className="text-xs text-gray-400">Traders mentored</p>
-                </div>
-              </motion.div>
-              <motion.div
-                className="flex items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Download className="w-6 h-6 text-green-400" />
-                <div className="ml-2">
-                  <p className="text-xl font-bold text-white">1M+</p>
-                  <p className="text-xs text-gray-400">Book downloads</p>
-                </div>
-              </motion.div>
-              <motion.div
-                className="flex items-center"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Coffee className="w-6 h-6 text-yellow-400" />
-                <div className="ml-2">
-                  <p className="text-xl font-bold text-white">15+</p>
-                  <p className="text-xs text-gray-400">Years of experience</p>
-                </div>
-              </motion.div>
-            </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="relative mt-8 lg:mt-0">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl blur-3xl opacity-30"></div>
-            <motion.div
-              className="relative bg-gray-800 rounded-2xl p-4 shadow-2xl"
-              whileHover={{ scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <Image
-                src="/images/avatar3.png"
-                alt="Rakesh Bansal - Trading Mentor and Author"
-                width={500}
-                height={300}
-                className="w-full rounded-lg shadow-lg mb-4 h-[200px] sm:h-[250px] lg:h-[300px] object-contain"
-              />
-              <h3 className="text-xl font-bold text-white mb-2">
-                Meet Rakesh Bansal
-              </h3>
-              <p className="text-sm text-gray-300 mb-4">
-                With over 15 years of experience in the financial markets,
-                Rakesh Bansal has helped thousands of traders achieve their
-                goals. His books have become essential reading for both novice
-                and experienced traders alike.
-              </p>
-              <Button
-                variant="gradient"
-                size="custom"
-                showArrow
-                className="w-full"
+          <motion.div
+            variants={itemVariants}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-4xl"
+          >
+            {books.map((book, index) => (
+              <motion.div
+                key={index}
+                className="bg-gray-800 rounded-lg p-4 shadow-lg relative overflow-hidden"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
-                Schedule a Free Consultation
-              </Button>
-            </motion.div>
+                <Image
+                  src={book.cover}
+                  alt={book.title}
+                  width={150}
+                  height={200}
+                  className="w-full h-48 object-cover object-top rounded-md mb-2"
+                />
+                <h3 className="text-lg font-semibold text-white mb-2 line-clamp-2">
+                  {book.title}
+                </h3>
+                <div className="flex items-center mb-2">
+                  <svg
+                    className="w-5 h-5 text-yellow-400 mr-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <span className="text-yellow-400">{book.rating}</span>
+                  <span className="text-gray-400 text-sm ml-1">
+                    ({book.reviews} reviews)
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-white font-bold text-sm sm:text-base md:text-lg lg:text-2xl">
+                    {book.price}
+                  </span>
+                  <Link href={book.href} passHref>
+                    <Button variant="gradient" size="sm">
+                      Buy Now
+                    </Button>
+                  </Link>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="flex items-center gap-8 mt-12"
+          >
+            <div className="flex items-center">
+              <svg
+                className="w-8 h-8 text-purple-400 mr-2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              <div>
+                <p className="text-xl font-bold text-white">50,000+</p>
+                <p className="text-sm text-gray-400">Traders mentored</p>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <svg
+                className="w-8 h-8 text-green-400 mr-2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+              </svg>
+              <div>
+                <p className="text-xl font-bold text-white">1M+</p>
+                <p className="text-sm text-gray-400">Book downloads</p>
+              </div>
+            </div>
+            <div className="flex items-center">
+              <svg
+                className="w-8 h-8 text-yellow-400 mr-2"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+              </svg>
+              <div>
+                <p className="text-xl font-bold text-white">15+</p>
+                <p className="text-sm text-gray-400">Years of experience</p>
+              </div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
@@ -267,7 +261,17 @@ export default function ThirdSlide() {
           repeatType: "reverse",
         }}
       >
-        <BookOpen className="w-64 h-64 text-purple-400" />
+        <svg
+          className="w-64 h-64 text-purple-400"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
       </motion.div>
       <motion.div
         className="absolute top-20 right-20 z-0 opacity-15"
@@ -281,7 +285,17 @@ export default function ThirdSlide() {
           repeatType: "reverse",
         }}
       >
-        <BookOpen className="w-48 h-48 text-green-400" />
+        <svg
+          className="w-48 h-48 text-green-400"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
       </motion.div>
     </section>
   );
