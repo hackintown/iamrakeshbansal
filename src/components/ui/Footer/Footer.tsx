@@ -48,13 +48,19 @@ export default function Footer() {
   ];
 
   const usefulLinks = [
+    { text: "Blog", href: "/blog" },
+    { text: "FAQ", href: "#faq-sec" },
     { text: "About Us", href: "/about-us" },
     { text: "Services", href: "#services-sec" },
     { text: "Contact", href: "/contact-us" },
-    { text: "Blog", href: "/blog" },
-    { text: "FAQ", href: "#faq-sec" },
   ];
-
+  const disclaimerLinks = [
+    { text: "Disclaimer ", href: "/about-us" },
+    { text: "Feedback Form", href: "#services-sec" },
+    { text: "Privacy Policy", href: "/contact-us" },
+    { text: "Customer Grievances", href: "/blog" },
+    { text: "Terms and Conditions", href: "#faq-sec" },
+  ];
   const contactInfo = [
     { Icon: MdPhone, text: "+91  88514-75191", href: "tel:+918851475191" },
     {
@@ -67,19 +73,23 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-background overflow-hidden">
-      {/* <svg
-        className="absolute top-0 w-full h-24 -mt-1 -rotate-180"
-        preserveAspectRatio="none"
-        viewBox="0 0 1440 120"
-        fill="white"bg-gradient-to-br from-purple-900 via-green-800 to-black text-white
-      >
-        <path d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 36.7C840 27 960 13 1080 16.3C1200 20 1320 40 1380 50L1440 60V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z" />
-      </svg> */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1440 320"
         preserveAspectRatio="none"
-        className="absolute bottom-0 w-full h-[420px] lg:h-[250px] -mt-1 z-0"
+        className="absolute md:hidden bottom-0 w-full h-[420px] lg:h-[250px] -mt-1 z-0"
+      >
+        <path
+          fill="#800080"
+          fill-opacity="1"
+          d="M0,224L40,240C80,256,160,288,240,261.3C320,235,400,149,480,133.3C560,117,640,171,720,165.3C800,160,880,96,960,112C1040,128,1120,224,1200,229.3C1280,235,1360,149,1400,106.7L1440,64L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
+        ></path>
+      </svg>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        className="absolute bottom-0 w-full h-[420px] lg:h-[250px] -mt-1 z-0 hidden md:block"
       >
         <path
           fill="#800080"
@@ -89,7 +99,7 @@ export default function Footer() {
       </svg>
 
       <div className="container relative px-4 pt-10 z-10">
-        <div className="grid grid-cols-1 sm:grid-cols-[35%,15%,40%] lg:grid-cols-[20%,10%,30%,15%] gap-12 sm:gap-8 justify-center lg:justify-between">
+        <div className="grid grid-cols-1 sm:grid-cols-[25%,65%] lg:grid-cols-[20%,25%,25%,25%] xl:grid-cols-[20%,30%,25%,25%] gap-12 sm:gap-8 xl:gap-12 justify-center lg:justify-between">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -107,46 +117,58 @@ export default function Footer() {
               Empowering your digital journey with innovative solutions and
               unparalleled service.
             </p>
-            {/* <div className="flex space-x-4">
-              {socialIcons.map(({ Icon, href, label }, index) => (
-                <motion.a
-                  key={index}
-                  href={href}
-                  aria-label={label}
-                  className="bg-white text-purple-900 p-2 rounded-full hover:bg-green-400 transition-colors"
-                  whileHover={{ scale: 1.1, rotate: 360 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <Icon className="w-5 h-5" />
-                </motion.a>
-              ))}
-            </div> */}
           </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center sm:text-left"
-          >
-            <h3 className="text-xl font-semibold mb-6">Explore</h3>
-            <ul className="space-y-1">
-              {usefulLinks.map((link, index) => (
-                <motion.li
-                  key={index}
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                >
-                  <Link
-                    href={link.href}
-                    className="hover:text-green-400 transition-colors text-sm xl:text-base"
+          <div className="grid grid-cols-2 justify-between gap-x-5">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-center lg:text-left"
+            >
+              <h3 className="text-xl font-semibold mb-3">Explore</h3>
+              <ul className="space-y-1">
+                {usefulLinks.map((link, index) => (
+                  <motion.li
+                    key={index}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    {link.text}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </motion.div>
+                    <Link
+                      href={link.href}
+                      className="hover:text-green-400 transition-colors text-sm xl:text-base"
+                    >
+                      {link.text}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-center lg:text-left"
+            >
+              <h3 className="text-xl font-semibold mb-3">Disclaimer</h3>
+              <ul className="space-y-1">
+                {disclaimerLinks.map((link, index) => (
+                  <motion.li
+                    key={index}
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
+                    <Link
+                      href={link.href}
+                      className="hover:text-green-400 transition-colors text-sm xl:text-base"
+                    >
+                      {link.text}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -154,7 +176,7 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-center sm:text-left"
           >
-            <h3 className="text-xl font-semibold mb-6">Contact Us</h3>
+            <h3 className="text-xl font-semibold mb-3">Contact Us</h3>
             <ul className="space-y-4">
               {contactInfo.map(({ Icon, text, href }, index) => (
                 <motion.li
@@ -178,11 +200,12 @@ export default function Footer() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
+            className="sm:ml-20 lg:ml-0"
           >
             <h3 className="text-xl font-semibold mb-6 text-center sm:text-left">
               Download Our App
             </h3>
-            <div className="flex flex-col items-center sm:items-start gap-4">
+            <div className="flex lg:flex-col items-center justify-center sm:items-start sm:justify-start gap-4">
               {[
                 {
                   src: "https://cdn.rareblocks.xyz/collection/celebration/images/hero/4/app-store-button.png",
@@ -223,7 +246,7 @@ export default function Footer() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-5 md:gap-x-5">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-3 md:gap-x-5">
             <div className="flex gap-2 md:gap-3 lg:gap-4">
               {socialIcons.map(({ Icon, href, label }, index) => (
                 <motion.a
@@ -239,8 +262,8 @@ export default function Footer() {
               ))}
             </div>
             <p className="text-xs lg:text-sm text-white">
-              &copy; {new Date().getFullYear()} Your Company Name. All rights
-              reserved.
+              &copy; {new Date().getFullYear()} Rakesh Bansal Venture. All
+              rights reserved.
             </p>
             <div className="flex space-x-4 text-white">
               <Link

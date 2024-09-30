@@ -5,14 +5,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import {
-  PlayCircle,
-  Pause,
-  ChevronLeft,
-  ChevronRight,
-  Star,
-  Quote,
-} from "lucide-react";
+import { PlayCircle, Pause, Star, Quote } from "lucide-react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -48,32 +41,6 @@ const testimonials = [
       "https://www.youtube-nocookie.com/embed/CtyL7s_8-cE?rel=0&autoplay=0",
   },
 ];
-
-// const CustomArrow = ({
-//   direction,
-//   onClick,
-// }: {
-//   direction: "prev" | "next";
-//   onClick?: () => void;
-// }) => (
-//   <Button
-//     variant="outline"
-//     size="icon"
-//     className={cn(
-//       "absolute top-1/2 -translate-y-1/2 z-10 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300",
-//       direction === "prev" ? "-left-4 md:-left-6" : "-right-4 md:-right-6"
-//     )}
-//     onClick={onClick}
-//     aria-label={direction === "prev" ? "Previous slide" : "Next slide"}
-//   >
-//     {direction === "prev" ? (
-//       <ChevronLeft className="w-6 h-6" />
-//     ) : (
-//       <ChevronRight className="w-6 h-6" />
-//     )}
-//   </Button>
-// );
-
 interface TestimonialCardProps {
   quote: string;
   name: string;
@@ -93,7 +60,6 @@ const TestimonialCard = ({
 }: TestimonialCardProps) => {
   const [showVideo, setShowVideo] = useState(false);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowVideo(true);
@@ -199,7 +165,7 @@ export default function Testimonials() {
     AutoplaySpeed: 3000,
     slidesToShow: 3,
     slidesToScroll: 1,
-    beforeChange: (current: number, next: number) => setCurrentSlide(next),
+    beforeChange: (_: number, next: number) => setCurrentSlide(next),
     responsive: [
       {
         breakpoint: 1240,
@@ -277,25 +243,31 @@ export default function Testimonials() {
               </div>
             ))}
           </Slider>
-          <div className="absolute -bottom-16 right-5 flex space-x-2 mt-4">
-            <Button
-              variant="outline"
-              size="icon"
-              className="bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300"
+          <div className="absolute -bottom-12 right-8 flex mt-4 border border-border">
+            <div
               onClick={() => sliderRef.current?.slickPrev()}
               aria-label="Previous slide"
+              className="bg-[#852B83] cursor-pointer p-1"
             >
-              <ChevronLeft className="w-6 h-6" />
-            </Button>
-            <Button
-              variant="outline"
-              size="icon"
-              className="bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-all duration-300"
+              <Image
+                src="/images/prev-arrow.webp"
+                alt="Previous"
+                width={22} // Set your desired width
+                height={22} // Set your desired height
+              />
+            </div>
+            <div
               onClick={() => sliderRef.current?.slickNext()}
               aria-label="Next slide"
+              className="bg-[#F3A0F1] cursor-pointer p-1"
             >
-              <ChevronRight className="w-6 h-6" />
-            </Button>
+              <Image
+                src="/images/next-arrow.webp"
+                alt="Previous"
+                width={22} // Set your desired width
+                height={22} // Set your desired height
+              />
+            </div>
           </div>
         </div>
         <div className="mt-8 flex justify-center items-center">

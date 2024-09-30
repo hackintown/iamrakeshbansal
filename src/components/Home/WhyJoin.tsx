@@ -1,67 +1,89 @@
 "use client";
+
 import {
   Shield,
   Lightbulb,
   TrendingUp,
   GraduationCap,
-  // CheckCircle,
 } from "lucide-react";
-// import Link from "next/link";
-// import { Button } from "../ui/button";
-// import Image from "next/image";
-// const CustomCard = ({
-//   color,
-//   children,
-// }: {
-//   color: string;
-//   children?: React.ReactNode;
-// }) => (
-//   <div className="relative h-40 w-full">
-//     <svg
-//       className="absolute inset-0 w-full h-full"
-//       viewBox="0 0 300 200"
-//       preserveAspectRatio="none"
-//     >
-//       <path
-//         d="M0 20 C0 8.954 8.954 0 20 0 H280 C291.046 0 300 8.954 300 20 V180 C300 191.046 291.046 200 280 200 H20 C8.954 200 0 191.046 0 180 Z"
-//         fill={color}
-//       />
-//       <path
-//         d="M280 0 C291.046 0 300 8.954 300 20 V40 C300 20 291.046 0 280 0 Z"
-//         fill={color}
-//         fillOpacity="0.5"
-//       />
-//     </svg>
-//     <div className="relative z-10 h-full p-6">{children}</div>
-//   </div>
-// );
+import Slider from "react-slick";
+import { useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+
+const reasons = [
+  {
+    icon: Shield,
+    title: "Unwavering Integrity",
+    description:
+      "We uphold the highest standards of integrity in all our services, ensuring reliable and accurate investment advice.",
+    bgImage: "/images/dream-card1.png",
+  },
+  {
+    icon: Lightbulb,
+    title: "Absolute Transparency",
+    description:
+      "Our transparent processes build trust and confidence through clear and open communication about every recommendation.",
+    bgImage: "/images/dream-card2.png",
+  },
+  {
+    icon: TrendingUp,
+    title: "Strategic Discipline",
+    description:
+      "We help you develop a disciplined investment strategy, focusing on long-term goals to maximize consistent returns.",
+    bgImage: "/images/dream-card3.png",
+  },
+  {
+    icon: GraduationCap,
+    title: "Continuous Learning",
+    description:
+      "Embark on a journey of growth with our educational resources and expert guidance to enhance your investment skills.",
+    bgImage: "/images/dream-card2.png",
+  },
+];
+
 export default function WhyJoinUs() {
-  const reasons = [
-    {
-      icon: Shield,
-      title: "Unwavering Integrity",
-      description:
-        "We uphold the highest standards of integrity in all our services, ensuring reliable and accurate investment advice.",
-    },
-    {
-      icon: Lightbulb,
-      title: "Absolute Transparency",
-      description:
-        "Our transparent processes build trust and confidence through clear and open communication about every recommendation.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Strategic Discipline",
-      description:
-        "We help you develop a disciplined investment strategy, focusing on long-term goals to maximize consistent returns.",
-    },
-    {
-      icon: GraduationCap,
-      title: "Continuous Learning",
-      description:
-        "Embark on a journey of growth with our educational resources and expert guidance to enhance your investment skills.",
-    },
-  ];
+  const sliderRef = useRef<Slider>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    arrows: false,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    beforeChange: (_: number, next: number) => setCurrentSlide(next),
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 700,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  const goToSlide = (index: number) => {
+    sliderRef.current?.slickGoTo(index);
+  };
 
   return (
     <section className="text-white py-16 px-4 sm:px-6 lg:px-8 relative">
@@ -109,106 +131,92 @@ export default function WhyJoinUs() {
         </svg>
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-[30%,65%] gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[35%,60%] gap-4">
           <div className="space-y-6">
             <h2 className="text-4xl md:text-5xl font-bold mb-12">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-400">
-                Let&apos;s Dream <br />
-                Big Together
+                Why Join Us?
               </span>
             </h2>
-            <p className="text-sm">
-              Dr. Rakesh Bansal's aim is to revolutionize stock market research
-              services by bringing technology assisted analysis accessible to
-              retail investors.
+            <p className="text-sm lg:text-base font-light">
+              At Rakesh Bansal Ventures, we believe in a simple yet powerful
+              approach to achieving success in the stock market
             </p>
-            <p className="text-sm">
+            <p className="text-sm lg:text-base font-light">
               With your support, it is our endeavour to build India's largest
               Stock research ecosystem.
             </p>
           </div>
-          <div className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-4 gap-3">
+          <div className="w-full relative">
+            <Slider {...settings} ref={sliderRef}>
               {reasons.map((reason, index) => (
-                <div
-                  key={index}
-                  className="bg-black/50 backdrop-blur-lg rounded-lg p-4 transform transition duration-500 hover:scale-105 hover:bg-purple-900/50 border border-green-500/30"
-                >
-                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-green-500 rounded-full mb-6 mx-auto">
-                    <reason.icon className="w-5 h-5 text-white" />
+                <div key={index} className="px-2">
+                  <div className="transform transition duration-500 hover:scale-105 h-[233px] lg:h-[300] relative rounded-lg overflow-hidden">
+                    <div
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{
+                        backgroundImage: `url(${reason.bgImage})`,
+                        backgroundPosition: "top",
+                      }}
+                    />
+                    <div className="relative z-10 h-full flex flex-col justify-center rounded-xl items-center text-white p-5">
+                      <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-green-500 rounded-full mb-4 mx-auto">
+                        <reason.icon className="w-5 lg:w-8 lg:h-8 h-5 text-white" />
+                      </div>
+                      <h3 className="text-sm xl:text-base font-semibold text-center mb-3">
+                        {reason.title}
+                      </h3>
+                      <p className="text-accent-foreground text-center text-xs font-light leading-snug">
+                        {reason.description}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-sm font-semibold text-center mb-4">
-                    {reason.title}
-                  </h3>
-                  <p className="text-gray-300 text-center text-xs">
-                    {reason.description}
-                  </p>
                 </div>
               ))}
+            </Slider>
+            <div className="absolute -bottom-2 right-5 flex mt-4 border border-border">
+              <div
+                onClick={() => sliderRef.current?.slickPrev()}
+                aria-label="Previous slide"
+                className="bg-[#852B83] cursor-pointer"
+              >
+                <Image
+                  src="/images/prev-arrow.webp"
+                  alt="Previous"
+                  width={22} // Set your desired width
+                  height={22} // Set your desired height
+                />
+              </div>
+              <div
+                onClick={() => sliderRef.current?.slickNext()}
+                aria-label="Next slide"
+                className="bg-[#F3A0F1] cursor-pointer"
+              >
+                <Image
+                  src="/images/next-arrow.webp"
+                  alt="Previous"
+                  width={22} // Set your desired width
+                  height={22} // Set your desired height
+                />
+              </div>
             </div>
-            {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <p className="text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-              <p className="text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-            </div> */}
+            <div className="mt-8 flex justify-center items-center">
+              {reasons.map((_, index) => (
+                <button
+                  key={index}
+                  className={cn(
+                    "w-3 h-3 rounded-full mx-1 transition-all duration-300",
+                    currentSlide === index
+                      ? "bg-purple-600 scale-125"
+                      : "bg-gray-400"
+                  )}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
-
-        {/* <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-12 mt-20">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-400">
-            Why Join Us?
-          </span>
-        </h2> */}
-
-        {/* SEBI Registration Highlight */}
-        {/* <div className="bg-black/50 backdrop-blur-lg rounded-lg p-6 mb-12 transform transition duration-500 hover:scale-105 border border-purple-500/30">
-          <div className="flex items-center justify-center mb-4">
-            <CheckCircle className="w-8 h-8 text-green-400 mr-2" />
-            <h3 className="text-2xl font-semibold text-center">
-              SEBI Registered
-            </h3>
-          </div>
-          <p className="text-xl text-center text-green-300 font-semibold mb-2">
-            SEBI Research Analyst No: INH100008984
-          </p>
-          <p className="text-gray-300 text-center">
-            Rakesh Bansal Ventures is proudly registered under SEBI (Research
-            Analyst) Regulations, 2014, ensuring compliance with the highest
-            regulatory standards in the industry.
-          </p>
-        </div> */}
-
-        {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {reasons.map((reason, index) => (
-            <div
-              key={index}
-              className="bg-black/50 backdrop-blur-lg rounded-lg p-6 transform transition duration-500 hover:scale-105 hover:bg-purple-900/50 border border-green-500/30"
-            >
-              <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-500 to-green-500 rounded-full mb-6 mx-auto">
-                <reason.icon className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-center mb-4">
-                {reason.title}
-              </h3>
-              <p className="text-gray-300 text-center">{reason.description}</p>
-            </div>
-          ))}
-        </div> */}
-        {/* <div className="mt-16 text-center">
-          <p className="text-base text-gray-300 max-w-3xl mx-auto mb-6">
-            At Rakesh Bansal Ventures, we believe in a simple yet powerful
-            approach to achieving success in the stock market. Join us and
-            experience the difference with our SEBI-registered expertise.
-          </p>
-          <Link href="/">
-            <Button variant="gradient" size="custom">
-              Start Your Journey
-            </Button>
-          </Link>
-        </div> */}
       </div>
     </section>
   );

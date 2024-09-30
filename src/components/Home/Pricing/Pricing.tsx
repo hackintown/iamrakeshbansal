@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ChevronRight, ChevronLeft, Info } from "lucide-react";
+import { CheckCircle, Info } from "lucide-react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface Feature {
   name: string;
@@ -348,43 +350,23 @@ const Switch = ({
   </div>
 );
 
-const CustomArrow = ({
-  onClick,
-  direction,
-}: {
-  onClick?: () => void;
-  direction: "left" | "right";
-}) => (
-  <button
-    className={`custom-slick-arrow absolute ${
-      direction === "left" ? "-left-4" : "-right-4"
-    } top-1/2 transform -translate-y-1/2 cursor-pointer z-10 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-shadow duration-300`}
-    onClick={onClick}
-  >
-    {direction === "left" ? (
-      <ChevronLeft className="w-6 h-6 text-purple-700" />
-    ) : (
-      <ChevronRight className="w-6 h-6 text-purple-700" />
-    )}
-  </button>
-);
-
 export default function Pricing() {
   const [duration, setDuration] = useState<PlanDuration>("monthly");
   const sliderRef = useRef<Slider>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 300000,
     pauseOnHover: true,
-    nextArrow: <CustomArrow direction="right" />,
-    prevArrow: <CustomArrow direction="left" />,
+    arrows:false,
     className: "right-side-visible-slider",
+    beforeChange: (_: number, next: number) => setCurrentSlide(next),
     responsive: [
       { breakpoint: 1280, settings: { slidesToShow: 3 } },
       { breakpoint: 1024, settings: { slidesToShow: 2 } },
@@ -402,17 +384,11 @@ export default function Pricing() {
   const handleDurationChange = (newDuration: PlanDuration) => {
     setDuration(newDuration);
   };
+  const goToSlide = (index: number) => {
+    sliderRef.current?.slickGoTo(index);
+  };
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (sliderRef.current) {
-        sliderRef.current.slickGoTo(0);
-      }
-    };
 
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <div
@@ -502,11 +478,52 @@ export default function Pricing() {
         <div className="relative w-full">
           <Slider ref={sliderRef} {...settings}>
             {pricingData.map((plan, index) => (
-              <div key={index} className="outline-none px-2 py-2 w-full h-full">
-                <PricingCard plan={plan} duration={duration} />
+              <div key={index} className="outline-none px-2 py-2 w-full h-[580px]">
+                <PricingCard plan={plan}  duration={duration} />
               </div>
             ))}
           </Slider>
+          <div className="absolute -bottom-2 right-5 flex mt-4 border border-border">
+              <div
+                onClick={() => sliderRef.current?.slickPrev()}
+                aria-label="Previous slide"
+                className="bg-[#852B83] cursor-pointer"
+              >
+                <Image
+                  src="/images/prev-arrow.webp"
+                  alt="Previous"
+                  width={22} // Set your desired width
+                  height={22} // Set your desired height
+                />
+              </div>
+              <div
+                onClick={() => sliderRef.current?.slickNext()}
+                aria-label="Next slide"
+                className="bg-[#F3A0F1] cursor-pointer"
+              >
+                <Image
+                  src="/images/next-arrow.webp"
+                  alt="Previous"
+                  width={22} // Set your desired width
+                  height={22} // Set your desired height
+                />
+              </div>
+            </div>
+            <div className="mt-8 flex justify-center items-center">
+              {pricingData.map((_, index) => (
+                <button
+                  key={index}
+                  className={cn(
+                    "w-3 h-3 rounded-full mx-1 transition-all duration-300",
+                    currentSlide === index
+                      ? "bg-purple-600 scale-125"
+                      : "bg-gray-400"
+                  )}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
         </div>
       </div>
     </div>
