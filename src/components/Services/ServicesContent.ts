@@ -31,10 +31,24 @@ export const services = [
   { name: "HNI" as ServiceKey, icon: Users, color: "bg-indigo-500" },
 ];
 
+type ServicePlan = {
+  duration: "Monthly" | "Quarterly" | "Yearly";
+  price: string;
+};
 type WhyChooseUs = {
   title: string;
-  features: string[];
+  info: string;
 };
+type WhatWeOffer = {
+  title: string;
+  info: string;
+};
+type ServiceFeatures = {
+  price: string;
+  features: string[];
+  generalFeatures?: string[];
+};
+type generalFeatures = string;
 
 export const serviceContent: Record<
   ServiceKey,
@@ -42,247 +56,386 @@ export const serviceContent: Record<
     title: string;
     additionalDescription: string;
     description: string;
-    keyFeatures: string[];
-    disclaimer: string;
+    generalFeatures?: generalFeatures[];
+    advancedFeatures?: {
+      optionsService?: ServiceFeatures;
+      intradayService?: ServiceFeatures;
+    };
+    disclaimer?: string;
     registration: string;
-    whyChooseUs: WhyChooseUs;
-    plans: { duration: string; price: string }[];
+    whyChooseUs?: WhyChooseUs[];
+    whatWeOffer?: WhatWeOffer[];
+    plans?: ServicePlan[];
   }
 > = {
   "Intraday/BTST": {
-    title: "Intraday/BTST",
+    title: "Master the Art of Options & Intraday/BTST Service",
     description:
-      "Our Intraday Trading Subscription Plan offers precise and disciplined signals for single-day market movements. Trades are short-term with specific targets and are squared off the same or next day. We share only the stock name and current cash market price (CMP) to distribute the load and prevent price spikes. Based on your trading style and risk appetite, you can choose to trade in the cash segment or Futures & Options (If the stock is available in derivatives)",
+      "Seize profitable market opportunities with our combined trading package, designed to help you excel in both options buying and intraday/BTST strategies. Whether you're aiming for short-term gains or a disciplined options approach, our expert-backed recommendations and real-time signals provide you with everything you need to trade confidently and strategically.",
     additionalDescription:
-      "Please note that these signals are meant for intraday trading in equity. Using the correct mode will help distribute the load and avoid price spikes in a single PUT/CALL.",
-    keyFeatures: [
-      "BTST: Buy today & Sell tomorrow",
-      "STBT: Sell today & Buy tomorrow",
-      "Enter the trade after 2 PM before Close & exit the trade on Open within 30 minutes next day",
-      "2 quality calls will be sent by SMS each day",
-      "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning",
+      "Join us today to master options buying and intraday trading with a disciplined, straightforward, and transparent approach. This is your chance to trade with confidence and enhance your profitability.",
+    whatWeOffer: [
+      {
+        title: "Options Buying (Nifty 50 Focus):",
+        info: "We offer precise entry, exit, and stop-loss levels for Nifty 50 companies, ensuring optimal liquidity and reduced impact costs. Our trading ideas are powered by a mix of human expertise and AI technology, focusing solely on options buying for simplified and effective strategies.",
+      },
+      {
+        title: "Intraday/BTST Signals:",
+        info: " Get real-time alerts for intraday and BTST trading opportunities, ideal for capturing single-day market movements. Trades are based on current cash market prices, helping you avoid price spikes and distribute load efficiently. You can choose to trade in the cash segment or Futures & Options, depending on stock availability.",
+      },
     ],
-    whyChooseUs: {
-      title: "Why Choose Our Intraday Trading Subscription?",
-      features: [
-        "Real-Time Trade Signals: Receive real-time alerts for buying and selling stocks during the trading day.",
-        "Expert-Backed Recommendations: Our team uses a blend of original intelligence and years of experience.",
-        "Simplified Strategies: We prioritize straightforward and effective intraday trading strategies.",
-        "Disciplined Trading Approach: We provide entry prices, exit prices, and stop-loss levels.",
-        "Transparency and Reports: Stay informed with our detailed performance reports.",
-      ],
+    generalFeatures: [],
+    advancedFeatures: {
+      optionsService: {
+        price: "₹1,999/month",
+        features: [
+          "Monthly 10-15 Calls",
+          "Entry Price, Exit Price, and Stop Loss provided for each trade.",
+          "Capital Required: ₹55,000 to ₹1,00,000",
+          "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading.",
+          "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning.",
+        ],
+      },
+      intradayService: {
+        price: "₹999/month",
+        features: [
+          "Monthly 15-20 Calls",
+          "Entry Price, Exit Price, Stop Loss, and First Target for each signal.",
+          "Capital Required: ₹20,000 to ₹50,000.",
+          "Focuses on top Nifty 50 companies for effective short-term trading.",
+        ],
+      },
     },
+    whyChooseUs: [
+      {
+        title: "Expert-Backed Recommendations:",
+        info: "Led by industry experts like Dr. Rakesh Bansal, our trading signals blend years of market experience with advanced algorithms, offering actionable insights you can trust.",
+      },
+      {
+        title: "Simplified & Effective Strategies:",
+        info: "We believe in keeping things simple, focusing solely on options buying and straightforward intraday trading strategies. This clarity helps you execute trades without unnecessary complexity.",
+      },
+      {
+        title: "Disciplined Trading Approach:",
+        info: "Avoid over-trading and manage risk effectively with our well-defined entry, exit, and stop-loss levels for each trade.",
+      },
+      {
+        title: "Transparency & Reports:",
+        info: "Track your progress with our monthly performance reports, offering a transparent view of our trading rationale and results.",
+      },
+    ],
     disclaimer:
       "Investment in securities market are subject to market risks. Read all the related documents carefully before investing",
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
-      { duration: "Monthly", price: "Rs- 20000/-" },
-      { duration: "Quarterly", price: "Rs- 35000/-" },
-      { duration: "Yearly", price: "Rs- 60000/-" },
+      { duration: "Monthly", price: "Rs- 1,999/-" },
+      { duration: "Yearly", price: "Rs- 20,000/-" },
     ],
   },
 
   "Index & Option": {
-    title: "Index & Option",
+    title: "Master the Art of Options & Intraday/BTST Service",
     description:
-      "Our Options Trading Plan provides strategic insights into options markets, helping you leverage the potential of options for enhanced returns and risk management.",
+      "Seize profitable market opportunities with our combined trading package, designed to help you excel in both options buying and intraday/BTST strategies. Whether you're aiming for short-term gains or a disciplined options approach, our expert-backed recommendations and real-time signals provide you with everything you need to trade confidently and strategically.",
     additionalDescription:
-      "This plan is designed for traders who understand the complexities of options and want to capitalize on market volatility.",
-    keyFeatures: [
-      "Daily options trading signals",
-      "Strategy explanations for each trade",
-      "Risk management guidelines",
-      "Options Greeks analysis",
-      "Weekly market outlook for options",
+      "Join us today to master options buying and intraday trading with a disciplined, straightforward, and transparent approach. This is your chance to trade with confidence and enhance your profitability.",
+    whatWeOffer: [
+      {
+        title: "Options Buying (Nifty 50 Focus):",
+        info: "We offer precise entry, exit, and stop-loss levels for Nifty 50 companies, ensuring optimal liquidity and reduced impact costs. Our trading ideas are powered by a mix of human expertise and AI technology, focusing solely on options buying for simplified and effective strategies.",
+      },
+      {
+        title: "Intraday/BTST Signals:",
+        info: " Get real-time alerts for intraday and BTST trading opportunities, ideal for capturing single-day market movements. Trades are based on current cash market prices, helping you avoid price spikes and distribute load efficiently. You can choose to trade in the cash segment or Futures & Options, depending on stock availability.",
+      },
     ],
-    whyChooseUs: {
-      title: "Why Choose Our Options Trading Plan?",
-      features: [
-        "Expert Options Analysis: Our team provides in-depth analysis of options markets.",
-        "Diverse Strategies: We cover a range of options strategies from basic to advanced.",
-        "Risk Management Focus: Each trade comes with clear risk parameters.",
-        "Educational Content: Regular webinars and tutorials on options trading.",
-        "Responsive Support: Get your options-related queries answered promptly.",
-      ],
-    },
+    keyFeatures: [
+      "Monthly 10-15 Calls",
+      "Entry Price, Exit Price, and Stop Loss provided for each trade.",
+      "Capital Required: ₹55,000 to ₹1,00,000",
+      "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading.",
+      "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning",
+    ],
+    whyChooseUs: [
+      {
+        title: "Expert-Backed Recommendations:",
+        info: "Led by industry experts like Dr. Rakesh Bansal, our trading signals blend years of market experience with advanced algorithms, offering actionable insights you can trust.",
+      },
+      {
+        title: "Simplified & Effective Strategies:",
+        info: "We believe in keeping things simple, focusing solely on options buying and straightforward intraday trading strategies. This clarity helps you execute trades without unnecessary complexity.",
+      },
+      {
+        title: "Disciplined Trading Approach:",
+        info: "Avoid over-trading and manage risk effectively with our well-defined entry, exit, and stop-loss levels for each trade.",
+      },
+      {
+        title: "Transparency & Reports:",
+        info: "Track your progress with our monthly performance reports, offering a transparent view of our trading rationale and results.",
+      },
+    ],
     disclaimer:
-      "Options trading carries substantial risk of loss and is not suitable for all investors. Please ensure you fully understand the risks involved.",
+      "Investment in securities market are subject to market risks. Read all the related documents carefully before investing",
     registration:
-      "Our options trading recommendations are for educational purposes only. Always consult with a licensed financial advisor before making investment decisions.",
+      "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
-      { duration: "Monthly", price: "Rs- 15000/-" },
-      { duration: "Quarterly", price: "Rs- 40000/-" },
-      { duration: "Yearly", price: "Rs- 70000/-" },
+      { duration: "Monthly", price: "Rs- 1,999/-" },
+      { duration: "Yearly", price: "Rs- 20,000/-" },
     ],
   },
 
   "Option & Intraday": {
-    title: "Option & Intraday",
+    title: "Master the Art of Options & Intraday/BTST Service",
     description:
-      "Our Options Trading Plan provides strategic insights into options markets, helping you leverage the potential of options for enhanced returns and risk management.",
+      "Seize profitable market opportunities with our combined trading package, designed to help you excel in both options buying and intraday/BTST strategies. Whether you're aiming for short-term gains or a disciplined options approach, our expert-backed recommendations and real-time signals provide you with everything you need to trade confidently and strategically.",
     additionalDescription:
-      "This plan is designed for traders who understand the complexities of options and want to capitalize on market volatility.",
-    keyFeatures: [
-      "Daily options trading signals",
-      "Strategy explanations for each trade",
-      "Risk management guidelines",
-      "Options Greeks analysis",
-      "Weekly market outlook for options",
+      "Join us today to master options buying and intraday trading with a disciplined, straightforward, and transparent approach. This is your chance to trade with confidence and enhance your profitability.",
+    whatWeOffer: [
+      {
+        title: "Options Buying (Nifty 50 Focus):",
+        info: "We offer precise entry, exit, and stop-loss levels for Nifty 50 companies, ensuring optimal liquidity and reduced impact costs. Our trading ideas are powered by a mix of human expertise and AI technology, focusing solely on options buying for simplified and effective strategies.",
+      },
+      {
+        title: "Intraday/BTST Signals:",
+        info: " Get real-time alerts for intraday and BTST trading opportunities, ideal for capturing single-day market movements. Trades are based on current cash market prices, helping you avoid price spikes and distribute load efficiently. You can choose to trade in the cash segment or Futures & Options, depending on stock availability.",
+      },
     ],
-    whyChooseUs: {
-      title: "Why Choose Our Options Trading Plan?",
-      features: [
-        "Expert Options Analysis: Our team provides in-depth analysis of options markets.",
-        "Diverse Strategies: We cover a range of options strategies from basic to advanced.",
-        "Risk Management Focus: Each trade comes with clear risk parameters.",
-        "Educational Content: Regular webinars and tutorials on options trading.",
-        "Responsive Support: Get your options-related queries answered promptly.",
-      ],
-    },
+    keyFeatures: [
+      "Monthly 10-15 Calls",
+      "Entry Price, Exit Price, and Stop Loss provided for each trade.",
+      "Capital Required: ₹55,000 to ₹1,00,000",
+      "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading.",
+      "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning",
+    ],
+    whyChooseUs: [
+      {
+        title: "Expert-Backed Recommendations:",
+        info: "Led by industry experts like Dr. Rakesh Bansal, our trading signals blend years of market experience with advanced algorithms, offering actionable insights you can trust.",
+      },
+      {
+        title: "Simplified & Effective Strategies:",
+        info: "We believe in keeping things simple, focusing solely on options buying and straightforward intraday trading strategies. This clarity helps you execute trades without unnecessary complexity.",
+      },
+      {
+        title: "Disciplined Trading Approach:",
+        info: "Avoid over-trading and manage risk effectively with our well-defined entry, exit, and stop-loss levels for each trade.",
+      },
+      {
+        title: "Transparency & Reports:",
+        info: "Track your progress with our monthly performance reports, offering a transparent view of our trading rationale and results.",
+      },
+    ],
     disclaimer:
-      "Options trading carries substantial risk of loss and is not suitable for all investors. Please ensure you fully understand the risks involved.",
+      "Investment in securities market are subject to market risks. Read all the related documents carefully before investing",
     registration:
-      "Our options trading recommendations are for educational purposes only. Always consult with a licensed financial advisor before making investment decisions.",
+      "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
-      { duration: "Monthly", price: "Rs- 15000/-" },
-      { duration: "Quarterly", price: "Rs- 40000/-" },
-      { duration: "Yearly", price: "Rs- 70000/-" },
+      { duration: "Monthly", price: "Rs- 1,999/-" },
+      { duration: "Yearly", price: "Rs- 20,000/-" },
     ],
   },
 
   Mentorship: {
-    title: "Mentorship",
+    title: "Master the Art of Options & Intraday/BTST Service",
     description:
-      "Our Mentorship Plan offers personalized guidance from experienced traders to help you develop your trading skills and strategies.",
+      "Seize profitable market opportunities with our combined trading package, designed to help you excel in both options buying and intraday/BTST strategies. Whether you're aiming for short-term gains or a disciplined options approach, our expert-backed recommendations and real-time signals provide you with everything you need to trade confidently and strategically.",
     additionalDescription:
-      "This plan is ideal for both beginners looking to start their trading journey and experienced traders aiming to refine their strategies.",
-    keyFeatures: [
-      "One-on-one sessions with expert traders",
-      "Personalized trading plan development",
-      "Live market analysis and trading sessions",
-      "Performance review and improvement strategies",
-      "Access to proprietary trading tools and resources",
+      "Join us today to master options buying and intraday trading with a disciplined, straightforward, and transparent approach. This is your chance to trade with confidence and enhance your profitability.",
+    whatWeOffer: [
+      {
+        title: "Options Buying (Nifty 50 Focus):",
+        info: "We offer precise entry, exit, and stop-loss levels for Nifty 50 companies, ensuring optimal liquidity and reduced impact costs. Our trading ideas are powered by a mix of human expertise and AI technology, focusing solely on options buying for simplified and effective strategies.",
+      },
+      {
+        title: "Intraday/BTST Signals:",
+        info: " Get real-time alerts for intraday and BTST trading opportunities, ideal for capturing single-day market movements. Trades are based on current cash market prices, helping you avoid price spikes and distribute load efficiently. You can choose to trade in the cash segment or Futures & Options, depending on stock availability.",
+      },
     ],
-    whyChooseUs: {
-      title: "Why Choose Our Mentorship Plan?",
-      features: [
-        "Personalized Attention: Get individual guidance tailored to your trading goals and experience level.",
-        "Hands-on Learning: Participate in live trading sessions with your mentor.",
-        "Comprehensive Skill Development: Cover everything from basic concepts to advanced trading strategies.",
-        "Continuous Support: Regular check-ins and progress assessments to keep you on track.",
-        "Network Building: Connect with other traders and industry professionals.",
-      ],
-    },
+    keyFeatures: [
+      "Monthly 10-15 Calls",
+      "Entry Price, Exit Price, and Stop Loss provided for each trade.",
+      "Capital Required: ₹55,000 to ₹1,00,000",
+      "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading.",
+      "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning",
+    ],
+    whyChooseUs: [
+      {
+        title: "Expert-Backed Recommendations:",
+        info: "Led by industry experts like Dr. Rakesh Bansal, our trading signals blend years of market experience with advanced algorithms, offering actionable insights you can trust.",
+      },
+      {
+        title: "Simplified & Effective Strategies:",
+        info: "We believe in keeping things simple, focusing solely on options buying and straightforward intraday trading strategies. This clarity helps you execute trades without unnecessary complexity.",
+      },
+      {
+        title: "Disciplined Trading Approach:",
+        info: "Avoid over-trading and manage risk effectively with our well-defined entry, exit, and stop-loss levels for each trade.",
+      },
+      {
+        title: "Transparency & Reports:",
+        info: "Track your progress with our monthly performance reports, offering a transparent view of our trading rationale and results.",
+      },
+    ],
     disclaimer:
-      "Trading carries risk of capital loss. Our mentorship program aims to educate but does not guarantee trading success.",
+      "Investment in securities market are subject to market risks. Read all the related documents carefully before investing",
     registration:
-      "Enrollment in our mentorship program does not constitute financial advice. Always make independent decisions regarding your investments.",
+      "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
-      { duration: "Quarterly", price: "Rs- 50000/-" },
-      { duration: "Quarterly", price: "Rs- 90000/-" },
-      { duration: "Yearly", price: "Rs- 150000/-" },
+      { duration: "Monthly", price: "Rs- 1,999/-" },
+      { duration: "Yearly", price: "Rs- 20,000/-" },
     ],
   },
 
   Futures: {
-    title: "Futures",
+    title: "Master the Art of Options & Intraday/BTST Service",
     description:
-      "Our Futures Trading Plan offers comprehensive analysis and timely signals for futures markets across various asset classes.",
+      "Seize profitable market opportunities with our combined trading package, designed to help you excel in both options buying and intraday/BTST strategies. Whether you're aiming for short-term gains or a disciplined options approach, our expert-backed recommendations and real-time signals provide you with everything you need to trade confidently and strategically.",
     additionalDescription:
-      "This plan is tailored for traders looking to capitalize on price movements in futures contracts with a medium to long-term perspective.",
-    keyFeatures: [
-      "Daily futures market analysis",
-      "Entry and exit signals for futures contracts",
-      "Rollover strategies",
-      "Margin requirement guidelines",
-      "Sector-specific futures insights",
+      "Join us today to master options buying and intraday trading with a disciplined, straightforward, and transparent approach. This is your chance to trade with confidence and enhance your profitability.",
+    whatWeOffer: [
+      {
+        title: "Options Buying (Nifty 50 Focus):",
+        info: "We offer precise entry, exit, and stop-loss levels for Nifty 50 companies, ensuring optimal liquidity and reduced impact costs. Our trading ideas are powered by a mix of human expertise and AI technology, focusing solely on options buying for simplified and effective strategies.",
+      },
+      {
+        title: "Intraday/BTST Signals:",
+        info: " Get real-time alerts for intraday and BTST trading opportunities, ideal for capturing single-day market movements. Trades are based on current cash market prices, helping you avoid price spikes and distribute load efficiently. You can choose to trade in the cash segment or Futures & Options, depending on stock availability.",
+      },
     ],
-    whyChooseUs: {
-      title: "Why Choose Our Futures Trading Plan?",
-      features: [
-        "Comprehensive Market Coverage: We analyze futures across equity, commodity, and currency markets.",
-        "Trend Analysis: Our experts identify and explain key market trends affecting futures.",
-        "Risk-Reward Optimization: Each recommendation comes with clear risk-reward ratios.",
-        "Regular Market Updates: Stay informed with our daily and weekly futures market reports.",
-        "Educational Resources: Access to webinars and articles on futures trading strategies.",
-      ],
-    },
+    keyFeatures: [
+      "Monthly 10-15 Calls",
+      "Entry Price, Exit Price, and Stop Loss provided for each trade.",
+      "Capital Required: ₹55,000 to ₹1,00,000",
+      "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading.",
+      "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning",
+    ],
+    whyChooseUs: [
+      {
+        title: "Expert-Backed Recommendations:",
+        info: "Led by industry experts like Dr. Rakesh Bansal, our trading signals blend years of market experience with advanced algorithms, offering actionable insights you can trust.",
+      },
+      {
+        title: "Simplified & Effective Strategies:",
+        info: "We believe in keeping things simple, focusing solely on options buying and straightforward intraday trading strategies. This clarity helps you execute trades without unnecessary complexity.",
+      },
+      {
+        title: "Disciplined Trading Approach:",
+        info: "Avoid over-trading and manage risk effectively with our well-defined entry, exit, and stop-loss levels for each trade.",
+      },
+      {
+        title: "Transparency & Reports:",
+        info: "Track your progress with our monthly performance reports, offering a transparent view of our trading rationale and results.",
+      },
+    ],
     disclaimer:
-      "Futures trading involves substantial risk and is not appropriate for all investors. Ensure you understand the risks before trading.",
+      "Investment in securities market are subject to market risks. Read all the related documents carefully before investing",
     registration:
-      "Our futures trading recommendations are for informational purposes. Always conduct your own research and consult with a licensed financial advisor.",
+      "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
-      { duration: "Monthly", price: "Rs- 18000/-" },
-      { duration: "Quarterly", price: "Rs- 45000/-" },
-      { duration: "Yearly", price: "Rs- 80000/-" },
+      { duration: "Monthly", price: "Rs- 1,999/-" },
+      { duration: "Yearly", price: "Rs- 20,000/-" },
     ],
   },
 
   Commodity: {
-    title: "Commodity",
+    title: "Master the Art of Options & Intraday/BTST Service",
     description:
-      "Our Commodity Trading Plan provides expert insights and timely signals for trading in various commodity markets including metals, energy, and agricultural products.",
+      "Seize profitable market opportunities with our combined trading package, designed to help you excel in both options buying and intraday/BTST strategies. Whether you're aiming for short-term gains or a disciplined options approach, our expert-backed recommendations and real-time signals provide you with everything you need to trade confidently and strategically.",
     additionalDescription:
-      "This plan is designed for traders interested in diversifying their portfolio with commodity exposure and capitalizing on global economic trends.",
-    keyFeatures: [
-      "Daily commodity market analysis",
-      "Entry and exit signals for major commodities",
-      "Correlation analysis with other markets",
-      "Seasonal trends and patterns in commodities",
-      "Global events impact assessment on commodity prices",
+      "Join us today to master options buying and intraday trading with a disciplined, straightforward, and transparent approach. This is your chance to trade with confidence and enhance your profitability.",
+    whatWeOffer: [
+      {
+        title: "Options Buying (Nifty 50 Focus):",
+        info: "We offer precise entry, exit, and stop-loss levels for Nifty 50 companies, ensuring optimal liquidity and reduced impact costs. Our trading ideas are powered by a mix of human expertise and AI technology, focusing solely on options buying for simplified and effective strategies.",
+      },
+      {
+        title: "Intraday/BTST Signals:",
+        info: " Get real-time alerts for intraday and BTST trading opportunities, ideal for capturing single-day market movements. Trades are based on current cash market prices, helping you avoid price spikes and distribute load efficiently. You can choose to trade in the cash segment or Futures & Options, depending on stock availability.",
+      },
     ],
-    whyChooseUs: {
-      title: "Why Choose Our Commodity Trading Plan?",
-      features: [
-        "Diverse Market Coverage: We provide analysis on a wide range of commodity markets.",
-        "Fundamental and Technical Analysis: Our recommendations combine both fundamental economic factors and technical chart patterns.",
-        "Risk Management Strategies: Learn how to use options and futures to hedge commodity risks.",
-        "Global Perspective: Understand how international events affect commodity prices.",
-        "Regular Market Insights: Receive daily updates and weekly comprehensive reports on commodity markets.",
-      ],
-    },
+    keyFeatures: [
+      "Monthly 10-15 Calls",
+      "Entry Price, Exit Price, and Stop Loss provided for each trade.",
+      "Capital Required: ₹55,000 to ₹1,00,000",
+      "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading.",
+      "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning",
+    ],
+    whyChooseUs: [
+      {
+        title: "Expert-Backed Recommendations:",
+        info: "Led by industry experts like Dr. Rakesh Bansal, our trading signals blend years of market experience with advanced algorithms, offering actionable insights you can trust.",
+      },
+      {
+        title: "Simplified & Effective Strategies:",
+        info: "We believe in keeping things simple, focusing solely on options buying and straightforward intraday trading strategies. This clarity helps you execute trades without unnecessary complexity.",
+      },
+      {
+        title: "Disciplined Trading Approach:",
+        info: "Avoid over-trading and manage risk effectively with our well-defined entry, exit, and stop-loss levels for each trade.",
+      },
+      {
+        title: "Transparency & Reports:",
+        info: "Track your progress with our monthly performance reports, offering a transparent view of our trading rationale and results.",
+      },
+    ],
     disclaimer:
-      "Commodity trading involves substantial risk of loss and is not suitable for all investors. Past performance is not indicative of future results.",
+      "Investment in securities market are subject to market risks. Read all the related documents carefully before investing",
     registration:
-      "Our commodity trading recommendations are for informational purposes only. Always conduct your own due diligence before making investment decisions.",
+      "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
-      { duration: "Monthly", price: "Rs- 12000/-" },
-      { duration: "Quarterly", price: "Rs- 30000/-" },
-      { duration: "Yearly", price: "Rs- 55000/-" },
+      { duration: "Monthly", price: "Rs- 1,999/-" },
+      { duration: "Yearly", price: "Rs- 20,000/-" },
     ],
   },
   HNI: {
-    title: "HNI",
+    title: "Master the Art of Options & Intraday/BTST Service",
     description:
-      "Our High Net Worth Individual (HNI) Plan offers exclusive, high-value trading opportunities and personalized portfolio management services for select clients.",
+      "Seize profitable market opportunities with our combined trading package, designed to help you excel in both options buying and intraday/BTST strategies. Whether you're aiming for short-term gains or a disciplined options approach, our expert-backed recommendations and real-time signals provide you with everything you need to trade confidently and strategically.",
     additionalDescription:
-      "This premium plan is tailored for sophisticated investors looking for comprehensive wealth management and high-potential investment strategies.",
-    keyFeatures: [
-      "Exclusive high-value trading opportunities",
-      "Personalized portfolio management",
-      "Access to pre-IPO placements and block deals",
-      "Customized risk management strategies",
-      "Priority access to market research and analyst calls",
+      "Join us today to master options buying and intraday trading with a disciplined, straightforward, and transparent approach. This is your chance to trade with confidence and enhance your profitability.",
+    whatWeOffer: [
+      {
+        title: "Options Buying (Nifty 50 Focus):",
+        info: "We offer precise entry, exit, and stop-loss levels for Nifty 50 companies, ensuring optimal liquidity and reduced impact costs. Our trading ideas are powered by a mix of human expertise and AI technology, focusing solely on options buying for simplified and effective strategies.",
+      },
+      {
+        title: "Intraday/BTST Signals:",
+        info: " Get real-time alerts for intraday and BTST trading opportunities, ideal for capturing single-day market movements. Trades are based on current cash market prices, helping you avoid price spikes and distribute load efficiently. You can choose to trade in the cash segment or Futures & Options, depending on stock availability.",
+      },
     ],
-    whyChooseUs: {
-      title: "Why Choose Our HNI Plan?",
-      features: [
-        "Exclusive Opportunities: Access to high-value trades and investment opportunities not available to regular clients.",
-        "Personalized Service: Dedicated relationship manager and direct access to senior analysts.",
-        "Comprehensive Wealth Management: Holistic approach to managing and growing your wealth across various asset classes.",
-        "Advanced Risk Management: Sophisticated tools and strategies to protect and grow your wealth.",
-        "Networking Opportunities: Exclusive events and meetings with industry leaders and fellow HNI clients.",
-      ],
-    },
+    keyFeatures: [
+      "Monthly 10-15 Calls",
+      "Entry Price, Exit Price, and Stop Loss provided for each trade.",
+      "Capital Required: ₹55,000 to ₹1,00,000",
+      "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading.",
+      "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning",
+    ],
+    whyChooseUs: [
+      {
+        title: "Expert-Backed Recommendations:",
+        info: "Led by industry experts like Dr. Rakesh Bansal, our trading signals blend years of market experience with advanced algorithms, offering actionable insights you can trust.",
+      },
+      {
+        title: "Simplified & Effective Strategies:",
+        info: "We believe in keeping things simple, focusing solely on options buying and straightforward intraday trading strategies. This clarity helps you execute trades without unnecessary complexity.",
+      },
+      {
+        title: "Disciplined Trading Approach:",
+        info: "Avoid over-trading and manage risk effectively with our well-defined entry, exit, and stop-loss levels for each trade.",
+      },
+      {
+        title: "Transparency & Reports:",
+        info: "Track your progress with our monthly performance reports, offering a transparent view of our trading rationale and results.",
+      },
+    ],
     disclaimer:
-      "High-value investments carry significant risks. Our HNI services are designed for experienced investors who can bear substantial financial risks.",
+      "Investment in securities market are subject to market risks. Read all the related documents carefully before investing",
     registration:
-      "Enrollment in our HNI plan is subject to eligibility criteria. Our services do not guarantee profits and investors should be prepared for potential losses.",
+      "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
-      { duration: "Monthly", price: "Rs- 200000/-" },
-      { duration: "Quarterly", price: "Rs- 350000/-" },
-      { duration: "Yearly", price: "Rs- 600000/-" },
+      { duration: "Monthly", price: "Rs- 1,999/-" },
+      { duration: "Yearly", price: "Rs- 20,000/-" },
     ],
   },
 };
