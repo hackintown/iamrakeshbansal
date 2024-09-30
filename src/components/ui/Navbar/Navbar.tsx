@@ -173,7 +173,7 @@ const Navbar: React.FC = () => {
                   Advisory Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="flex flex-row">
-                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
+                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-background items-center justify-center">
                     {servicesData.map((service) => (
                       <ListItem
                         key={service.id}
@@ -190,7 +190,7 @@ const Navbar: React.FC = () => {
                   Courses
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
+                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-background items-center justify-center">
                     {coursesData.map((course) => (
                       <ListItem
                         key={course.id}
@@ -202,7 +202,7 @@ const Navbar: React.FC = () => {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               {/* Blogs */}
-              <NavigationMenuItem>
+              {/* <NavigationMenuItem>
                 <Link href="/blogs" passHref legacyBehavior>
                   <NavigationMenuLink
                     className={cn(
@@ -213,14 +213,14 @@ const Navbar: React.FC = () => {
                     Blogs
                   </NavigationMenuLink>
                 </Link>
-              </NavigationMenuItem>
+              </NavigationMenuItem> */}
               {/* About Us */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-base text-primary">
                   About Us
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
+                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-background items-center justify-center">
                     {aboutusData.map((about) => (
                       <ListItem
                         key={about.id}
@@ -250,7 +250,7 @@ const Navbar: React.FC = () => {
                   Disclaimer
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-gradient-to-b from-[#852B83] to-[#FFFFFF] items-center justify-center">
+                  <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-background items-center justify-center">
                     {disclaimerData.map((disclaimer) => (
                       <ListItem
                         key={disclaimer.id}
@@ -313,7 +313,7 @@ const Navbar: React.FC = () => {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.4, ease: [0.42, 0, 0.58, 1] }}
-                  className="grid w-full gap-2 p-4 rounded-2xl bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
+                  className="grid w-full gap-2 p-4 rounded-2xl"
                 >
                   {servicesData.map((service) => (
                     <Link
@@ -351,14 +351,14 @@ const Navbar: React.FC = () => {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.4, ease: [0.42, 0, 0.58, 1] }}
-                  className="grid w-full gap-2 p-4 rounded-2xl bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
+                  className="grid w-full gap-2 p-4 rounded-2xl"
                 >
                   {coursesData.map((course) => (
                     <Link
                       key={course.id}
                       href={course.href}
                       onClick={handleCloseSidebar}
-                      className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
+                      className="block shadow-md px-3 py-2 rounded-xl transition-all"
                     >
                       {course.name}
                     </Link>
@@ -368,13 +368,13 @@ const Navbar: React.FC = () => {
             </div>
 
             {/* Static Links */}
-            <Link
+            {/* <Link
               href="/blogs"
               onClick={handleCloseSidebar}
               className="block py-4 text-base font-medium text-primary hover:text-accent transition-all"
             >
               Blogs
-            </Link>
+            </Link> */}
             <Link
               href="/about-us"
               onClick={handleCloseSidebar}
@@ -412,14 +412,14 @@ const Navbar: React.FC = () => {
                   animate={{ opacity: 1, height: "auto" }}
                   exit={{ opacity: 0, height: 0 }}
                   transition={{ duration: 0.4, ease: [0.42, 0, 0.58, 1] }}
-                  className="grid w-full gap-2 p-4 rounded-2xl bg-gradient-to-b from-[#852B83] to-[#FFFFFF]"
+                  className="grid w-full gap-2 p-4 rounded-2xl"
                 >
                   {disclaimerData.map((disclaimer) => (
                     <Link
                       key={disclaimer.id}
                       href={disclaimer.href}
                       onClick={handleCloseSidebar}
-                      className="block shadow-md px-3 py-2 rounded-xl bg-[#D9D9D9] transition-all"
+                      className="block shadow-md px-3 py-2 rounded-xl transition-all"
                     >
                       {disclaimer.name}
                     </Link>
@@ -450,7 +450,7 @@ const ListItem = React.forwardRef<HTMLAnchorElement, ListItemProps>(
             ref={ref}
             href={href}
             className={cn(
-              "block select-none space-y-1 text-nowrap shadow-md bg-[#D9D9D9] rounded-xl text-center p-3 leading-none no-underline outline-none transition-colors hover:text-primary",
+              "block select-none space-y-1 text-nowrap shadow-sm rounded-xl hover:shadow-md text-center p-3 leading-none no-underline outline-none transition-colors hover:text-primary",
               className
             )}
             {...props}

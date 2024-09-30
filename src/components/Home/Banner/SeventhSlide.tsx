@@ -5,6 +5,9 @@ import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { Download, Smartphone, Wifi, Cloud, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 type Particle = {
   x: number;
@@ -100,6 +103,25 @@ export default function AppDownloadSlide() {
     },
   };
 
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 480, // For screens smaller than 480px
+        settings: {
+          slidesToShow: 1, // Show 1 slide
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
   return (
     <section className="container px-4 overflow-hidden">
       <canvas ref={canvasRef} className="absolute inset-0 z-0" />
@@ -125,22 +147,22 @@ export default function AppDownloadSlide() {
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
 
-      <div className="px-4 py-12 lg:py-0 lg:h-[650px] flex flex-col lg:flex-row items-center justify-between relative z-10">
+      <div className="px-4 py-6 sm:py-10 lg:py-0 lg:h-[650px] flex flex-col lg:flex-row items-center justify-between relative z-10">
         <motion.div
-          className="lg:w-1/2 mb-8 lg:mb-0"
+          className="w-full lg:w-1/2 mb-8 lg:mb-0"
           variants={containerVariants}
           initial="hidden"
           animate={controls}
         >
           <motion.h1
             variants={itemVariants}
-            className="text-4xl lg:text-5xl font-bold text-white mb-6"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
           >
             Take control of your daily expenses
           </motion.h1>
           <motion.p
             variants={itemVariants}
-            className="text-lg text-[#eee] mb-8"
+            className="text-sm md:text-base lg:text-lg text-[#eee] mb-8"
           >
             Our AI helps you predict expenses based on your previous activity
             and guides you in managing your money effectively.
@@ -189,22 +211,34 @@ export default function AppDownloadSlide() {
           </motion.div>
         </motion.div>
         <motion.div
-          className="lg:w-1/2 relative"
+          className="w-full lg:w-1/2 relative flex justify-center"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <div className="w-2/3 lg:w-1/2 relative">
+          <div className="w-full md:w-2/3 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-green-400 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
-            <div className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 ease-in-out">
-              <Image
-                src="/images/download-app.webp"
-                alt="Trading App Mockup"
-                width={500}
-                height={500}
-                className="w-full max-w-md mx-auto rounded-3xl shadow-2xl"
-              />
-            </div>
+            <Slider {...sliderSettings}>
+              {[
+                "/images/download-app.webp",
+                "/images/group-mbl-shape.webp",
+                "/images/product-mbl-shape.webp",
+                "/images/course-mbl-shape.webp",
+              ].map((src, index) => (
+                <div
+                  key={index}
+                  className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 ease-in-out"
+                >
+                  <Image
+                    src={src}
+                    alt={`App Screen ${index + 1}`}
+                    width={500}
+                    height={500}
+                    className="w-full  max-w-md mx-auto rounded-3xl shadow-2xl"
+                  />
+                </div>
+              ))}
+            </Slider>
           </div>
         </motion.div>
       </div>

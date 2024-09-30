@@ -15,27 +15,27 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
     items: [
       {
         id: "intraday-btst-plan",
-        name: "Intraday/BTST Plan",
+        name: "Intraday/BTST Services",
         href: "/subscriptions/intraday-btst-plan",
       },
       {
         id: "options-plan",
-        name: "Options Plan",
+        name: "Index & Option Services",
         href: "/subscriptions/options-plan",
       },
       {
         id: "option-intraday",
-        name: "Option & IntraDay",
+        name: "Option & IntraDay Services",
         href: "/subscriptions/option-intraday",
       },
       {
         id: "futures-plan",
-        name: "Futures Plan",
+        name: "Futures Services",
         href: "/subscriptions/futures-plan",
       },
       {
         id: "mentorship-plan",
-        name: "Mentorship Plan",
+        name: "Mentorship Services",
         href: "/subscriptions/mentorship-plan",
       },
       {
@@ -45,7 +45,7 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
       },
       {
         id: "hni",
-        name: "HNI",
+        name: "HNI Services",
         href: "/subscriptions/hni",
       },
     ],

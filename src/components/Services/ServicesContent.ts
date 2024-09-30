@@ -10,10 +10,10 @@ import {
 
 export type ServiceKey =
   | "Intraday/BTST"
-  | "Options/Intraday"
-  | "Options"
-  | "Futures"
+  | "Index & Option"
+  | "Option & Intraday"
   | "Mentorship"
+  | "Futures"
   | "Commodity"
   | "HNI";
 
@@ -50,7 +50,7 @@ export const serviceContent: Record<
   }
 > = {
   "Intraday/BTST": {
-    title: "Intraday/BTST Plan",
+    title: "Intraday/BTST",
     description:
       "Our Intraday Trading Subscription Plan offers precise and disciplined signals for single-day market movements. Trades are short-term with specific targets and are squared off the same or next day. We share only the stock name and current cash market price (CMP) to distribute the load and prevent price spikes. Based on your trading style and risk appetite, you can choose to trade in the cash segment or Futures & Options (If the stock is available in derivatives)",
     additionalDescription:
@@ -82,8 +82,9 @@ export const serviceContent: Record<
       { duration: "Yearly", price: "Rs- 60000/-" },
     ],
   },
-  "Options/Intraday": {
-    title: "Options/Intraday",
+
+  "Index & Option": {
+    title: "Index & Option",
     description:
       "Our Options Trading Plan provides strategic insights into options markets, helping you leverage the potential of options for enhanced returns and risk management.",
     additionalDescription:
@@ -116,8 +117,8 @@ export const serviceContent: Record<
     ],
   },
 
-  Options: {
-    title: "Options Plan",
+  "Option & Intraday": {
+    title: "Option & Intraday",
     description:
       "Our Options Trading Plan provides strategic insights into options markets, helping you leverage the potential of options for enhanced returns and risk management.",
     additionalDescription:
@@ -149,41 +150,9 @@ export const serviceContent: Record<
       { duration: "Yearly", price: "Rs- 70000/-" },
     ],
   },
-  Futures: {
-    title: "Futures Plan",
-    description:
-      "Our Futures Trading Plan offers comprehensive analysis and timely signals for futures markets across various asset classes.",
-    additionalDescription:
-      "This plan is tailored for traders looking to capitalize on price movements in futures contracts with a medium to long-term perspective.",
-    keyFeatures: [
-      "Daily futures market analysis",
-      "Entry and exit signals for futures contracts",
-      "Rollover strategies",
-      "Margin requirement guidelines",
-      "Sector-specific futures insights",
-    ],
-    whyChooseUs: {
-      title: "Why Choose Our Futures Trading Plan?",
-      features: [
-        "Comprehensive Market Coverage: We analyze futures across equity, commodity, and currency markets.",
-        "Trend Analysis: Our experts identify and explain key market trends affecting futures.",
-        "Risk-Reward Optimization: Each recommendation comes with clear risk-reward ratios.",
-        "Regular Market Updates: Stay informed with our daily and weekly futures market reports.",
-        "Educational Resources: Access to webinars and articles on futures trading strategies.",
-      ],
-    },
-    disclaimer:
-      "Futures trading involves substantial risk and is not appropriate for all investors. Ensure you understand the risks before trading.",
-    registration:
-      "Our futures trading recommendations are for informational purposes. Always conduct your own research and consult with a licensed financial advisor.",
-    plans: [
-      { duration: "Monthly", price: "Rs- 18000/-" },
-      { duration: "Quarterly", price: "Rs- 45000/-" },
-      { duration: "Yearly", price: "Rs- 80000/-" },
-    ],
-  },
+
   Mentorship: {
-    title: "Mentorship Plan",
+    title: "Mentorship",
     description:
       "Our Mentorship Plan offers personalized guidance from experienced traders to help you develop your trading skills and strategies.",
     additionalDescription:
@@ -215,8 +184,43 @@ export const serviceContent: Record<
       { duration: "Yearly", price: "Rs- 150000/-" },
     ],
   },
+
+  Futures: {
+    title: "Futures",
+    description:
+      "Our Futures Trading Plan offers comprehensive analysis and timely signals for futures markets across various asset classes.",
+    additionalDescription:
+      "This plan is tailored for traders looking to capitalize on price movements in futures contracts with a medium to long-term perspective.",
+    keyFeatures: [
+      "Daily futures market analysis",
+      "Entry and exit signals for futures contracts",
+      "Rollover strategies",
+      "Margin requirement guidelines",
+      "Sector-specific futures insights",
+    ],
+    whyChooseUs: {
+      title: "Why Choose Our Futures Trading Plan?",
+      features: [
+        "Comprehensive Market Coverage: We analyze futures across equity, commodity, and currency markets.",
+        "Trend Analysis: Our experts identify and explain key market trends affecting futures.",
+        "Risk-Reward Optimization: Each recommendation comes with clear risk-reward ratios.",
+        "Regular Market Updates: Stay informed with our daily and weekly futures market reports.",
+        "Educational Resources: Access to webinars and articles on futures trading strategies.",
+      ],
+    },
+    disclaimer:
+      "Futures trading involves substantial risk and is not appropriate for all investors. Ensure you understand the risks before trading.",
+    registration:
+      "Our futures trading recommendations are for informational purposes. Always conduct your own research and consult with a licensed financial advisor.",
+    plans: [
+      { duration: "Monthly", price: "Rs- 18000/-" },
+      { duration: "Quarterly", price: "Rs- 45000/-" },
+      { duration: "Yearly", price: "Rs- 80000/-" },
+    ],
+  },
+
   Commodity: {
-    title: "Commodity Plan",
+    title: "Commodity",
     description:
       "Our Commodity Trading Plan provides expert insights and timely signals for trading in various commodity markets including metals, energy, and agricultural products.",
     additionalDescription:
@@ -249,7 +253,7 @@ export const serviceContent: Record<
     ],
   },
   HNI: {
-    title: "HNI Plan",
+    title: "HNI",
     description:
       "Our High Net Worth Individual (HNI) Plan offers exclusive, high-value trading opportunities and personalized portfolio management services for select clients.",
     additionalDescription:

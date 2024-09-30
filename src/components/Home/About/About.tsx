@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 export default function EnhancedAboutSection() {
   return (
     <section className="relative py-14 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 via-green-900 to-purple-900">
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-500 via-purple-900 to-green-600">
         <svg
           className="absolute top-0 right-0 w-full h-64 transform rotate-180 z-0"
           viewBox="0 0 1440 320"
@@ -53,7 +53,7 @@ export default function EnhancedAboutSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-3xl font-bold text-white text-center sm:text-5xl leading-tight xl:leading-tight mb-3">
+          <h1 className="text-3xl font-bold text-white text-center sm:text-5xl leading-tight xl:leading-tight mb-3 lg:mb-5 xl:mb-10">
             About Dr.&nbsp;
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400">
               Rakesh Bansal

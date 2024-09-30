@@ -4,17 +4,17 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import FirstSlide from "./FirstSlide";
-import SecondSlide from "./SecondSlide";
+// import SecondSlide from "./SecondSlide";
 import ThirdSlide from "./ThirdSlide";
-import FourthSlide from "./FourthSlide";
+// import FourthSlide from "./FourthSlide";
 import SeventhSlide from "./SeventhSlide";
 
 const slides = [
   { id: 1, component: FirstSlide },
   { id: 2, component: ThirdSlide },
-  { id: 3, component: FourthSlide },
+  // { id: 3, component: FourthSlide },
   { id: 4, component: SeventhSlide },
-  { id: 5, component: SecondSlide },
+  // { id: 5, component: SecondSlide },
 ];
 
 export default function Banner() {

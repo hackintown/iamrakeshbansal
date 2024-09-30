@@ -142,10 +142,10 @@ export default function WhyJoinUs() {
               At Rakesh Bansal Ventures, we believe in a simple yet powerful
               approach to achieving success in the stock market
             </p>
-            <p className="text-sm lg:text-base font-light">
+            {/* <p className="text-sm lg:text-base font-light">
               With your support, it is our endeavour to build India's largest
               Stock research ecosystem.
-            </p>
+            </p> */}
           </div>
           <div className="w-full relative">
             <Slider {...settings} ref={sliderRef}>

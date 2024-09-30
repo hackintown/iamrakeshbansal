@@ -20,8 +20,8 @@ interface Feature {
 interface PricingPlan {
   title: string;
   monthlyPrice: string;
-  quarterlyPrice: string;
-  yearlyPrice: string;
+  quarterlyPrice?: string;
+  yearlyPrice?: string;
   description: string;
   features: Feature[];
   buttonText: string;
@@ -75,10 +75,10 @@ const pricingData: PricingPlan[] = [
     ),
   },
   {
-    title: "Mentorship Service",
-    monthlyPrice: "1999",
-    quarterlyPrice: "5700",
-    yearlyPrice: "19999",
+    title: "Mentorship",
+    monthlyPrice: "3800",
+    quarterlyPrice: "9999",
+    yearlyPrice: "34999",
     description: "Most popular",
     href: "/subscriptions/mentorship-plan",
     features: [
@@ -109,10 +109,9 @@ const pricingData: PricingPlan[] = [
     ),
   },
   {
-    title: "Future Service",
-    monthlyPrice: "3999",
-    quarterlyPrice: "11400",
-    yearlyPrice: "39999",
+    title: "Future",
+    monthlyPrice: "5000",
+    yearlyPrice: "50000",
     description: "For professionals",
     href: "/subscriptions/futures-plan",
     features: [
@@ -145,10 +144,9 @@ const pricingData: PricingPlan[] = [
     ),
   },
   {
-    title: "Commodity Service",
-    monthlyPrice: "3999",
-    quarterlyPrice: "11400",
-    yearlyPrice: "39999",
+    title: "Commodity",
+    monthlyPrice: "3500",
+    quarterlyPrice: "8999",
     description: "For professionals",
     href: "/subscriptions/commodity-plan",
     features: [
@@ -181,10 +179,9 @@ const pricingData: PricingPlan[] = [
     ),
   },
   {
-    title: "Index/Option",
-    monthlyPrice: "3999",
-    quarterlyPrice: "11400",
-    yearlyPrice: "39999",
+    title: "Index & Option",
+    monthlyPrice: "1999",
+    yearlyPrice: "19999",
     description: "For professionals",
     href: "/subscriptions/options-plan",
     features: [
@@ -312,7 +309,7 @@ const PricingCard = ({
     >
       <CardHeader
         title={plan.title}
-        price={price}
+        price={price || ""}
         description={plan.description}
         popular={plan.popular}
         duration={duration}

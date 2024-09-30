@@ -166,10 +166,10 @@ export default function HeroSection() {
                 width={500}
                 height={500}
               />
-              <div className="absolute bottom-8 md:bottom-16 left-6 to-transparent p-6">
+              {/* <div className="absolute bottom-8 md:bottom-16 left-6 to-transparent p-6">
                 <h2 className="text-2xl font-bold text-white">Rakesh Bansal</h2>
                 <p className="text-gray-300">Trading Mentor & Market Analyst</p>
-              </div>
+              </div> */}
             </div>
           </motion.div>
         </motion.div>
