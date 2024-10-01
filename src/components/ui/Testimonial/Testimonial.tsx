@@ -243,29 +243,29 @@ export default function Testimonials() {
               </div>
             ))}
           </Slider>
-          <div className="absolute -bottom-12 right-8 flex mt-4 border border-border">
+          <div className="absolute -bottom-14 right-5 flex mt-4 border border-border  overflow-hidden">
             <div
               onClick={() => sliderRef.current?.slickPrev()}
               aria-label="Previous slide"
-              className="bg-[#852B83] cursor-pointer p-1"
+              className="bg-purple-600 cursor-pointer p-2"
             >
               <Image
                 src="/images/prev-arrow.webp"
                 alt="Previous"
-                width={22} // Set your desired width
-                height={22} // Set your desired height
+                width={22}
+                height={22}
               />
             </div>
             <div
               onClick={() => sliderRef.current?.slickNext()}
               aria-label="Next slide"
-              className="bg-[#F3A0F1] cursor-pointer p-1"
+              className="bg-purple-600 border-l cursor-pointer p-2"
             >
               <Image
                 src="/images/next-arrow.webp"
-                alt="Previous"
-                width={22} // Set your desired width
-                height={22} // Set your desired height
+                alt="Next"
+                width={22}
+                height={22}
               />
             </div>
           </div>
@@ -285,11 +285,6 @@ export default function Testimonials() {
             />
           ))}
         </div>
-      </div>
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-0 left-1/2 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
       </div>
     </div>
   );

@@ -36,18 +36,18 @@ const socialPlatforms = [
     href: "https://whatsapp.com/channel/0029Vaglc39K0IBhitUB5N2K",
   },
   {
-    name: "Telegram",
-    icon: "/images/telegram.webp",
-    followers: 29694,
-    action: "FOLLOW",
-    href: "https://t.me/RakeshAlgo",
-  },
-  {
     name: "Twitter",
     icon: "/images/twitter.webp",
     followers: 310700,
     action: "FOLLOW",
     href: "https://x.com/iamrakeshbansal",
+  },
+  {
+    name: "Telegram",
+    icon: "/images/telegram.webp",
+    followers: 29694,
+    action: "FOLLOW",
+    href: "https://t.me/RakeshAlgo",
   },
 ];
 
@@ -86,7 +86,7 @@ export default function SocialPlatforms() {
           {socialPlatforms.map((platform) => (
             <div
               key={platform.name}
-              className="flex flex-col items-center justify-between w-full p-2 sm:p-3 md:p-4 lg:p-5"
+              className="flex flex-col items-center justify-between w-full p-0"
             >
               <div className="rounded-full p-1 sm:p-2 md:p-3 h-[70px] sm:h-20">
                 <Image

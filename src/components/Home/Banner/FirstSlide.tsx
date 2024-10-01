@@ -116,11 +116,10 @@ export default function HeroSection() {
               </span>
             </h1>
             <p className="mt-5 text-xs sm:text-sm md:text-base text-gray-300 font-light">
-              Dr. Rakesh Bansal&apos;s aim is to revolutionize stock market research
-              services by bringing technology assisted analysis accessible to
-              retail investors. With your support, it is our endeavour to build
-              India&apos;s largest Stock research ecosystem. You can use this in one
-              banner that you have hided currently
+              Dr. Rakesh Bansal&apos;s aim is to revolutionize stock market
+              research services by bringing technology assisted analysis
+              accessible to retail investors. With your support, it is our
+              endeavour to build India&apos;s largest Stock research ecosystem.
             </p>
             <motion.div
               className="mt-8 flex items-center space-x-4"

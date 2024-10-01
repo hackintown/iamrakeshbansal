@@ -4,11 +4,11 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { Download, Smartphone, Wifi, Cloud, Zap } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useInView } from "react-intersection-observer";
+import { cn } from "@/lib/utils";
 
 type Particle = {
   x: number;
@@ -17,6 +17,12 @@ type Particle = {
   color: string;
   velocity: { x: number; y: number };
 };
+const imageSlide = [
+  "/images/download-app.webp",
+  "/images/group-mbl-shape.webp",
+  "/images/product-mbl-shape.webp",
+  "/images/course-mbl-shape.webp",
+];
 
 export default function AppDownloadSlide() {
   const controls = useAnimation();
@@ -25,6 +31,8 @@ export default function AppDownloadSlide() {
   const [customerReviews, setCustomerReviews] = useState(0);
   const [workExperience, setWorkExperience] = useState(0);
   const [tradingCommunity, setTradingCommunity] = useState(0);
+  const sliderRef = useRef<Slider>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const { ref, inView } = useInView({
     threshold: 0.5, // Adjust the threshold as needed
   });
@@ -163,6 +171,7 @@ export default function AppDownloadSlide() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
+    beforeChange: (_: number, next: number) => setCurrentSlide(next),
     responsive: [
       {
         breakpoint: 480, // For screens smaller than 480px
@@ -172,6 +181,9 @@ export default function AppDownloadSlide() {
         },
       },
     ],
+  };
+  const goToSlide = (index: number) => {
+    sliderRef.current?.slickGoTo(index);
   };
 
   return (
@@ -206,28 +218,19 @@ export default function AppDownloadSlide() {
           initial="hidden"
           animate={controls}
         >
-          <motion.h1
-            variants={itemVariants}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6"
-          >
-            Take control of your daily expenses
-          </motion.h1>
-          <motion.p
-            variants={itemVariants}
-            className="text-sm md:text-base lg:text-lg text-[#eee] mb-8"
-          >
-            Our AI helps you predict expenses based on your previous activity
-            and guides you in managing your money effectively.
-          </motion.p>
-          <motion.a
-            href="#"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Button variant="gradient" size="custom" showArrow className="">
-              Get started for free
-            </Button>
-          </motion.a>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight text-white mb-4">
+            Elevate Your Trading
+            <br />
+            <span className="text-green-400">Anytime, Anywhere!</span>
+          </h2>
+          <p className="text-sm lg:text-base text-gray-300 mb-8">
+            Stay ahead with real-time updates on the go! Our app delivers
+            customized notifications for trades, along with access to exclusive
+            webinars, courses, and a supportive community for expert guidance.
+            All in one place! Download the app now and experience seamless
+            trading updates, learning, and community interaction at your
+            fingertips!
+          </p>
           <motion.div variants={itemVariants} className="mt-12">
             <p className="text-sm font-medium text-purple-400 mb-4">
               Available on
@@ -262,31 +265,31 @@ export default function AppDownloadSlide() {
             </div>
           </motion.div>
           <div className="flex flex-wrap  gap-3 justify-between mt-8 max-w-xl">
-              <div ref={ref} className="text-center">
-                <h3 className="text-2xl font-semibold text-white">
-                  {formatNumber(appDownloads)}
-                </h3>
-                <p className="text-white text-sm mt-2">App Downloaded</p>
-              </div>
-              <div ref={ref} className="text-center">
-                <h3 className="text-2xl font-semibold text-white">
-                  {formatNumber(customerReviews)}
-                </h3>
-                <p className="text-white text-sm mt-2">Customer Reviews</p>
-              </div>
-              <div ref={ref} className="text-center">
-                <h3 className="text-2xl font-semibold text-white">
-                  {formatNumber(workExperience)}
-                </h3>
-                <p className="text-white text-sm mt-2">Work Experience</p>
-              </div>
-              <div ref={ref} className="text-center">
-                <h3 className="text-2xl font-semibold text-white">
-                  {formatNumber(tradingCommunity)}
-                </h3>
-                <p className="text-white text-sm mt-2">Trading Community</p>
-              </div>
+            <div ref={ref} className="text-center">
+              <h3 className="text-2xl font-semibold text-white">
+                {formatNumber(appDownloads)}
+              </h3>
+              <p className="text-white text-sm mt-2">App Downloaded</p>
             </div>
+            <div ref={ref} className="text-center">
+              <h3 className="text-2xl font-semibold text-white">
+                {formatNumber(customerReviews)}
+              </h3>
+              <p className="text-white text-sm mt-2">Customer Reviews</p>
+            </div>
+            <div ref={ref} className="text-center">
+              <h3 className="text-2xl font-semibold text-white">
+                {formatNumber(workExperience)}
+              </h3>
+              <p className="text-white text-sm mt-2">Work Experience</p>
+            </div>
+            <div ref={ref} className="text-center">
+              <h3 className="text-2xl font-semibold text-white">
+                {formatNumber(tradingCommunity)}
+              </h3>
+              <p className="text-white text-sm mt-2">Trading Community</p>
+            </div>
+          </div>
         </motion.div>
         <motion.div
           className="w-full lg:w-1/2 relative flex justify-center"
@@ -297,12 +300,7 @@ export default function AppDownloadSlide() {
           <div className="w-full md:w-2/3 relative">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-green-400 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
             <Slider {...sliderSettings}>
-              {[
-                "/images/download-app.webp",
-                "/images/group-mbl-shape.webp",
-                "/images/product-mbl-shape.webp",
-                "/images/course-mbl-shape.webp",
-              ].map((src, index) => (
+              {imageSlide.map((src, index) => (
                 <div
                   key={index}
                   className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 ease-in-out"
@@ -317,6 +315,21 @@ export default function AppDownloadSlide() {
                 </div>
               ))}
             </Slider>
+            <div className="mt-4 flex justify-center items-center">
+              {imageSlide.map((_, index) => (
+                <button
+                  key={index}
+                  className={cn(
+                    "w-3 h-3 rounded-full mx-1 transition-all duration-300",
+                    currentSlide === index
+                      ? "bg-purple-600 scale-125"
+                      : "bg-gray-400"
+                  )}
+                  onClick={() => goToSlide(index)}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
       </div>

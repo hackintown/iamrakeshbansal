@@ -8,8 +8,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { MdPlayArrow } from "react-icons/md";
 
 interface Feature {
   name: string;
@@ -73,6 +73,41 @@ const pricingData: PricingPlan[] = [
     ),
   },
   {
+    title: "Index/Option",
+    monthlyPrice: "1999",
+    yearlyPrice: "19999",
+    description: "For professionals",
+    href: "/subscriptions/options-plan",
+    features: [
+      { name: "Monthly 10-15 Calls", included: true },
+      { name: "Entry Price", included: true },
+      { name: "Exit Price", included: true },
+      { name: "Stop Loss", included: true },
+      { name: "Capital Required 55k to 100k", included: true },
+      { name: "Top Nifty 50 Companies", included: true },
+      {
+        name: "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY",
+        included: true,
+        info: "Comprehensive index coverage",
+      },
+    ],
+    buttonText: "See More",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-8 w-8 text-purple-600"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fillRule="evenodd"
+          d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z"
+          clipRule="evenodd"
+        />
+      </svg>
+    ),
+  },
+  {
     title: "Mentorship",
     monthlyPrice: "3800",
     quarterlyPrice: "9999",
@@ -80,12 +115,12 @@ const pricingData: PricingPlan[] = [
     description: "Most popular",
     href: "/subscriptions/mentorship-plan",
     features: [
-      { name: "Monthly 10-15 Calls", included: true },
+      { name: "Quarterly 10-15 Calls", included: true },
       { name: "Entry Price", included: true },
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
       { name: "Capital Required 100k to 500k", included: true },
-      { name: "Short Medium & Long Term", included: true },
+      { name: "Short, Medium & Long Term", included: true },
       { name: "Swing Trade", included: true },
       {
         name: "Live Market Support",
@@ -113,7 +148,7 @@ const pricingData: PricingPlan[] = [
     description: "For professionals",
     href: "/subscriptions/futures-plan",
     features: [
-      { name: "Monthly 10-15 Calls", included: true },
+      { name: "Monthly 8-10 Calls", included: true },
       { name: "Entry Price", included: true },
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
@@ -171,41 +206,6 @@ const pricingData: PricingPlan[] = [
         <path
           fillRule="evenodd"
           d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
-  },
-  {
-    title: "Index & Option",
-    monthlyPrice: "1999",
-    yearlyPrice: "19999",
-    description: "For professionals",
-    href: "/subscriptions/options-plan",
-    features: [
-      { name: "Monthly 10-15 Calls", included: true },
-      { name: "Entry Price", included: true },
-      { name: "Exit Price", included: true },
-      { name: "Stop Loss", included: true },
-      { name: "Capital Required 55k to 100k", included: true },
-      { name: "Top Nifty 50 Companies", included: true },
-      {
-        name: "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY",
-        included: true,
-        info: "Comprehensive index coverage",
-      },
-    ],
-    buttonText: "See More",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-8 w-8 text-purple-600"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fillRule="evenodd"
-          d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z"
           clipRule="evenodd"
         />
       </svg>
@@ -300,8 +300,8 @@ const PricingCard = ({
 
   return (
     <motion.div
-      className={`rounded-lg overflow-hidden flex-grow h-[583px] flex flex-col justify-between ${
-        plan.popular ? "border-2 border-green-500" : "border border-gray-200"
+      className={`rounded-lg overflow-hidden flex-grow h-[583px] flex flex-col justify-between hover:border-2 border-green-500 ${
+        plan.popular ? "" : "border border-gray-200"
       } bg-white w-full max-w-sm text-black shadow-md hover:shadow-xl 
       transition-all duration-300 relative h-full flex-grow`}
       initial={{ opacity: 0, y: 50 }}
@@ -469,7 +469,7 @@ export default function Pricing() {
           />
           {duration === "yearly" && (
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-medium bg-green-100 text-green-800">
-              Save 20% with yearly billing
+              Save upto 20% with yearly billing
             </span>
           )}
         </motion.div>
@@ -484,30 +484,20 @@ export default function Pricing() {
               </div>
             ))}
           </Slider>
-          <div className="absolute -bottom-2 right-5 flex mt-4 border border-border">
+          <div className="absolute -bottom-2 right-5 flex mt-4 border border-border  overflow-hidden">
             <div
               onClick={() => sliderRef.current?.slickPrev()}
               aria-label="Previous slide"
-              className="bg-[#852B83] cursor-pointer"
+              className="bg-purple-600 cursor-pointer p-1 flex items-center justify-center"
             >
-              <Image
-                src="/images/prev-arrow.webp"
-                alt="Previous"
-                width={22}
-                height={22}
-              />
+              <MdPlayArrow className="text-white size-8 rotate-180" />
             </div>
             <div
               onClick={() => sliderRef.current?.slickNext()}
               aria-label="Next slide"
-              className="bg-[#F3A0F1] cursor-pointer"
+              className="bg-purple-600 border-l cursor-pointer p-1 flex items-center justify-center"
             >
-              <Image
-                src="/images/next-arrow.webp"
-                alt="Next"
-                width={22}
-                height={22}
-              />
+              <MdPlayArrow className="text-white size-8" />
             </div>
           </div>
           <div className="mt-8 flex justify-center items-center">

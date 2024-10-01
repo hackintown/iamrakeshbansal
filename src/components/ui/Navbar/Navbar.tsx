@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <nav className="bg-white py-2 border-b-gray-200 shadow-md relative z-50">
+    <nav className="bg-white py-2 border-b-gray-200 shadow-md  z-50 w-full">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link href="/">
           <Image

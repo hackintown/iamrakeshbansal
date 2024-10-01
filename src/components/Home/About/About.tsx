@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 export default function EnhancedAboutSection() {
   return (
@@ -11,11 +11,24 @@ export default function EnhancedAboutSection() {
       <div className="absolute inset-0 opacity-30">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <pattern id="about-us-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <pattern
+              id="about-us-pattern"
+              x="0"
+              y="0"
+              width="20"
+              height="20"
+              patternUnits="userSpaceOnUse"
+            >
               <circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.2)" />
             </pattern>
           </defs>
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#about-us-pattern)" />
+          <rect
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            fill="url(#about-us-pattern)"
+          />
         </svg>
       </div>
       <div className="container relative mx-auto px-4 z-10 text-white">
@@ -39,7 +52,7 @@ export default function EnhancedAboutSection() {
               className="relative overflow-hidden rounded-2xl shadow-2xl z-50 w-full h-[400px] md:h-[500px]"
             >
               <Image
-                src="/images/about-us-img.webp"
+                src="/images/about-us-img.jpg"
                 alt="Dr. Rakesh Bansal"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -49,10 +62,20 @@ export default function EnhancedAboutSection() {
             </motion.div>
             <div className="space-y-6">
               <p className="text-base lg:text-lg text-center md:text-left text-gray-300 leading-relaxed font-light">
-                Dr. Rakesh Bansal, a post-graduate in International Business Management and doctorate holder, has been a prominent figure in stock market analysis since 1998. With over two decades of extensive experience, he specializes in technical analysis, wealth management, and investment analysis.
+                Dr. Rakesh Bansal, a post-graduate in International Business
+                Management and has doctorate through his expertise in markets
+                and analysis, he has been in the market since 1998 and is a
+                prominent figure in stock market analysis with millions of
+                people following his advice to work towards their financial
+                independence. With over two decades of extensive experience, he
+                specializes in technical analysis, wealth management and
+                investment analyst.
               </p>
               <p className="text-base lg:text-lg text-center md:text-left text-gray-300 leading-relaxed font-light">
-                As a SEBI registered research analyst <span className="font-bold inline-block">(INH100008984)</span>, Dr. Bansal offers high-quality market insights and educational resources to traders and investors across the country, guiding millions towards financial independence.
+                He is SEBI registered research analyst&nbsp;
+                <span className="font-bold inline-block">(INH100008984)</span>,
+                offering high-quality market insights and educational resources
+                to traders and investors across the country.
               </p>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -60,8 +83,12 @@ export default function EnhancedAboutSection() {
                 className="pt-4"
               >
                 <Link href="/about-us">
-                  <Button variant="gradient" size="custom" className="w-full md:w-auto">
-                    Learn More
+                  <Button
+                    variant="gradient"
+                    size="custom"
+                    className="w-full md:w-auto"
+                  >
+                    View More
                   </Button>
                 </Link>
               </motion.div>
@@ -70,5 +97,5 @@ export default function EnhancedAboutSection() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

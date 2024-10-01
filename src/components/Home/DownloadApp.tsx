@@ -6,12 +6,22 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+
+const imageSlide = [
+  "/images/download-app.webp",
+  "/images/group-mbl-shape.webp",
+  "/images/product-mbl-shape.webp",
+  "/images/course-mbl-shape.webp",
+];
 export default function DownloadApp() {
   const [appDownloads, setAppDownloads] = useState(0);
   const [customerReviews, setCustomerReviews] = useState(0);
   const [workExperience, setWorkExperience] = useState(0);
   const [tradingCommunity, setTradingCommunity] = useState(0);
+  const sliderRef = useRef<Slider>(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
   const { ref, inView } = useInView({
     threshold: 0.5, // Adjust the threshold as needed
   });
@@ -67,6 +77,8 @@ export default function DownloadApp() {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
+    className: "right-side-visible-slider",
+    beforeChange: (_: number, next: number) => setCurrentSlide(next),
     responsive: [
       {
         breakpoint: 480, // For screens smaller than 480px
@@ -76,6 +88,10 @@ export default function DownloadApp() {
         },
       },
     ],
+  };
+
+  const goToSlide = (index: number) => {
+    sliderRef.current?.slickGoTo(index);
   };
   return (
     <section className="relative overflow-hidden py-10">
@@ -206,12 +222,7 @@ export default function DownloadApp() {
             <div className="w-full md:w-2/3 relative">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-400 to-green-400 rounded-full filter blur-3xl opacity-30 animate-pulse"></div>
               <Slider {...sliderSettings}>
-                {[
-                  "/images/download-app.webp",
-                  "/images/group-mbl-shape.webp",
-                  "/images/product-mbl-shape.webp",
-                  "/images/course-mbl-shape.webp",
-                ].map((src, index) => (
+                {imageSlide.map((src, index) => (
                   <div
                     key={index}
                     className="relative transform rotate-6 hover:rotate-0 transition-transform duration-500 ease-in-out"
@@ -226,6 +237,21 @@ export default function DownloadApp() {
                   </div>
                 ))}
               </Slider>
+              <div className="mt-4 flex justify-center items-center">
+                {imageSlide.map((_, index) => (
+                  <button
+                    key={index}
+                    className={cn(
+                      "w-3 h-3 rounded-full mx-1 transition-all duration-300",
+                      currentSlide === index
+                        ? "bg-purple-600 scale-125"
+                        : "bg-gray-400"
+                    )}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>

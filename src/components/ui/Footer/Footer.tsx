@@ -1,20 +1,51 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp, FaYoutube } from "react-icons/fa"
-import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md"
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaLinkedinIn,
+  FaTwitter,
+  FaWhatsapp,
+  FaYoutube,
+} from "react-icons/fa";
+import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
 export default function Footer() {
   const socialIcons = [
-    { Icon: FaLinkedinIn, href: "https://www.linkedin.com/in/drrakeshbansal/", label: "LinkedIn" },
-    { Icon: FaInstagram, href: "https://www.instagram.com/therakeshbansal/", label: "Instagram" },
-    { Icon: FaYoutube, href: "https://www.youtube.com/@RakeshBansal", label: "YouTube" },
-    { Icon: FaFacebookF, href: "https://www.facebook.com/IAMRAKESHBANSAL/", label: "Facebook" },
-    { Icon: FaWhatsapp, href: "https://www.whatsapp.com/channel/0029…", label: "WhatsApp" },
-    { Icon: FaTwitter, href: "https://x.com/iamrakeshbansal", label: "Twitter" },
-  ]
+    {
+      Icon: FaLinkedinIn,
+      href: "https://www.linkedin.com/in/drrakeshbansal/",
+      label: "LinkedIn",
+    },
+    {
+      Icon: FaInstagram,
+      href: "https://www.instagram.com/therakeshbansal/",
+      label: "Instagram",
+    },
+    {
+      Icon: FaYoutube,
+      href: "https://www.youtube.com/@RakeshBansal",
+      label: "YouTube",
+    },
+    {
+      Icon: FaFacebookF,
+      href: "https://www.facebook.com/IAMRAKESHBANSAL/",
+      label: "Facebook",
+    },
+    {
+      Icon: FaWhatsapp,
+      href: "https://www.whatsapp.com/channel/0029…",
+      label: "WhatsApp",
+    },
+    {
+      Icon: FaTwitter,
+      href: "https://x.com/iamrakeshbansal",
+      label: "Twitter",
+    },
+  ];
 
   const usefulLinks = [
     { text: "Blog", href: "/blog" },
@@ -22,7 +53,7 @@ export default function Footer() {
     { text: "About Us", href: "/about-us" },
     { text: "Services", href: "#services-sec" },
     { text: "Contact", href: "/contact-us" },
-  ]
+  ];
 
   const quickLinks = [
     { text: "Disclaimer", href: "/disclaimer" },
@@ -30,14 +61,26 @@ export default function Footer() {
     { text: "Privacy Policy", href: "/privacy-policy" },
     { text: "Customer Grievances", href: "/customer-grievances" },
     { text: "Terms and Conditions", href: "/terms-conditions" },
-  ]
+  ];
 
   const contactInfo = [
-    { Icon: MdPhone, text: "Joining: +91 95608-84223", href: "tel:+919560884223" },
-    { Icon: MdPhone, text: "Enquiries :+91 88514-75191", href: "tel:+918851475191" },
-    { Icon: MdEmail, text: "wecare@iamrakeshbansal.com", href: "mailto:wecare@iamrakeshbansal.com" },
-    { Icon: MdLocationOn, text: "123 Main St, City, Country", href: "#" },
-  ]
+    {
+      Icon: MdPhone,
+      text: "Joining: +91 95608-84223",
+      href: "tel:+919560884223",
+    },
+    {
+      Icon: MdPhone,
+      text: "Enquiries :+91 88514-75191",
+      href: "tel:+918851475191",
+    },
+    {
+      Icon: MdEmail,
+      text: "wecare@iamrakeshbansal.com",
+      href: "mailto:wecare@iamrakeshbansal.com",
+    },
+    { Icon: MdLocationOn, text: "New Delhi, India", href: "#" },
+  ];
 
   return (
     <footer className="relative bg-gradient-to-br from-purple-900 via-green-800 to-black text-white overflow-hidden">
@@ -50,16 +93,23 @@ export default function Footer() {
         <path d="M0 0L60 10C120 20 240 40 360 46.7C480 53 600 47 720 36.7C840 27 960 13 1080 16.3C1200 20 1320 40 1380 50L1440 60V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V0Z" />
       </svg>
       <div className="container mx-auto px-4 pt-20 sm:pt-32 pb-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[25%,30%,20%,15%] gap-8 sm:gap-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="flex flex-col items-center sm:items-start"
           >
-            <Image src="/images/logo.webp" alt="Logo" width={180} height={60} className="mb-6" />
+            <Image
+              src="/images/footer-logo.png"
+              alt="Logo"
+              width={180}
+              height={60}
+              className="mb-6"
+            />
             <p className="text-sm mb-6 text-center sm:text-left">
-              Empowering your digital journey with innovative solutions and unparalleled service.
+              Empowering your digital journey with innovative solutions and
+              unparalleled service.
             </p>
             <div className="flex flex-wrap justify-center sm:justify-start gap-4">
               {socialIcons.map(({ Icon, href, label }, index) => (
@@ -93,7 +143,10 @@ export default function Footer() {
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    <Link href={link.href} className="hover:text-green-400 transition-colors text-sm">
+                    <Link
+                      href={link.href}
+                      className="hover:text-purple-400 transition-colors text-sm"
+                    >
                       {link.text}
                     </Link>
                   </motion.li>
@@ -114,7 +167,10 @@ export default function Footer() {
                     whileHover={{ x: 5 }}
                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
                   >
-                    <Link href={link.href} className="hover:text-green-400 transition-colors text-sm">
+                    <Link
+                      href={link.href}
+                      className="hover:text-purple-400 transition-colors text-sm"
+                    >
                       {link.text}
                     </Link>
                   </motion.li>
@@ -137,7 +193,10 @@ export default function Footer() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <Icon className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <a href={href} className="hover:text-green-400 transition-colors text-sm">
+                  <a
+                    href={href}
+                    className="hover:text-purple-400 transition-colors text-sm"
+                  >
                     {text}
                   </a>
                 </motion.li>
@@ -174,7 +233,13 @@ export default function Footer() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Image className="w-auto rounded h-12" src={icon.src} alt={icon.alt} width={135} height={40} />
+                  <Image
+                    className="w-auto rounded h-12"
+                    src={icon.src}
+                    alt={icon.alt}
+                    width={135}
+                    height={40}
+                  />
                 </motion.a>
               ))}
             </div>
@@ -186,24 +251,34 @@ export default function Footer() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          <div className="flex flex-col sm:flex-row justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-center items-center">
             <p className="text-sm mb-4 sm:mb-0 text-center sm:text-left">
-              &copy; {new Date().getFullYear()} Rakesh Bansal Venture All rights reserved.
+              &copy; {new Date().getFullYear()} Rakesh Bansal Venture All rights
+              reserved.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Link href="/privacy-policy" className="text-sm hover:text-green-400 transition-colors">
+            {/* <div className="flex flex-wrap justify-center gap-4">
+              <Link
+                href="/privacy-policy"
+                className="text-sm hover:text-green-400 transition-colors"
+              >
                 Privacy Policy
               </Link>
-              <Link href="/terms-conditions" className="text-sm hover:text-green-400 transition-colors">
+              <Link
+                href="/terms-conditions"
+                className="text-sm hover:text-green-400 transition-colors"
+              >
                 Terms of Service
               </Link>
-              <Link href="/cookie-policy" className="text-sm hover:text-green-400 transition-colors">
+              <Link
+                href="/cookie-policy"
+                className="text-sm hover:text-green-400 transition-colors"
+              >
                 Cookie Policy
               </Link>
-            </div>
+            </div> */}
           </div>
         </motion.div>
       </div>
     </footer>
-  )
+  );
 }

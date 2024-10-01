@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, ExternalLink, Search, Shield } from "lucide-react";
+import { AlertTriangle, Search, Shield } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -128,22 +128,41 @@ export default function Disclaimer() {
     {
       title: "Research Team",
       content:
-        "The Report also includes analysis and views of our research team. The Report is purely for information purposes and does not construe to be investment recommendation/advice or an offer or solicitation of an offer to buy/sell any securities. The opinions expressed in the Report are our current opinions as of the date of the Report and may be subject to change from time to time without notice.",
+        "The Report also includes analysis and views of our research team. The Report is purely for information purposes and does not construe to be investment recommendation/advice or an offer or solicitation of an offer to buy/sell any securities. The opinions expressed in the Report are our current opinions as of the date of the Report and may be subject to change from time to time without notice.We or any persons connected with us do not accept any liability arising from the use of this document.",
+    },
+    {
+      title: "Investors",
+      content:
+        "Investors should not solely rely on the information contained in this Report and must make investment decisions based on their own investment objectives, judgment, risk profile and financial position. The recipients of this Report may take professional advice before acting on this information.",
     },
     {
       title: "Independence",
       content:
-        "We have encouraged independence in preparation of research report and strives to minimize conflict in preparation of research report. We/ Our Partner's and their relatives did not receive any compensation or other benefits from the subject company/ies mentioned in the Report or from a third party in connection with preparation of the Report.",
+        "As we/ our partners are presently engaged in various financial services business and so might have financial, business or other interests in other entities including the subject company/ies mentioned in this Report. However, we have encourages independence in preparation of research report and strives to minimize conflict in preparation of research report. We/ Our Partner’s and their relatives did not receive any compensation or other benefits from the subject company/ies mentioned in the Report or from a third party in connection with preparation of the Report. Accordingly, We/ Our Partner’s and their relatives do not have any material conflict of interest at the time of publication of this Report.",
+    },
+    {
+      title: "Consent",
+      content: `It is confirmed that for giving these recommendations, we have not received any compensation from the companies mentioned herein in the preceding twelve months.
+
+We/ Our Partner’s and their relatives collectively do not own 1% or more of the actual / beneficial ownership of equity securities of the subject company/ies mentioned in the report as of the last day of the month preceding the publication of the research report.
+
+We submit that no material disciplinary action has been taken on me by any regulatory authority impacting Equity Research activities.`,
     },
     {
       title: "Website Access",
-      content:
-        "By accessing https://www.iamrakeshbansal.com/, you have read, understood and agree to be legally bound by the terms of the following disclaimer and user agreement. https://www.iamrakeshbansal.com/ is not responsible for any errors, omissions, representations or any links on any of our pages.",
+      content: `By accessing https://www.iamrakeshbansal.com/, you have read, understood and agree to be legally bound by the terms of the following disclaimer and user agreement:
+        
+        https://www.iamrakeshbansal.com/ is not responsible for any errors, omissions, representations or any links on any of our pages. https://www.iamrakeshbansal.com/ does not endorse any advertisers on our web pages. Please verify the veracity of all information on your own before undertaking any alliance. This website contains articles contributed by several individuals. The views are exclusively their own and do not necessarily represent the views of the website or its management. The linked sites are not under our control and we are not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. https://www.iamrakeshbansal.com/ is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement by us of the site.`,
     },
     {
       title: "Risks of Online Services",
       content:
-        "There are risks associated with utilizing internet and short messaging system (SMS) based information and research dissemination services. Subscribers are advised to understand that the services can fail due to failure of hardware, software, and Internet connection.",
+        "There are risks associated with utilizing internet and short messaging system (SMS) based information and research dissemination services. Subscribers are advised to understand that the services can fail due to failure of hardware, software, and Internet connection. While we try our best that the messages are delivered in time to the subscribers Mobile Network, the delivery of these messages to the customer’s mobile phone/handset is the responsibility of the customer’s Mobile Network. SMS may be delayed and/or not delivered to the customer’s mobile phone/handset on certain days, owing to technical reasons and https://www.iamrakeshbansal.com/ cannot be held responsible for the same.",
+    },
+    {
+      title: "Warranty",
+      content:
+        "https://www.iamrakeshbansal.com/ hereby expressly disclaims any implied warranties imputed by the laws of any jurisdiction. We consider ourselves and intend to be subject to the jurisdiction only of the court of Delhi in India. If you don’t agree with any of our disclaimers above, please do not read the material on any of our pages. This site is specifically for users in the territory of India. Although the access to users outside India is not denied, https://www.iamrakeshbansal.com/ shall have no legal liabilities whatsoever in any laws of any jurisdiction other than India. We reserve the right to make changes to our site and these disclaimers, terms, and conditions at any time.",
     },
     {
       title: "Intellectual Property",
@@ -153,12 +172,15 @@ export default function Disclaimer() {
     {
       title: "Communication Consent",
       content:
-        "Please note that by surfing our website, submitting your details in our website you are authorizing RAKESH BANSAL VENTURES to contact you and send Promotional and Transactional communication even though you may be registered under National Do Not Call Registry.",
+        "Please note that by surfing our website, submitting your details in our website you are authorizing RAKESH BANSAL VENTURES to contact you and send Promotional and Transactional communication even though you may be registered under National Do Not Call Registry established under the Telecom Unsolicited Commercial Communications Regulations 2007 or registered or may register under the National Customer Preference Register established under new regulation viz the Telecom Commercial Communications Customer Preference Regulations, 2010.",
     },
     {
       title: "SEBI Registration",
-      content:
-        "Registration granted by SEBI and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors.",
+      content: `Registration granted by SEBI and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors.
+
+RAKESH BANSAL VENTURES
+
+SEBI Registered Research Analyst Registration Number: INH100008984`,
     },
   ];
 
@@ -188,9 +210,9 @@ export default function Disclaimer() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-purple-100">
+    <div className="min-h-screen bg-gradient-to-br from-white to-purple-200">
       <motion.header
-        className="py-4 sm:py-6 px-4 sm:px-6 lg:px-8 bg-white shadow-md sticky top-0 z-50"
+        className="py-4 sm:py-6 px-4 sm:px-6 lg:px-8 bg-red-200 sticky top-0 z-30"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -202,7 +224,7 @@ export default function Disclaimer() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <Shield className="w-8 h-8 text-purple-600 mr-2" />
+            <Shield className="w-8 h-8 text-red-600 mr-2" />
             <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600">
               Rakesh Bansal Ventures
             </h1>
@@ -213,7 +235,7 @@ export default function Disclaimer() {
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-green-500" />
+            <AlertTriangle className="w-5 h-5 sm:w-6 sm:h-6 text-red-500" />
             <span className="font-semibold text-sm sm:text-base text-black">
               Disclaimer
             </span>
@@ -266,7 +288,10 @@ export default function Disclaimer() {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-sm text-gray-600">
+                    <p
+                      className="text-sm text-gray-600"
+                      style={{ whiteSpace: "pre-line" }}
+                    >
                       {makeLinksClickable(section.content)}
                     </p>
                   </CardContent>
@@ -275,37 +300,7 @@ export default function Disclaimer() {
             ))}
           </motion.div>
         </AnimatePresence>
-
-        <motion.div className="mt-12 text-center" {...fadeInUp}>
-          <p className="text-lg font-semibold mb-2 text-purple-600">
-            RAKESH BANSAL VENTURES
-          </p>
-          <p className="text-sm text-gray-600">
-            SEBI Registered Research Analyst Registration Number: INH100008984
-          </p>
-        </motion.div>
       </main>
-
-      <motion.footer
-        className="py-4 sm:py-6 px-4 sm:px-6 lg:px-8 bg-purple-600 text-white mt-12"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5, duration: 0.5 }}
-      >
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-sm">
-            &copy; {new Date().getFullYear()} Rakesh Bansal Ventures. All rights
-            reserved.
-          </p>
-          <Link
-            href="https://www.iamrakeshbansal.com"
-            className="text-sm text-green-300 hover:text-green-200 transition-colors inline-flex items-center mt-2"
-          >
-            www.iamrakeshbansal.com
-            <ExternalLink className="w-4 h-4 ml-1" />
-          </Link>
-        </div>
-      </motion.footer>
     </div>
   );
 }
