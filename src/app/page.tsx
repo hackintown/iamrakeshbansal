@@ -7,6 +7,7 @@ import WhyJoinUs from "@/components/Home/WhyJoin";
 import BookPublished from "@/components/ui/BookPublished";
 import Faq from "@/components/ui/Faq";
 import Footer from "@/components/ui/Footer/Footer";
+import RegisteredBy from "@/components/ui/RegisteredBy";
 import SocialMedia from "@/components/ui/SocialMedia";
 import Testimonials from "@/components/ui/Testimonial/Testimonial";
 
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-black">
       <Banner />
+      <RegisteredBy />
       <WhyJoinUs />
       <About />
       <Pricing />

@@ -108,7 +108,7 @@ export default function BookPublished() {
       <div className="container pt-10 relative z-10">
         <h2 className="text-4xl md:text-5xl font-bold text-center mb-3">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-green-400">
-            Published Book
+            Published Books
           </span>
         </h2>
         <p className="max-w-2xl mx-auto text-xs sm:text-sm text-center text-secondary-foreground font-light">

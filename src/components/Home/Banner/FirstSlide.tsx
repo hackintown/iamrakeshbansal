@@ -107,15 +107,20 @@ export default function HeroSection() {
           className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:items-start w-full h-full"
         >
           <motion.div variants={itemVariants} className="mt-6 lg:mt-20">
-            <h1 className="text-3xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-tight">
-              Master <br className="hidden xl:block" /> the Markets with&nbsp;
+            <h1 className="text-3xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-[1.2]">
+              Let&apos;s
+              <br className="hidden xl:block" /> Dream Big With&nbsp;
+              <br className="hidden xl:block" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400">
-                Rakesh Bansal
+                Dr. Rakesh Bansal
               </span>
             </h1>
-            <p className="mt-5 text-sm md:text-base lg:text-xl text-gray-300">
-              Empowering traders with expert insights and proven strategies for
-              success in the dynamic world of financial markets.
+            <p className="mt-5 text-xs sm:text-sm md:text-base text-gray-300 font-light">
+              Dr. Rakesh Bansal&apos;s aim is to revolutionize stock market research
+              services by bringing technology assisted analysis accessible to
+              retail investors. With your support, it is our endeavour to build
+              India&apos;s largest Stock research ecosystem. You can use this in one
+              banner that you have hided currently
             </p>
             <motion.div
               className="mt-8 flex items-center space-x-4"
@@ -158,7 +163,7 @@ export default function HeroSection() {
             variants={itemVariants}
             className="relative overflow-hidden"
           >
-            <div className="relative rounded-lg overflow-hidden h-full max-w-[500px] mx-auto lg:max-h-[650px]">
+            <div className="relative rounded-lg overflow-hidden h-full max-w-[500px] lg:max-h-[650px] lg:float-right">
               <Image
                 className="w-full h-full lg:h-auto object-cover"
                 src="/hero/banner-first-slide.webp"

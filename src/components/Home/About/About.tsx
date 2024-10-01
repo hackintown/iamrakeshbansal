@@ -39,11 +39,11 @@ export default function EnhancedAboutSection() {
               className="relative overflow-hidden rounded-2xl shadow-2xl z-50 w-full h-[400px] md:h-[500px]"
             >
               <Image
-                src="/hero/banner-img3.webp"
+                src="/images/about-us-img.webp"
                 alt="Dr. Rakesh Bansal"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover transition-transform duration-300 hover:scale-105"
+                className="object-contain transition-transform duration-300 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-green-900/80 to-purple-900/80 opacity-10" />
             </motion.div>
