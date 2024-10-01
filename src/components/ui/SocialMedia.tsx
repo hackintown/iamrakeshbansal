@@ -31,14 +31,14 @@ const socialPlatforms = [
   {
     name: "WhatsApp",
     icon: "/images/whatsapp.webp",
-    followers: 291000,
+    followers: 4100,
     action: "FOLLOW",
-    href: "https://www.whatsapp.com/channel/0029…",
+    href: "https://whatsapp.com/channel/0029Vaglc39K0IBhitUB5N2K",
   },
   {
     name: "Telegram",
     icon: "/images/telegram.webp",
-    followers: 291000,
+    followers: 29694,
     action: "FOLLOW",
     href: "https://t.me/RakeshAlgo",
   },
