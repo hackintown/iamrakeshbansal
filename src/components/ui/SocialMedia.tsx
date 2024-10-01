@@ -10,21 +10,21 @@ const socialPlatforms = [
   {
     name: "YouTube",
     icon: "/images/yt.webp",
-    followers: 357000,
+    followers: 400800,
     action: "SUBSCRIBE",
     href: "",
   },
   {
     name: "Instagram",
     icon: "/images/insta.webp",
-    followers: 556000,
+    followers: 653000,
     action: "FOLLOW",
     href: "https://www.instagram.com/therakeshbansal/",
   },
   {
     name: "Facebook",
     icon: "/images/fb.webp",
-    followers: 86000,
+    followers: 95000,
     action: "FOLLOW",
     href: "https://www.facebook.com/IAMRAKESHBANSAL/",
   },
@@ -80,7 +80,7 @@ export default function SocialPlatforms() {
         priority
       />
       {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-10 z-0" />
+      <div className="absolute inset-0 bg-black bg-opacity-20 z-0" />
       <div className="container relative z-10">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
           {socialPlatforms.map((platform) => (
@@ -88,7 +88,7 @@ export default function SocialPlatforms() {
               key={platform.name}
               className="flex flex-col items-center justify-between w-full p-2 sm:p-3 md:p-4 lg:p-5"
             >
-              <div className="rounded-full p-1 sm:p-2 md:p-3 sm:h-24">
+              <div className="rounded-full p-1 sm:p-2 md:p-3 h-[70px] sm:h-20">
                 <Image
                   src={platform.icon}
                   alt={`${platform.name} icon`}
@@ -97,7 +97,7 @@ export default function SocialPlatforms() {
                   className="w-full h-full max-w-[80px] sm:max-w-[100px] md:max-w-[120px]"
                 />
               </div>
-              <p className="text-white text-sm sm:text-base md:text-lg lg:text-2xl font-bold mt-1 sm:mt-2">
+              <p className="text-white text-base md:text-lg lg:text-2xl font-semibold mt-1 sm:mt-2">
                 {isMounted ? (
                   <CountUp
                     end={platform.followers}
@@ -109,13 +109,17 @@ export default function SocialPlatforms() {
                   formatNumber(platform.followers)
                 )}
               </p>
-              <Link href={platform.href} target="_blank" rel="noopener noreferrer">
+              <Link
+                href={platform.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button
                   variant="outline"
                   size="sm"
                   className="mt-1 sm:mt-2 md:mt-4 max-w-[120px] sm:max-w-[150px] lg:max-w-[180px] w-full transition-colors
                  text-xs sm:text-sm lg:text-base bg-transparent text-secondary-foreground px-2 sm:px-3 md:px-4 
-              lg:px-12 py-1 sm:py-2"
+              lg:px-8 py-1 sm:py-2"
                 >
                   {platform.action}
                 </Button>
