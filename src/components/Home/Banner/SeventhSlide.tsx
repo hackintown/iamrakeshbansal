@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, useAnimation } from "framer-motion";
 import { Download, Smartphone, Wifi, Cloud, Zap } from "lucide-react";
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useInView } from "react-intersection-observer";
 
 type Particle = {
   x: number;
@@ -20,6 +21,57 @@ type Particle = {
 export default function AppDownloadSlide() {
   const controls = useAnimation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [appDownloads, setAppDownloads] = useState(0);
+  const [customerReviews, setCustomerReviews] = useState(0);
+  const [workExperience, setWorkExperience] = useState(0);
+  const [tradingCommunity, setTradingCommunity] = useState(0);
+  const { ref, inView } = useInView({
+    threshold: 0.5, // Adjust the threshold as needed
+  });
+
+  useEffect(() => {
+    let timeoutId: number;
+    if (inView) {
+      const animateCount = (
+        target: number,
+        duration: number,
+        updateState: (value: number) => void
+      ) => {
+        const startValue = 0;
+        const startTime = performance.now();
+
+        const step = () => {
+          const currentTime = performance.now();
+          const progress = Math.min((currentTime - startTime) / duration, 1);
+          const currentValue = Math.floor(
+            startValue + progress * (target - startValue)
+          );
+
+          updateState(currentValue);
+
+          if (progress < 1) {
+            timeoutId = requestAnimationFrame(step);
+          }
+        };
+
+        timeoutId = requestAnimationFrame(step);
+      };
+
+      animateCount(30000, 3000, setAppDownloads); // Example: animate to 10,000 in 2 seconds
+      animateCount(500, 3000, setCustomerReviews);
+      animateCount(25, 3000, setWorkExperience);
+      animateCount(40000, 3000, setTradingCommunity);
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [inView]);
+
+  const formatNumber = (number: number): string => {
+    if (number >= 1000) {
+      return number / 1000 + "K+";
+    }
+    return number.toString() + "+";
+  };
 
   useEffect(() => {
     controls.start("visible");
@@ -209,6 +261,32 @@ export default function AppDownloadSlide() {
               ))}
             </div>
           </motion.div>
+          <div className="flex flex-wrap  gap-3 justify-between mt-8 max-w-xl">
+              <div ref={ref} className="text-center">
+                <h3 className="text-2xl font-semibold text-white">
+                  {formatNumber(appDownloads)}
+                </h3>
+                <p className="text-white text-sm mt-2">App Downloaded</p>
+              </div>
+              <div ref={ref} className="text-center">
+                <h3 className="text-2xl font-semibold text-white">
+                  {formatNumber(customerReviews)}
+                </h3>
+                <p className="text-white text-sm mt-2">Customer Reviews</p>
+              </div>
+              <div ref={ref} className="text-center">
+                <h3 className="text-2xl font-semibold text-white">
+                  {formatNumber(workExperience)}
+                </h3>
+                <p className="text-white text-sm mt-2">Work Experience</p>
+              </div>
+              <div ref={ref} className="text-center">
+                <h3 className="text-2xl font-semibold text-white">
+                  {formatNumber(tradingCommunity)}
+                </h3>
+                <p className="text-white text-sm mt-2">Trading Community</p>
+              </div>
+            </div>
         </motion.div>
         <motion.div
           className="w-full lg:w-1/2 relative flex justify-center"
