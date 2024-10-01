@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import CountUp from "react-countup";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const socialPlatforms = [
   {
@@ -11,24 +12,42 @@ const socialPlatforms = [
     icon: "/images/yt.webp",
     followers: 357000,
     action: "SUBSCRIBE",
+    href: "",
   },
   {
     name: "Instagram",
     icon: "/images/insta.webp",
     followers: 556000,
     action: "FOLLOW",
+    href: "https://www.instagram.com/therakeshbansal/",
   },
   {
     name: "Facebook",
     icon: "/images/fb.webp",
     followers: 86000,
     action: "FOLLOW",
+    href: "https://www.facebook.com/IAMRAKESHBANSAL/",
+  },
+  {
+    name: "WhatsApp",
+    icon: "/images/whatsapp.webp",
+    followers: 291000,
+    action: "FOLLOW",
+    href: "https://www.whatsapp.com/channel/0029…",
+  },
+  {
+    name: "Telegram",
+    icon: "/images/telegram.webp",
+    followers: 291000,
+    action: "FOLLOW",
+    href: "https://t.me/RakeshAlgo",
   },
   {
     name: "Twitter",
     icon: "/images/twitter.webp",
     followers: 291000,
     action: "FOLLOW",
+    href: "https://x.com/iamrakeshbansal",
   },
 ];
 
@@ -63,7 +82,7 @@ export default function SocialPlatforms() {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-10 z-0" />
       <div className="container relative z-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
           {socialPlatforms.map((platform) => (
             <div
               key={platform.name}
@@ -73,9 +92,9 @@ export default function SocialPlatforms() {
                 <Image
                   src={platform.icon}
                   alt={`${platform.name} icon`}
-                  width={164}
-                  height={164}
-                  className="w-full h-full max-w-[80px] sm:max-w-[100px] md:max-w-[120px] lg:max-w-[140px] xl:max-w-[164px]"
+                  width={100}
+                  height={100}
+                  className="w-full h-full max-w-[80px] sm:max-w-[100px] md:max-w-[120px]"
                 />
               </div>
               <p className="text-white text-sm sm:text-base md:text-lg lg:text-2xl font-bold mt-1 sm:mt-2">
@@ -90,15 +109,17 @@ export default function SocialPlatforms() {
                   formatNumber(platform.followers)
                 )}
               </p>
-              <Button
-                variant="outline"
-                size="sm"
-                className="mt-1 sm:mt-2 md:mt-4 max-w-[120px] sm:max-w-[150px] lg:max-w-[180px] w-full transition-colors
+              <Link href={platform.href} target="_blank" rel="noopener noreferrer">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="mt-1 sm:mt-2 md:mt-4 max-w-[120px] sm:max-w-[150px] lg:max-w-[180px] w-full transition-colors
                  text-xs sm:text-sm lg:text-base bg-transparent text-secondary-foreground px-2 sm:px-3 md:px-4 
               lg:px-12 py-1 sm:py-2"
-              >
-                {platform.action}
-              </Button>
+                >
+                  {platform.action}
+                </Button>
+              </Link>
             </div>
           ))}
         </div>

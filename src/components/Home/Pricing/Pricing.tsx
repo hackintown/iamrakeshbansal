@@ -74,6 +74,7 @@ const pricingData: PricingPlan[] = [
   },
   {
     title: "Mentorship",
+    monthlyPrice: "3800",
     quarterlyPrice: "9999",
     yearlyPrice: "34999",
     description: "Most popular",

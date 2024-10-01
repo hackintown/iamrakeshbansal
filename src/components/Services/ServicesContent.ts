@@ -188,26 +188,6 @@ export const serviceContent: Record<
       { duration: "Yearly", price: "Rs- 20,000/-" },
     ],
   },
-  Mentorship: {
-    title: "Mentorship",
-    description:
-      "Unlock Your Trading Potential with Our Comprehensive Mentorship Program!",
-    additionalDescription:
-      "Are you ready to take your trading journey to the next level? Our upgraded mentorship program offers you a range of powerful tools and insights to enhance your trading skills and profitability. We're dedicated to providing you with the knowledge and support you need to succeed in the dynamic world of the stock market.",
-    generalFeatures: [
-      "Strategic Buy Ideas for Short to Medium Term: Our program equips you with carefully researched and analyzed cash market buy ideas that span the short to medium-term horizon. Supported by robust rationale and detailed reports, we provide entry price, exit price, and stop-loss levels, empowering you to make confident and informed trading decisions.",
-      "Webinar Series for In-Depth Learning: To ensure your success, we conduct webinars that cater to problem-solving, address conceptual doubts, and tackle any queries you might have. Additionally, our webinar series includes real-life examples featuring shared videos showcasing real-life trading scenarios. These examples provide you with the conceptual understanding necessary to navigate the complexities of the stock market effectively.",
-      "Mentorship Performance Reports: Our mentorship program provides transparency through quarterly and yearly performance reports, which will be published on our website. This allows you to track our performance and assess the program's overall effectiveness.",
-    ],
-    disclaimer:
-      "Get access to valuable insights, expert analysis, and strategic recommendations to enhance your trading skills and maximize your profits. Our mentorship program offers carefully curated content, including real-life examples, webinar sessions, and performance reports to help you navigate the complexities of the stock market with confidence",
-    registration:
-      "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
-    plans: [
-      { duration: "Quarterly", price: "Rs- 9,999/-" },
-      { duration: "Yearly", price: "Rs- 34,999/-" },
-    ],
-  },
   Futures: {
     title: "Our Futures Trading Strategy",
     description: `We let the performance speak for itself. You can view our historical performance under the 
@@ -241,6 +221,29 @@ export const serviceContent: Record<
       { duration: "Yearly", price: "Rs- 50,000/-" },
     ],
   },
+
+  Mentorship: {
+    title: "Mentorship",
+    description:
+      "Unlock Your Trading Potential with Our Comprehensive Mentorship Program!",
+    additionalDescription:
+      "Are you ready to take your trading journey to the next level? Our upgraded mentorship program offers you a range of powerful tools and insights to enhance your trading skills and profitability. We're dedicated to providing you with the knowledge and support you need to succeed in the dynamic world of the stock market.",
+    generalFeatures: [
+      "Strategic Buy Ideas for Short to Medium Term: Our program equips you with carefully researched and analyzed cash market buy ideas that span the short to medium-term horizon. Supported by robust rationale and detailed reports, we provide entry price, exit price, and stop-loss levels, empowering you to make confident and informed trading decisions.",
+      "Webinar Series for In-Depth Learning: To ensure your success, we conduct webinars that cater to problem-solving, address conceptual doubts, and tackle any queries you might have. Additionally, our webinar series includes real-life examples featuring shared videos showcasing real-life trading scenarios. These examples provide you with the conceptual understanding necessary to navigate the complexities of the stock market effectively.",
+      "Mentorship Performance Reports: Our mentorship program provides transparency through quarterly and yearly performance reports, which will be published on our website. This allows you to track our performance and assess the program's overall effectiveness.",
+    ],
+    disclaimer:
+      "Get access to valuable insights, expert analysis, and strategic recommendations to enhance your trading skills and maximize your profits. Our mentorship program offers carefully curated content, including real-life examples, webinar sessions, and performance reports to help you navigate the complexities of the stock market with confidence",
+    registration:
+      "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
+    plans: [
+      { duration: "Monthly", price: "Rs- 3,800/-" },
+      { duration: "Quarterly", price: "Rs- 9,999/-" },
+      { duration: "Yearly", price: "Rs- 34,999/-" },
+    ],
+  },
+
   Commodity: {
     title: "Commodity",
     description:
