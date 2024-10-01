@@ -45,7 +45,7 @@ const socialPlatforms = [
   {
     name: "Twitter",
     icon: "/images/twitter.webp",
-    followers: 291000,
+    followers: 310700,
     action: "FOLLOW",
     href: "https://x.com/iamrakeshbansal",
   },
