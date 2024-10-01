@@ -7,7 +7,7 @@ import WhyJoinUs from "@/components/Home/WhyJoin";
 import BookPublished from "@/components/ui/BookPublished";
 import Faq from "@/components/ui/Faq";
 import Footer from "@/components/ui/Footer/Footer";
-// import SocialMedia from "@/components/ui/SocialMedia";
+import SocialMedia from "@/components/ui/SocialMedia";
 import Testimonials from "@/components/ui/Testimonial/Testimonial";
 
 export default function Home() {
@@ -20,8 +20,8 @@ export default function Home() {
       <BookPublished />
       <DownloadApp />
       {/* <Blog /> */}
-      {/* <SocialMedia /> */}
       <Testimonials />
+      <SocialMedia />
       <Faq />
       <Footer />
     </main>

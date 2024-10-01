@@ -1,24 +1,16 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  FaFacebook,
-  FaTwitter,
-  FaLinkedin,
-  FaInstagram,
-  FaYoutube,
-} from "react-icons/fa";
-import { CldVideoPlayer } from "next-cloudinary";
-import "next-cloudinary/dist/cld-video-player.css";
-import { Button } from "../ui/button";
+import { FaYoutube } from "react-icons/fa";
+import { GiBookshelf, GiTeacher, GiChart } from "react-icons/gi";
+import { Button } from "@/components/ui/button";
+import BookPublished from "../ui/BookPublished";
 
-export default function ModernAboutUs() {
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const { scrollYProgress } = useScroll();
+const AboutUs: React.FC = () => {
   const timelineRef = useRef(null);
+  const { scrollYProgress } = useScroll();
   const { scrollYProgress: timelineProgress } = useScroll({
     target: timelineRef,
     offset: ["start end", "end start"],
@@ -27,51 +19,42 @@ export default function ModernAboutUs() {
   const opacity = useTransform(timelineProgress, [0, 0.5, 1], [0, 1, 0]);
   const scale = useTransform(timelineProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVideoLoaded(true), 1000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  const timelineEvents = [
-    { year: 2000, title: "Started Trading Career" },
-    { year: 2005, title: "Published First Book" },
-    { year: 2010, title: "Launched Online Trading Course" },
-    { year: 2015, title: "Established Trading Academy" },
-    { year: 2020, title: "Released Trading App" },
-  ];
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden">
-      {/* Hero Section with Autoplay Video */}
-      <section className="relative h-[300px]">
-        <div
-          className={`absolute inset-0 transition-opacity duration-1000 ${
-            isVideoLoaded ? "opacity-50" : "opacity-0"
-          }`}
-        >
-          <CldVideoPlayer
-            width="1920"
-            height="1080"
-            src="samples/cld-sample-video"
-            autoPlay
-            loop
-            muted
-            controls={false}
-            className="w-full h-full object-cover"
-          />
-        </div>
+      {/* Hero Section */}
+      <section className="relative h-[300px] md:h-[400px] lg:h-[500px]">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-800 to-indigo-600 opacity-50" />
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4"
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5 }}
+          className="absolute inset-0"
         >
-          <h1 className="text-4xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400">
-            Rakesh Bansal
-          </h1>
-          <p className="text-xl md:text-2xl mb-8">
+          <Image
+            src="https://img.freepik.com/free-vector/gradient-stock-market-concept_23-2149166910.jpg"
+            alt="Stock Market Background"
+            layout="fill"
+            objectFit="cover"
+            className="opacity-50"
+          />
+        </motion.div>
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+          <motion.h1
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="text-4xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400"
+          >
+            Dr. Rakesh Bansal
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.7 }}
+            className="text-xl md:text-2xl mb-8"
+          >
             Empowering Traders, Transforming Lives
-          </p>
+          </motion.p>
           <motion.div
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
@@ -91,11 +74,11 @@ export default function ModernAboutUs() {
               />
             </svg>
           </motion.div>
-        </motion.div>
+        </div>
       </section>
 
       {/* About Section */}
-      <section className="sm:pt-32 pb-10 md:pt-[8rem] lg:pt-44 bg-gradient-to-b from-gray-900 to-blue-900">
+      <section className="py-20 bg-gradient-to-b from-gray-900 to-blue-900">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -105,35 +88,93 @@ export default function ModernAboutUs() {
           >
             <div className="md:w-1/2">
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center md:text-left">
-                About Rakesh Bansal
+                About Dr. Rakesh Bansal
               </h2>
-              <p className="text-sm md:text-base mb-6 font-light leading-snug text-center md:text-left">
-                Rakesh Bansal is a visionary trading mentor and bestselling
-                author with over two decades of experience in the financial
-                markets. His innovative strategies and mentorship programs have
-                helped thousands of aspiring traders achieve their financial
-                goals and transform their lives.
+              <p className="text-sm md:text-base mb-6 font-light leading-relaxed text-center md:text-left">
+                Dr. Rakesh Bansal, a post-graduate in International Business
+                Management and holder of a doctorate in market analysis, has
+                been a prominent figure in stock market analysis since 1998.
+                With over two decades of extensive experience, he specializes in
+                technical analysis, wealth management, and investment analysis.
               </p>
-              <p className="text-sm md:text-base mb-6 font-light leading-snug text-center md:text-left">
-                As the founder of the renowned Trading Academy and creator of
-                cutting-edge trading applications, Rakesh continues to push the
-                boundaries of what's possible in the world of trading education
-                and technology.
+              <p className="text-sm md:text-base mb-6 font-light leading-relaxed text-center md:text-left">
+                As a SEBI registered research analyst (INH100008984), Dr. Bansal
+                offers high-quality market insights and educational resources to
+                traders and investors across the country, helping millions work
+                towards their financial independence.
               </p>
-              <Link href="#" className="flex justify-center md:justify-start">
-                <Button variant="gradient" size="custom" className="">Explore My Journey</Button>
-              </Link>
+              <div className="flex justify-center md:justify-start">
+                <Button variant="gradient" size="custom" className="mr-4">
+                  Learn More
+                </Button>
+                <Button variant="gradient" size="custom">
+                  Contact Us
+                </Button>
+              </div>
             </div>
             <div className="md:w-1/2">
-              <Image
-                src="/hero/banner-img1.webp"
-                alt="Rakesh Bansal"
-                width={400}
-                height={400}
-                className="rounded-full border-4 border-blue-400 shadow-lg"
-              />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Image
+                  src="/images/about-us-img.webp"
+                  alt="Dr. Rakesh Bansal"
+                  width={400}
+                  height={400}
+                  className="rounded-full border-4 border-blue-400 shadow-lg"
+                />
+              </motion.div>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Career and Media Presence */}
+      <section className="py-20 bg-gradient-to-b from-blue-900 to-green-900">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl font-bold mb-12 text-center"
+          >
+            Career and Media Presence
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: FaYoutube,
+                title: "Expert Panelist",
+                description:
+                  "Featured on Zee Business, CNBC Awaaz, ET Now, and DD News",
+              },
+              {
+                icon: GiBookshelf,
+                title: "Published Author",
+                description:
+                  "Author of 'Profitable Short Term Trading Strategies'",
+              },
+              {
+                icon: GiChart,
+                title: "Industry Leader",
+                description:
+                  "Former technical analysis department leader at top firms",
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white bg-opacity-10 rounded-lg p-6 text-center"
+              >
+                <item.icon className="text-5xl mb-4 mx-auto text-blue-400" />
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -141,15 +182,26 @@ export default function ModernAboutUs() {
       <section
         id="timeline"
         ref={timelineRef}
-        className="py-20 bg-gradient-to-b from-blue-900 to-green-900"
+        className="py-20 bg-gradient-to-b from-green-900 to-gray-900"
       >
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            My Journey
-          </h2>
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl font-bold mb-12 text-center"
+          >
+            Dr. Bansal's Journey
+          </motion.h2>
           <motion.div style={{ opacity, scale }} className="relative">
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-400" />
-            {timelineEvents.map((event, index) => (
+            {[
+              { year: 1998, title: "Started Trading Career" },
+              { year: 2005, title: "Published First Book" },
+              { year: 2010, title: "Launched Online Trading Course" },
+              { year: 2015, title: "Established Trading Academy" },
+              { year: 2020, title: "Released Trading App" },
+            ].map((event, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 50 }}
@@ -174,79 +226,107 @@ export default function ModernAboutUs() {
         </div>
       </section>
 
-      {/* Books Section */}
-      <section className="py-20 bg-gradient-to-b from-green-900 to-gray-900">
+      {/* Trading Philosophy and Methodology */}
+      <section className="py-20 bg-gradient-to-b from-gray-900 to-blue-900">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            Bestselling Books
-          </h2>
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl font-bold mb-12 text-center"
+          >
+            Trading Philosophy and Methodology
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white bg-opacity-10 rounded-lg p-6"
+            >
+              <h3 className="text-2xl font-semibold mb-4">
+                Disciplined Approach
+              </h3>
+              <p className="text-sm mb-4">
+                Dr. Bansal's trading philosophy is rooted in discipline and
+                meticulous technical analysis. He focuses on identifying strong
+                entry and exit points, utilizing advanced tools to uncover
+                hidden market opportunities.
+              </p>
+              <ul className="list-disc list-inside text-sm">
+                <li>3-line break charts</li>
+                <li>Inverse charts</li>
+                <li>ATM trading strategy</li>
+              </ul>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white bg-opacity-10 rounded-lg p-6"
+            >
+              <h3 className="text-2xl font-semibold mb-4">Risk Management</h3>
+              <p className="text-sm mb-4">
+                Dr. Bansal emphasizes the importance of effective risk
+                management in trading. His strategies are designed to help
+                traders capitalize on short-term trends while minimizing
+                potential losses.
+              </p>
+              <ul className="list-disc list-inside text-sm">
+                <li>Clear stop-loss levels</li>
+                <li>Position sizing techniques</li>
+                <li>Diversification strategies</li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Educational Contributions */}
+      <section className="py-20 bg-gradient-to-b from-blue-900 to-green-900">
+        <div className="container mx-auto px-4">
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl md:text-4xl font-bold mb-12 text-center"
+          >
+            Educational Contributions
+          </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[1, 2, 3].map((book) => (
+            {[
+              {
+                icon: GiTeacher,
+                title: "Webinars",
+                description: "Live interactive sessions on market analysis",
+              },
+              {
+                icon: GiBookshelf,
+                title: "Courses",
+                description: "Comprehensive trading courses for all levels",
+              },
+              {
+                icon: GiChart,
+                title: "Research",
+                description: "In-depth market research and analysis reports",
+              },
+            ].map((item, index) => (
               <motion.div
-                key={book}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white rounded-lg shadow-lg overflow-hidden"
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white bg-opacity-10 rounded-lg p-6 text-center"
               >
-                <Image
-                  src={`/placeholder.svg?height=300&width=200&text=Book ${book}`}
-                  alt={`Book ${book}`}
-                  width={200}
-                  height={300}
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-blue-900">
-                    The Art of Trading: Volume {book}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    Discover the secrets of successful trading with Rakesh
-                    Bansal's comprehensive guide to market analysis and
-                    strategy.
-                  </p>
-                  <div className="flex justify-between items-center">
-                    <span className="text-2xl font-bold text-green-600">
-                      $34.99
-                    </span>
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full transition duration-300">
-                      Learn More
-                    </button>
-                  </div>
-                </div>
+                <item.icon className="text-5xl mb-4 mx-auto text-green-400" />
+                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Social Media Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-            Connect with Rakesh
-          </h2>
-          <div className="flex flex-wrap justify-center gap-8">
-            {[
-              { icon: FaFacebook, href: "#", color: "bg-blue-600" },
-              { icon: FaTwitter, href: "#", color: "bg-sky-500" },
-              { icon: FaLinkedin, href: "#", color: "bg-blue-700" },
-              { icon: FaInstagram, href: "#", color: "bg-pink-600" },
-              { icon: FaYoutube, href: "#", color: "bg-red-600" },
-            ].map((social, index) => (
-              <motion.a
-                key={index}
-                href={social.href}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className={`${social.color} text-white rounded-full p-4 transition duration-300`}
-              >
-                <social.icon className="w-8 h-8" />
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </section>
+      <BookPublished />
 
       {/* Scroll Progress Indicator */}
       <motion.div
@@ -255,4 +335,6 @@ export default function ModernAboutUs() {
       />
     </div>
   );
-}
+};
+
+export default AboutUs;

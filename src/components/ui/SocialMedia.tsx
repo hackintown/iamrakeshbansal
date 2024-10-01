@@ -50,7 +50,7 @@ export default function SocialPlatforms() {
   }, []);
 
   return (
-    <div className="relative z-10 py-8 sm:py-16 md:py-20 lg:py-32">
+    <div className="relative z-10 py-2 sm:py-3 md:py-4 lg:py-6">
       {/* Background Image */}
       <Image
         src="/images/social-media.webp"

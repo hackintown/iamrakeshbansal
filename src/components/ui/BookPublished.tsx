@@ -18,52 +18,45 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 
 const slides = [
   {
     imageUrl:
       "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg",
     alt: "Project 1",
+    link: "https://www.amazon.in/Profitable-Short-Term-Trading-Strategies/dp/817094905X/ref=as_li_ss_tl?_encoding=UTF8&qid=1598112345&sr=8-3&linkCode=sl1&tag=mylink05d-21&linkId=615bc48b7c7f3fc566275dd0c8095fdf",
   },
   {
     imageUrl:
       "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg",
     alt: "Project 3",
+    link: "https://www.amazon.in/Profitable-Elliott-Wave-Trading-Strategies/dp/938626837X/ref=as_li_ss_tl?dchild=1&keywords=rakesh+bansal&qid=1598112345&sr=8-1&linkCode=sl1&tag=mylink05d-21&linkId=18dd0da516336b7f178d635f32de5f78",
   },
   {
     imageUrl:
       "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg",
     alt: "Project 4",
+    link: "https://www.amazon.in/dp/B08GQV8L43/ref=as_li_ss_tl?_encoding=UTF8&qid=1598605294&sr=8-1&linkCode=sl1&tag=mylink05d-21&linkId=7d6c1920b81d0bd0e1c0613a8cdad63d",
   },
   {
     imageUrl:
       "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg",
     alt: "Project 1",
+    link: "https://www.amazon.in/Profitable-Short-Term-Trading-Strategies/dp/817094905X/ref=as_li_ss_tl?_encoding=UTF8&qid=1598112345&sr=8-3&linkCode=sl1&tag=mylink05d-21&linkId=615bc48b7c7f3fc566275dd0c8095fdf",
   },
   {
     imageUrl:
       "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg",
     alt: "Project 3",
+    link: "https://www.amazon.in/Profitable-Elliott-Wave-Trading-Strategies/dp/938626837X/ref=as_li_ss_tl?dchild=1&keywords=rakesh+bansal&qid=1598112345&sr=8-1&linkCode=sl1&tag=mylink05d-21&linkId=18dd0da516336b7f178d635f32de5f78",
   },
   {
     imageUrl:
       "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg",
     alt: "Project 4",
-  },
-  {
-    imageUrl:
-      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_1.jpg",
-    alt: "Project 1",
-  },
-  {
-    imageUrl:
-      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_2.jpg",
-    alt: "Project 3",
-  },
-  {
-    imageUrl:
-      "https://www.iamrakeshbansal.com/wp-content/uploads/2022/08/rkb_book_3.jpg",
-    alt: "Project 4",
+    link: "https://www.amazon.in/dp/B08GQV8L43/ref=as_li_ss_tl?_encoding=UTF8&qid=1598605294&sr=8-1&linkCode=sl1&tag=mylink05d-21&linkId=7d6c1920b81d0bd0e1c0613a8cdad63d",
   },
 ];
 
@@ -71,6 +64,7 @@ export default function BookPublished() {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const handlePrev = useCallback(() => {
     if (swiperInstance) {
@@ -171,7 +165,11 @@ export default function BookPublished() {
             >
               {slides.map((slide, index) => (
                 <SwiperSlide key={index} className="swiper-slide">
-                  <div className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-xl">
+                  <div
+                    className="relative w-full h-[500px] rounded-2xl overflow-hidden shadow-xl"
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
                     <Image
                       src={slide.imageUrl}
                       alt={slide.alt}
@@ -179,6 +177,27 @@ export default function BookPublished() {
                       sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                       className="object-fit transition-transform duration-300 hover:scale-105"
                     />
+                    <AnimatePresence>
+                      {hoveredIndex === index && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 20 }}
+                          transition={{ duration: 0.3 }}
+                          className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50"
+                        >
+                          <Link href={slide.link} target="_blank" rel="noopener noreferrer">
+                            <motion.a
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="px-6 py-3 bg-gradient-to-r from-purple-500 to-green-500 text-white font-semibold rounded-lg shadow-lg"
+                            >
+                              Buy Now
+                            </motion.a>
+                          </Link>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </SwiperSlide>
               ))}

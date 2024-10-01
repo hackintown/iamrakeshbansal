@@ -47,7 +47,7 @@ export default function Banner() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="w-full h-full flex items-center justify-center max-h-max  xl:min-h-[600px] xl:max-h-[600px]"
+          className="w-full h-full flex items-center justify-center max-h-max lg:max-h-[600px]  xl:min-h-[600px] xl:max-h-[600px]"
         >
           {React.createElement(slides[currentSlide].component)}
         </motion.div>

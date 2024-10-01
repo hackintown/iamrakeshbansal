@@ -238,13 +238,11 @@ const CardHeader = ({
       <span className="text-4xl font-bold text-purple-700">₹{price}</span>
       <span className="text-sm text-gray-600">/{duration}</span>
     </div>
-
     {popular && (
       <span className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-bl-lg rounded-tr-lg">
         Most Popular
       </span>
     )}
-
     <p className="text-sm text-gray-600 mt-2">{description}</p>
   </div>
 );
@@ -291,11 +289,17 @@ const PricingCard = ({
   plan: PricingPlan;
   duration: PlanDuration;
 }) => {
-  const price = plan[`${duration}Price`];
+  const availableDurations = ["monthly", "quarterly", "yearly"].filter(
+    (d) => plan[`${d}Price` as keyof PricingPlan]
+  ) as PlanDuration[];
+
+  const defaultDuration = availableDurations[0];
+  const price = plan[`${duration}Price`] || plan[`${defaultDuration}Price`];
+  const displayDuration = plan[`${duration}Price`] ? duration : defaultDuration;
 
   return (
     <motion.div
-      className={`rounded-lg overflow-hidden flex-grow h-[583px]  flex flex-col justify-between ${
+      className={`rounded-lg overflow-hidden flex-grow h-[583px] flex flex-col justify-between ${
         plan.popular ? "border-2 border-green-500" : "border border-gray-200"
       } bg-white w-full max-w-sm text-black shadow-md hover:shadow-xl 
       transition-all duration-300 relative h-full flex-grow`}
@@ -309,7 +313,7 @@ const PricingCard = ({
         price={price || ""}
         description={plan.description}
         popular={plan.popular}
-        duration={duration}
+        duration={displayDuration}
         icon={plan.icon}
       />
       <FeatureList features={plan.features} />
@@ -378,13 +382,14 @@ export default function Pricing() {
   const handleDurationChange = (newDuration: PlanDuration) => {
     setDuration(newDuration);
   };
+
   const goToSlide = (index: number) => {
     sliderRef.current?.slickGoTo(index);
   };
 
   return (
     <div
-      className="relative z-10 py-10  overflow-hidden bg-gradient-to-br from-purple-50 to-green-50"
+      className="relative z-10 py-10 overflow-hidden bg-gradient-to-br from-purple-50 to-green-50"
       id="services-sec"
     >
       <div className="absolute inset-0 bg-gradient-to-bl from-purple-900/10 to-green-900/10">
@@ -487,8 +492,8 @@ export default function Pricing() {
               <Image
                 src="/images/prev-arrow.webp"
                 alt="Previous"
-                width={22} // Set your desired width
-                height={22} // Set your desired height
+                width={22}
+                height={22}
               />
             </div>
             <div
@@ -498,9 +503,9 @@ export default function Pricing() {
             >
               <Image
                 src="/images/next-arrow.webp"
-                alt="Previous"
-                width={22} // Set your desired width
-                height={22} // Set your desired height
+                alt="Next"
+                width={22}
+                height={22}
               />
             </div>
           </div>
