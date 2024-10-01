@@ -19,7 +19,7 @@ interface Feature {
 
 interface PricingPlan {
   title: string;
-  monthlyPrice: string;
+  monthlyPrice?: string;
   quarterlyPrice?: string;
   yearlyPrice?: string;
   description: string;
@@ -36,8 +36,6 @@ const pricingData: PricingPlan[] = [
   {
     title: "Intraday/BTST",
     monthlyPrice: "999",
-    quarterlyPrice: "4500",
-    yearlyPrice: "15999",
     description: "For beginners",
     href: "/subscriptions/intraday-btst-plan",
     features: [
@@ -76,7 +74,6 @@ const pricingData: PricingPlan[] = [
   },
   {
     title: "Mentorship",
-    monthlyPrice: "3800",
     quarterlyPrice: "9999",
     yearlyPrice: "34999",
     description: "Most popular",
@@ -109,7 +106,7 @@ const pricingData: PricingPlan[] = [
     ),
   },
   {
-    title: "Future",
+    title: "Futures",
     monthlyPrice: "5000",
     yearlyPrice: "50000",
     description: "For professionals",
@@ -361,7 +358,7 @@ export default function Pricing() {
     autoplay: true,
     autoplaySpeed: 300000,
     pauseOnHover: true,
-    arrows:false,
+    arrows: false,
     className: "right-side-visible-slider",
     beforeChange: (_: number, next: number) => setCurrentSlide(next),
     responsive: [
@@ -384,8 +381,6 @@ export default function Pricing() {
   const goToSlide = (index: number) => {
     sliderRef.current?.slickGoTo(index);
   };
-
-
 
   return (
     <div
@@ -475,52 +470,55 @@ export default function Pricing() {
         <div className="relative w-full">
           <Slider ref={sliderRef} {...settings}>
             {pricingData.map((plan, index) => (
-              <div key={index} className="outline-none px-2 py-2 w-full h-[580px]">
-                <PricingCard plan={plan}  duration={duration} />
+              <div
+                key={index}
+                className="outline-none px-2 py-2 w-full h-[580px]"
+              >
+                <PricingCard plan={plan} duration={duration} />
               </div>
             ))}
           </Slider>
           <div className="absolute -bottom-2 right-5 flex mt-4 border border-border">
-              <div
-                onClick={() => sliderRef.current?.slickPrev()}
-                aria-label="Previous slide"
-                className="bg-[#852B83] cursor-pointer"
-              >
-                <Image
-                  src="/images/prev-arrow.webp"
-                  alt="Previous"
-                  width={22} // Set your desired width
-                  height={22} // Set your desired height
-                />
-              </div>
-              <div
-                onClick={() => sliderRef.current?.slickNext()}
-                aria-label="Next slide"
-                className="bg-[#F3A0F1] cursor-pointer"
-              >
-                <Image
-                  src="/images/next-arrow.webp"
-                  alt="Previous"
-                  width={22} // Set your desired width
-                  height={22} // Set your desired height
-                />
-              </div>
+            <div
+              onClick={() => sliderRef.current?.slickPrev()}
+              aria-label="Previous slide"
+              className="bg-[#852B83] cursor-pointer"
+            >
+              <Image
+                src="/images/prev-arrow.webp"
+                alt="Previous"
+                width={22} // Set your desired width
+                height={22} // Set your desired height
+              />
             </div>
-            <div className="mt-8 flex justify-center items-center">
-              {pricingData.map((_, index) => (
-                <button
-                  key={index}
-                  className={cn(
-                    "w-3 h-3 rounded-full mx-1 transition-all duration-300",
-                    currentSlide === index
-                      ? "bg-purple-600 scale-125"
-                      : "bg-gray-400"
-                  )}
-                  onClick={() => goToSlide(index)}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
+            <div
+              onClick={() => sliderRef.current?.slickNext()}
+              aria-label="Next slide"
+              className="bg-[#F3A0F1] cursor-pointer"
+            >
+              <Image
+                src="/images/next-arrow.webp"
+                alt="Previous"
+                width={22} // Set your desired width
+                height={22} // Set your desired height
+              />
             </div>
+          </div>
+          <div className="mt-8 flex justify-center items-center">
+            {pricingData.map((_, index) => (
+              <button
+                key={index}
+                className={cn(
+                  "w-3 h-3 rounded-full mx-1 transition-all duration-300",
+                  currentSlide === index
+                    ? "bg-purple-600 scale-125"
+                    : "bg-gray-400"
+                )}
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
