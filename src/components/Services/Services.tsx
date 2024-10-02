@@ -1,10 +1,26 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import Image from "next/image";
+import {
+  ChevronDown,
+  ChevronUp,
+  X,
+  Check,
+  AlertTriangle,
+  Clock,
+  BarChart2,
+  PieChart,
+  DollarSign,
+  BookOpen,
+  // LightbulbIcon,
+  // BriefcaseIcon,
+  // HandshakeIcon,
+  // CalendarIcon,
+  // ClockIcon,
+} from "lucide-react";
 import { serviceContent, ServiceKey } from "./ServicesContent";
-import { ChevronDown, ChevronUp, X } from "lucide-react";
 
 const urlToServiceKeyMap: Record<string, ServiceKey> = {
   "intraday-btst-plan": "Intraday/BTST",
@@ -17,29 +33,185 @@ const urlToServiceKeyMap: Record<string, ServiceKey> = {
 
 const fullDisclaimer = `
 RAKESH BANSAL VENTURES is SEBI registered Research Entity in terms of SEBI (Research Analyst) Regulations, 2014 with SEBI Research Analyst No: INH100008984. We engage in the business of providing fundamental and technical reports including charts and other technical tools to identify market pattern aiming to provide an overview of the previous trading pattern and expectation from the future market.
-"Investment in securities market are subject to market risks. Read all the related documents carefully before investing."
-The information and views in the reports, our website https://www.iamrakeshbansal.com / & all the services ("Research Information") we provide are believed to be reliable, but we do not represent or warrant its accuracy, completeness or reliability of the information contained in our Research Information, investors and clients are advised to independently evaluate the market conditions/ risks involved, before making any trading/investment decisions.
+
+<b>"Investment in securities market are subject to market risks. Read all the related documents carefully before investing."</b>
+
+The information and views in the reports, our website <a href="https://www.iamrakeshbansal.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://www.iamrakeshbansal.com</a> / & all the services ("Research Information") we provide are believed to be reliable, but we do not represent or warrant its accuracy, completeness or reliability of the information contained in our Research Information, investors and clients are advised to independently evaluate the market conditions/ risks involved, before making any trading/investment decisions.
+
 The report / information / opinions have been prepared by us and are subject to change without any notice. The report and information contained herein is strictly confidential and meant solely for the selected recipient and may not be altered in any way, transmitted to, copied or distributed, in part or in whole, to any other person or to the media or reproduced in any form, without prior written consent of us. The information provided in the Report is from publicly available data, which we believe and reliable. While reasonable endeavors have been made to present reliable data in the Report so far as it relates to current and historical information, we are not guarantee the accuracy or completeness of the data in the Report. Accordingly, we or our partner's / relatives of our partner's shall not be in any way responsible for any loss or damage that may arise to any person from any inadvertent error in the information contained, views and opinions expressed in this publication.
+
 Past performance should not be taken as an indication or guarantee of future performance, and no representation or warranty, express or implied, is made regarding future performance. The price, value of and income from any of the securities or financial instruments mentioned in this report can fall as well as rise.
+
 The Report also includes analysis and views of our research team. The Report is purely for information purposes and does not construe to be investment recommendation/advice or an offer or solicitation of an offer to buy/sell any securities. The opinions expressed in the Report are our current opinions as of the date of the Report and may be subject to change from time to time without notice. We or any persons connected with us do not accept any liability arising from the use of this document.
+
 Investors should not solely rely on the information contained in this Report and must make investment decisions based on their own investment objectives, judgment, risk profile and financial position. The recipients of this Report may take professional advice before acting on this information.
+
 As we/ our partners are presently engaged in various financial services business and so might have financial, business or other interests in other entities including the subject company/ies mentioned in this Report. However, we have encourages independence in preparation of research report and strives to minimize conflict in preparation of research report. We/ Our Partner's and their relatives did not receive any compensation or other benefits from the subject company/ies mentioned in the Report or from a third party in connection with preparation of the Report. Accordingly, We/ Our Partner's and their relatives do not have any material conflict of interest at the time of publication of this Report.
+
 It is confirmed that for giving these recommendations, we have not received any compensation from the companies mentioned herein in the preceding twelve months.
+
 We/ Our Partner's and their relatives collectively do not own 1% or more of the actual / beneficial ownership of equity securities of the subject company/ies mentioned in the report as of the last day of the month preceding the publication of the research report.
+
 We submit that no material disciplinary action has been taken on me by any regulatory authority impacting Equity Research activities.
-By accessing https://www.iamrakeshbansal.com/, you have read, understood and agree to be legally bound by the terms of the following disclaimer and user agreement:
-https://www.iamrakeshbansal.com/ is not responsible for any errors, omissions, representations or any links on any of our pages. https://www.iamrakeshbansal.com/ does not endorse any advertisers on our web pages. Please verify the veracity of all information on your own before undertaking any alliance. This website contains articles contributed by several individuals. The views are exclusively their own and do not necessarily represent the views of the website or its management. The linked sites are not under our control and we are not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. https://www.iamrakeshbansal.com/ is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement by us of the site.
-There are risks associated with utilizing internet and short messaging system (SMS) based information and research dissemination services. Subscribers are advised to understand that the services can fail due to failure of hardware, software, and Internet connection. While we try our best that the messages are delivered in time to the subscribers Mobile Network, the delivery of these messages to the customer's mobile phone/handset is the responsibility of the customer's Mobile Network. SMS may be delayed and/or not delivered to the customer's mobile phone/handset on certain days, owing to technical reasons and https://www.iamrakeshbansal.com/ cannot be held responsible for the same.
-https://www.iamrakeshbansal.com/ hereby expressly disclaims any implied warranties imputed by the laws of any jurisdiction. We consider ourselves and intend to be subject to the jurisdiction only of the court of Delhi in India. If you don't agree with any of our disclaimers above, please do not read the material on any of our pages. This site is specifically for users in the territory of India. Although the access to users outside India is not denied, https://www.iamrakeshbansal.com/ shall have no legal liabilities whatsoever in any laws of any jurisdiction other than India. We reserve the right to make changes to our site and these disclaimers, terms, and conditions at any time.
+
+By accessing <a href="https://www.iamrakeshbansal.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://www.iamrakeshbansal.com</a>, you have read, understood and agree to be legally bound by the terms of the following disclaimer and user agreement:
+
+<a href="https://www.iamrakeshbansal.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://www.iamrakeshbansal.com</a> is not responsible for any errors, omissions, representations or any links on any of our pages. <a href="https://www.iamrakeshbansal.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://www.iamrakeshbansal.com</a> does not endorse any advertisers on our web pages. Please verify the veracity of all information on your own before undertaking any alliance. This website contains articles contributed by several individuals. The views are exclusively their own and do not necessarily represent the views of the website or its management. The linked sites are not under our control and we are not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. <a href="https://www.iamrakeshbansal.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://www.iamrakeshbansal.com</a> is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement by us of the site.
+
+There are risks associated with utilizing internet and short messaging system (SMS) based information and research dissemination services. Subscribers are advised to understand that the services can fail due to failure of hardware, software, and Internet connection. While we try our best that the messages are delivered in time to the subscribers Mobile Network, the delivery of these messages to the customer's mobile phone/handset is the responsibility of the customer's Mobile Network. SMS may be delayed and/or not delivered to the customer's mobile phone/handset on certain days, owing to technical reasons and <a href="https://www.iamrakeshbansal.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://www.iamrakeshbansal.com</a> cannot be held responsible for the same.
+
+<a href="https://www.iamrakeshbansal.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://www.iamrakeshbansal.com</a> hereby expressly disclaims any implied warranties imputed by the laws of any jurisdiction. We consider ourselves and intend to be subject to the jurisdiction only of the court of Delhi in India. If you don't agree with any of our disclaimers above, please do not read the material on any of our pages. This site is specifically for users in the territory of India. Although the access to users outside India is not denied, <a href="https://www.iamrakeshbansal.com" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">https://www.iamrakeshbansal.com</a> shall have no legal liabilities whatsoever in any laws of any jurisdiction other than India. We reserve the right to make changes to our site and these disclaimers, terms, and conditions at any time.
+
 The content of the website cannot be copied, reproduced, republished, uploaded, posted, transmitted or distributed for any non-personal use without obtaining prior permission from RAKESH BANSAL VENTURES. We reserve the right to terminate the accounts of subscribers/customers, who violate the proprietary rights, in addition to necessary legal action.
+
 Please note that by surfing our website, submitting your details in our website you are authorizing RAKESH BANSAL VENTURES to contact you and send Promotional and Transactional communication even though you may be registered under National Do Not Call Registry established under the Telecom Unsolicited Commercial Communications Regulations 2007 or registered or may register under the National Customer Preference Register established under new regulation viz the Telecom Commercial Communications Customer Preference Regulations, 2010.
+
 Registration granted by SEBI and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors.
-RAKESH BANSAL VENTURES
-SEBI Registered Research Analyst Registration Number: INH100008984 `;
+
+<b>RAKESH BANSAL VENTURES</b>
+
+<b>SEBI Registered Research Analyst Registration Number: INH100008984</b> `;
 
 interface ServiceProps {
   param: string;
 }
+// const SocialIcon: React.FC<{ Icon: React.ElementType; href: string }> = ({
+//   Icon,
+//   href,
+// }) => (
+//   <motion.a
+//     href={href}
+//     target="_blank"
+//     rel="noopener noreferrer"
+//     whileHover={{ scale: 1.2 }}
+//     whileTap={{ scale: 0.9 }}
+//     className="text-white hover:text-gray-200 transition-colors"
+//   >
+//     <Icon size={24} />
+//   </motion.a>
+// );
+
+const KeyboardEffect: React.FC<{ text: string }> = ({ text }) => {
+  const controls = useAnimation();
+
+  React.useEffect(() => {
+    const animateText = async () => {
+      await controls.start((i) => ({
+        opacity: 1,
+        y: 0,
+        transition: { delay: i * 0.1 },
+      }));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await controls.start((i) => ({
+        opacity: 0,
+        y: 10,
+        transition: { delay: (text.length - i) * 0.05 },
+      }));
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      animateText();
+    };
+    animateText();
+  }, [controls, text]);
+
+  return (
+    <div className="flex overflow-hidden">
+      {text.split("  ").map((char, i) => (
+        <motion.span
+          key={i}
+          custom={i}
+          animate={controls}
+          initial={{ opacity: 0, y: 20 }}
+          className="inline-block"
+        >
+          {char}
+        </motion.span>
+      ))}
+    </div>
+  );
+};
+
+// interface TimelineEvent {
+//   year: number;
+//   title: string;
+//   description: string;
+//   icon: React.ElementType;
+// }
+
+// const HorizontalTimeline: React.FC<{ events: TimelineEvent[] }> = ({
+//   events,
+// }) => {
+//   return (
+//     <div className="relative w-full overflow-x-auto py-16">
+//       <div
+//         className="absolute inset-0 bg-gray-100 opacity-50"
+//         style={{
+//           backgroundImage: "url('/images/world-map.png')",
+//           backgroundSize: "cover",
+//           backgroundPosition: "center",
+//         }}
+//       />
+//       <div className="relative min-w-max px-4">
+//         <div className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
+//         <div className="flex justify-between">
+//           {events.map((event, index) => (
+//             <TimelineItem key={event.year} event={event} index={index} />
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// const TimelineItem: React.FC<{ event: TimelineEvent; index: number }> = ({
+//   event,
+//   index,
+// }) => {
+//   const isEven = index % 2 === 0;
+//   const Icon = event.icon;
+
+//   return (
+//     <div
+//       className={`w-64 ${isEven ? "-mt-3" : "mt-3"} flex flex-col items-center`}
+//     >
+//       <motion.div
+//         initial={{ opacity: 0, y: isEven ? 20 : -20 }}
+//         animate={{ opacity: 1, y: 0 }}
+//         transition={{ duration: 0.5, delay: index * 0.1 }}
+//         className={`order-${isEven ? 1 : 2} mb-2`}
+//       >
+//         <div className="bg-white rounded-lg shadow-md p-4">
+//           <h3 className="text-lg font-semibold mb-2">{event.title}</h3>
+//           <p className="text-sm text-gray-600">{event.description}</p>
+//         </div>
+//       </motion.div>
+//       <motion.div
+//         initial={{ scale: 0 }}
+//         animate={{ scale: 1 }}
+//         transition={{
+//           type: "spring",
+//           stiffness: 260,
+//           damping: 20,
+//           delay: index * 0.1,
+//         }}
+//         className={`w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center z-10 order-${
+//           isEven ? 2 : 1
+//         }`}
+//       >
+//         <Icon className="w-6 h-6 text-blue-500" />
+//       </motion.div>
+//       <motion.div
+//         initial={{ opacity: 0, scale: 0.5 }}
+//         animate={{ opacity: 1, scale: 1 }}
+//         transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
+//         className={`absolute ${
+//           isEven ? "top-0" : "bottom-4"
+//         } bg-white rounded-full shadow-md px-3 py-1`}
+//       >
+//         <span className="text-sm font-semibold">{event.year}</span>
+//       </motion.div>
+//     </div>
+//   );
+// };
 
 const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
   const [selectedService, setSelectedService] =
@@ -77,6 +249,21 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
     setDisclaimerAgreed(false);
     setHasReadDisclaimer(false);
   };
+  // const timelineEvents: TimelineEvent[] = content.keyFeatures
+  //   ? content.keyFeatures.map((feature, index) => ({
+  //       year: 2023 - index,
+  //       title: feature.split(":")[0],
+  //       description: feature.split(":")[1] || feature,
+  //       icon: [
+  //         LightbulbIcon,
+  //         BriefcaseIcon,
+  //         HandshakeIcon,
+  //         CalendarIcon,
+  //         ClockIcon,
+  //         BookOpen,
+  //       ][index % 6],
+  //     }))
+  //   : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -92,6 +279,23 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
             className="bg-white text-gray-800 rounded-lg p-8 shadow-xl"
           >
             <ServiceDescription content={content} />
+            {content.keyFeatures && (
+              <KeyFeatures features={content.keyFeatures} />
+            )}
+            {/* <ServiceDescription content={content} /> */}
+            {/* {content.keyFeatures && (
+              <div className="mt-12 mb-8">
+                <h3 className="text-2xl font-semibold mb-6 text-indigo-600">
+                  Key Features
+                </h3>
+                <div className="overflow-x-auto">
+                  <HorizontalTimeline events={timelineEvents} />
+                </div>
+              </div>
+            )} */}
+            {content.plans && (
+              <PricingPlans plans={content.plans} onPayNow={handlePayNow} />
+            )}
             {content.generalFeatures && (
               <GeneralFeatures features={content.generalFeatures} />
             )}
@@ -100,9 +304,6 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
             )}
             {content.whyChooseUs && <WhyChooseUs items={content.whyChooseUs} />}
             {content.whatWeOffer && <WhatWeOffer items={content.whatWeOffer} />}
-            {content.plans && (
-              <PricingPlans plans={content.plans} onPayNow={handlePayNow} />
-            )}
             {content.disclaimer && <Disclaimer text={content.disclaimer} />}
             {content.registration && (
               <Registration text={content.registration} />
@@ -127,36 +328,84 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
 
 const ServiceHeader: React.FC<{ title: string }> = ({ title }) => (
   <motion.header
-    initial={{ opacity: 0, y: -50 }}
-    animate={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
     transition={{ duration: 1 }}
-    className="relative h-40 flex items-center justify-center overflow-hidden bg-gradient-to-r from-purple-800 to-indigo-600"
+    className="relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-r from-purple-800 to-indigo-600 py-5 lg:py-10"
   >
-    <h1 className="text-4xl md:text-5xl font-bold z-10">{title}</h1>
-    <motion.div
-      animate={{
-        scale: [1, 1.1, 1],
-        rotate: [0, 5, -5, 0],
-      }}
-      transition={{
-        duration: 10,
-        repeat: Infinity,
-        repeatType: "reverse",
-      }}
-      className="absolute inset-0 z-0 opacity-20"
-      style={{
-        backgroundImage: "url('/images/fyi.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    />
+    <div className="absolute inset-0 z-0">
+      <motion.div
+        animate={{
+          backgroundPosition: ["0% 0%", "100% 100%"],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          repeatType: "reverse",
+        }}
+        className="w-full h-full opacity-10 object-contain object-top"
+        style={{
+          backgroundImage: 'url("/images/fyi.png")',
+          backgroundSize: "200% 200%",
+        }}
+      />
+    </div>
+
+    <div className="z-10 flex flex-col items-center">
+      {/* <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
+        className="relative mb-4"
+      >
+        <Image
+          src="/hero/banner-first-slide.webp"
+          alt="Rakesh Bansal"
+          width={200}
+          height={200}
+          className="rounded-full border-4 border-white shadow-lg object-cover"
+        />
+      </motion.div> */}
+
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5 }}
+        className="text-center"
+      >
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white">
+          <KeyboardEffect text={title.toUpperCase()} />
+        </h1>
+      </motion.div>
+
+      {/* <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 1 }}
+        className="flex space-x-4 mt-2 mb-4"
+      >
+        <SocialIcon
+          Icon={Facebook}
+          href="https://www.facebook.com/IAMRAKESHBANSAL/"
+        />
+        <SocialIcon Icon={Twitter} href="https://x.com/iamrakeshbansal" />
+        <SocialIcon
+          Icon={Instagram}
+          href="https://www.instagram.com/therakeshbansal/"
+        />
+        <SocialIcon
+          Icon={Linkedin}
+          href="https://www.linkedin.com/in/drrakeshbansal/"
+        />
+      </motion.div> */}
+    </div>
   </motion.header>
 );
 
 const ServiceDescription: React.FC<{
   content: (typeof serviceContent)[ServiceKey];
 }> = ({ content }) => (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
     <div>
       <h2 className="text-3xl font-bold mb-4">{content.title}</h2>
       <motion.p
@@ -178,26 +427,74 @@ const ServiceDescription: React.FC<{
         </motion.p>
       )}
     </div>
-    <div className="w-full">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      className="w-full flex justify-center"
+    >
       <Image
-        src="/images/fyi.png"
-        alt="Service Image"
-        width={500}
-        height={500}
-        className="w-full h-auto rounded-lg object-cover"
+        src="/images/about-us-img.webp"
+        alt="Rakesh Bansal"
+        width={300}
+        height={300}
+        className="rounded-full shadow-2xl"
       />
-    </div>
+    </motion.div>
   </div>
+);
+
+const KeyFeatures: React.FC<{ features: string[] }> = ({ features }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="mt-12 mb-8"
+  >
+    <h3 className="text-2xl font-semibold mb-6 text-indigo-600">
+      Key Features
+    </h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {features.map((feature, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="bg-purple-50 rounded-lg px-4 py-2 shadow-md"
+        >
+          <div className="flex items-center">
+            <div className="bg-indigo-500 rounded-full p-2 mr-4">
+              {index === 0 && <Clock className="w-6 h-6 text-white" />}
+              {index === 1 && <BarChart2 className="w-6 h-6 text-white" />}
+              {index === 2 && <PieChart className="w-6 h-6 text-white" />}
+              {index === 3 && <DollarSign className="w-6 h-6 text-white" />}
+              {index > 3 && <BookOpen className="w-6 h-6 text-white" />}
+            </div>
+            <h4 className="text-lg font-semibold text-green-700">
+              {feature.split(":")[0]}
+            </h4>
+          </div>
+          {/* <p className="text-gray-600">{feature.split(":")[1] || feature}</p> */}
+        </motion.div>
+      ))}
+    </div>
+  </motion.div>
 );
 
 const CustomCard: React.FC<{ title: string; children: React.ReactNode }> = ({
   title,
   children,
 }) => (
-  <div className="bg-white text-gray-800 rounded-lg p-6 shadow-xl mb-8">
-    <h3 className="text-2xl font-semibold mb-4">{title}</h3>
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5 }}
+    className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-800 rounded-lg p-6 shadow-xl mb-8"
+  >
+    <h3 className="text-2xl font-semibold mb-4 text-indigo-600">{title}</h3>
     {children}
-  </div>
+  </motion.div>
 );
 
 const CustomAccordion: React.FC<{
@@ -209,7 +506,7 @@ const CustomAccordion: React.FC<{
   return (
     <div className="border-b border-gray-200 py-4">
       <button
-        className="flex justify-between items-center w-full text-left font-semibold"
+        className="flex justify-between items-center w-full text-left font-semibold text-indigo-600"
         onClick={() => setIsOpen(!isOpen)}
       >
         {title}
@@ -238,15 +535,17 @@ const CustomAccordion: React.FC<{
 
 const GeneralFeatures: React.FC<{ features: string[] }> = ({ features }) => (
   <CustomCard title="General Features">
-    <ul className="list-disc pl-5 space-y-2">
+    <ul className="space-y-2">
       {features.map((feature, index) => (
         <motion.li
           key={index}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="flex items-center space-x-2"
         >
-          {feature}
+          <Check className="w-5 h-5 text-green-500" />
+          <span>{feature}</span>
         </motion.li>
       ))}
     </ul>
@@ -262,16 +561,20 @@ const AdvancedFeatures: React.FC<{
         key={index}
         title={`${key.charAt(0).toUpperCase() + key.slice(1)} Service`}
       >
-        <p className="font-semibold mb-2">Price: {value.price}</p>
-        <ul className="list-disc pl-5 space-y-2">
+        <p className="font-semibold mb-2 text-indigo-600">
+          Price: {value.price}
+        </p>
+        <ul className="space-y-2">
           {value.features.map((feature, featureIndex) => (
             <motion.li
               key={featureIndex}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: featureIndex * 0.1 }}
+              className="flex items-center space-x-2"
             >
-              {feature}
+              <Check className="w-5 h-5 text-green-500" />
+              <span>{feature}</span>
             </motion.li>
           ))}
         </ul>
@@ -284,18 +587,20 @@ const WhyChooseUs: React.FC<{ items: { title: string; info: string }[] }> = ({
   items,
 }) => (
   <CustomCard title="Why Choose Us">
-    {items.map((item, index) => (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="mb-4"
-      >
-        <h4 className="font-semibold">{item.title}</h4>
-        <p>{item.info}</p>
-      </motion.div>
-    ))}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {items.map((item, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="bg-white rounded-lg p-6 shadow-md"
+        >
+          <h4 className="font-semibold text-indigo-600 mb-2">{item.title}</h4>
+          <p className="text-gray-600">{item.info}</p>
+        </motion.div>
+      ))}
+    </div>
   </CustomCard>
 );
 
@@ -303,18 +608,20 @@ const WhatWeOffer: React.FC<{ items: { title: string; info: string }[] }> = ({
   items,
 }) => (
   <CustomCard title="What We Offer">
-    {items.map((item, index) => (
-      <motion.div
-        key={index}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: index * 0.1 }}
-        className="mb-4"
-      >
-        <h4 className="font-semibold">{item.title}</h4>
-        <p>{item.info}</p>
-      </motion.div>
-    ))}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {items.map((item, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          className="bg-white rounded-lg p-6 shadow-md"
+        >
+          <h4 className="font-semibold text-indigo-600 mb-2">{item.title}</h4>
+          <p className="text-gray-600">{item.info}</p>
+        </motion.div>
+      ))}
+    </div>
   </CustomCard>
 );
 
@@ -323,25 +630,20 @@ const PricingPlans: React.FC<{
   onPayNow: () => void;
 }> = ({ plans, onPayNow }) => (
   <CustomCard title="Pricing Plans">
-    <div className="flex flex-wrap gap-6 items-center justify-center text-white">
+    <div className="flex flex-wrap gap-6 items-center justify-center">
       {plans.map((plan, index) => (
         <motion.div
           key={index}
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="bg-gray-50 rounded-lg p-6 shadow-md w-full h-full max-w-[250px] max-h-[250px]"
-          style={{
-            backgroundImage: `url(${getPlanBackgroundImage(plan.duration)})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-          }}
+          className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg p-6 shadow-md w-full max-w-[250px] text-white"
         >
           <h4 className="text-xl font-semibold mb-2">{plan.duration}</h4>
           <p className="text-3xl font-bold mb-4">{plan.price}</p>
           <button
             onClick={onPayNow}
-            className="w-full bg-background border border-border text-foreground py-2 px-4 rounded transition-colors duration-300 hover:bg-opacity-80"
+            className="w-full bg-white text-indigo-600 py-2 px-4 rounded transition-colors duration-300 hover:bg-indigo-100"
           >
             Subscribe Now
           </button>
@@ -353,14 +655,15 @@ const PricingPlans: React.FC<{
 
 const Disclaimer: React.FC<{ text: string }> = ({ text }) => (
   <CustomCard title="Disclaimer">
-    <motion.p
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="text-yellow-600"
+      className="flex items-start space-x-2 text-yellow-600"
     >
-      {text}
-    </motion.p>
+      <AlertTriangle className="w-5 h-5 mt-1 flex-shrink-0" />
+      <p>{text}</p>
+    </motion.div>
   </CustomCard>
 );
 
@@ -414,28 +717,30 @@ const DisclaimerModal: React.FC<{
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
+        className="fixed inset-0 bg-black bg-opacity-50 flex justify-center p-4 z-50"
       >
         <motion.div
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           exit={{ scale: 0.9 }}
-          className="bg-white text-gray-800 p-6 rounded-lg max-w-4xl w-full max-h-[90vh] flex flex-col relative"
+          className="bg-white text-gray-800 p-6 rounded-lg max-w-4xl w-full max-h-[40vh] flex flex-col relative"
         >
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-2xl font-bold">Disclaimer</h2>
-            <button onClick={onClose}>
+            <h2 className="text-2xl font-bold text-indigo-600">Disclaimer</h2>
+            <button
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700"
+            >
               <X className="w-6 h-6" />
             </button>
           </div>
-
-          {/* Disclaimer content rendered with dangerouslySetInnerHTML */}
           <div
-            className="text-base font-light text-gray-800 overflow-y-auto h-[70vh] p-4"
+            className="text-base font-light text-gray-800 overflow-y-auto h-[70vh] p-4 bg-gray-100 rounded-lg"
+            style={{ whiteSpace: "pre-line" }}
             onScroll={onScroll}
             dangerouslySetInnerHTML={{ __html: fullDisclaimer }}
           />
-          <div className="mt-6 flex justify-end space-x-4">
+          <div className="mt-6 flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4">
             <label className="flex items-center">
               <input
                 type="checkbox"
@@ -444,41 +749,32 @@ const DisclaimerModal: React.FC<{
                 disabled={!hasRead}
                 className="mr-2"
               />
-              I agree to the terms and conditions
+              <span className="text-sm">
+                I agree to the terms and conditions
+              </span>
             </label>
-            <button
-              onClick={onClose}
-              className="px-4 py-2 rounded-lg text-white bg-gray-400"
-            >
-              Close
-            </button>
-            <button
-              onClick={handlePayNow}
-              disabled={!agreed}
-              className={`px-4 py-2 rounded-lg text-white ${
-                agreed ? "bg-indigo-600" : "bg-gray-400"
-              }`}
-            >
-              Processed
-            </button>
+            <div className="space-x-2">
+              <button
+                onClick={onClose}
+                className="px-4 py-2 rounded-lg text-white bg-gray-400 hover:bg-gray-500 transition-colors"
+              >
+                Close
+              </button>
+              <button
+                onClick={handlePayNow}
+                disabled={!agreed}
+                className={`px-4 py-2 rounded-lg text-white transition-colors ${
+                  agreed ? "bg-indigo-600 hover:bg-indigo-700" : "bg-gray-400"
+                }`}
+              >
+                Proceed
+              </button>
+            </div>
           </div>
         </motion.div>
       </motion.div>
     )}
   </AnimatePresence>
 );
-
-function getPlanBackgroundImage(duration: string): string {
-  switch (duration.toLowerCase()) {
-    case "monthly":
-      return "/images/dream-card1.png";
-    case "quarterly":
-      return "/images/dream-card2.png";
-    case "yearly":
-      return "/images/dream-card3.png";
-    default:
-      return "/images/dream-card1.png";
-  }
-}
 
 export default ServicesPage;

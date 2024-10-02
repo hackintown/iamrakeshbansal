@@ -36,6 +36,7 @@ type ServiceFeatures = {
   price: string;
   features: string[];
 };
+type KeyFeatures = string;
 
 export const serviceContent: Record<
   ServiceKey,
@@ -54,6 +55,7 @@ export const serviceContent: Record<
     whatWeOffer?: WhatWeOffer[];
     plans?: ServicePlan[];
     notes?: string;
+    keyFeatures?: KeyFeatures[];
   }
 > = {
   "Intraday/BTST": {
@@ -62,6 +64,16 @@ export const serviceContent: Record<
       "Our Intraday Trading Subscription Plan offers precise and disciplined signals for single-day market movements. Trades are short-term with specific targets and are squared off the same or next day. We share only the stock name and current cash market price (CMP) to distribute the load and prevent price spikes. Based on your trading style and risk appetite, you can choose to trade in the cash segment or Futures & Options (If the stock is available in derivatives).",
     additionalDescription:
       "Please note that these signals are meant for intraday trading in equity. Using the correct mode will help distribute the load and avoid price spikes in a single PUT/CALL.",
+    keyFeatures: [
+      "Monthly 15-20 Calls",
+      "Entry Price",
+      "Exit Price",
+      "Stop Loss",
+      "First Target",
+      "Capital Required 20k to 50k",
+      "Top Nifty 50 Companies",
+      "Index & Equity",
+    ],
     whyChooseUs: [
       {
         title: "Real-Time Trade Signals:",
@@ -97,6 +109,16 @@ export const serviceContent: Record<
     description:
       "Options trading presents an enticing opportunity, but to succeed, you need a sophisticated skill set. In options buying, it's not just about predicting market trends, it's about timing your trades effectively. To ensure a seamless trading experience, we exclusively recommend options trading in the top Nifty 50 companies. We provide entry prices, exit prices, and stop-loss levels, empowering you to make confident and informed trading decisions. This strategic approach minimizes impact costs and ensures ample liquidity, allowing you to execute trades smoothly and efficiently.",
     additionalDescription: "",
+    keyFeatures: [
+      "Monthly 8-10 Calls",
+      "Entry Price",
+      "Exit Price",
+      "Stop Loss",
+      "First Target",
+      "Capital Required 55k to 100k",
+      "Top Nifty 50 Companies",
+      "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY",
+    ],
     whatWeOffer: [
       {
         title: "Expert-Backed Recommendations:",
@@ -194,6 +216,15 @@ export const serviceContent: Record<
       "Performance" tab on our website. Here's what you gain from our Futures Trading Strategy:`,
     additionalDescription:
       "Join us today to master options buying and intraday trading with a disciplined, straightforward, and transparent approach. This is your chance to trade with confidence and enhance your profitability.",
+    keyFeatures: [
+      "Monthly 8-10 Calls",
+      "Entry Price",
+      "Exit Price",
+      "Stop Loss",
+      "Performance Reports",
+      "Capital Required 500k to 10000k",
+      "Top Nifty 50 Companies",
+    ],
     whyChooseUs: [
       {
         title: "Emotion-Free Trading:",
@@ -228,6 +259,17 @@ export const serviceContent: Record<
       "Unlock Your Trading Potential with Our Comprehensive Mentorship Program!",
     additionalDescription:
       "Are you ready to take your trading journey to the next level? Our upgraded mentorship program offers you a range of powerful tools and insights to enhance your trading skills and profitability. We're dedicated to providing you with the knowledge and support you need to succeed in the dynamic world of the stock market.",
+
+    keyFeatures: [
+      "Quarterly 10-15 Calls",
+      "Entry Price",
+      "Exit Price",
+      "Stop Loss",
+      "Capital Required 100k to 500k",
+      "Short, Medium & Long Term",
+      "Swing Trade",
+      "Live Market Support",
+    ],
     generalFeatures: [
       "Strategic Buy Ideas for Short to Medium Term: Our program equips you with carefully researched and analyzed cash market buy ideas that span the short to medium-term horizon. Supported by robust rationale and detailed reports, we provide entry price, exit price, and stop-loss levels, empowering you to make confident and informed trading decisions.",
       "Webinar Series for In-Depth Learning: To ensure your success, we conduct webinars that cater to problem-solving, address conceptual doubts, and tackle any queries you might have. Additionally, our webinar series includes real-life examples featuring shared videos showcasing real-life trading scenarios. These examples provide you with the conceptual understanding necessary to navigate the complexities of the stock market effectively.",
@@ -250,6 +292,16 @@ export const serviceContent: Record<
       "The MCX market offers vast potential, but it also demands discipline and a strategic approach. Our advisory provides you with the knowledge and support needed to make informed trading decisions with confidence. We offer precise entry prices, exit prices, and stop-loss levels, empowering you to trade with assurance.",
     additionalDescription:
       "Blending human intelligence with robust data-driven models, we guide you through the exciting world of MCX, focusing on gold, silver, crude oil, and other strategically chosen metals.",
+    keyFeatures: [
+      "Quarterly 10-15 Calls",
+      "Entry Price",
+      "Exit Price",
+      "Stop Loss",
+      "Performance Reports",
+      "Capital Required 500k to 10000k",
+      "Short, Medium & Long Term",
+      "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil",
+    ],
     whatWeOffer: [
       {
         title: "Options Buying (Nifty 50 Focus):",

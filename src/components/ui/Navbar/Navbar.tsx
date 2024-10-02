@@ -170,7 +170,7 @@ const Navbar: React.FC = () => {
               {/* Services */}
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="text-base text-primary">
-                  Advisory Services
+                  Research Services
                 </NavigationMenuTrigger>
                 <NavigationMenuContent className="flex flex-row">
                   <ul className="grid max-w-[300px] w-full gap-2 p-4 bg-background items-center justify-center">

@@ -1,18 +1,27 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import CountUp from "react-countup";
-import { useState, useEffect } from "react";
-import Link from "next/link";
 
-const socialPlatforms = [
+interface SocialPlatform {
+  name: string;
+  icon: string;
+  followers: number;
+  action: string;
+  href: string;
+}
+
+const socialPlatforms: SocialPlatform[] = [
   {
     name: "YouTube",
     icon: "/images/yt.webp",
     followers: 400800,
     action: "SUBSCRIBE",
-    href: "",
+    href: "https://www.youtube.com/@RakeshBansal",
   },
   {
     name: "Instagram",
@@ -61,7 +70,7 @@ function formatNumber(num: number): string {
   return num.toString();
 }
 
-export default function SocialPlatforms() {
+export default function SocialMediaSection() {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -69,39 +78,43 @@ export default function SocialPlatforms() {
   }, []);
 
   return (
-    <div className="relative z-10 py-2 sm:py-3 md:py-4 lg:py-6">
-      {/* Background Image */}
-      <Image
-        src="/images/social-media.webp"
-        alt="Background"
-        fill
-        sizes="100vw"
-        className="object-cover object-[left,right]"
-        priority
-      />
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-20 z-0" />
-      <div className="container relative z-10">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
-          {socialPlatforms.map((platform) => (
-            <div
+    <section className="relative py-8 overflow-hidden bg-gradient-to-r from-purple-900 to-green-900">
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/social-media.webp"
+          alt="Social Media Background"
+          fill
+          priority
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-50" />
+      </div>
+      <div className="container relative z-10 mx-auto px-4">
+        <h2 className="text-3xl font-semibold text-white text-center mb-8">
+          Connect with Dr. Rakesh Bansal
+        </h2>
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+          {socialPlatforms.map((platform, index) => (
+            <motion.div
               key={platform.name}
-              className="flex flex-col items-center justify-between w-full p-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="w-[calc(50%-1rem)] sm:w-auto flex flex-col items-center justify-between bg-white bg-opacity-10 rounded-lg p-4 backdrop-blur-sm transition-all duration-300 hover:bg-opacity-20 hover:scale-105"
             >
-              <div className="rounded-full p-1 sm:p-2 md:p-3 h-[70px] sm:h-20">
+              <div className="relative w-12 h-12 sm:w-16 sm:h-16">
                 <Image
                   src={platform.icon}
                   alt={`${platform.name} icon`}
-                  width={100}
-                  height={100}
-                  className="w-full h-full max-w-[80px] sm:max-w-[100px] md:max-w-[120px]"
+                  layout="fill"
+                  objectFit="contain"
                 />
               </div>
-              <p className="text-white text-base md:text-lg lg:text-2xl font-semibold mt-1 sm:mt-2">
+              <p className="text-white text-lg sm:text-xl font-semibold mt-2">
                 {isMounted ? (
                   <CountUp
                     end={platform.followers}
-                    duration={3}
+                    duration={2}
                     separator=","
                     formattingFn={formatNumber}
                   />
@@ -117,17 +130,15 @@ export default function SocialPlatforms() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="mt-1 sm:mt-2 md:mt-4 max-w-[120px] sm:max-w-[150px] lg:max-w-[180px] w-full transition-colors
-                 text-xs sm:text-sm lg:text-base bg-transparent text-secondary-foreground px-2 sm:px-3 md:px-4 
-              lg:px-8 py-1 sm:py-2"
+                  className="mt-2 w-full bg-transparent text-white border-white hover:bg-white hover:text-purple-900 transition-colors duration-300"
                 >
                   {platform.action}
                 </Button>
               </Link>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

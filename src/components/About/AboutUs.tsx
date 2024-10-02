@@ -1,49 +1,170 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { FaYoutube } from "react-icons/fa";
-import { GiBookshelf, GiTeacher, GiChart } from "react-icons/gi";
-import { Button } from "@/components/ui/button";
-import BookPublished from "../ui/BookPublished";
+import { IconType } from "react-icons";
+import {
+  motion,
+  useScroll,
+  useSpring,
+  useInView,
+  useAnimation,
+} from "framer-motion";
+import {
+  FaYoutube,
+  FaTwitter,
+  FaLinkedin,
+  FaFacebook,
+  FaChartLine,
+  FaGraduationCap,
+  FaBook,
+  FaTv,
+} from "react-icons/fa";
+import { Button } from "../ui/button";
 
-const AboutUs: React.FC = () => {
-  const timelineRef = useRef(null);
-  const { scrollYProgress } = useScroll();
-  const { scrollYProgress: timelineProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start end", "end start"],
-  });
+const socialIcons = [
+  { Icon: FaYoutube, url: "#", color: "text-purple-600" },
+  { Icon: FaTwitter, url: "#", color: "text-green-600" },
+  { Icon: FaLinkedin, url: "#", color: "text-purple-600" },
+  { Icon: FaFacebook, url: "#", color: "text-green-600" },
+];
 
-  const opacity = useTransform(timelineProgress, [0, 0.5, 1], [0, 1, 0]);
-  const scale = useTransform(timelineProgress, [0, 0.5, 1], [0.8, 1, 0.8]);
+interface Achievement {
+  number: string;
+  text: string;
+}
+
+const achievements: Achievement[] = [
+  { number: "25+", text: "Years Experience" },
+  { number: "45000k+", text: "Trained Participants" },
+  { number: "2M+", text: "Followers" },
+  { number: "1.6M", text: "TV Channels" },
+];
+
+interface EducationalContent {
+  icon: IconType;
+  title: string;
+  description: string;
+}
+const educationalContent: EducationalContent[] = [
+  {
+    icon: FaChartLine,
+    title: "Technical Analysis",
+    description: "Learn advanced charting techniques",
+  },
+  {
+    icon: FaGraduationCap,
+    title: "Webinars",
+    description: "Participate in live interactive sessions",
+  },
+  {
+    icon: FaBook,
+    title: "Courses",
+    description: "Comprehensive trading education",
+  },
+  {
+    icon: FaTv,
+    title: "Media Appearances",
+    description: "Insights on leading financial channels",
+  },
+];
+
+interface AnimatedSectionProps {
+  children: React.ReactNode;
+}
+
+const AnimatedSection: React.FC<AnimatedSectionProps> = ({ children }) => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const inView = useInView(ref);
+
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative h-[300px] md:h-[400px] lg:h-[500px]">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-800 to-indigo-600 opacity-50" />
-        <motion.div
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0"
-        >
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={controls}
+      variants={{
+        visible: { opacity: 1, y: 0 },
+        hidden: { opacity: 0, y: 50 },
+      }}
+      transition={{ duration: 0.5 }}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+interface AnimatedCounterProps {
+  number: string;
+  text: string;
+}
+
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ number, text }) => {
+  const controls = useAnimation();
+  const ref = useRef(null);
+  const inView = useInView(ref);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (inView) {
+      controls.start({
+        scale: [1, 1.2, 1],
+        transition: { duration: 0.5 },
+      });
+      const interval = setInterval(() => {
+        setCount((prevCount) => {
+          const nextCount = prevCount + 1;
+          return nextCount > parseInt(number) ? parseInt(number) : nextCount;
+        });
+      }, 20);
+      return () => clearInterval(interval);
+    }
+  }, [inView, number, controls]);
+
+  return (
+    <motion.div ref={ref} animate={controls} className="text-center">
+      <div className="text-4xl font-bold mb-2 text-purple-600">
+        {count}
+        {number.includes("+") && "+"}
+      </div>
+      <div className="text-sm text-green-600">{text}</div>
+    </motion.div>
+  );
+};
+
+const AboutUs = () => {
+  const scrollRef = useRef(null);
+  const { scrollYProgress } = useScroll({ target: scrollRef });
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
+  return (
+    <div ref={scrollRef} className="bg-white text-black">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute right-0 inset-0 z-0">
           <Image
-            src="https://img.freepik.com/free-vector/gradient-stock-market-concept_23-2149166910.jpg"
-            alt="Stock Market Background"
-            layout="fill"
-            objectFit="cover"
-            className="opacity-50"
+            src="/images/fyi.png"
+            alt="Background"
+            fill
+            className="object-cover bg-top"
           />
-        </motion.div>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+        </div>
+        <div className="absolute inset-0 bg-black opacity-50 z-10" />
+        <div className="relative z-20 text-center px-4">
           <motion.h1
             initial={{ opacity: 0, y: -50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.5 }}
-            className="text-4xl md:text-7xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-green-400"
+            className="text-4xl md:text-7xl font-bold mb-4 text-white"
           >
             Dr. Rakesh Bansal
           </motion.h1>
@@ -51,287 +172,284 @@ const AboutUs: React.FC = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7 }}
-            className="text-xl md:text-2xl mb-8"
+            className="text-xl md:text-2xl mb-8 text-white"
           >
             Empowering Traders, Transforming Lives
           </motion.p>
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-10 w-10"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
+          <motion.div className="flex justify-center space-x-4">
+            {socialIcons.map(({ Icon, url, color }, index) => (
+              <motion.a
+                key={index}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                className={`${color} text-2xl`}
+              >
+                <Icon />
+              </motion.a>
+            ))}
           </motion.div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-blue-900">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="flex flex-col md:flex-row items-center justify-between gap-12"
-          >
-            <div className="md:w-1/2">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center md:text-left">
-                About Dr. Rakesh Bansal
-              </h2>
-              <p className="text-sm md:text-base mb-6 font-light leading-relaxed text-center md:text-left">
-                Dr. Rakesh Bansal, a post-graduate in International Business
-                Management and holder of a doctorate in market analysis, has
-                been a prominent figure in stock market analysis since 1998.
-                With over two decades of extensive experience, he specializes in
-                technical analysis, wealth management, and investment analysis.
-              </p>
-              <p className="text-sm md:text-base mb-6 font-light leading-relaxed text-center md:text-left">
-                As a SEBI registered research analyst (INH100008984), Dr. Bansal
-                offers high-quality market insights and educational resources to
-                traders and investors across the country, helping millions work
-                towards their financial independence.
-              </p>
-              <div className="flex justify-center md:justify-start">
-                <Button variant="gradient" size="custom" className="mr-4">
-                  Learn More
-                </Button>
+      <AnimatedSection>
+        <section className="py-20 bg-gradient-to-r from-purple-100 to-green-100">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+              <div className="md:w-1/2">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-purple-600">
+                  About Dr. Rakesh Bansal
+                </h2>
+                <p className="text-sm md:text-base mb-6 leading-relaxed">
+                  Dr. Rakesh Bansal, a post-graduate in International Business
+                  Management and holder of a doctorate in market analysis, has
+                  been a prominent figure in stock market analysis since 1998.
+                  With over two decades of extensive experience, he specializes
+                  in technical analysis, wealth management, and investment
+                  analysis.
+                </p>
+                <p className="text-sm md:text-base mb-6 leading-relaxed">
+                  As a SEBI registered research analyst (INH100008984), Dr.
+                  Bansal offers high-quality market insights and educational
+                  resources to traders and investors across the country, helping
+                  millions work towards their financial independence.
+                </p>
+
                 <Button variant="gradient" size="custom">
                   Contact Us
                 </Button>
               </div>
-            </div>
-            <div className="md:w-1/2">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Image
-                  src="/images/about-us-img.webp"
-                  alt="Dr. Rakesh Bansal"
-                  width={400}
-                  height={400}
-                  className="rounded-full border-4 border-blue-400 shadow-lg"
-                />
-              </motion.div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Career and Media Presence */}
-      <section className="py-20 bg-gradient-to-b from-blue-900 to-green-900">
-        <div className="container mx-auto px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold mb-12 text-center"
-          >
-            Career and Media Presence
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: FaYoutube,
-                title: "Expert Panelist",
-                description:
-                  "Featured on Zee Business, CNBC Awaaz, ET Now, and DD News",
-              },
-              {
-                icon: GiBookshelf,
-                title: "Published Author",
-                description:
-                  "Author of 'Profitable Short Term Trading Strategies'",
-              },
-              {
-                icon: GiChart,
-                title: "Industry Leader",
-                description:
-                  "Former technical analysis department leader at top firms",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white bg-opacity-10 rounded-lg p-6 text-center"
-              >
-                <item.icon className="text-5xl mb-4 mx-auto text-blue-400" />
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm">{item.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section
-        id="timeline"
-        ref={timelineRef}
-        className="py-20 bg-gradient-to-b from-green-900 to-gray-900"
-      >
-        <div className="container mx-auto px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold mb-12 text-center"
-          >
-            Dr. Bansal's Journey
-          </motion.h2>
-          <motion.div style={{ opacity, scale }} className="relative">
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-blue-400" />
-            {[
-              { year: 1998, title: "Started Trading Career" },
-              { year: 2005, title: "Published First Book" },
-              { year: 2010, title: "Launched Online Trading Course" },
-              { year: 2015, title: "Established Trading Academy" },
-              { year: 2020, title: "Released Trading App" },
-            ].map((event, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`flex items-center mb-8 ${
-                  index % 2 === 0 ? "justify-start" : "justify-end"
-                }`}
-              >
-                <div
-                  className={`w-5/12 ${
-                    index % 2 === 0 ? "text-right pr-8" : "text-left pl-8"
-                  }`}
+              <div className="">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <h3 className="text-2xl font-bold mb-2">{event.year}</h3>
-                  <p className="text-lg">{event.title}</p>
-                </div>
-                <div className="w-2 h-2 bg-blue-400 rounded-full z-10" />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Trading Philosophy and Methodology */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-blue-900">
-        <div className="container mx-auto px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold mb-12 text-center"
-          >
-            Trading Philosophy and Methodology
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white bg-opacity-10 rounded-lg p-6"
-            >
-              <h3 className="text-2xl font-semibold mb-4">
-                Disciplined Approach
-              </h3>
-              <p className="text-sm mb-4">
-                Dr. Bansal's trading philosophy is rooted in discipline and
-                meticulous technical analysis. He focuses on identifying strong
-                entry and exit points, utilizing advanced tools to uncover
-                hidden market opportunities.
-              </p>
-              <ul className="list-disc list-inside text-sm">
-                <li>3-line break charts</li>
-                <li>Inverse charts</li>
-                <li>ATM trading strategy</li>
-              </ul>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white bg-opacity-10 rounded-lg p-6"
-            >
-              <h3 className="text-2xl font-semibold mb-4">Risk Management</h3>
-              <p className="text-sm mb-4">
-                Dr. Bansal emphasizes the importance of effective risk
-                management in trading. His strategies are designed to help
-                traders capitalize on short-term trends while minimizing
-                potential losses.
-              </p>
-              <ul className="list-disc list-inside text-sm">
-                <li>Clear stop-loss levels</li>
-                <li>Position sizing techniques</li>
-                <li>Diversification strategies</li>
-              </ul>
-            </motion.div>
+                  <Image
+                    src="/images/about-us-img.webp"
+                    alt="Dr. Rakesh Bansal"
+                    width={400}
+                    height={400}
+                    className="rounded-full border-4 border-blue-400 shadow-lg"
+                  />
+                </motion.div>
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
 
-      {/* Educational Contributions */}
-      <section className="py-20 bg-gradient-to-b from-blue-900 to-green-900">
-        <div className="container mx-auto px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl md:text-4xl font-bold mb-12 text-center"
-          >
-            Educational Contributions
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: GiTeacher,
-                title: "Webinars",
-                description: "Live interactive sessions on market analysis",
-              },
-              {
-                icon: GiBookshelf,
-                title: "Courses",
-                description: "Comprehensive trading courses for all levels",
-              },
-              {
-                icon: GiChart,
-                title: "Research",
-                description: "In-depth market research and analysis reports",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white bg-opacity-10 rounded-lg p-6 text-center"
-              >
-                <item.icon className="text-5xl mb-4 mx-auto text-green-400" />
-                <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-                <p className="text-sm">{item.description}</p>
-              </motion.div>
-            ))}
+      <AnimatedSection>
+        <section className="py-10 bg-gradient-to-r from-green-100 to-purple-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-green-600">
+              Achievements
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {achievements.map((achievement, index) => (
+                <AnimatedCounter
+                  key={index}
+                  number={achievement.number}
+                  text={achievement.text}
+                />
+              ))}
+            </div>
           </div>
+        </section>
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <section className="py-10 bg-gradient-to-r from-purple-100 to-green-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-purple-600">
+              Career and Media Presence
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-white rounded-lg p-6 shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4 text-green-600">
+                  Expert Panelist
+                </h3>
+                <p className="text-sm mb-4">
+                  Dr. Rakesh Bansal is a well-known expert panelist on leading
+                  financial news channels, including Zee Business, CNBC Awaaz,
+                  ET Now, and DD News. His stock market insights and trading
+                  strategies are highly regarded by investors seeking to gain a
+                  competitive edge in the market.
+                </p>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4 text-green-600">
+                  Professional Experience
+                </h3>
+                <p className="text-sm mb-4">
+                  He has previously worked with prestigious firms such as R K
+                  Global, SMC Global Securities Limited, and BLB Limited,
+                  leading their technical analysis departments. His first book,
+                  "Profitable Short Term Trading Strategies," published by
+                  Vision Books, showcases his deep understanding of the stock
+                  market.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <section className="py-10 bg-gradient-to-r from-green-100 to-purple-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-green-600">
+              Trading Philosophy and Methodology
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="bg-white rounded-lg p-6 shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4 text-purple-600">
+                  Disciplined Approach
+                </h3>
+                <p className="text-sm mb-4">
+                  Dr. Bansal's trading philosophy is rooted in discipline and
+                  meticulous technical analysis. He focuses on identifying
+                  strong entry and exit points, utilizing tools such as 3-line
+                  break charts and inverse charts to uncover hidden market
+                  opportunities.
+                </p>
+                <ul className="list-disc list-inside text-sm">
+                  <li>3-line break charts</li>
+                  <li>Inverse charts</li>
+                  <li>ATM trading strategy</li>
+                </ul>
+              </div>
+              <div className="bg-white rounded-lg p-6 shadow-lg">
+                <h3 className="text-2xl font-semibold mb-4 text-purple-600">
+                  Psychological Aspect
+                </h3>
+                <p className="text-sm mb-4">
+                  Bansal emphasizes the psychological aspect of trading,
+                  ensuring traders maintain emotional stability while making
+                  informed decisions. His ATM trading strategy is designed to
+                  help traders capitalize on short-term trends while managing
+                  risks effectively.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <section className="py-10 bg-gradient-to-r from-purple-100 to-green-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-purple-600">
+              Educational Contributions
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {educationalContent.map((item, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.05 }}
+                  className="bg-white rounded-lg p-6 shadow-lg text-center"
+                >
+                  <item.icon className="text-5xl mb-4 mx-auto text-green-600" />
+                  <h3 className="text-xl font-semibold mb-2 text-purple-600">
+                    {item.title}
+                  </h3>
+                  <p className="text-sm">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <section className="py-10 bg-gradient-to-r from-green-100 to-purple-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-green-600">
+              Frequently Asked Questions
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {[
+                {
+                  question:
+                    "What is Dr Bansal's approach to technical analysis?",
+                  answer:
+                    "Dr. Rakesh Bansal emphasizes charting techniques like 3-line break charts and inverse charts to identify trends. He stresses the importance of defining clear entry and exit points for successful trading.",
+                },
+                {
+                  question: "Where can I access his educational content?",
+                  answer:
+                    "You can participate in his webinars and courses through iamrakesbansal.com and Rakesh Bansal Ventures App to benefit from his market insights and trading strategies.",
+                },
+                {
+                  question: "Is Dr Bansal SEBI registered?",
+                  answer:
+                    "Yes, Dr Bansal is a SEBI-registered Research Analyst under the registration number INH100008984.",
+                },
+                {
+                  question: "What are his qualifications?",
+                  answer:
+                    "Dr. Rakesh Bansal holds an MBA in Finance and a CPFA. He has also completed the Equity Derivatives Certification from the National Institute of Securities Markets (NISM), Mumbai. Additionally, he holds a Doctorate in Market Analysis with a Hybrid Tech Model and is the Founder of iamrakeshbansal.com.",
+                },
+              ].map((faq, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{ scale: 1.02 }}
+                  className="bg-white rounded-lg p-6 shadow-lg"
+                >
+                  <h3 className="text-xl font-semibold mb-2 text-purple-600">
+                    {faq.question}
+                  </h3>
+                  <p className="text-sm">{faq.answer}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <section className="py-5 bg-gradient-to-r from-purple-100 to-green-100">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center text-purple-600">
+              Conclusion
+            </h2>
+            <div className="bg-white rounded-lg p-6 shadow-lg">
+              <p className="text-sm mb-4">
+                Dr. Rakesh Bansal has immensely contributed to spreading
+                financial literacy across India, training over 45,000
+                participants in the financial markets. He firmly believes that
+                wealth can be built in the stock market through consistency,
+                patience, and dedication. His teachings emphasize a disciplined
+                approach, empowering traders to achieve long-term success with
+                the right mindset and strategies.
+              </p>
+              <p className="text-sm">
+                Dr. Rakesh Bansal has significantly contributed to the Indian
+                stock market community by offering disciplined, research-backed
+                strategies for successful trading. His commitment to educating
+                traders through technical analysis and risk management has
+                empowered countless individuals to navigate the complexities of
+                the financial markets with confidence.
+              </p>
+            </div>
+          </div>
+        </section>
+      </AnimatedSection>
+
+      <section className="py-10 bg-white">
+        <div className="container mx-auto px-4">
+          <p className="text-xs text-center text-gray-700 font-semibold">
+            Disclaimer: Investments in the securities market are subject to
+            market risks. Please read all related documents carefully before
+            investing.
+          </p>
         </div>
       </section>
-      <BookPublished />
 
-      {/* Scroll Progress Indicator */}
       <motion.div
-        className="fixed bottom-0 left-0 right-0 h-1 bg-blue-500"
-        style={{ scaleX: scrollYProgress }}
+        className="fixed bottom-0 left-0 right-0 h-1 bg-purple-500 origin-left"
+        style={{ scaleX }}
       />
     </div>
   );

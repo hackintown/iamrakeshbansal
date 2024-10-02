@@ -117,7 +117,7 @@ export default function BookPublished() {
           financial success.
         </p>
         <div className="">
-          <div className="relative w-full max-w-5xl mx-auto py-10 lg:py-12">
+          <div className="relative w-full max-w-5xl mx-auto py-10">
             <Swiper
               onSwiper={setSwiperInstance}
               effect={"coverflow"}
@@ -186,7 +186,11 @@ export default function BookPublished() {
                           transition={{ duration: 0.3 }}
                           className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50"
                         >
-                          <Link href={slide.link} target="_blank" rel="noopener noreferrer">
+                          <Link
+                            href={slide.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
                             <motion.a
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}

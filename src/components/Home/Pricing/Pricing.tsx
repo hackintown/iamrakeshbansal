@@ -290,13 +290,11 @@ const PricingCard = ({
   plan: PricingPlan;
   duration: PlanDuration;
 }) => {
-  const availableDurations = ["monthly", "quarterly", "yearly"].filter(
-    (d) => plan[`${d}Price` as keyof PricingPlan]
-  ) as PlanDuration[];
+  const price = plan[`${duration}Price`];
 
-  const defaultDuration = availableDurations[0];
-  const price = plan[`${duration}Price`] || plan[`${defaultDuration}Price`];
-  const displayDuration = plan[`${duration}Price`] ? duration : defaultDuration;
+  if (!price) {
+    return null; // Don't render the card if there's no price for the selected duration
+  }
 
   return (
     <motion.div
@@ -311,10 +309,10 @@ const PricingCard = ({
     >
       <CardHeader
         title={plan.title}
-        price={price || ""}
+        price={price}
         description={plan.description}
         popular={plan.popular}
-        duration={displayDuration}
+        duration={duration}
         icon={plan.icon}
       />
       <FeatureList features={plan.features} />
@@ -354,14 +352,16 @@ export default function Pricing() {
   const sliderRef = useRef<Slider>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  const availablePlans = pricingData.filter((plan) => plan[`${duration}Price`]);
+
   const settings = {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 4,
+    slidesToShow: Math.min(4, availablePlans.length),
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 300000,
+    autoplaySpeed: 30000,
     pauseOnHover: true,
     arrows: false,
     className: "right-side-visible-slider",
@@ -382,6 +382,7 @@ export default function Pricing() {
 
   const handleDurationChange = (newDuration: PlanDuration) => {
     setDuration(newDuration);
+    setCurrentSlide(0);
   };
 
   const goToSlide = (index: number) => {
@@ -475,7 +476,7 @@ export default function Pricing() {
         </motion.div>
         <div className="relative w-full">
           <Slider ref={sliderRef} {...settings}>
-            {pricingData.map((plan, index) => (
+            {availablePlans.map((plan, index) => (
               <div
                 key={index}
                 className="outline-none px-2 py-2 w-full h-[580px]"
@@ -484,37 +485,41 @@ export default function Pricing() {
               </div>
             ))}
           </Slider>
-          <div className="absolute -bottom-2 right-5 flex mt-4 border border-border  overflow-hidden">
-            <div
-              onClick={() => sliderRef.current?.slickPrev()}
-              aria-label="Previous slide"
-              className="bg-purple-600 cursor-pointer p-1 flex items-center justify-center"
-            >
-              <MdPlayArrow className="text-white size-8 rotate-180" />
-            </div>
-            <div
-              onClick={() => sliderRef.current?.slickNext()}
-              aria-label="Next slide"
-              className="bg-purple-600 border-l cursor-pointer p-1 flex items-center justify-center"
-            >
-              <MdPlayArrow className="text-white size-8" />
-            </div>
-          </div>
-          <div className="mt-8 flex justify-center items-center">
-            {pricingData.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "w-3 h-3 rounded-full mx-1 transition-all duration-300",
-                  currentSlide === index
-                    ? "bg-purple-600 scale-125"
-                    : "bg-gray-400"
-                )}
-                onClick={() => goToSlide(index)}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
+          {availablePlans.length > 1 && (
+            <>
+              <div className="absolute -bottom-2 right-5 flex mt-4 border border-border  overflow-hidden">
+                <div
+                  onClick={() => sliderRef.current?.slickPrev()}
+                  aria-label="Previous slide"
+                  className="bg-purple-600 cursor-pointer p-1 flex items-center justify-center"
+                >
+                  <MdPlayArrow className="text-white size-8 rotate-180" />
+                </div>
+                <div
+                  onClick={() => sliderRef.current?.slickNext()}
+                  aria-label="Next slide"
+                  className="bg-purple-600 border-l cursor-pointer p-1 flex items-center justify-center"
+                >
+                  <MdPlayArrow className="text-white size-8" />
+                </div>
+              </div>
+              <div className="mt-8 flex justify-center items-center">
+                {availablePlans.map((_, index) => (
+                  <button
+                    key={index}
+                    className={cn(
+                      "w-3 h-3 rounded-full mx-1 transition-all duration-300",
+                      currentSlide === index
+                        ? "bg-purple-600 scale-125"
+                        : "bg-gray-400"
+                    )}
+                    onClick={() => goToSlide(index)}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>
