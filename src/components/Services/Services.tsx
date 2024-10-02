@@ -75,33 +75,21 @@ Registration granted by SEBI and certification from NISM in no way guarantee per
 interface ServiceProps {
   param: string;
 }
-// const SocialIcon: React.FC<{ Icon: React.ElementType; href: string }> = ({
-//   Icon,
-//   href,
-// }) => (
-//   <motion.a
-//     href={href}
-//     target="_blank"
-//     rel="noopener noreferrer"
-//     whileHover={{ scale: 1.2 }}
-//     whileTap={{ scale: 0.9 }}
-//     className="text-white hover:text-gray-200 transition-colors"
-//   >
-//     <Icon size={24} />
-//   </motion.a>
-// );
 
 const KeyboardEffect: React.FC<{ text: string }> = ({ text }) => {
   const controls = useAnimation();
 
   React.useEffect(() => {
+    let isMounted = true;
     const animateText = async () => {
+      if (!isMounted) return;
       await controls.start((i) => ({
         opacity: 1,
         y: 0,
         transition: { delay: i * 0.1 },
       }));
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (!isMounted) return;
       await controls.start((i) => ({
         opacity: 0,
         y: 10,
@@ -111,19 +99,22 @@ const KeyboardEffect: React.FC<{ text: string }> = ({ text }) => {
       animateText();
     };
     animateText();
+    return () => {
+      isMounted = false; // Set the flag to false to avoid calling controls after unmount
+      controls.stop(); // Stop any ongoing animations
+    };
   }, [controls, text]);
 
   return (
-    <div className="flex overflow-hidden">
-      {text.split("  ").map((char, i) => (
+    <div style={{ display: "flex", gap: "0.2rem" }}>
+      {text.split("").map((char, i) => (
         <motion.span
           key={i}
           custom={i}
           animate={controls}
-          initial={{ opacity: 0, y: 20 }}
-          className="inline-block"
+          initial={{ opacity: 0, y: 10 }}
         >
-          {char}
+          {char === " " ? "\u00A0" : char}
         </motion.span>
       ))}
     </div>
@@ -352,21 +343,6 @@ const ServiceHeader: React.FC<{ title: string }> = ({ title }) => (
     </div>
 
     <div className="z-10 flex flex-col items-center">
-      {/* <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ type: "spring", stiffness: 260, damping: 20 }}
-        className="relative mb-4"
-      >
-        <Image
-          src="/hero/banner-first-slide.webp"
-          alt="Rakesh Bansal"
-          width={200}
-          height={200}
-          className="rounded-full border-4 border-white shadow-lg object-cover"
-        />
-      </motion.div> */}
-
       <motion.div
         initial={{ y: 50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -377,27 +353,6 @@ const ServiceHeader: React.FC<{ title: string }> = ({ title }) => (
           <KeyboardEffect text={title.toUpperCase()} />
         </h1>
       </motion.div>
-
-      {/* <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="flex space-x-4 mt-2 mb-4"
-      >
-        <SocialIcon
-          Icon={Facebook}
-          href="https://www.facebook.com/IAMRAKESHBANSAL/"
-        />
-        <SocialIcon Icon={Twitter} href="https://x.com/iamrakeshbansal" />
-        <SocialIcon
-          Icon={Instagram}
-          href="https://www.instagram.com/therakeshbansal/"
-        />
-        <SocialIcon
-          Icon={Linkedin}
-          href="https://www.linkedin.com/in/drrakeshbansal/"
-        />
-      </motion.div> */}
     </div>
   </motion.header>
 );
@@ -475,7 +430,6 @@ const KeyFeatures: React.FC<{ features: string[] }> = ({ features }) => (
               {feature.split(":")[0]}
             </h4>
           </div>
-          {/* <p className="text-gray-600">{feature.split(":")[1] || feature}</p> */}
         </motion.div>
       ))}
     </div>
@@ -637,13 +591,20 @@ const PricingPlans: React.FC<{
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg p-6 shadow-md w-full max-w-[250px] text-white"
+          className="rounded-lg p-6 shadow-md w-full h-full max-w-[250px] max-h-[250px]"
+          style={{
+            backgroundImage: `url(${getPlanBackgroundImage(plan.duration)})`,
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat",
+          }}
         >
-          <h4 className="text-xl font-semibold mb-2">{plan.duration}</h4>
-          <p className="text-3xl font-bold mb-4">{plan.price}</p>
+          <h4 className="text-xl font-semibold mb-2 text-white">
+            {plan.duration}
+          </h4>
+          <p className="text-3xl font-bold mb-4 text-white">{plan.price}</p>
           <button
             onClick={onPayNow}
-            className="w-full bg-white text-indigo-600 py-2 px-4 rounded transition-colors duration-300 hover:bg-indigo-100"
+            className="w-full bg-background border border-border text-foreground py-2 px-4 rounded transition-colors duration-300 hover:bg-opacity-80"
           >
             Subscribe Now
           </button>
@@ -776,5 +737,16 @@ const DisclaimerModal: React.FC<{
     )}
   </AnimatePresence>
 );
-
+function getPlanBackgroundImage(duration: string): string {
+  switch (duration.toLowerCase()) {
+    case "monthly":
+      return "/images/dream-card1.png";
+    case "quarterly":
+      return "/images/dream-card2.png";
+    case "yearly":
+      return "/images/dream-card3.png";
+    default:
+      return "/images/dream-card1.png";
+  }
+}
 export default ServicesPage;

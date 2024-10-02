@@ -3,6 +3,7 @@ import "./globals.css";
 
 import { Poppins } from "@next/font/google";
 import Navbar from "@/components/ui/Navbar/Navbar";
+// import { AnimatedNavbar } from "@/components/ui/AnimatedNavbar/AnimatedNavbar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -39,9 +40,12 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={`${poppins.variable} font-sans antialiased`}>
-        <div className="sticky top-0 z-50 bg-white">
+        <div className="relative w-full flex items-center justify-center">
           <Navbar />
         </div>
+        {/* <div className="relative w-full flex items-center justify-center">
+          <AnimatedNavbar className="top-0" />
+        </div> */}
         {children}
       </body>
     </html>

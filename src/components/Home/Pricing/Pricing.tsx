@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, Info } from "lucide-react";
@@ -353,6 +353,12 @@ export default function Pricing() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const availablePlans = pricingData.filter((plan) => plan[`${duration}Price`]);
+  useEffect(() => {
+    const servicesSection = document.getElementById("services-sec");
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
 
   const settings = {
     dots: false,
