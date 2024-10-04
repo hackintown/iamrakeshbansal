@@ -257,7 +257,7 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       <ServiceHeader title={content.title} />
-      <main className="container mx-auto px-4 py-16">
+      <main className="container mx-auto px-4 py-8 lg:py-10">
         <AnimatePresence mode="wait">
           <motion.section
             key={selectedService}
@@ -265,7 +265,7 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 50 }}
             transition={{ duration: 0.5 }}
-            className="bg-white text-gray-800 rounded-lg p-8 shadow-xl"
+            className="bg-white text-gray-800 rounded-lg p-4 shadow-xl"
           >
             <ServiceDescription content={content} />
             {content.keyFeatures && (
@@ -320,7 +320,7 @@ const ServiceHeader: React.FC<{ title: string }> = ({ title }) => (
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     transition={{ duration: 1 }}
-    className="relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-r from-purple-800 to-indigo-600 py-5 lg:py-10"
+    className="relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-r from-purple-800 to-gray-600 py-5 lg:py-10"
   >
     <div className="absolute inset-0 z-0">
       <motion.div
@@ -360,12 +360,14 @@ const ServiceDescription: React.FC<{
 }> = ({ content }) => (
   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
     <div>
-      <h2 className="text-3xl font-bold mb-4">{content.title}</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-indigo-600">
+        {content.title}
+      </h2>
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-6 font-light"
+        className="mb-6 font-light text-sm sm:text-base"
       >
         {content.description}
       </motion.p>
@@ -374,7 +376,7 @@ const ServiceDescription: React.FC<{
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-6 font-light"
+          className="mb-6 font-light text-sm sm:text-base"
         >
           {content.additionalDescription}
         </motion.p>
@@ -387,10 +389,10 @@ const ServiceDescription: React.FC<{
       className="w-full flex justify-center"
     >
       <Image
-        src="/images/about-us-img.webp"
+        src="/images/service-page-img.webp"
         alt="Rakesh Bansal"
-        width={300}
-        height={300}
+        width={500}
+        height={500}
         className="rounded-full shadow-2xl"
       />
     </motion.div>
@@ -418,13 +420,23 @@ const KeyFeatures: React.FC<{ features: string[] }> = ({ features }) => (
         >
           <div className="flex items-center">
             <div className="bg-indigo-500 rounded-full p-2 mr-4">
-              {index === 0 && <Clock className="w-6 h-6 text-white" />}
-              {index === 1 && <BarChart2 className="w-6 h-6 text-white" />}
-              {index === 2 && <PieChart className="w-6 h-6 text-white" />}
-              {index === 3 && <DollarSign className="w-6 h-6 text-white" />}
-              {index > 3 && <BookOpen className="w-6 h-6 text-white" />}
+              {index === 0 && (
+                <Clock className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              )}
+              {index === 1 && (
+                <BarChart2 className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              )}
+              {index === 2 && (
+                <PieChart className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              )}
+              {index === 3 && (
+                <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              )}
+              {index > 3 && (
+                <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              )}
             </div>
-            <h4 className="text-lg font-semibold text-green-700">
+            <h4 className="text-sm sm:text-base lg:text-lg font-semibold text-green-700">
               {feature.split(":")[0]}
             </h4>
           </div>
@@ -539,17 +551,21 @@ const WhyChooseUs: React.FC<{ items: { title: string; info: string }[] }> = ({
   items,
 }) => (
   <CustomCard title="Why Choose Us">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {items.map((item, index) => (
         <motion.div
           key={index}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="bg-white rounded-lg p-6 shadow-md"
+          className="bg-white rounded-lg p-2 shadow-md"
         >
-          <h4 className="font-semibold text-indigo-600 mb-2">{item.title}</h4>
-          <p className="text-gray-600">{item.info}</p>
+          <h4 className="font-semibold text-indigo-600 mb-2 text-base lg:text-lg">
+            {item.title}
+          </h4>
+          <p className="text-gray-600 font-light text-sm lg:text-base">
+            {item.info}
+          </p>
         </motion.div>
       ))}
     </div>
@@ -621,7 +637,7 @@ const Disclaimer: React.FC<{ text: string }> = ({ text }) => (
       className="flex items-start space-x-2 text-yellow-600"
     >
       <AlertTriangle className="w-5 h-5 mt-1 flex-shrink-0" />
-      <p>{text}</p>
+      <p className="text-sm md:text-base">{text}</p>
     </motion.div>
   </CustomCard>
 );
@@ -632,7 +648,7 @@ const Registration: React.FC<{ text: string }> = ({ text }) => (
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="text-blue-600"
+      className="text-blue-600 text-sm md:text-base"
     >
       {text}
     </motion.p>
@@ -645,7 +661,7 @@ const Notes: React.FC<{ text: string }> = ({ text }) => (
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="text-green-600"
+      className="text-green-600 text-sm md:text-base"
     >
       {text}
     </motion.p>
@@ -671,7 +687,7 @@ const DisclaimerModal: React.FC<{
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           exit={{ scale: 0.9 }}
-          className="bg-white text-gray-800 p-6 rounded-lg max-w-4xl w-full h-[40vh] md:h-[80vh] lg:h-[90vh] flex flex-col relative"
+          className="bg-white text-gray-800 p-6 rounded-lg max-w-4xl w-full h-[60vh] md:h-[80vh] lg:h-[90vh] flex flex-col relative"
         >
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-bold text-indigo-600">Disclaimer</h2>

@@ -149,7 +149,7 @@ const AboutUs = () => {
 
   return (
     <div ref={scrollRef} className="bg-white text-black">
-      <section className="relative flex items-center justify-center overflow-hidden bg-purple-200 py-6">
+      <section className="relative flex items-center justify-center overflow-hidden bg-gradient-to-b from-purple-900 to-gray-800 py-6">
         <div className="relative z-20 text-center px-4">
           <motion.h1
             initial={{ opacity: 0, y: -50 }}

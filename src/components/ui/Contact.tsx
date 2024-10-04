@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import { useState } from "react";
 import {
   FaFacebookF,
@@ -8,7 +9,8 @@ import {
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
-import { MdPhone, MdEmail, MdAccessTime, MdSend } from "react-icons/md";
+import { MdPhone, MdEmail, MdAccessTime } from "react-icons/md";
+import { Button } from "./button";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -27,6 +29,7 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Form submitted:", formData);
+    // Add your form submission logic here
   };
 
   return (
@@ -83,19 +86,34 @@ const Contact = () => {
                   <MdPhone className="text-green-400 mr-3 text-xl" />
                   <div>
                     <p>Payment & Joining related:</p>
-                    <p className="font-semibold">(+91) - 95608 - 84223</p>
+                    <Link
+                      href="tel:+919560884223"
+                      className="font-semibold hover:text-green-400 transition-colors"
+                    >
+                      (+91) - 95608 - 84223
+                    </Link>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <MdPhone className="text-green-400 mr-3 text-xl" />
                   <div>
                     <p>Enquiries:</p>
-                    <p className="font-semibold">(+91) - 88514 - 75191</p>
+                    <Link
+                      href="tel:+918851475191"
+                      className="font-semibold hover:text-green-400 transition-colors"
+                    >
+                      (+91) - 88514 - 75191
+                    </Link>
                   </div>
                 </div>
                 <div className="flex items-center">
                   <MdEmail className="text-green-400 mr-3 text-xl" />
-                  <span>wecare@iamrakeshbansal.com</span>
+                  <Link
+                    href="mailto:wecare@iamrakeshbansal.com"
+                    className="hover:text-green-400 transition-colors"
+                  >
+                    wecare@iamrakeshbansal.com
+                  </Link>
                 </div>
               </div>
             </div>
@@ -125,14 +143,32 @@ const Contact = () => {
               <h2 className="text-2xl font-semibold mb-6">Connect With Us</h2>
               <div className="flex justify-center space-x-4">
                 {[
-                  { Icon: FaFacebookF, color: "bg-blue-600" },
-                  { Icon: FaTwitter, color: "bg-sky-500" },
-                  { Icon: FaInstagram, color: "bg-pink-600" },
-                  { Icon: FaLinkedinIn, color: "bg-blue-700" },
-                ].map(({ Icon, color }, index) => (
+                  {
+                    Icon: FaFacebookF,
+                    color: "bg-blue-600",
+                    url: "https://www.facebook.com/IAMRAKESHBANSAL/",
+                  },
+                  {
+                    Icon: FaTwitter,
+                    color: "bg-sky-500",
+                    url: "https://x.com/iamrakeshbansal",
+                  },
+                  {
+                    Icon: FaInstagram,
+                    color: "bg-pink-600",
+                    url: "https://www.instagram.com/therakeshbansal/",
+                  },
+                  {
+                    Icon: FaLinkedinIn,
+                    color: "bg-blue-700",
+                    url: "https://www.linkedin.com/in/drrakeshbansal/",
+                  },
+                ].map(({ Icon, color, url }, index) => (
                   <motion.a
                     key={index}
-                    href="#"
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className={`${color} p-3 rounded-full text-white`}
                     whileHover={{ scale: 1.2, rotate: 360 }}
                     whileTap={{ scale: 0.8 }}
@@ -204,15 +240,9 @@ const Contact = () => {
                   required
                 ></textarea>
               </div>
-              <motion.button
-                type="submit"
-                className="w-full bg-green-500 text-white px-6 py-3 rounded-md font-semibold hover:bg-green-600 transition-colors flex items-center justify-center"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <MdSend className="mr-2" />
+              <Button variant="gradient" size="custom" className="w-full">
                 Send Message
-              </motion.button>
+              </Button>
             </form>
           </motion.div>
         </div>
