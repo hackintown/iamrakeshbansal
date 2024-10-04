@@ -150,7 +150,7 @@ const FAQItem: React.FC<FaqProps> = ({
   return (
     <motion.div
       ref={ref}
-      className="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-4"
+      className="bg-white overflow-hidden shadow-sm rounded-sm sm:rounded-lg mb-4"
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -208,7 +208,7 @@ export default function FAQ() {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   return (
-    <div className="bg-gradient-to-br from-purple-200 to-green-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="bg-gradient-to-br from-purple-100 to-green-50 py-12 px-4 sm:px-6 lg:px-8 shadow-sm">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-green-400 text-center mb-12"

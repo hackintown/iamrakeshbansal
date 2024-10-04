@@ -37,7 +37,7 @@ export default function Footer() {
     },
     {
       Icon: FaWhatsapp,
-      href: "https://www.whatsapp.com/channel/0029…",
+      href: "https://www.whatsapp.com/channel/0029Vaglc39K0IBhitUB5N2K",
       label: "WhatsApp",
     },
     {
@@ -48,16 +48,19 @@ export default function Footer() {
   ];
 
   const usefulLinks = [
+    { text: "Home", href: "/" },
     { text: "Blog", href: "/blog" },
-    { text: "FAQ", href: "#faq-sec" },
+    { text: "Services", href: "/#services-sec" },
     { text: "About Us", href: "/about-us" },
-    { text: "Services", href: "#services-sec" },
     { text: "Contact", href: "/contact-us" },
   ];
 
   const quickLinks = [
     { text: "Disclaimer", href: "/disclaimer" },
-    { text: "Feedback Form", href: "#services-sec" },
+    {
+      text: "Feedback Form",
+      href: "https://docs.google.com/forms/d/e/1FAIpQLScbFTo1a56fkSEYXrKZevHEtuClx9WS9l5Xd3gXjdfoI-GwCg/viewform",
+    },
     { text: "Privacy Policy", href: "/privacy-policy" },
     { text: "Customer Grievances", href: "/customer-grievances" },
     { text: "Terms and Conditions", href: "/terms-conditions" },
@@ -253,8 +256,8 @@ export default function Footer() {
         >
           <div className="flex flex-col sm:flex-row justify-center items-center">
             <p className="text-sm mb-4 sm:mb-0 text-center sm:text-left">
-              &copy; {new Date().getFullYear()} Rakesh Bansal Venture All rights
-              reserved.
+              &copy; {new Date().getFullYear()} Rakesh Bansal Ventures All
+              rights reserved.
             </p>
             {/* <div className="flex flex-wrap justify-center gap-4">
               <Link

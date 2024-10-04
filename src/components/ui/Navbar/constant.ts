@@ -86,7 +86,7 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
       {
         id: "terms-and-conditions",
         name: "Terms and Conditions",
-        href: "terms-and-conditions",
+        href: "/terms-conditions",
       },
     ],
   },

@@ -149,16 +149,7 @@ const AboutUs = () => {
 
   return (
     <div ref={scrollRef} className="bg-white text-black">
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute right-0 inset-0 z-0">
-          <Image
-            src="/images/fyi.png"
-            alt="Background"
-            fill
-            className="object-cover bg-top"
-          />
-        </div>
-        <div className="absolute inset-0 bg-black opacity-50 z-10" />
+      <section className="relative flex items-center justify-center overflow-hidden bg-purple-200 py-6">
         <div className="relative z-20 text-center px-4">
           <motion.h1
             initial={{ opacity: 0, y: -50 }}
@@ -172,7 +163,7 @@ const AboutUs = () => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.7 }}
-            className="text-xl md:text-2xl mb-8 text-white"
+            className="text-xl md:text-2xl mb-3 text-white"
           >
             Empowering Traders, Transforming Lives
           </motion.p>

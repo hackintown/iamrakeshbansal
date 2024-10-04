@@ -56,6 +56,7 @@ export const serviceContent: Record<
     plans?: ServicePlan[];
     notes?: string;
     keyFeatures?: KeyFeatures[];
+    href?: string;
   }
 > = {
   "Intraday/BTST": {
@@ -102,7 +103,13 @@ export const serviceContent: Record<
       "Join Us Today! Embark on your journey to successful intraday trading with our new subscription plan. At just ₹999 per month, this is an unbeatable opportunity to sharpen your trading skills and boost your profits.",
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
-    plans: [{ duration: "Monthly", price: "Rs- 999/-" }],
+    plans: [
+      {
+        duration: "Monthly",
+        price: "Rs- 999/-",
+      },
+    ],
+    href: "https://rakeshbansal.rpy.club/g/KbkzwwjCcO",
   },
   "Index & Option": {
     title: "Master the Art of Options Buying and Index",
@@ -145,9 +152,11 @@ export const serviceContent: Record<
       { duration: "Monthly", price: "Rs- 1,999/-" },
       { duration: "Yearly", price: "Rs- 20,000/-" },
     ],
+    href: "https://rakeshbansal.rpy.club/pick-package/NjXQphqSS",
   },
   "Option & Intraday": {
     title: "Option & Intraday",
+    href: "https://rakeshbansal.rpy.club/g/KbkzwwjCcO",
     description:
       "Seize profitable market opportunities with our combined trading package, designed to help you excel in both options buying and intraday/BTST strategies. Whether you're aiming for short-term gains or a disciplined options approach, our expert-backed recommendations and real-time signals provide you with everything you need to trade confidently and strategically.",
     additionalDescription:
@@ -212,6 +221,7 @@ export const serviceContent: Record<
   },
   Futures: {
     title: "Our Futures Trading Strategy",
+    href: "https://rakeshbansal.rpy.club/jcp/Z3WkEvk1L6",
     description: `We let the performance speak for itself. You can view our historical performance under the 
       "Performance" tab on our website. Here's what you gain from our Futures Trading Strategy:`,
     additionalDescription:
@@ -255,6 +265,7 @@ export const serviceContent: Record<
 
   Mentorship: {
     title: "Mentorship",
+    href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
     description:
       "Unlock Your Trading Potential with Our Comprehensive Mentorship Program!",
     additionalDescription:
@@ -288,6 +299,7 @@ export const serviceContent: Record<
 
   Commodity: {
     title: "Commodity",
+    href: "https://rakeshbansal.rpy.club/jcp/atcYbhpxGM",
     description:
       "The MCX market offers vast potential, but it also demands discipline and a strategic approach. Our advisory provides you with the knowledge and support needed to make informed trading decisions with confidence. We offer precise entry prices, exit prices, and stop-loss levels, empowering you to trade with assurance.",
     additionalDescription:

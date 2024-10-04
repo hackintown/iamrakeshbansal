@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { motion, useAnimation, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { TrendingUp, DollarSign, BarChart2 } from "lucide-react";
+import { TrendingUp, IndianRupee, BarChart2 } from "lucide-react";
 import Link from "next/link";
 
 export default function HeroSection() {
@@ -144,7 +144,7 @@ export default function HeroSection() {
                 </span>
               </div>
               <div className="flex items-center">
-                <DollarSign className="h-6 w-6 text-green-400 mr-2" />
+                <IndianRupee className="h-6 w-6 text-green-400 mr-2" />
                 <span className="text-gray-300 text-xs md:text-sm">
                   Market Strategies
                 </span>

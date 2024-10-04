@@ -17,11 +17,6 @@ export default function CustomerGrievances() {
             Customer Grievances
           </h1>
 
-          <p className="text-lg text-gray-700 mb-8 text-center">
-            We value your feedback and are committed to addressing your concerns
-            promptly and effectively.
-          </p>
-
           <section className="bg-white rounded-lg shadow-lg p-8 mb-8">
             <h2 className="text-2xl font-semibold text-purple-700 mb-6">
               Contact Information

@@ -210,7 +210,6 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
   const [content, setContent] = useState(serviceContent["Intraday/BTST"]);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
-  const [hasReadDisclaimer, setHasReadDisclaimer] = useState(false);
 
   useEffect(() => {
     const serviceKey = urlToServiceKeyMap[param];
@@ -220,25 +219,24 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
     }
   }, [param]);
 
-  const handlePayNow = () => {
+  const handleSubscribe = () => {
     if (!disclaimerAgreed) {
       setShowDisclaimer(true);
-    } else {
-      alert("Proceeding to payment...");
+    } else if (content.href) {
+      window.location.href = content.href;
     }
   };
 
-  const handleDisclaimerScroll = (e: React.UIEvent<HTMLDivElement>) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.currentTarget;
-    if (scrollHeight - scrollTop === clientHeight) {
-      setHasReadDisclaimer(true);
+  const handleProceed = () => {
+    if (content.href) {
+      window.location.href = content.href;
     }
+    setShowDisclaimer(false);
   };
 
   const handleCloseDisclaimer = () => {
     setShowDisclaimer(false);
     setDisclaimerAgreed(false);
-    setHasReadDisclaimer(false);
   };
   // const timelineEvents: TimelineEvent[] = content.keyFeatures
   //   ? content.keyFeatures.map((feature, index) => ({
@@ -285,7 +283,10 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
               </div>
             )} */}
             {content.plans && (
-              <PricingPlans plans={content.plans} onPayNow={handlePayNow} />
+              <PricingPlans
+                plans={content.plans}
+                onSubscribe={handleSubscribe}
+              />
             )}
             {content.generalFeatures && (
               <GeneralFeatures features={content.generalFeatures} />
@@ -306,12 +307,9 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
       <DisclaimerModal
         show={showDisclaimer}
         onClose={handleCloseDisclaimer}
-        onScroll={handleDisclaimerScroll}
         agreed={disclaimerAgreed}
         setAgreed={setDisclaimerAgreed}
-        hasRead={hasReadDisclaimer}
-        disclaimerText={content.disclaimer || ""}
-        handlePayNow={handlePayNow}
+        handleProceed={handleProceed}
       />
     </div>
   );
@@ -581,8 +579,8 @@ const WhatWeOffer: React.FC<{ items: { title: string; info: string }[] }> = ({
 
 const PricingPlans: React.FC<{
   plans: { duration: string; price: string }[];
-  onPayNow: () => void;
-}> = ({ plans, onPayNow }) => (
+  onSubscribe: () => void;
+}> = ({ plans, onSubscribe }) => (
   <CustomCard title="Pricing Plans">
     <div className="flex flex-wrap gap-6 items-center justify-center">
       {plans.map((plan, index) => (
@@ -603,7 +601,7 @@ const PricingPlans: React.FC<{
           </h4>
           <p className="text-3xl font-bold mb-4 text-white">{plan.price}</p>
           <button
-            onClick={onPayNow}
+            onClick={onSubscribe}
             className="w-full bg-background border border-border text-foreground py-2 px-4 rounded transition-colors duration-300 hover:bg-opacity-80"
           >
             Subscribe Now
@@ -657,21 +655,10 @@ const Notes: React.FC<{ text: string }> = ({ text }) => (
 const DisclaimerModal: React.FC<{
   show: boolean;
   onClose: () => void;
-  onScroll: (e: React.UIEvent<HTMLDivElement>) => void;
   agreed: boolean;
   setAgreed: (agreed: boolean) => void;
-  hasRead: boolean;
-  disclaimerText: string;
-  handlePayNow: () => void;
-}> = ({
-  show,
-  onClose,
-  onScroll,
-  agreed,
-  setAgreed,
-  hasRead,
-  handlePayNow,
-}) => (
+  handleProceed: () => void;
+}> = ({ show, onClose, agreed, setAgreed, handleProceed }) => (
   <AnimatePresence>
     {show && (
       <motion.div
@@ -684,7 +671,7 @@ const DisclaimerModal: React.FC<{
           initial={{ scale: 0.9 }}
           animate={{ scale: 1 }}
           exit={{ scale: 0.9 }}
-          className="bg-white text-gray-800 p-6 rounded-lg max-w-4xl w-full max-h-[40vh] flex flex-col relative"
+          className="bg-white text-gray-800 p-6 rounded-lg max-w-4xl w-full h-[40vh] md:h-[80vh] lg:h-[90vh] flex flex-col relative"
         >
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-bold text-indigo-600">Disclaimer</h2>
@@ -696,9 +683,8 @@ const DisclaimerModal: React.FC<{
             </button>
           </div>
           <div
-            className="text-base font-light text-gray-800 overflow-y-auto h-[70vh] p-4 bg-gray-100 rounded-lg"
+            className="text-base font-light text-gray-800 overflow-y-auto p-4 bg-gray-100 rounded-lg"
             style={{ whiteSpace: "pre-line" }}
-            onScroll={onScroll}
             dangerouslySetInnerHTML={{ __html: fullDisclaimer }}
           />
           <div className="mt-6 flex flex-col sm:flex-row justify-between space-y-4 sm:space-y-0 sm:space-x-4">
@@ -707,7 +693,6 @@ const DisclaimerModal: React.FC<{
                 type="checkbox"
                 checked={agreed}
                 onChange={() => setAgreed(!agreed)}
-                disabled={!hasRead}
                 className="mr-2"
               />
               <span className="text-sm">
@@ -722,7 +707,7 @@ const DisclaimerModal: React.FC<{
                 Close
               </button>
               <button
-                onClick={handlePayNow}
+                onClick={handleProceed}
                 disabled={!agreed}
                 className={`px-4 py-2 rounded-lg text-white transition-colors ${
                   agreed ? "bg-indigo-600 hover:bg-indigo-700" : "bg-gray-400"
