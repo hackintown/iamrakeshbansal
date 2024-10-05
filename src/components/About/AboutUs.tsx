@@ -20,7 +20,6 @@ import {
   FaBook,
   FaTv,
 } from "react-icons/fa";
-import { Button } from "../ui/button";
 
 const socialIcons = [
   { Icon: FaYoutube, url: "#", color: "text-purple-600" },
@@ -186,7 +185,7 @@ const AboutUs = () => {
       </section>
 
       <AnimatedSection>
-        <section className="py-20 bg-gradient-to-r from-purple-100 to-green-100">
+        <section className="py-10 bg-gradient-to-r from-purple-100 to-green-100">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-center justify-between gap-12">
               <div className="md:w-1/2">
@@ -207,10 +206,6 @@ const AboutUs = () => {
                   resources to traders and investors across the country, helping
                   millions work towards their financial independence.
                 </p>
-
-                <Button variant="gradient" size="custom">
-                  Contact Us
-                </Button>
               </div>
               <div className="">
                 <motion.div
@@ -232,7 +227,7 @@ const AboutUs = () => {
       </AnimatedSection>
 
       <AnimatedSection>
-        <section className="py-10 bg-gradient-to-r from-green-100 to-purple-100">
+        <section className="py-5 bg-gradient-to-r from-green-100 to-purple-100">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-green-600">
               Achievements
@@ -251,7 +246,7 @@ const AboutUs = () => {
       </AnimatedSection>
 
       <AnimatedSection>
-        <section className="py-10 bg-gradient-to-r from-purple-100 to-green-100">
+        <section className="py-5 bg-gradient-to-r from-purple-100 to-green-100">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-purple-600">
               Career and Media Presence

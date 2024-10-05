@@ -7,10 +7,10 @@ import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
-  FaTwitter,
   FaWhatsapp,
   FaYoutube,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { MdEmail, MdLocationOn, MdPhone } from "react-icons/md";
 
 export default function Footer() {
@@ -41,7 +41,7 @@ export default function Footer() {
       label: "WhatsApp",
     },
     {
-      Icon: FaTwitter,
+      Icon: FaXTwitter,
       href: "https://x.com/iamrakeshbansal",
       label: "Twitter",
     },
@@ -52,7 +52,7 @@ export default function Footer() {
     { text: "Blog", href: "/blog" },
     { text: "Services", href: "/#services-sec" },
     { text: "About Us", href: "/about-us" },
-    { text: "Contact", href: "/contact-us" },
+    { text: "Contact Us", href: "/contact-us" },
   ];
 
   const quickLinks = [
@@ -111,7 +111,7 @@ export default function Footer() {
               className="mb-6"
             />
             <p className="text-sm mb-6 text-center sm:text-left">
-              Empowering your digital journey with innovative solutions and
+              Empowering your financial journey with innovative solutions and
               unparalleled service.
             </p>
             <div className="flex flex-wrap justify-center sm:justify-start gap-4">

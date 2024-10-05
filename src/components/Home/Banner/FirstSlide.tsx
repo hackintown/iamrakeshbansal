@@ -6,6 +6,7 @@ import { motion, useAnimation, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { TrendingUp, IndianRupee, BarChart2 } from "lucide-react";
 import Link from "next/link";
+import { TypeAnimation } from "react-type-animation";
 
 export default function HeroSection() {
   const controls = useAnimation();
@@ -107,13 +108,20 @@ export default function HeroSection() {
           className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:items-start w-full h-full"
         >
           <motion.div variants={itemVariants} className="mt-6 lg:mt-20">
-            <h1 className="text-3xl font-bold text-white sm:text-5xl xl:text-6xl leading-tight xl:leading-[1.2]">
+            <h1 className="text-2xl font-bold text-white sm:text-4xl xl:text-5xl leading-tight xl:leading-[1.2]">
               Let&apos;s
-              <br className="hidden xl:block" /> Dream Big With&nbsp;
-              <br className="hidden xl:block" />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400">
-                Dr. Rakesh Bansal
-              </span>
+              <br className="hidden xl:block" /> Dream Big
+              <br />
+              <TypeAnimation
+                sequence={["Together!", 1000, "With Dr. Rakesh Bansal", 1000]}
+                wrapper="span"
+                cursor={true}
+                repeat={Infinity}
+                className="text-2xl font-bold sm:text-4xl xl:text-5xl leading-tight 
+                xl:leading-[1.2] text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-green-400"
+                style={{ display: "inline-block", whiteSpace: "nowrap" }}
+              />
+              &nbsp;
             </h1>
             <p className="mt-5 text-xs sm:text-sm md:text-base text-gray-300 font-light">
               Dr. Rakesh Bansal&apos;s aim is to revolutionize stock market
@@ -170,10 +178,6 @@ export default function HeroSection() {
                 width={500}
                 height={500}
               />
-              {/* <div className="absolute bottom-8 md:bottom-16 left-6 to-transparent p-6">
-                <h2 className="text-2xl font-bold text-white">Rakesh Bansal</h2>
-                <p className="text-gray-300">Trading Mentor & Market Analyst</p>
-              </div> */}
             </div>
           </motion.div>
         </motion.div>

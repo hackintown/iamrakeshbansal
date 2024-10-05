@@ -50,7 +50,7 @@ export const serviceContent: Record<
       intradayService?: ServiceFeatures;
     };
     disclaimer?: string;
-    registration: string;
+    registration?: string;
     whyChooseUs?: WhyChooseUs[];
     whatWeOffer?: WhatWeOffer[];
     plans?: ServicePlan[];
@@ -98,7 +98,7 @@ export const serviceContent: Record<
       },
     ],
     disclaimer:
-      "Investment in securities market are subject to market risks. Read all the related documents carefully before investing",
+      "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
     notes:
       "Join Us Today! Embark on your journey to successful intraday trading with our new subscription plan. At just ₹999 per month, this is an unbeatable opportunity to sharpen your trading skills and boost your profits.",
     registration:
@@ -145,7 +145,7 @@ export const serviceContent: Record<
       },
     ],
     disclaimer:
-      "Join us today and start trading with a strategy that prioritizes rational decision-making and reliable insights. This is your opportunity to master the art of options buying with a clear, disciplined, and effective approach.",
+      "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
@@ -211,7 +211,7 @@ export const serviceContent: Record<
       },
     ],
     disclaimer:
-      "Investment in securities market are subject to market risks. Read all the related documents carefully before investing",
+      "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
@@ -220,7 +220,7 @@ export const serviceContent: Record<
     ],
   },
   Futures: {
-    title: "Our Futures Trading Strategy",
+    title: "Futures Service",
     href: "https://rakeshbansal.rpy.club/jcp/Z3WkEvk1L6",
     description: `We let the performance speak for itself. You can view our historical performance under the 
       "Performance" tab on our website. Here's what you gain from our Futures Trading Strategy:`,
@@ -250,11 +250,11 @@ export const serviceContent: Record<
       },
       {
         title: "Regular Performance Reports:",
-        info: "We maintain transparency by publishing monthly performance reports on our website. This helps you track our results and assess the effectiveness of our strategies over time.",
+        info: "We maintain transparency by publishing monthly performance reports on our WhatsApp Or Particular group. This helps you track our results and assess the effectiveness of our strategies over time.",
       },
     ],
     disclaimer:
-      "Join us today and start trading with a strategy that prioritizes rational decision-making and reliable insights",
+      "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
@@ -264,7 +264,7 @@ export const serviceContent: Record<
   },
 
   Mentorship: {
-    title: "Mentorship",
+    title: "Mentorship Service",
     href: "https://rakeshbansal.rpy.club/jcp/cjSFgnD01I",
     description:
       "Unlock Your Trading Potential with Our Comprehensive Mentorship Program!",
@@ -287,7 +287,7 @@ export const serviceContent: Record<
       "Mentorship Performance Reports: Our mentorship program provides transparency through quarterly and yearly performance reports, which will be published on our website. This allows you to track our performance and assess the program's overall effectiveness.",
     ],
     disclaimer:
-      "Get access to valuable insights, expert analysis, and strategic recommendations to enhance your trading skills and maximize your profits. Our mentorship program offers carefully curated content, including real-life examples, webinar sessions, and performance reports to help you navigate the complexities of the stock market with confidence",
+      "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
@@ -298,7 +298,7 @@ export const serviceContent: Record<
   },
 
   Commodity: {
-    title: "Commodity",
+    title: "Commodity Service",
     href: "https://rakeshbansal.rpy.club/jcp/atcYbhpxGM",
     description:
       "The MCX market offers vast potential, but it also demands discipline and a strategic approach. Our advisory provides you with the knowledge and support needed to make informed trading decisions with confidence. We offer precise entry prices, exit prices, and stop-loss levels, empowering you to trade with assurance.",
@@ -313,16 +313,6 @@ export const serviceContent: Record<
       "Capital Required 500k to 10000k",
       "Short, Medium & Long Term",
       "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil",
-    ],
-    whatWeOffer: [
-      {
-        title: "Options Buying (Nifty 50 Focus):",
-        info: "We offer precise entry, exit, and stop-loss levels for Nifty 50 companies, ensuring optimal liquidity and reduced impact costs. Our trading ideas are powered by a mix of human expertise and AI technology, focusing solely on options buying for simplified and effective strategies.",
-      },
-      {
-        title: "Intraday/BTST Signals:",
-        info: "Get real-time alerts for intraday and BTST trading opportunities, ideal for capturing single-day market movements. Trades are based on current cash market prices, helping you avoid price spikes and distribute load efficiently. You can choose to trade in the cash segment or Futures & Options, depending on stock availability.",
-      },
     ],
     whyChooseUs: [
       {
@@ -343,12 +333,10 @@ export const serviceContent: Record<
       },
     ],
     disclaimer:
-      "All our recommendations are backed by solid trading rationale, and we publish a monthly commodities performance report on our website to ensure transparency.",
-    registration:
-      "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
+      "All our recommendations are backed by solid trading rationale, and we publish a monthly commodities performance report on particular group or WhatsApp.",
     plans: [
       { duration: "Monthly", price: "Rs- 3,500/-" },
-      { duration: "Yearly", price: "Rs- 8,999/-" },
+      { duration: "Quarterly", price: "Rs- 8,999/-" },
     ],
   },
 };

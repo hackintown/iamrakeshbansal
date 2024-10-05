@@ -18,15 +18,21 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
         name: "Intraday/BTST Services",
         href: "/subscriptions/intraday-btst-plan",
       },
-      {
-        id: "options-plan",
-        name: "Index & Option Services",
-        href: "/subscriptions/options-plan",
-      },
+      // {
+      //   id: "options-plan",
+      //   name: "Index & Option Services",
+      //   href: "/subscriptions/options-plan",
+      // },
       {
         id: "option-intraday",
         name: "Option & IntraDay Services",
         href: "/subscriptions/option-intraday",
+      },
+
+      {
+        id: "mentorship-plan",
+        name: "Mentorship Services",
+        href: "/subscriptions/mentorship-plan",
       },
       {
         id: "futures-plan",
@@ -34,13 +40,8 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
         href: "/subscriptions/futures-plan",
       },
       {
-        id: "mentorship-plan",
-        name: "Mentorship Services",
-        href: "/subscriptions/mentorship-plan",
-      },
-      {
         id: "commodity-plan",
-        name: "Commodity Plan",
+        name: "Commodity Services",
         href: "/subscriptions/commodity-plan",
       },
       {
@@ -74,9 +75,9 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
     title: "Disclaimer",
     items: [
       {
-        id: "control-policy",
-        name: "Control Policy",
-        href: "control-policy",
+        id: "disclaimer",
+        name: "Disclaimer",
+        href: "disclaimer",
       },
       {
         id: "privacy-policy",
@@ -87,6 +88,26 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
         id: "terms-and-conditions",
         name: "Terms and Conditions",
         href: "/terms-conditions",
+      },
+      {
+        id: "customer-grievances",
+        name: "Customer Grievances",
+        href: "customer-grievances",
+      },
+    ],
+  },
+  {
+    title: "Contact Us",
+    items: [
+      {
+        id: "contact-us",
+        name: "Contact Us",
+        href: "/contact-us",
+      },
+      {
+        id: "feedback-form",
+        name: "Feedback Form",
+        href: "https://docs.google.com/forms/d/e/1FAIpQLScbFTo1a56fkSEYXrKZevHEtuClx9WS9l5Xd3gXjdfoI-GwCg/viewform",
       },
     ],
   },

@@ -34,22 +34,25 @@ const Navbar: React.FC = () => {
         <div className="hidden lg:flex space-x-6">
           <Link
             href="/"
-            className="text-base font-normal hover:text-purple-600 transition-colors duration-200"
+            className="text-base font-medium text-purple-600 hover:text-purple-600 transition-colors duration-200"
           >
             Home
           </Link>
           {NAVBAR_CONSTANT.map((group) => (
             <div key={group.title} className="relative group">
-              <button className="text-base font-normal text-black hover:text-purple-600 transition-colors duration-200 flex items-center gap-x-1">
+              <button className="text-base font-medium text-purple-600 hover:text-purple-600 transition-colors duration-200 flex items-center gap-x-1">
                 {group.title}
                 <FaChevronDown className="transition-transform duration-300 group-hover:rotate-180 size-3" />
               </button>
-              <div className="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left scale-95 group-hover:scale-100">
+              <div
+                className="absolute left-1/2 transform -translate-x-1/2 right-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100
+               group-hover:visible transition-all duration-300  origin-top-left scale-95 group-hover:scale-100"
+              >
                 {group.items.map((item) => (
                   <Link
                     key={item.id}
                     href={item.href}
-                    className="block px-4 py-2 text-sm text-black hover:bg-purple-100 hover:text-purple-600 rounded-lg transition-colors duration-200"
+                    className="block px-4 py-2 text-sm lg:text-base  text-black hover:bg-purple-100 hover:text-purple-600 rounded-lg transition-colors duration-200"
                   >
                     {item.name}
                   </Link>
@@ -57,12 +60,6 @@ const Navbar: React.FC = () => {
               </div>
             </div>
           ))}
-          <Link
-            href="/"
-            className="text-base font-normal hover:text-purple-600 transition-colors duration-200"
-          >
-            Contact Us
-          </Link>
         </div>
         <button
           onClick={toggleMenu}
