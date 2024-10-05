@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import { Poppins } from "@next/font/google";
+import { Poppins } from "next/font/google";
 import Navbar from "@/components/ui/Navbar/Navbar";
-// import { AnimatedNavbar } from "@/components/ui/AnimatedNavbar/AnimatedNavbar";
+import Footer from "@/components/ui/Footer/Footer";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -40,13 +40,14 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={`${poppins.variable} font-sans antialiased`}>
-        <div className="relative w-full flex items-center justify-center">
+        <header>
           <Navbar />
-        </div>
-        {/* <div className="relative w-full flex items-center justify-center">
-          <AnimatedNavbar className="top-0" />
-        </div> */}
-        {children}
+        </header>
+
+        <main className="pt-[64px] lg:pt-[80px]">{children}</main>
+        <footer>
+          <Footer />
+        </footer>
       </body>
     </html>
   );

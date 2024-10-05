@@ -3,37 +3,87 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useState } from "react";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import axios from "axios";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 import { MdPhone, MdEmail, MdAccessTime } from "react-icons/md";
 import { Button } from "./button";
+import { useRouter } from "next/navigation";
+
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
     message: "",
   });
+  const [status, setStatus] = useState<string>("");
+  const [messageError, setMessageError] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const router = useRouter();
 
-  const handleInputChange = (
+  const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Add your form submission logic here
+
+    if (formData.message.length < 250) {
+      setMessageError(true);
+      setStatus("Message must be at least 250 characters.");
+      return;
+    } else {
+      setMessageError(false);
+    }
+
+    try {
+      const response = await axios.post("/api/contact", formData);
+
+      if (response.status === 200) {
+        setStatus("Message sent successfully");
+        setFormData({ name: "", email: "", message: "" });
+        setShowPopup(true); // Show popup on success
+        setTimeout(() => {
+          setShowPopup(false);
+          router.push("/"); // Redirect to home page
+        }, 2000); // Close popup after 3 seconds
+      } else {
+        setStatus("Failed to send the message");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setStatus("Error sending the message");
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-green-900 text-white">
+      {showPopup && (
+        <motion.div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <div className="bg-white p-6 rounded-lg shadow-lg text-black text-center">
+            <h2 className="text-2xl font-semibold">Thank You!</h2>
+            <p className="mt-2">
+              Your message has been submitted successfully.
+            </p>
+            <p>Redirecting to the homepage...</p>
+          </div>
+        </motion.div>
+      )}
       {/* Hero Section with Animated Graphics */}
       <motion.div
         className="relative h-64 flex items-center justify-center overflow-hidden"
@@ -149,7 +199,7 @@ const Contact = () => {
                     url: "https://www.facebook.com/IAMRAKESHBANSAL/",
                   },
                   {
-                    Icon: FaTwitter,
+                    Icon: FaXTwitter,
                     color: "bg-sky-500",
                     url: "https://x.com/iamrakeshbansal",
                   },
@@ -201,9 +251,9 @@ const Contact = () => {
                   id="name"
                   name="name"
                   value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-white bg-opacity-20 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+                  onChange={handleChange}
                   required
+                  className="w-full px-3 py-2 bg-white bg-opacity-20 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
                 />
               </div>
               <div>
@@ -218,9 +268,9 @@ const Contact = () => {
                   id="email"
                   name="email"
                   value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full px-3 py-2 bg-white bg-opacity-20 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
+                  onChange={handleChange}
                   required
+                  className="w-full px-3 py-2 bg-white bg-opacity-20 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
                 />
               </div>
               <div>
@@ -234,15 +284,29 @@ const Contact = () => {
                   id="message"
                   name="message"
                   value={formData.message}
-                  onChange={handleInputChange}
+                  onChange={handleChange}
+                  required
                   rows={6}
                   className="w-full px-3 py-2 bg-white bg-opacity-20 rounded-md focus:outline-none focus:ring-2 focus:ring-green-400"
-                  required
                 ></textarea>
+                <div className="text-sm text-gray-600 mt-1">
+                  {formData.message.length}/250 characters minimum
+                </div>
+                {messageError && (
+                  <p className="text-red-500 text-sm mt-1">
+                    Message must be at least 250 characters.
+                  </p>
+                )}
               </div>
-              <Button variant="gradient" size="custom" className="w-full">
+              <Button
+                disabled={messageError}
+                variant="gradient"
+                size="custom"
+                className="w-full"
+              >
                 Send Message
               </Button>
+              {status && <p className="text-center text-sm mt-4">{status}</p>}
             </form>
           </motion.div>
         </div>

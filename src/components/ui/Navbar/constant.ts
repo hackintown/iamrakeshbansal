@@ -11,7 +11,7 @@ export interface NavGroup {
 
 export const NAVBAR_CONSTANT: NavGroup[] = [
   {
-    title: "Services",
+    title: "Research Services",
     items: [
       {
         id: "intraday-btst-plan",
@@ -47,7 +47,7 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
       {
         id: "hni",
         name: "HNI Services",
-        href: "/subscriptions/hni",
+        href: "/hni",
       },
     ],
   },

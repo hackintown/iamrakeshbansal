@@ -106,8 +106,8 @@ export default function SocialMediaSection() {
                 <Image
                   src={platform.icon}
                   alt={`${platform.name} icon`}
-                  layout="fill"
-                  objectFit="contain"
+                  fill
+                  className="object-contain w-full h-full"
                 />
               </div>
               <p className="text-white text-lg sm:text-xl font-semibold mt-2">
