@@ -82,28 +82,56 @@ export default function WhyJoinUs() {
 
   return (
     <section className="text-black py-10 px-4 sm:px-6 lg:px-8 relative bg-white">
-      <div className="absolute inset-0 opacity-0">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+      <div className="absolute inset-0 bg-gradient-to-bl from-purple-900/10 to-green-900/10">
+        <svg
+          className="absolute inset-0 w-full h-full"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
           <defs>
-            <pattern
-              id="why-us-pattern"
-              x="0"
-              y="0"
-              width="20"
-              height="20"
-              patternUnits="userSpaceOnUse"
+            <linearGradient
+              id="pricing-grad"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
             >
-              <circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.2)" />
-            </pattern>
+              <stop offset="0%" stopColor="rgba(139, 92, 246, 0.05)" />
+              <stop offset="50%" stopColor="rgba(16, 185, 129, 0.05)" />
+              <stop offset="100%" stopColor="rgba(139, 92, 246, 0.05)" />
+            </linearGradient>
           </defs>
-          <rect
-            x="0"
-            y="0"
-            width="100%"
-            height="100%"
-            fill="url(#why-us-pattern)"
-          />
+          <path fill="url(#pricing-grad)" d="M0 0 C 50 100, 80 100, 100 0 Z" />
         </svg>
+      </div>
+      <div className="absolute inset-0">
+        {[...Array(5)].map((_, i) => (
+          <svg
+            key={i}
+            className="absolute"
+            style={{ left: `${i * 25}%`, top: "20%" }}
+            width="40"
+            height="40"
+            viewBox="0 0 40 40"
+          >
+            <path
+              d="M20 2 L38 38 L2 38 Z"
+              fill="none"
+              stroke="rgba(139, 92, 246, 0.1)"
+              strokeWidth="1"
+            >
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="0 20 20"
+                to="360 20 20"
+                dur={`${10 + i * 2}s`}
+                repeatCount="indefinite"
+              />
+            </path>
+          </svg>
+        ))}
       </div>
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-[35%,60%] gap-12 items-center">
