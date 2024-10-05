@@ -1,32 +1,32 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import FirstSlide from "./FirstSlide";
-// import SecondSlide from "./SecondSlide";
 import ThirdSlide from "./ThirdSlide";
-// import FourthSlide from "./FourthSlide";
 import SeventhSlide from "./SeventhSlide";
 
 const slides = [
   { id: 1, component: FirstSlide },
   { id: 2, component: ThirdSlide },
-  // { id: 3, component: FourthSlide },
   { id: 4, component: SeventhSlide },
-  // { id: 5, component: SecondSlide },
 ];
 
 export default function Banner() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const touchStartX = useRef(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+      if (!isDragging) {
+        setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+      }
     }, 500000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
-  }, []);
+  }, [isDragging]);
 
   const nextSlide = () => {
     setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
@@ -38,16 +38,56 @@ export default function Banner() {
     );
   };
 
+  const handleDragStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    setIsDragging(true);
+    touchStartX.current = event.touches[0].clientX;
+  };
+
+  const handleDragEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+    setIsDragging(false);
+    const touchEndX = event.changedTouches[0].clientX;
+    const dragDistance = touchEndX - touchStartX.current;
+
+    if (Math.abs(dragDistance) > 50) {
+      if (dragDistance > 0) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
+    }
+  };
+
+  const handlePan = (
+    event: MouseEvent | TouchEvent | PointerEvent,
+    info: PanInfo
+  ) => {
+    if (info.offset.x > 100) {
+      prevSlide();
+    } else if (info.offset.x < -100) {
+      nextSlide();
+    }
+  };
+
   return (
-    <div className="relative w-full  overflow-hidden">
+    <div className="relative w-full overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -100 }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="w-full h-full flex items-center justify-center max-h-max lg:max-h-[600px]  xl:min-h-[600px] xl:max-h-[600px]"
+          transition={{ duration: 0.1, ease: "easeInOut" }}
+          className="w-full h-full flex items-center justify-center max-h-max lg:max-h-[600px] xl:min-h-[600px] xl:max-h-[600px]"
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragStart={() => setIsDragging(true)}
+          onDragEnd={(e, info) => {
+            setIsDragging(false);
+            handlePan(e, info);
+          }}
+          onTouchStart={handleDragStart}
+          onTouchEnd={handleDragEnd}
         >
           {React.createElement(slides[currentSlide].component)}
         </motion.div>
