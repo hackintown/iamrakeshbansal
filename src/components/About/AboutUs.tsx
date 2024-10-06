@@ -12,7 +12,6 @@ import {
 } from "framer-motion";
 import {
   FaYoutube,
-  FaTwitter,
   FaLinkedin,
   FaFacebook,
   FaChartLine,
@@ -20,10 +19,10 @@ import {
   FaBook,
   FaTv,
 } from "react-icons/fa";
-
+import { FaXTwitter } from "react-icons/fa6";
 const socialIcons = [
   { Icon: FaYoutube, url: "#", color: "text-purple-600" },
-  { Icon: FaTwitter, url: "#", color: "text-green-600" },
+  { Icon: FaXTwitter, url: "#", color: "text-green-600" },
   { Icon: FaLinkedin, url: "#", color: "text-purple-600" },
   { Icon: FaFacebook, url: "#", color: "text-green-600" },
 ];
@@ -35,9 +34,9 @@ interface Achievement {
 
 const achievements: Achievement[] = [
   { number: "25+", text: "Years Experience" },
-  { number: "45000k+", text: "Trained Participants" },
+  { number: "45k+", text: "Trained Participants" },
   { number: "2M+", text: "Followers" },
-  { number: "1.6M", text: "TV Channels" },
+  { number: "1.6M+", text: "TV Channels" },
 ];
 
 interface EducationalContent {
@@ -130,6 +129,8 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({ number, text }) => {
     <motion.div ref={ref} animate={controls} className="text-center">
       <div className="text-4xl font-bold mb-2 text-purple-600">
         {count}
+        {number.includes("k") && "k"}
+        {number.includes("M") && "M"}
         {number.includes("+") && "+"}
       </div>
       <div className="text-sm text-green-600">{text}</div>
