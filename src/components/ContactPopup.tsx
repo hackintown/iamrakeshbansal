@@ -1,26 +1,63 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { MessageCircle, Phone, Send, Youtube, Facebook, Linkedin, Instagram, Twitter } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef, useEffect } from "react";
+import {
+  MessageCircle,
+  Phone,
+  Send,
+  Youtube,
+  Facebook,
+  Linkedin,
+  Instagram,
+  Twitter,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function ContactPopup() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
+  const popupRef = useRef<HTMLDivElement>(null);
 
   const socialIcons = [
-    { Icon: MessageCircle, color: '#25D366', label: 'WhatsApp' },
-    { Icon: Youtube, color: '#FF0000', label: 'YouTube' },
-    { Icon: Facebook, color: '#1877F2', label: 'Facebook' },
-    { Icon: Linkedin, color: '#0A66C2', label: 'LinkedIn' },
-    { Icon: Send, color: '#0088CC', label: 'Telegram' },
-    { Icon: Instagram, color: '#E4405F', label: 'Instagram' },
-    { Icon: Twitter, color: '#1DA1F2', label: 'Twitter' },
-    { Icon: Phone, color: '#4CAF50', label: 'Phone' },
-  ]
+    { Icon: MessageCircle, color: "#25D366", label: "WhatsApp" },
+    { Icon: Youtube, color: "#FF0000", label: "YouTube" },
+    { Icon: Facebook, color: "#1877F2", label: "Facebook" },
+    { Icon: Linkedin, color: "#0A66C2", label: "LinkedIn" },
+    { Icon: Send, color: "#0088CC", label: "Telegram" },
+    { Icon: Instagram, color: "#E4405F", label: "Instagram" },
+    { Icon: Twitter, color: "#1DA1F2", label: "Twitter" },
+    { Icon: Phone, color: "#4CAF50", label: "Phone" },
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, []);
+
+  const handleInteraction = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div
+      className="fixed bottom-4 right-4 z-50"
+      ref={popupRef}
+      onMouseEnter={handleInteraction}
+      onMouseLeave={handleInteraction}
+      onClick={handleInteraction}
+    >
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -45,14 +82,11 @@ export default function ContactPopup() {
         )}
       </AnimatePresence>
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-        <Button
-          onClick={() => setIsOpen(!isOpen)}
-          className="py-3 px-5 bg-purple-600 hover:bg-purple-700 text-white transition-colors duration-300 ease-in-out flex items-center space-x-2 rounded-full shadow-lg hover:shadow-xl"
-        >
-          <span className="hidden sm:inline">Contact Us</span>
+        <button className="py-3 px-5 bg-purple-600 hover:bg-purple-700 text-white transition-colors duration-300 ease-in-out flex items-center space-x-2 rounded-full shadow-lg hover:shadow-xl">
+          <span className="hidden sm:block">Contact Us</span>
           <MessageCircle className="w-5 h-5" />
-        </Button>
+        </button>
       </motion.div>
     </div>
-  )
+  );
 }

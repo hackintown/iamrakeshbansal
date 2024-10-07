@@ -283,7 +283,7 @@ export default function Footer() {
           </div>
         </motion.div>
       </div>
-      <div className="absolute bottom-10 xl:bottom-15 right-8 hidden lg:block">
+      <div className="">
         <ContactPopup />
       </div>
     </footer>

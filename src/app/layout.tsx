@@ -61,7 +61,7 @@ export default function RootLayout({
         <footer>
           <Footer />
         </footer>
-        <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-[68px] h-[68px] z-50">
+        <div className="fixed bottom-16 lg:bottom-[70px] right-4 md:right-6 w-[68px] h-[68px] z-50">
           {/* Outer shadow and base circle */}
           <div
             className="absolute inset-0 rounded-full shadow-2xl  bg-white/30 backdrop-blur-lg border-4 border-white transform 
