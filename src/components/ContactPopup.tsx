@@ -9,8 +9,8 @@ import {
   Facebook,
   Linkedin,
   Instagram,
-  Twitter,
 } from "lucide-react";
+import { FaXTwitter } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function ContactPopup() {
@@ -24,7 +24,7 @@ export default function ContactPopup() {
     { Icon: Linkedin, color: "#0A66C2", label: "LinkedIn" },
     { Icon: Send, color: "#0088CC", label: "Telegram" },
     { Icon: Instagram, color: "#E4405F", label: "Instagram" },
-    { Icon: Twitter, color: "#1DA1F2", label: "Twitter" },
+    { Icon: FaXTwitter, color: "#1DA1F2", label: "Twitter" },
     { Icon: Phone, color: "#4CAF50", label: "Phone" },
   ];
 

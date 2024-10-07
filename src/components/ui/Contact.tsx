@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -25,15 +25,22 @@ const Contact = () => {
   const [status, setStatus] = useState<string>("");
   const [messageError, setMessageError] = useState<boolean>(false);
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [isSubmitDisabled, setIsSubmitDisabled] = useState<boolean>(true);
   const router = useRouter();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+
+    if (name === "message") {
+      setMessageError(value.length < 250);
+      setIsSubmitDisabled(value.length < 250);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -66,6 +73,10 @@ const Contact = () => {
       setStatus("Error sending the message");
     }
   };
+  useEffect(() => {
+    setMessageError(formData.message.length < 250);
+    setIsSubmitDisabled(formData.message.length < 250);
+  }, [formData.message]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-green-900 text-white">
@@ -299,10 +310,12 @@ const Contact = () => {
                 )}
               </div>
               <Button
-                disabled={messageError}
+                disabled={isSubmitDisabled}
                 variant="gradient"
                 size="custom"
-                className="w-full"
+                className={`w-full ${
+                  isSubmitDisabled ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
                 Send Message
               </Button>
