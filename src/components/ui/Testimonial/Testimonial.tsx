@@ -23,71 +23,79 @@ const testimonials: Testimonial[] = [
     name: "Prakash Choudhary",
     title: "Self-Investor",
     rating: 5,
-    imageUrl: "/hero/banner-img3.webp",
+    imageUrl: "/testimonial/prakash-chaudhary.webp",
   },
   {
     quote:
       "After being with Rakesh Bansal Ventures for 9 months, I’m thrilled with their services. Their analysis is always spot-on, and their signals have helped me navigate the markets with confidence. Absolutely worth the investment!",
-    name: "Sushma Upadhyay ",
+    name: "Vipul Prajapati",
     title: "Full-time Trader",
     rating: 5,
-    imageUrl: "/hero/banner-img3.webp",
+    imageUrl: "/testimonial/vipul-prajapati.webp",
   },
   {
     quote:
       "The future segment recommendations are top-notch, but I believe there’s room for further improvement. I look forward to seeing even better performance in this area. Overall, I’ve been impressed with the results.",
-    name: "Pankajkumar agarwal",
+    name: "Mrs. Venna",
     title: "Equity Investor",
     rating: 4,
-    imageUrl: "/hero/banner-img3.webp",
+    imageUrl: "/testimonial/veena.webp",
   },
   {
     quote:
       "While the stock performance is good, focusing on 2-3 monthly stocks that deliver over 25% returns would be ideal. For small investors, the subscription fee is high, but the profits are still rewarding in the long run.",
-    name: "Deepjyoti Roy",
+    name: "Raju Aggrawal",
     title: "Retail Investor",
     rating: 4,
-    imageUrl: "/hero/banner-img3.webp",
+    imageUrl: "/testimonial/raju-aggarwal.webp",
   },
   {
     quote:
       "The stock selection process is reliable, and I have been highly satisfied with the membership. I’ve earned considerable profits through their guidance and trust their expertise for future gains. No one can match their service!",
-    name: "Ajab Singh",
+    name: "Pankaj Agrawal",
     title: "Retail Investor",
     rating: 5,
-    imageUrl: "/hero/banner-img3.webp",
+    imageUrl: "/testimonial/pankaj-agrawal.webp",
   },
   {
     quote:
       "I’ve followed Rakesh Sir for over a year and finally joined his advisory service 4 months ago. Within the last month, I’ve earned 50k! The calls are precise, and even when a stop loss hits, I’ve managed to profit.",
-    name: "Ajit Deshmukh",
+    name: "Nikunj Marvaniya",
     title: "Option Trader",
     rating: 5,
-    imageUrl: "/hero/banner-img3.webp",
+    imageUrl: "/testimonial/nikunj-marvaniya.webp",
   },
   {
     quote:
       "The option segment could benefit from more concentrated and premium-quality calls. The IGL call on Zee Business was exceptional, and I hope to see more calls like that in the future. Keep up the great work!",
-    name: "Nagesh Kondapure ",
+    name: "Dr. RC Chaudhary",
     title: "Stock Trader",
     rating: 4,
-    imageUrl: "/hero/banner-img3.webp",
+    imageUrl: "/testimonial/dr-rc-choudhary.webp",
   },
   {
     quote:
       "I appreciate the clarity in Rakesh Sir’s intraday calls, including entry prices, stop loss, and targets. Adding a monthly holding call for potential breakout stocks would add even more value to the service.",
-    name: "Dr RC CHOUDHARY ",
+    name: "Deep Jyoti",
     title: "Day Trader",
     rating: 5,
-    imageUrl: "/hero/banner-img3.webp",
+    imageUrl: "/testimonial/deepjyoti.webp",
   },
   {
     quote:
       "Rakesh Bansal Ventures’ customer support is responsive and knowledgeable. They address my queries quickly, and I feel supported in my trading journey. Their service is a must for serious traders looking for solid guidance.",
-    name: "Asish nayak",
+    name: "Darshan",
     title: "Investor",
     rating: 5,
-    imageUrl: "/hero/banner-img3.webp",
+    imageUrl: "/testimonial/darshan.webp",
+  },
+  {
+    quote:
+      "Rakesh Bansal Ventures’ customer support is responsive and knowledgeable. They address my queries quickly, and I feel supported in my trading journey. Their service is a must for serious traders looking for solid guidance.",
+    name: "Ashwani Kansal",
+    title: "Investor",
+    rating: 5,
+    imageUrl: "/testimonial/ashwani-kansal.webp",
   },
 ];
 
@@ -111,13 +119,12 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         : "opacity-0 translate-x-full absolute"
     )}
   >
-    <div className="w-full md:w-1/3 h-64 md:h-auto relative ring-4 ring-purple-500 my-1 md:my-0 mx-1 rounded-xl overflow-hidden ">
+    <div className="w-full md:w-1/3 h-[400px] relative ring-4 ring-purple-500 my-1 md:my-0 mx-1 rounded-xl overflow-hidden ">
       <Image
         src={imageUrl}
         alt={`${name}'s testimonial`}
-        width={500}
-        height={500}
-        className="w-full h-auto object-cover"
+        fill
+        className="object-cover object-center"
       />
     </div>
     <div className="w-full md:w-2/3 p-6 md:p-8 flex flex-col justify-between relative">
@@ -272,7 +279,7 @@ const Testimonials: React.FC = () => {
           <VideoTestimonials />
         </div>
 
-        <div className="relative md:h-[300px] mb-4 lg:mb-8" ref={sliderRef}>
+        <div className="relative md:h-[400px] mb-4 md:mb-8 lg:mb-10" ref={sliderRef}>
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
               key={index}
@@ -280,7 +287,7 @@ const Testimonials: React.FC = () => {
               isActive={index === currentSlide}
             />
           ))}
-          <div className=" absolute right-3 flex -bottom-14 border border-purple-200 overflow-hidden">
+          <div className=" absolute right-3 flex -bottom-16 border border-purple-200 overflow-hidden">
             <button
               onClick={prevSlide}
               className="bg-purple-600 cursor-pointer p-1 flex items-center justify-center"

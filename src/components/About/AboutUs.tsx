@@ -36,7 +36,7 @@ const achievements: Achievement[] = [
   { number: "25+", text: "Years Experience" },
   { number: "45k+", text: "Trained Participants" },
   { number: "2M+", text: "Followers" },
-  { number: "1.6M+", text: "TV Channels" },
+  { number: "1", text: "TV Channels" },
 ];
 
 interface EducationalContent {

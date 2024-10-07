@@ -145,10 +145,6 @@ export default function VideoTestimonials() {
         modules={[EffectCoverflow, Navigation, Pagination, Autoplay]}
         className="swiper-container"
         onSlideChange={handleSlideChange}
-        autoplay={{
-          delay: 10000,
-          disableOnInteraction: false,
-        }}
         breakpoints={{
           320: {
             slidesPerView: 1,
@@ -212,7 +208,7 @@ export default function VideoTestimonials() {
       </Swiper>
       <button
         onClick={handlePrev}
-        className={`absolute top-1/2 -left-5 sm:-left-8 lg:-left-16 transform -translate-y-1/2 z-10 p-3 rounded-full transition-all duration-300 ${
+        className={`absolute top-1/2 -left-5 sm:-left-8 lg:-left-12 transform -translate-y-1/2 z-10 p-3 rounded-full transition-all duration-300 ${
           isBeginning ? "opacity-50 cursor-not-allowed" : "hover:opacity-80"
         }`}
         aria-label="Previous slide"
@@ -222,7 +218,7 @@ export default function VideoTestimonials() {
       </button>
       <button
         onClick={handleNext}
-        className={`absolute top-1/2 -right-5 sm:-right-8 lg:-right-16 transform -translate-y-1/2 z-10 p-3 rounded-full transition-all duration-300 ${
+        className={`absolute top-1/2 -right-5 sm:-right-8 lg:-right-12 transform -translate-y-1/2 z-10 p-3 rounded-full transition-all duration-300 ${
           isEnd ? "opacity-50 cursor-not-allowed" : "hover:opacity-80"
         }`}
         aria-label="Next slide"
