@@ -1,5 +1,6 @@
 "use client";
 
+import ContactPopup from "@/components/ContactPopup";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -281,6 +282,9 @@ export default function Footer() {
             </div> */}
           </div>
         </motion.div>
+      </div>
+      <div className="absolute bottom-10 xl:bottom-15 right-8 hidden lg:block">
+        <ContactPopup />
       </div>
     </footer>
   );
