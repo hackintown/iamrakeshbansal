@@ -42,7 +42,7 @@ type WhatWeOffer = {
 };
 
 type ServiceFeatures = {
-  price: string;
+  price?: string;
   features: string[];
 };
 type KeyFeatures = string;
@@ -363,7 +363,6 @@ export const serviceContent: Record<
         - Mentorship Channel`,
     advancedFeatures: {
       Future: {
-        price: "₹1,999/month",
         features: [
           "10-15 calls per month",
           "Entry, Exit, and Stop Loss prices.",
@@ -372,7 +371,6 @@ export const serviceContent: Record<
         ],
       },
       Mentorship: {
-        price: "₹999/month",
         features: [
           "10-15 calls per Quarter",
           "Entry, Exit, and Stop Loss prices",
