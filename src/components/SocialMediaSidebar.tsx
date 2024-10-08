@@ -2,14 +2,41 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Facebook, Twitter, Instagram, Linkedin, Youtube } from "lucide-react";
+import { FaFacebook, FaYoutube, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import Link from "next/link";
 
 const socialMedias = [
-  { name: "Facebook", icon: Facebook, color: "#1877F2" },
-  { name: "Twitter", icon: Twitter, color: "#1DA1F2" },
-  { name: "Instagram", icon: Instagram, color: "#E4405F" },
-  { name: "LinkedIn", icon: Linkedin, color: "#0A66C2" },
-  { name: "YouTube", icon: Youtube, color: "#FF0000" },
+  {
+    name: "Facebook",
+    icon: FaFacebook,
+    url: "https://www.facebook.com/IAMRAKESHBANSAL/",
+    color: "#1877F2",
+  },
+  {
+    name: "Twitter",
+    icon: FaXTwitter,
+    url: "https://x.com/iamrakeshbansal",
+    color: "#1DA1F2",
+  },
+  {
+    name: "Instagram",
+    icon: FaInstagram,
+    url: "https://www.instagram.com/therakeshbansal/",
+    color: "#E4405F",
+  },
+  {
+    name: "LinkedIn",
+    icon: FaLinkedin,
+    url: "https://www.linkedin.com/in/drrakeshbansal/",
+    color: "#0A66C2",
+  },
+  {
+    name: "Youtube ",
+    icon: FaYoutube,
+    url: "https://www.youtube.com/@RakeshBansal",
+    color: "#FF0000",
+  },
 ];
 
 export default function SocialMediaSidebar() {
@@ -30,19 +57,26 @@ export default function SocialMediaSidebar() {
           onHoverEnd={() => setHoveredIndex(null)}
           style={{ backgroundColor: social.color }}
         >
-          <motion.div
+          <Link
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center w-full"
-            animate={{
-              flexDirection: hoveredIndex === index ? "row" : "row-reverse",
-            }}
           >
-            <div className="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 shrink-0">
-              <social.icon className="w-6 h-6 text-white" />
-            </div>
-            <span className="text-white text-sm font-medium mx-2 whitespace-nowrap">
-              {social.name}
-            </span>
-          </motion.div>
+            <motion.div
+              className="flex items-center w-full"
+              animate={{
+                flexDirection: hoveredIndex === index ? "row" : "row-reverse",
+              }}
+            >
+              <div className="w-10 h-10 flex items-center justify-center bg-white bg-opacity-20 shrink-0">
+                <social.icon className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-white text-sm font-medium mx-2 whitespace-nowrap">
+                {social.name}
+              </span>
+            </motion.div>
+          </Link>
         </motion.div>
       ))}
     </div>
