@@ -1,4 +1,11 @@
-import { Clock, BarChart2, PieChart, DollarSign, BookOpen } from "lucide-react";
+import {
+  Clock,
+  BarChart2,
+  PieChart,
+  DollarSign,
+  BookOpen,
+  TrendingUp,
+} from "lucide-react";
 
 export type ServiceKey =
   | "Intraday/BTST"
@@ -6,7 +13,8 @@ export type ServiceKey =
   | "Option & Intraday"
   | "Mentorship"
   | "Futures"
-  | "Commodity";
+  | "Commodity"
+  | "HNI";
 
 export const services = [
   { name: "Intraday/BTST", icon: Clock, color: "bg-purple-500" },
@@ -15,6 +23,7 @@ export const services = [
   { name: "Futures", icon: BarChart2, color: "bg-green-500" },
   { name: "Mentorship", icon: BookOpen, color: "bg-blue-500" },
   { name: "Commodity", icon: DollarSign, color: "bg-red-500" },
+  { name: "HNI", icon: TrendingUp, color: "bg-indigo-500" },
 ];
 
 type ServicePlan = {
@@ -38,6 +47,9 @@ type ServiceFeatures = {
 };
 type KeyFeatures = string;
 
+type AdvancedFeatures = {
+  [key: string]: ServiceFeatures;
+};
 export const serviceContent: Record<
   ServiceKey,
   {
@@ -45,10 +57,7 @@ export const serviceContent: Record<
     additionalDescription: string;
     description: string;
     generalFeatures?: string[];
-    advancedFeatures?: {
-      optionsService?: ServiceFeatures;
-      intradayService?: ServiceFeatures;
-    };
+    advancedFeatures?: AdvancedFeatures;
     disclaimer?: string;
     registration?: string;
     whyChooseUs?: WhyChooseUs[];
@@ -57,6 +66,7 @@ export const serviceContent: Record<
     notes?: string;
     keyFeatures?: KeyFeatures[];
     href?: string;
+    termsAndConditions?: string;
   }
 > = {
   "Intraday/BTST": {
@@ -172,7 +182,7 @@ export const serviceContent: Record<
       },
     ],
     advancedFeatures: {
-      optionsService: {
+      Options: {
         price: "₹1,999/month",
         features: [
           "Monthly 10-15 Calls",
@@ -182,7 +192,7 @@ export const serviceContent: Record<
           "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning.",
         ],
       },
-      intradayService: {
+      Intraday: {
         price: "₹999/month",
         features: [
           "Monthly 15-20 Calls",
@@ -338,5 +348,77 @@ export const serviceContent: Record<
       { duration: "Monthly", price: "Rs- 3,500/-" },
       { duration: "Quarterly", price: "Rs- 8,999/-" },
     ],
+  },
+
+  HNI: {
+    title: "Exclusive HNI Subscription",
+    href: "https://forms.gle/Ki1ZunDWoA83Pdey9",
+    description:
+      "Our HNI (High Net-worth Individual) subscription is designed for serious investors seeking personalized insights, exclusive stock recommendations, and expert guidance tailored to maximize potential returns. This service gives you direct access to Rakesh Bansal Ventures' expertise, ensuring that you stay ahead in the dynamic stock market.",
+    additionalDescription: `<b>What's Included:</b><br>
+      - Blending human intelligence with robust data-driven models,<br>
+      - Exclusive Access to Telegram Channels:<br>
+        - HNI Channel<br>
+        - Future Service Channel<br>
+        - Mentorship Channel`,
+    advancedFeatures: {
+      Future: {
+        price: "₹1,999/month",
+        features: [
+          "10-15 calls per month",
+          "Entry, Exit, and Stop Loss prices.",
+          "Regular performance reports",
+          "Focus on top Nifty 50 companies",
+        ],
+      },
+      Mentorship: {
+        price: "₹999/month",
+        features: [
+          "10-15 calls per Quarter",
+          "Entry, Exit, and Stop Loss prices",
+          "Short, Medium, and Long-Term Swing Trades",
+          "Focuses on top Nifty 50 companies for effective short-term trading.",
+        ],
+      },
+    },
+    whyChooseUs: [
+      {
+        title: "HNI Group Exclusive Benefits:",
+        info: "Access to exclusive stock information and business insights Personalized entry and exit strategies for chosen shares Personalized discussions and one-on-one consultations based on pre-booked slots",
+      },
+      {
+        title: "One-on-One Consultations:",
+        info: "Exclusive one-on-one consultations with Dr. Rakesh Bansal may be available based on slot bookings and advisor discretion.",
+      },
+      {
+        title: "Direct Access to Rakesh Bansal Ventures’ Senior Team:",
+        info: "Get the facility to connect with a senior representative of the Rakesh Bansal Ventures team for personalized insights and discussions.",
+      },
+      {
+        title: "One-on-One Consultations:",
+        info: "Exclusive one-on-one consultations with Dr. Rakesh Bansal may be available based on slot bookings and advisor discretion.",
+      },
+    ],
+    disclaimer: `Investment in securities market is subject to market risks. Read all the related documents carefully before investing.
+We don't guarantee any kind of Profit.
+Stock market involves risk and trade only if are comfortable with risk.
+Please don't trade/invest looking at our performance sheet as Past performance is not the guarantee for future performance.
+Our performance sheet is for our own satisfaction & transparency. You may or may not be able to buy/sell at my recommended price as recommendations are shared in live/ running market and we cannot freeze stock price to help you buying/selling at our recommended price.
+Our humble request is for you to please trade/invest as per your individual risk appetite.`,
+
+    plans: [{ duration: "Yearly", price: "Rs- 5 lakh + 18% GST /-" }],
+    notes:
+      "100% payment in advance, no refunds applicable under any circumstances.",
+
+    termsAndConditions: `<ol}>
+<li>The fee is annual and payment is 100% advance and under no circumstances Rakesh Bansal Ventures (hereinafter referred to as Advisor) shall be liable for any refund for amount paid by the client.</li>
+<li>In case of any cancellation/termination from Client, the amount paid by the client shall be forfeited and Advisor shall not be liable to provide any more services to the client. In case of any cancellation/termination from Advisor, the commercials shall be mutually discussed and agreed for the pending duration of the agreement.</li>
+<li>The Client represents that the research advisory shall solely be used for own use and not shared with anyone under any circumstances, whatsoever.</li>
+<li>The services will not include portfolio management or any related services relating to sale/purchase of Equities/other financial instruments, the services shall remain pure research advisory based. Specific requests may be entertained and mutually managed among the parties within the scope of the services.</li>
+<li>There is no commitment of any profits under the scope of this service. Client has to understand the speculative and dynamic nature of stock market and shall invest/trade based on their own free will, the Advisor shall have no liability of any kind under any circumstances.</li>
+<li>
+Specific requests may be made by client to have one-on-one consultation with Dr. Rakesh Bansal with respect to research advisory. Such requests may be entertained at sole discretion of the Advisor on best effort basis; however, it shall not make the basis of the services rendered within this HNI SUBSCRIPTION MODULE.</li>
+</ol>
+  `,
   },
 };

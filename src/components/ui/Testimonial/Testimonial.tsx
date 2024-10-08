@@ -119,12 +119,12 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         : "opacity-0 translate-x-full absolute"
     )}
   >
-    <div className="w-full md:w-1/3 h-[280px] relative ring-4 ring-purple-500 my-1 md:my-0 mx-1 rounded-xl overflow-hidden ">
+    <div className="w-full md:w-[350px] h-[250px] relative ring-4 ring-purple-500 my-1 md:my-0 mx-1 rounded-xl overflow-hidden ">
       <Image
         src={imageUrl}
         alt={`${name}'s testimonial`}
         fill
-        className="object-cover object-center"
+        className="object-cover"
       />
     </div>
     <div className="w-full md:w-2/3 p-6 md:p-8 flex flex-col justify-between relative">
@@ -231,17 +231,13 @@ const Testimonials: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-green-600 mb-4">
             What Our Clients Say
           </h2>
-          {/* <p className="text-sm md:text-base text-foreground max-w-2xl mx-auto">
-            Discover how our services have transformed the investment strategies
-            of our valued clients.
-          </p> */}
         </div>
         <div className="mb-6 lg:mb-8">
           <VideoTestimonials />
         </div>
 
         <div
-          className="relative md:h-[280px] mb-4 md:mb-8 lg:mb-10"
+          className="relative md:h-[250px] mb-4 md:mb-8 lg:mb-10"
           ref={sliderRef}
         >
           {testimonials.map((testimonial, index) => (

@@ -12,8 +12,6 @@ export default function ServicePage({
     (group) => group.title === "Research Services"
   )?.items.find((item) => item.href.endsWith(params.service));
 
-  console.log(`ye lo params: ${service}`);
-
   if (!service) {
     notFound();
   }

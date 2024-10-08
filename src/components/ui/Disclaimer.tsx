@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { AlertTriangle, Search, Shield } from "lucide-react";
+import { AlertTriangle, Search } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -210,27 +210,14 @@ SEBI Registered Research Analyst Registration Number: INH100008984`,
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-purple-200">
-      <motion.header
-        className="py-4 sm:py-6 px-4 sm:px-6 lg:px-8 bg-red-200 sticky top-0 z-30"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center">
+    <div className="min-h-screen bg-gradient-to-br from-purple-200 to-white">
+      <main className="max-w-6xl mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+        <motion.div className="text-center mb-8 sm:mb-12" {...fadeInUp}>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2 text-purple-600">
+            Important Notice
+          </h2>
           <motion.div
-            className="flex items-center mb-2 sm:mb-0"
-            initial={{ x: -20, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-          >
-            <Shield className="w-8 h-8 text-red-600 mr-2" />
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-purple-600">
-              Rakesh Bansal Ventures
-            </h1>
-          </motion.div>
-          <motion.div
-            className="flex items-center space-x-2"
+            className="flex items-center justify-center space-x-2 mb-3"
             initial={{ x: 20, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.5 }}
@@ -240,17 +227,6 @@ SEBI Registered Research Analyst Registration Number: INH100008984`,
               Disclaimer
             </span>
           </motion.div>
-        </div>
-      </motion.header>
-
-      <main className="max-w-6xl mx-auto py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
-        <motion.div className="text-center mb-8 sm:mb-12" {...fadeInUp}>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 text-purple-600">
-            Important Notice
-          </h2>
-          <p className="text-base sm:text-lg text-black mb-4">
-            Please read this disclaimer carefully before using our services.
-          </p>
           <div className="relative max-w-md mx-auto">
             <Input
               type="text"

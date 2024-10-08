@@ -29,6 +29,7 @@ const urlToServiceKeyMap: Record<string, ServiceKey> = {
   "mentorship-plan": "Mentorship",
   "futures-plan": "Futures",
   "commodity-plan": "Commodity",
+  "hni-service": "HNI",
 };
 
 const fullDisclaimer = `
@@ -121,89 +122,6 @@ const KeyboardEffect: React.FC<{ text: string }> = ({ text }) => {
   );
 };
 
-// interface TimelineEvent {
-//   year: number;
-//   title: string;
-//   description: string;
-//   icon: React.ElementType;
-// }
-
-// const HorizontalTimeline: React.FC<{ events: TimelineEvent[] }> = ({
-//   events,
-// }) => {
-//   return (
-//     <div className="relative w-full overflow-x-auto py-16">
-//       <div
-//         className="absolute inset-0 bg-gray-100 opacity-50"
-//         style={{
-//           backgroundImage: "url('/images/world-map.png')",
-//           backgroundSize: "cover",
-//           backgroundPosition: "center",
-//         }}
-//       />
-//       <div className="relative min-w-max px-4">
-//         <div className="h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
-//         <div className="flex justify-between">
-//           {events.map((event, index) => (
-//             <TimelineItem key={event.year} event={event} index={index} />
-//           ))}
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// const TimelineItem: React.FC<{ event: TimelineEvent; index: number }> = ({
-//   event,
-//   index,
-// }) => {
-//   const isEven = index % 2 === 0;
-//   const Icon = event.icon;
-
-//   return (
-//     <div
-//       className={`w-64 ${isEven ? "-mt-3" : "mt-3"} flex flex-col items-center`}
-//     >
-//       <motion.div
-//         initial={{ opacity: 0, y: isEven ? 20 : -20 }}
-//         animate={{ opacity: 1, y: 0 }}
-//         transition={{ duration: 0.5, delay: index * 0.1 }}
-//         className={`order-${isEven ? 1 : 2} mb-2`}
-//       >
-//         <div className="bg-white rounded-lg shadow-md p-4">
-//           <h3 className="text-lg font-semibold mb-2">{event.title}</h3>
-//           <p className="text-sm text-gray-600">{event.description}</p>
-//         </div>
-//       </motion.div>
-//       <motion.div
-//         initial={{ scale: 0 }}
-//         animate={{ scale: 1 }}
-//         transition={{
-//           type: "spring",
-//           stiffness: 260,
-//           damping: 20,
-//           delay: index * 0.1,
-//         }}
-//         className={`w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center z-10 order-${
-//           isEven ? 2 : 1
-//         }`}
-//       >
-//         <Icon className="w-6 h-6 text-blue-500" />
-//       </motion.div>
-//       <motion.div
-//         initial={{ opacity: 0, scale: 0.5 }}
-//         animate={{ opacity: 1, scale: 1 }}
-//         transition={{ duration: 0.3, delay: index * 0.1 + 0.2 }}
-//         className={`absolute ${
-//           isEven ? "top-0" : "bottom-4"
-//         } bg-white rounded-full shadow-md px-3 py-1`}
-//       >
-//         <span className="text-sm font-semibold">{event.year}</span>
-//       </motion.div>
-//     </div>
-//   );
-// };
-
 const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
   const [selectedService, setSelectedService] =
     useState<ServiceKey>("Intraday/BTST");
@@ -238,21 +156,6 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
     setShowDisclaimer(false);
     setDisclaimerAgreed(false);
   };
-  // const timelineEvents: TimelineEvent[] = content.keyFeatures
-  //   ? content.keyFeatures.map((feature, index) => ({
-  //       year: 2023 - index,
-  //       title: feature.split(":")[0],
-  //       description: feature.split(":")[1] || feature,
-  //       icon: [
-  //         LightbulbIcon,
-  //         BriefcaseIcon,
-  //         HandshakeIcon,
-  //         CalendarIcon,
-  //         ClockIcon,
-  //         BookOpen,
-  //       ][index % 6],
-  //     }))
-  //   : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white">
@@ -271,17 +174,6 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
             {content.keyFeatures && (
               <KeyFeatures features={content.keyFeatures} />
             )}
-            {/* <ServiceDescription content={content} /> */}
-            {/* {content.keyFeatures && (
-              <div className="mt-12 mb-8">
-                <h3 className="text-2xl font-semibold mb-6 text-indigo-600">
-                  Key Features
-                </h3>
-                <div className="overflow-x-auto">
-                  <HorizontalTimeline events={timelineEvents} />
-                </div>
-              </div>
-            )} */}
             {content.plans && (
               <PricingPlans
                 plans={content.plans}
@@ -301,6 +193,9 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
               <Registration text={content.registration} />
             )}
             {content.notes && <Notes text={content.notes} />}
+            {content.termsAndConditions && (
+              <TermsAndConditions text={content.termsAndConditions} />
+            )}
           </motion.section>
         </AnimatePresence>
       </main>
@@ -372,14 +267,13 @@ const ServiceDescription: React.FC<{
         {content.description}
       </motion.p>
       {content.additionalDescription && (
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mb-6 font-light text-sm sm:text-base"
-        >
-          {content.additionalDescription}
-        </motion.p>
+          dangerouslySetInnerHTML={{ __html: content.additionalDescription }}
+        />
       )}
     </div>
     <motion.div
@@ -637,7 +531,26 @@ const Disclaimer: React.FC<{ text: string }> = ({ text }) => (
       className="flex items-start space-x-2 text-yellow-600"
     >
       <AlertTriangle className="w-5 h-5 mt-1 flex-shrink-0" />
-      <p className="text-sm md:text-base">{text}</p>
+      <p className="text-sm md:text-base" style={{ whiteSpace: "pre-line" }}>
+        {text}
+      </p>
+    </motion.div>
+  </CustomCard>
+);
+
+const TermsAndConditions: React.FC<{ text: string }> = ({ text }) => (
+  <CustomCard title="Terms and Conditions">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex items-start space-x-2 text-yellow-600"
+    >
+      <p
+        className="text-sm md:text-base"
+        dangerouslySetInnerHTML={{ __html: text }}
+        style={{ whiteSpace: "pre-line" }}
+      />
     </motion.div>
   </CustomCard>
 );
