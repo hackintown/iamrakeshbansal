@@ -4,7 +4,8 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import Navbar from "@/components/ui/Navbar/Navbar";
 import Footer from "@/components/ui/Footer/Footer";
-import Image from "next/image";
+import Carecature from "@/components/ui/Carecature";
+import SocialMediaSidebar from "@/components/SocialMediaSidebar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -61,26 +62,8 @@ export default function RootLayout({
         <footer>
           <Footer />
         </footer>
-        <div className="fixed bottom-16 lg:bottom-[70px] right-4 md:right-6 w-[68px] h-[68px] z-50">
-          {/* Outer shadow and base circle */}
-          <div
-            className="absolute inset-0 rounded-full shadow-2xl  bg-white/30 backdrop-blur-lg border-4 border-white transform 
-          hover:scale-105 transition-transform duration-300 perspective-500"
-          >
-            {/* 3D effect using perspective */}
-            <div className="absolute inset-0 transform translate-y-[-10px]">
-              {/* Clipping the image to pop out */}
-              <div className="w-[120px] h-[100px] absolute top-[-20px] left-[-30px] rounded-full overflow-visible">
-                <Image
-                  src="/images/focus-here.gif"
-                  alt="Rakesh-Bansal-Avatar"
-                  fill
-                  className="object-cover w-[120px] h-[100px] transform translate-y-[-15px] rounded-full drop-shadow-2xl"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        <Carecature />
+        <SocialMediaSidebar />
       </body>
     </html>
   );

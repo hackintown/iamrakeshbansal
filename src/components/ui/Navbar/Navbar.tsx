@@ -52,13 +52,13 @@ export default function Navbar() {
         <div className="hidden lg:flex space-x-6">
           <Link
             href="/"
-            className="text-base font-medium text-purple-600 hover:text-purple-600 transition-colors duration-200"
+            className="text-base font-medium text-foreground hover:text-purple-600 transition-colors duration-200"
           >
             Home
           </Link>
           {NAVBAR_CONSTANT.map((group) => (
             <div key={group.title} className="relative group">
-              <button className="text-base font-medium text-purple-600 hover:text-purple-600 transition-colors duration-200 flex items-center gap-x-1">
+              <button className="text-base font-medium text-foreground hover:text-purple-600 transition-colors duration-200 flex items-center gap-x-1">
                 {group.title}
                 <FaChevronDown className="transition-transform duration-300 group-hover:rotate-180 size-3" />
               </button>

@@ -119,7 +119,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         : "opacity-0 translate-x-full absolute"
     )}
   >
-    <div className="w-full md:w-1/3 h-[400px] relative ring-4 ring-purple-500 my-1 md:my-0 mx-1 rounded-xl overflow-hidden ">
+    <div className="w-full md:w-1/3 h-[280px] relative ring-4 ring-purple-500 my-1 md:my-0 mx-1 rounded-xl overflow-hidden ">
       <Image
         src={imageUrl}
         alt={`${name}'s testimonial`}
@@ -174,45 +174,6 @@ const Testimonials: React.FC = () => {
 
   return (
     <div className="relative overflow-hidden py-10 bg-white">
-      {/* <div className="absolute inset-0 bg-gradient-to-tl from-gray-900 via-green-900 to-purple-900">
-        <svg
-          className="absolute inset-0 w-full h-full"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient
-              id="testimonial-grad"
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="rgba(16, 185, 129, 0.05)" />
-              <stop offset="50%" stopColor="rgba(139, 92, 246, 0.05)" />
-              <stop offset="100%" stopColor="rgba(16, 185, 129, 0.05)" />
-            </linearGradient>
-          </defs>
-          <path
-            fill="url(#testimonial-grad)"
-            fillOpacity="1"
-            d="M0,32L48,53.3C96,75,192,117,288,122.7C384,128,480,96,576,85.3C672,75,768,85,864,101.3C960,117,1056,139,1152,133.3C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-          ></path>
-        </svg>
-      </div>
-      <div className="absolute inset-0 opacity-30">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <filter id="testimonial-noise">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.8"
-              numOctaves="4"
-              stitchTiles="stitch"
-            />
-            <feColorMatrix type="saturate" values="0" />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#testimonial-noise)" />
-        </svg>
-      </div> */}
       <div className="absolute inset-0 bg-gradient-to-bl from-purple-900/10 to-green-900/10">
         <svg
           className="absolute inset-0 w-full h-full"
@@ -270,16 +231,19 @@ const Testimonials: React.FC = () => {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-green-600 mb-4">
             What Our Clients Say
           </h2>
-          <p className="text-sm md:text-base text-foreground max-w-2xl mx-auto">
+          {/* <p className="text-sm md:text-base text-foreground max-w-2xl mx-auto">
             Discover how our services have transformed the investment strategies
             of our valued clients.
-          </p>
+          </p> */}
         </div>
         <div className="mb-6 lg:mb-8">
           <VideoTestimonials />
         </div>
 
-        <div className="relative md:h-[400px] mb-4 md:mb-8 lg:mb-10" ref={sliderRef}>
+        <div
+          className="relative md:h-[280px] mb-4 md:mb-8 lg:mb-10"
+          ref={sliderRef}
+        >
           {testimonials.map((testimonial, index) => (
             <TestimonialCard
               key={index}
