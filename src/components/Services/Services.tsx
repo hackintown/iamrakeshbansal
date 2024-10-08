@@ -411,7 +411,7 @@ const GeneralFeatures: React.FC<{ features: string[] }> = ({ features }) => (
 );
 
 const AdvancedFeatures: React.FC<{
-  features: Record<string, { price: string; features: string[] }>;
+  features: Record<string, { price?: string; features: string[] }>;
 }> = ({ features }) => (
   <CustomCard title="Advanced Features">
     {Object.entries(features).map(([key, value], index) => (
