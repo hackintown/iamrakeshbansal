@@ -178,6 +178,7 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
               <PricingPlans
                 plans={content.plans}
                 onSubscribe={handleSubscribe}
+                buttonText={content.buttonText ?? "Subscribe Now"}
               />
             )}
             {content.generalFeatures && (
@@ -242,7 +243,7 @@ const ServiceHeader: React.FC<{ title: string }> = ({ title }) => (
         transition={{ delay: 0.5 }}
         className="text-center"
       >
-        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white">
+        <h1 className="text-[1.2rem] sm:text-3xl md:text-5xl font-bold text-white">
           <KeyboardEffect text={title.toUpperCase()} />
         </h1>
       </motion.div>
@@ -488,8 +489,13 @@ const WhatWeOffer: React.FC<{ items: { title: string; info: string }[] }> = ({
 );
 
 const PricingPlans: React.FC<{
-  plans: { duration: string; price: string }[];
+  plans: {
+    buttonText?: string;
+    duration: string;
+    price: string;
+  }[];
   onSubscribe: () => void;
+  buttonText: string;
 }> = ({ plans, onSubscribe }) => (
   <CustomCard title="Pricing Plans">
     <div className="flex flex-wrap gap-6 items-center justify-center">
@@ -514,7 +520,7 @@ const PricingPlans: React.FC<{
             onClick={onSubscribe}
             className="w-full bg-background border border-border text-foreground py-2 px-4 rounded transition-colors duration-300 hover:bg-opacity-80"
           >
-            Subscribe Now
+            {plan.buttonText ? plan.buttonText : "Subscribe Now"}
           </button>
         </motion.div>
       ))}
@@ -531,9 +537,11 @@ const Disclaimer: React.FC<{ text: string }> = ({ text }) => (
       className="flex items-start space-x-2 text-yellow-600"
     >
       <AlertTriangle className="w-5 h-5 mt-1 flex-shrink-0" />
-      <p className="text-sm md:text-base" style={{ whiteSpace: "pre-line" }}>
-        {text}
-      </p>
+      <p
+        className="text-sm md:text-base"
+        dangerouslySetInnerHTML={{ __html: text }}
+        style={{ whiteSpace: "pre-line" }}
+      />
     </motion.div>
   </CustomCard>
 );

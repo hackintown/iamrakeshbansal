@@ -24,7 +24,7 @@ export default function Caricature() {
         <div
           className="
           w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28
-          bg-white bg-opacity-20 backdrop-filter backdrop-blur-lg
+          bg-[#f2f2f4] backdrop-filter backdrop-blur-lg
           rounded-full flex items-center justify-center overflow-hidden
           transition-all duration-300 ease-in-out
           transform hover:scale-105
@@ -32,10 +32,10 @@ export default function Caricature() {
           ring-2 ring-white ring-opacity-50 hover:ring-opacity-75
         "
         >
-          <div className="relative w-full h-full z-50">
+          <div className="relative top-3 w-full h-full z-50">
             <video
-              src="/images/carecature.mp4"
-              className="object-cover w-full h-full rounded-full"
+              src="/images/jhakas.mp4"
+              className="object-cover w-full h-full"
               autoPlay
               loop
               playsInline

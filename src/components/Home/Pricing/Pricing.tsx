@@ -48,11 +48,6 @@ const pricingData: PricingPlan[] = [
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
       { name: "First Target", included: true },
-      {
-        name: "Capital Required 20k to 50k",
-        included: true,
-        info: "Recommended capital range for optimal trading",
-      },
       { name: "Top Nifty 50 Companies", included: true },
       { name: "Index & Equity", included: true },
     ],
@@ -83,7 +78,6 @@ const pricingData: PricingPlan[] = [
       { name: "Entry Price", included: true },
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
-      { name: "Capital Required 55k to 100k", included: true },
       { name: "Top Nifty 50 Companies", included: true },
       {
         name: "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY",
@@ -119,7 +113,6 @@ const pricingData: PricingPlan[] = [
       { name: "Entry Price", included: true },
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
-      { name: "Capital Required 100k to 500k", included: true },
       { name: "Short, Medium & Long Term", included: true },
       { name: "Swing Trade", included: true },
       {
@@ -157,7 +150,6 @@ const pricingData: PricingPlan[] = [
         included: true,
         info: "Detailed monthly performance analysis",
       },
-      { name: "Capital Required 500k to 10000k", included: true },
       { name: "Top Nifty 50 Companies", included: true },
     ],
     buttonText: "See More",
@@ -188,7 +180,6 @@ const pricingData: PricingPlan[] = [
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
       { name: "Performance Reports", included: true },
-      { name: "Capital Required 500k to 10000k", included: true },
       {
         name: "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil",
         included: true,
@@ -362,7 +353,7 @@ export default function Pricing() {
 
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: availablePlans.length > 2,
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,

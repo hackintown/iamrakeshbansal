@@ -29,6 +29,7 @@ export const services = [
 type ServicePlan = {
   duration: "Monthly" | "Quarterly" | "Yearly";
   price: string;
+  buttonText?: string;
 };
 
 type WhyChooseUs = {
@@ -53,6 +54,7 @@ type AdvancedFeatures = {
 export const serviceContent: Record<
   ServiceKey,
   {
+    buttonText?: string;
     title: string;
     additionalDescription: string;
     description: string;
@@ -352,7 +354,7 @@ export const serviceContent: Record<
 
   HNI: {
     title: "Exclusive HNI Subscription",
-    href: "https://forms.gle/Ki1ZunDWoA83Pdey9",
+    href: "https://forms.gle/diuYQdWGtuvjmvts8",
     description:
       "Our HNI (High Net-worth Individual) subscription is designed for serious investors seeking personalized insights, exclusive stock recommendations, and expert guidance tailored to maximize potential returns. This service gives you direct access to Rakesh Bansal Ventures' expertise, ensuring that you stay ahead in the dynamic stock market.",
     additionalDescription: `<b>What's Included:</b><br>
@@ -397,26 +399,37 @@ export const serviceContent: Record<
         info: "Exclusive one-on-one consultations with Dr. Rakesh Bansal may be available based on slot bookings and advisor discretion.",
       },
     ],
-    disclaimer: `Investment in securities market is subject to market risks. Read all the related documents carefully before investing.
-We don't guarantee any kind of Profit.
-Stock market involves risk and trade only if are comfortable with risk.
-Please don't trade/invest looking at our performance sheet as Past performance is not the guarantee for future performance.
-Our performance sheet is for our own satisfaction & transparency. You may or may not be able to buy/sell at my recommended price as recommendations are shared in live/ running market and we cannot freeze stock price to help you buying/selling at our recommended price.
-Our humble request is for you to please trade/invest as per your individual risk appetite.`,
+    disclaimer: `
+      <ol>
+        <li>Investment in securities market is subject to market risks. Read all the related documents carefully before investing.</li>
+        <li>We don't guarantee any kind of Profit.</li>
+        <li>Stock market involves risk and trade only if are comfortable with risk.</li>
+        <li>Please don't trade/invest looking at our performance sheet as Past performance is not the guarantee for future performance.</li>
+        <li>Our performance sheet is for our own satisfaction & transparency. You may or may not be able to buy/sell at my recommended price as recommendations are shared in live/ running market and we cannot freeze stock price to help you buying/selling at our recommended price.</li>
+        <li>Our humble request is for you to please trade/invest as per your individual risk appetite.</li>
+      </ol>
+`,
 
-    plans: [{ duration: "Yearly", price: "Rs- 5 lakh + 18% GST /-" }],
+    plans: [
+      {
+        duration: "Yearly",
+        price: "Rs- 5 lakh + 18% GST",
+        buttonText: "Register Now",
+      },
+    ],
     notes:
       "100% payment in advance, no refunds applicable under any circumstances.",
 
-    termsAndConditions: `<ol}>
-<li>The fee is annual and payment is 100% advance and under no circumstances Rakesh Bansal Ventures (hereinafter referred to as Advisor) shall be liable for any refund for amount paid by the client.</li>
-<li>In case of any cancellation/termination from Client, the amount paid by the client shall be forfeited and Advisor shall not be liable to provide any more services to the client. In case of any cancellation/termination from Advisor, the commercials shall be mutually discussed and agreed for the pending duration of the agreement.</li>
-<li>The Client represents that the research advisory shall solely be used for own use and not shared with anyone under any circumstances, whatsoever.</li>
-<li>The services will not include portfolio management or any related services relating to sale/purchase of Equities/other financial instruments, the services shall remain pure research advisory based. Specific requests may be entertained and mutually managed among the parties within the scope of the services.</li>
-<li>There is no commitment of any profits under the scope of this service. Client has to understand the speculative and dynamic nature of stock market and shall invest/trade based on their own free will, the Advisor shall have no liability of any kind under any circumstances.</li>
-<li>
-Specific requests may be made by client to have one-on-one consultation with Dr. Rakesh Bansal with respect to research advisory. Such requests may be entertained at sole discretion of the Advisor on best effort basis; however, it shall not make the basis of the services rendered within this HNI SUBSCRIPTION MODULE.</li>
-</ol>
+    termsAndConditions: `
+    <ol}>
+        <li>The fee is annual and payment is 100% advance and under no circumstances Rakesh Bansal Ventures (hereinafter referred to as Advisor) shall be liable for any refund for amount paid by the client.</li>
+        <li>In case of any cancellation/termination from Client, the amount paid by the client shall be forfeited and Advisor shall not be liable to provide any more services to the client. In case of any cancellation/termination from Advisor, the commercials shall be mutually discussed and agreed for the pending duration of the agreement.</li>
+        <li>The Client represents that the research advisory shall solely be used for own use and not shared with anyone under any circumstances, whatsoever.</li>
+        <li>The services will not include portfolio management or any related services relating to sale/purchase of Equities/other financial instruments, the services shall remain pure research advisory based. Specific requests may be entertained and mutually managed among the parties within the scope of the services.</li>
+        <li>There is no commitment of any profits under the scope of this service. Client has to understand the speculative and dynamic nature of stock market and shall invest/trade based on their own free will, the Advisor shall have no liability of any kind under any circumstances.</li>
+        <li>
+        Specific requests may be made by client to have one-on-one consultation with Dr. Rakesh Bansal with respect to research advisory. Such requests may be entertained at sole discretion of the Advisor on best effort basis; however, it shall not make the basis of the services rendered within this HNI SUBSCRIPTION MODULE.</li>
+    </ol>
   `,
   },
 };

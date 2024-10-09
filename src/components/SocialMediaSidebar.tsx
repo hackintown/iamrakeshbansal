@@ -2,7 +2,13 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaFacebook, FaYoutube, FaInstagram, FaLinkedin } from "react-icons/fa";
+import {
+  FaFacebook,
+  FaYoutube,
+  FaInstagram,
+  FaLinkedin,
+  FaWhatsapp,
+} from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Link from "next/link";
 
@@ -36,6 +42,12 @@ const socialMedias = [
     icon: FaYoutube,
     url: "https://www.youtube.com/@RakeshBansal",
     color: "#FF0000",
+  },
+  {
+    name: "WhatsApp",
+    icon: FaWhatsapp,
+    url: "https://wa.me/919996161879",
+    color: "#25D366",
   },
 ];
 
