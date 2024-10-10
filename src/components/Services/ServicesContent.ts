@@ -83,7 +83,6 @@ export const serviceContent: Record<
       "Exit Price",
       "Stop Loss",
       "First Target",
-      "Capital Required 20k to 50k",
       "Top Nifty 50 Companies",
       "Index & Equity",
     ],
@@ -134,7 +133,6 @@ export const serviceContent: Record<
       "Exit Price",
       "Stop Loss",
       "First Target",
-      "Capital Required 55k to 100k",
       "Top Nifty 50 Companies",
       "Nifty, Bank Nifty, FINNIFTY, & MIDCPNIFTY",
     ],
@@ -189,7 +187,6 @@ export const serviceContent: Record<
         features: [
           "Monthly 10-15 Calls",
           "Entry Price, Exit Price, and Stop Loss provided for each trade.",
-          "Capital Required: ₹55,000 to ₹1,00,000",
           "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading.",
           "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning.",
         ],
@@ -199,7 +196,6 @@ export const serviceContent: Record<
         features: [
           "Monthly 15-20 Calls",
           "Entry Price, Exit Price, Stop Loss, and First Target for each signal.",
-          "Capital Required: ₹20,000 to ₹50,000.",
           "Focuses on top Nifty 50 companies for effective short-term trading.",
         ],
       },
@@ -244,7 +240,6 @@ export const serviceContent: Record<
       "Exit Price",
       "Stop Loss",
       "Performance Reports",
-      "Capital Required 500k to 10000k",
       "Top Nifty 50 Companies",
     ],
     whyChooseUs: [
@@ -288,7 +283,6 @@ export const serviceContent: Record<
       "Entry Price",
       "Exit Price",
       "Stop Loss",
-      "Capital Required 100k to 500k",
       "Short, Medium & Long Term",
       "Swing Trade",
       "Live Market Support",
@@ -322,7 +316,6 @@ export const serviceContent: Record<
       "Exit Price",
       "Stop Loss",
       "Performance Reports",
-      "Capital Required 500k to 10000k",
       "Short, Medium & Long Term",
       "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil",
     ],
@@ -353,16 +346,23 @@ export const serviceContent: Record<
   },
 
   HNI: {
-    title: "Exclusive HNI Subscription",
+    title: "Exclusive HNI Service",
     href: "https://forms.gle/diuYQdWGtuvjmvts8",
     description:
       "Our HNI (High Net-worth Individual) subscription is designed for serious investors seeking personalized insights, exclusive stock recommendations, and expert guidance tailored to maximize potential returns. This service gives you direct access to Rakesh Bansal Ventures' expertise, ensuring that you stay ahead in the dynamic stock market.",
-    additionalDescription: `<b>What's Included:</b><br>
-      - Blending human intelligence with robust data-driven models,<br>
-      - Exclusive Access to Telegram Channels:<br>
-        - HNI Channel<br>
-        - Future Service Channel<br>
-        - Mentorship Channel`,
+    additionalDescription: `
+      <b>What's Included:</b><br>
+      <ul>
+        <li>Blending human intelligence with robust data-driven models</li>
+        <li>Exclusive Access to Telegram Channels:
+          <ul>
+            <li>HNI Channel</li>
+            <li>Future Service Channel</li>
+            <li>Mentorship Channel</li>
+          </ul>
+        </li>
+      </ul>
+        `,
     advancedFeatures: {
       Future: {
         features: [

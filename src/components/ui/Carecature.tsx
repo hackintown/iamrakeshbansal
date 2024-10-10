@@ -39,6 +39,7 @@ export default function Caricature() {
               autoPlay
               loop
               playsInline
+              preload="auto"
             />
           </div>
         </div>

@@ -22,7 +22,7 @@ import "swiper/css/pagination";
 const testimonials = [
   {
     videoUrl:
-      "https://www.iamrakeshbansal.com/wp-content/uploads/2024/01/RKB-23DEC-MEDIABYTE-JASWINDER.mp4",
+      "https://www.iamrakeshbansal.com/wp-content/uploads/2024/01/RKB-23DEC-MEDIABYTES-05.mp4",
     name: "John Doe",
     company: "Tech Innovators",
     review:

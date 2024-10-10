@@ -181,6 +181,7 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
                 buttonText={content.buttonText ?? "Subscribe Now"}
               />
             )}
+            {content.notes && <Notes text={content.notes} />}
             {content.generalFeatures && (
               <GeneralFeatures features={content.generalFeatures} />
             )}
@@ -193,7 +194,7 @@ const ServicesPage: React.FC<ServiceProps> = ({ param }) => {
             {content.registration && (
               <Registration text={content.registration} />
             )}
-            {content.notes && <Notes text={content.notes} />}
+
             {content.termsAndConditions && (
               <TermsAndConditions text={content.termsAndConditions} />
             )}
@@ -243,7 +244,7 @@ const ServiceHeader: React.FC<{ title: string }> = ({ title }) => (
         transition={{ delay: 0.5 }}
         className="text-center"
       >
-        <h1 className="text-[1.2rem] sm:text-3xl md:text-5xl font-bold text-white">
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white">
           <KeyboardEffect text={title.toUpperCase()} />
         </h1>
       </motion.div>
@@ -496,37 +497,43 @@ const PricingPlans: React.FC<{
   }[];
   onSubscribe: () => void;
   buttonText: string;
-}> = ({ plans, onSubscribe }) => (
-  <CustomCard title="Pricing Plans">
-    <div className="flex flex-wrap gap-6 items-center justify-center">
-      {plans.map((plan, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="rounded-lg p-6 shadow-md w-full h-full max-w-[250px] max-h-[250px]"
-          style={{
-            backgroundImage: `url(${getPlanBackgroundImage(plan.duration)})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <h4 className="text-xl font-semibold mb-2 text-white">
-            {plan.duration}
-          </h4>
-          <p className="text-3xl font-bold mb-4 text-white">{plan.price}</p>
-          <button
-            onClick={onSubscribe}
-            className="w-full bg-background border border-border text-foreground py-2 px-4 rounded transition-colors duration-300 hover:bg-opacity-80"
+}> = ({ plans, onSubscribe }) => {
+  const isSinglePlan = plans.length === 1;
+  return (
+    <CustomCard title="Pricing Plans">
+      <div className="flex flex-wrap gap-6 items-center justify-center">
+        {plans.map((plan, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="rounded-lg p-6 shadow-md w-full h-full max-w-[250px] max-h-[250px]"
+            style={{
+              backgroundImage: `url(${getPlanBackgroundImage(
+                plan.duration,
+                isSinglePlan
+              )})`,
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+            }}
           >
-            {plan.buttonText ? plan.buttonText : "Subscribe Now"}
-          </button>
-        </motion.div>
-      ))}
-    </div>
-  </CustomCard>
-);
+            <h4 className="text-xl font-semibold mb-2 text-white">
+              {plan.duration}
+            </h4>
+            <p className="text-3xl font-bold mb-4 text-white">{plan.price}</p>
+            <button
+              onClick={onSubscribe}
+              className="w-full bg-background border border-border text-foreground py-2 px-4 rounded transition-colors duration-300 hover:bg-opacity-80"
+            >
+              {plan.buttonText ? plan.buttonText : "Subscribe Now"}
+            </button>
+          </motion.div>
+        ))}
+      </div>
+    </CustomCard>
+  );
+};
 
 const Disclaimer: React.FC<{ text: string }> = ({ text }) => (
   <CustomCard title="Disclaimer">
@@ -555,7 +562,7 @@ const TermsAndConditions: React.FC<{ text: string }> = ({ text }) => (
       className="flex items-start space-x-2 text-yellow-600"
     >
       <p
-        className="text-sm md:text-base"
+        className="text-sm md:text-base pl-5"
         dangerouslySetInnerHTML={{ __html: text }}
         style={{ whiteSpace: "pre-line" }}
       />
@@ -659,7 +666,13 @@ const DisclaimerModal: React.FC<{
     )}
   </AnimatePresence>
 );
-function getPlanBackgroundImage(duration: string): string {
+function getPlanBackgroundImage(
+  duration: string,
+  isSinglePlan: boolean
+): string {
+  if (isSinglePlan) {
+    return "/images/dream-card1.png";
+  }
   switch (duration.toLowerCase()) {
     case "monthly":
       return "/images/dream-card1.png";

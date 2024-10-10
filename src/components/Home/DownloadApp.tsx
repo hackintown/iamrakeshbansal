@@ -18,7 +18,6 @@ const imageSlide = [
 export default function DownloadApp() {
   const [appDownloads, setAppDownloads] = useState(0);
   const [customerReviews, setCustomerReviews] = useState(0);
-  const [workExperience, setWorkExperience] = useState(0);
   const [tradingCommunity, setTradingCommunity] = useState(0);
   const sliderRef = useRef<Slider>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -54,9 +53,8 @@ export default function DownloadApp() {
         timeoutId = requestAnimationFrame(step);
       };
 
-      animateCount(30000, 3000, setAppDownloads); // Example: animate to 10,000 in 2 seconds
-      animateCount(500, 3000, setCustomerReviews);
-      animateCount(25, 3000, setWorkExperience);
+      animateCount(50000, 3000, setAppDownloads); // Example: animate to 10,000 in 2 seconds
+      animateCount(10000, 3000, setCustomerReviews);
       animateCount(40000, 3000, setTradingCommunity);
     }
 
@@ -186,7 +184,7 @@ export default function DownloadApp() {
                 />
               </Link>
             </div>
-            <div className="flex flex-wrap  gap-3 justify-between mt-12 max-w-xl">
+            <div className="flex flex-wrap  gap-3 items-center justify-between mt-12 max-w-md">
               <div ref={ref} className="text-center">
                 <h3 className="text-2xl font-semibold text-white">
                   {formatNumber(appDownloads)}
@@ -198,12 +196,6 @@ export default function DownloadApp() {
                   {formatNumber(customerReviews)}
                 </h3>
                 <p className="text-white text-sm mt-2">Customer Reviews</p>
-              </div>
-              <div ref={ref} className="text-center">
-                <h3 className="text-2xl font-semibold text-white">
-                  {formatNumber(workExperience)}
-                </h3>
-                <p className="text-white text-sm mt-2">Work Experience</p>
               </div>
               <div ref={ref} className="text-center">
                 <h3 className="text-2xl font-semibold text-white">

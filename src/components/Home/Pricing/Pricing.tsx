@@ -289,7 +289,7 @@ const PricingCard = ({
 
   return (
     <motion.div
-      className={`rounded-lg overflow-hidden flex-grow h-[583px] flex flex-col justify-between hover:border-2 border-green-500 ${
+      className={`rounded-lg overflow-hidden flex-grow h-[583px] flex flex-col justify-between hover:border-2 hover:border-purple-500 border-green-500 ${
         plan.popular ? "" : "border border-gray-200"
       } bg-white w-full max-w-sm text-black shadow-md hover:shadow-xl 
       transition-all duration-300 relative h-full flex-grow`}
