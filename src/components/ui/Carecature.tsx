@@ -38,6 +38,7 @@ export default function Caricature() {
               className="object-cover w-full h-full"
               autoPlay
               loop
+              muted
               playsInline
               preload="auto"
             />
