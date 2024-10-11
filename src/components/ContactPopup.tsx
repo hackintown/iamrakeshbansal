@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import { FaXTwitter } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
-
 export default function ContactPopup() {
   const [isOpen, setIsOpen] = useState(false);
   const popupRef = useRef<HTMLDivElement>(null);
