@@ -185,11 +185,11 @@ const Contact = () => {
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
-                  "Monday: 11 am to 6 pm",
-                  "Tuesday: 11 am to 6 pm",
-                  "Wednesday: 11 am to 6 pm",
-                  "Thursday: 11 am to 6 pm",
-                  "Friday: 11 am to 6 pm",
+                  "Monday: 10 am to 6 pm",
+                  "Tuesday: 10 am to 6 pm",
+                  "Wednesday: 10 am to 6 pm",
+                  "Thursday: 10 am to 6 pm",
+                  "Friday: 10 am to 6 pm",
                   "Saturday: 10 am to 6 pm",
                 ].map((day, index) => (
                   <div key={index} className="flex items-center">

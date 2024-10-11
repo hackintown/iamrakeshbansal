@@ -286,7 +286,7 @@ export const serviceContent: Record<
       "Quarterly 10-15 Calls",
       "Entry Price",
       "Exit Price",
-      "Short & Medium",
+      "Short & Medium Term",
       "Live Market Support",
     ],
     generalFeatures: [
@@ -319,7 +319,7 @@ export const serviceContent: Record<
       "Exit Price",
       "Stop Loss",
       "Performance Reports",
-      "Short & Medium",
+      "Short & Medium Term",
       "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil",
     ],
     whyChooseUs: [
@@ -377,7 +377,7 @@ export const serviceContent: Record<
         features: [
           "10-15 calls per Quarter",
           "Entry &  Exit",
-          "Short & Medium",
+          "Short & Medium Term",
           "Focuses on top Nifty 50 companies for effective short-term trading.",
         ],
       },

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 
 export default function Caricature() {
@@ -32,15 +33,12 @@ export default function Caricature() {
           ring-2 ring-white ring-opacity-50 hover:ring-opacity-75
         "
         >
-          <div className="relative top-3 w-full h-full z-50">
-            <video
-              src="/images/jhakas.mp4"
-              className="object-cover w-full h-full"
-              autoPlay
-              loop
-              muted
-              playsInline
-              preload="auto"
+          <div className="relative top-5 w-full h-full z-50">
+            <Image
+              src="/images/carecature.gif"
+              fill
+              alt="carecature"
+              className="object-cover"
             />
           </div>
         </div>
