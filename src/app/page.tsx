@@ -9,6 +9,7 @@ import Faq from "@/components/ui/Faq";
 import RegisteredBy from "@/components/ui/RegisteredBy";
 import SocialMedia from "@/components/ui/SocialMedia";
 import Testimonials from "@/components/ui/Testimonial/Testimonial";
+// import Testimonial from "@/components/ui/Testimonial/Testimonials";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <BookPublished />
       <DownloadApp />
       {/* <Blog /> */}
+      {/* <Testimonial /> */}
       <Testimonials />
       <SocialMedia />
       <Faq />

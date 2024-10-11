@@ -357,8 +357,6 @@ export default function Pricing() {
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 1,
-    centerMode: duration === "monthly",
-    centerPadding: duration === "monthly" ? "0px" : "10px",
     autoplay: duration === "monthly",
     autoplaySpeed: 3000,
     pauseOnHover: true,

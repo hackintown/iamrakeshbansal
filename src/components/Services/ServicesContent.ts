@@ -60,7 +60,7 @@ export const serviceContent: Record<
     description: string;
     generalFeatures?: string[];
     advancedFeatures?: AdvancedFeatures;
-    disclaimer?: string;
+    disclaimer?: string[];
     registration?: string;
     whyChooseUs?: WhyChooseUs[];
     whatWeOffer?: WhatWeOffer[];
@@ -68,7 +68,7 @@ export const serviceContent: Record<
     notes?: string;
     keyFeatures?: KeyFeatures[];
     href?: string;
-    termsAndConditions?: string;
+    termsAndConditions?: string[];
   }
 > = {
   "Intraday/BTST": {
@@ -108,8 +108,9 @@ export const serviceContent: Record<
         info: "Stay informed with our detailed performance reports, offering insights into our trading strategies and the rationale behind each recommendation. Track your performance and understand the mechanics of successful intraday trading.",
       },
     ],
-    disclaimer:
+    disclaimer: [
       "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
+    ],
     notes:
       "Join Us Today! Embark on your journey to successful intraday trading with our new subscription plan. At just ₹999 per month, this is an unbeatable opportunity to sharpen your trading skills and boost your profits.",
     registration:
@@ -154,8 +155,9 @@ export const serviceContent: Record<
         info: "All our recommendations are backed by detailed trading rationale, and we publish a monthly options/index performance report on our website. This allows you to track our performance and gain further insights into our strategies.",
       },
     ],
-    disclaimer:
+    disclaimer: [
       "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
+    ],
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
@@ -218,8 +220,9 @@ export const serviceContent: Record<
         info: "Track your progress with our monthly performance reports, offering a transparent view of our trading rationale and results.",
       },
     ],
-    disclaimer:
+    disclaimer: [
       "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
+    ],
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
@@ -260,8 +263,9 @@ export const serviceContent: Record<
         info: "We maintain transparency by publishing monthly performance reports on our WhatsApp Or Particular group. This helps you track our results and assess the effectiveness of our strategies over time.",
       },
     ],
-    disclaimer:
+    disclaimer: [
       "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
+    ],
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
@@ -292,8 +296,9 @@ export const serviceContent: Record<
       "Webinar Series for In-Depth Learning: To ensure your success, we conduct webinars that cater to problem-solving, address conceptual doubts, and tackle any queries you might have. Additionally, our webinar series includes real-life examples featuring shared videos showcasing real-life trading scenarios. These examples provide you with the conceptual understanding necessary to navigate the complexities of the stock market effectively.",
       "Mentorship Performance Reports: Our mentorship program provides transparency through quarterly and yearly performance reports, which will be published on our website. This allows you to track our performance and assess the program's overall effectiveness.",
     ],
-    disclaimer:
+    disclaimer: [
       "All our recommendations are backed by solid trading rationale, and we publish a monthly performance report on particular group or WhatsApp.",
+    ],
     registration:
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
@@ -337,8 +342,9 @@ export const serviceContent: Record<
         info: "Track your progress with our monthly performance reports, offering a transparent view of our trading rationale and results.",
       },
     ],
-    disclaimer:
+    disclaimer: [
       "All our recommendations are backed by solid trading rationale, and we publish a monthly commodities performance report on particular group or WhatsApp.",
+    ],
     plans: [
       { duration: "Monthly", price: "Rs- 3,500/-" },
       { duration: "Quarterly", price: "Rs- 8,999/-" },
@@ -352,14 +358,11 @@ export const serviceContent: Record<
       "Our HNI (High Net-worth Individual) subscription is designed for serious investors seeking personalized insights, exclusive stock recommendations, and expert guidance tailored to maximize potential returns. This service gives you direct access to Rakesh Bansal Ventures' expertise, ensuring that you stay ahead in the dynamic stock market.",
     additionalDescription: `
       <b>What's Included:</b><br>
-  
         <li>Blending human intelligence with robust data-driven models</li>
         <li>Exclusive Access to Telegram Channels:
-      
             <li>HNI Channel</li>
             <li>Future Service Channel</li>
             <li>Mentorship Channel</li>
-         
         </li>
    
         `,
@@ -399,16 +402,14 @@ export const serviceContent: Record<
         info: "Exclusive one-on-one consultations with Dr. Rakesh Bansal may be available based on slot bookings and advisor discretion.",
       },
     ],
-    disclaimer: `
-
-        <li>Investment in securities market is subject to market risks. Read all the related documents carefully before investing.</li>
-        <li>We don't guarantee any kind of Profit.</li>
-        <li>Stock market involves risk and trade only if are comfortable with risk.</li>
-        <li>Please don't trade/invest looking at our performance sheet as Past performance is not the guarantee for future performance.</li>
-        <li>Our performance sheet is for our own satisfaction & transparency. You may or may not be able to buy/sell at my recommended price as recommendations are shared in live/ running market and we cannot freeze stock price to help you buying/selling at our recommended price.</li>
-        <li>Our humble request is for you to please trade/invest as per your individual risk appetite.</li>
-    
-`,
+    disclaimer: [
+      "Investment in securities market is subject to market risks. Read all the related documents carefully before investing.",
+      "We don't guarantee any kind of Profit.",
+      "Stock market involves risk and trade only if you are comfortable with risk.",
+      "Please don't trade/invest based on our performance sheet, as past performance is not a guarantee for future performance.",
+      "Our performance sheet is for our own satisfaction & transparency. You may or may not be able to buy/sell at our recommended price.",
+      "Our humble request is to trade/invest according to your individual risk appetite.",
+    ],
 
     plans: [
       {
@@ -420,15 +421,13 @@ export const serviceContent: Record<
     notes:
       "100% payment in advance, no refunds applicable under any circumstances.",
 
-    termsAndConditions: `
-        <li>The fee is annual and payment is 100% advance and under no circumstances Rakesh Bansal Ventures (hereinafter referred to as Advisor) shall be liable for any refund for amount paid by the client.</li>
-        <li>In case of any cancellation/termination from Client, the amount paid by the client shall be forfeited and Advisor shall not be liable to provide any more services to the client. In case of any cancellation/termination from Advisor, the commercials shall be mutually discussed and agreed for the pending duration of the agreement.</li>
-        <li>The Client represents that the research advisory shall solely be used for own use and not shared with anyone under any circumstances, whatsoever.</li>
-        <li>The services will not include portfolio management or any related services relating to sale/purchase of Equities/other financial instruments, the services shall remain pure research advisory based. Specific requests may be entertained and mutually managed among the parties within the scope of the services.</li>
-        <li>There is no commitment of any profits under the scope of this service. Client has to understand the speculative and dynamic nature of stock market and shall invest/trade based on their own free will, the Advisor shall have no liability of any kind under any circumstances.</li>
-        <li>
-        Specific requests may be made by client to have one-on-one consultation with Dr. Rakesh Bansal with respect to research advisory. Such requests may be entertained at sole discretion of the Advisor on best effort basis; however, it shall not make the basis of the services rendered within this HNI SUBSCRIPTION MODULE.</li>
- 
-  `,
+    termsAndConditions: [
+      "The fee is annual and payment is 100% advance and under no circumstances Rakesh Bansal Ventures (hereinafter referred to as Advisor) shall be liable for any refund for amount paid by the client.",
+      "In case of any cancellation/termination from Client, the amount paid by the client shall be forfeited and Advisor shall not be liable to provide any more services to the client.",
+      "The Client represents that the research advisory shall solely be used for own use and not shared with anyone under any circumstances, whatsoever.",
+      "The services will not include portfolio management or any related services relating to sale/purchase of Equities/other financial instruments, the services shall remain pure research advisory based.",
+      "There is no commitment of any profits under the scope of this service. Client has to understand the speculative and dynamic nature of stock market.",
+      "Specific requests may be made by client to have one-on-one consultation with Dr. Rakesh Bansal with respect to research advisory. Such requests may be entertained at sole discretion of the Advisor.",
+    ],
   },
 };

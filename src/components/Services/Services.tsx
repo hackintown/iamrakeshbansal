@@ -350,7 +350,7 @@ const CustomCard: React.FC<{ title: string; children: React.ReactNode }> = ({
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-800 rounded-lg p-6 shadow-xl mb-8"
+    className="bg-gradient-to-br from-gray-100 to-gray-200 text-gray-800 rounded-lg p-3 lg:p-4 shadow-xl mb-8"
   >
     <h3 className="text-2xl font-semibold mb-4 text-indigo-600">{title}</h3>
     {children}
@@ -535,7 +535,7 @@ const PricingPlans: React.FC<{
   );
 };
 
-const Disclaimer: React.FC<{ text: string }> = ({ text }) => (
+const Disclaimer: React.FC<{ text: string[] }> = ({ text }) => (
   <CustomCard title="Disclaimer">
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -543,17 +543,22 @@ const Disclaimer: React.FC<{ text: string }> = ({ text }) => (
       transition={{ duration: 0.5 }}
       className="flex items-start space-x-2 text-yellow-600"
     >
-      <AlertTriangle className="w-5 h-5 mt-1 flex-shrink-0" />
-      <p
-        className="text-sm md:text-base"
-        dangerouslySetInnerHTML={{ __html: text }}
-        style={{ whiteSpace: "pre-line" }}
-      />
+      <div className="flex items-start space-x-2 text-yellow-600">
+        <AlertTriangle className="w-6 h-6 flex-shrink-0 text-yellow-500" />
+        <ul className="list-inside space-y-2 text-sm md:text-base text-red-600">
+          {text.map((item, index) => (
+            <li key={index} className="flex items-start">
+              <span className="mr-2 font-semibold">•</span>
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
     </motion.div>
   </CustomCard>
 );
 
-const TermsAndConditions: React.FC<{ text: string }> = ({ text }) => (
+const TermsAndConditions: React.FC<{ text: string[] }> = ({ text }) => (
   <CustomCard title="Terms and Conditions">
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -561,11 +566,14 @@ const TermsAndConditions: React.FC<{ text: string }> = ({ text }) => (
       transition={{ duration: 0.5 }}
       className="flex items-start space-x-2 text-yellow-600"
     >
-      <p
-        className="text-sm md:text-base pl-5"
-        dangerouslySetInnerHTML={{ __html: text }}
-        style={{ whiteSpace: "pre-line" }}
-      />
+      <ul className="list-inside space-y-2 text-sm md:text-base text-red-600">
+        {text.map((item, index) => (
+          <li key={index} className="flex items-start">
+            <span className="mr-2 font-semibold">•</span>
+            {item}
+          </li>
+        ))}
+      </ul>
     </motion.div>
   </CustomCard>
 );
