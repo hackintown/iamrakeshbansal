@@ -113,8 +113,7 @@ const pricingData: PricingPlan[] = [
       { name: "Entry Price", included: true },
       { name: "Exit Price", included: true },
       { name: "Stop Loss", included: true },
-      { name: "Short, Medium & Long Term", included: true },
-      { name: "Swing Trade", included: true },
+      { name: "Short & Medium", included: true },
       {
         name: "Live Market Support",
         included: true,

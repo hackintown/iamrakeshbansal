@@ -168,7 +168,7 @@ export const serviceContent: Record<
   },
   "Option & Intraday": {
     title: "Option & Intraday",
-    href: "https://rakeshbansal.rpy.club/g/KbkzwwjCcO",
+    href: "https://rakeshbansal.rpy.club/pick-package/NjXQphqSS",
     description:
       "Seize profitable market opportunities with our combined trading package, designed to help you excel in both options buying and intraday/BTST strategies. Whether you're aiming for short-term gains or a disciplined options approach, our expert-backed recommendations and real-time signals provide you with everything you need to trade confidently and strategically.",
     additionalDescription:
@@ -376,8 +376,8 @@ export const serviceContent: Record<
       Mentorship: {
         features: [
           "10-15 calls per Quarter",
-          "Entry, Exit, and Stop Loss prices",
-          "Short, Medium, and Long-Term Swing Trades",
+          "Entry &  Exit",
+          "Short & Medium",
           "Focuses on top Nifty 50 companies for effective short-term trading.",
         ],
       },
