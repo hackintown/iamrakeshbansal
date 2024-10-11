@@ -286,9 +286,7 @@ export const serviceContent: Record<
       "Quarterly 10-15 Calls",
       "Entry Price",
       "Exit Price",
-      "Stop Loss",
-      "Short, Medium & Long Term",
-      "Swing Trade",
+      "Short & Medium",
       "Live Market Support",
     ],
     generalFeatures: [
@@ -321,7 +319,7 @@ export const serviceContent: Record<
       "Exit Price",
       "Stop Loss",
       "Performance Reports",
-      "Short, Medium & Long Term",
+      "Short & Medium",
       "Silver, Zinc, Aluminium, Gold, Copper and Crude Oil",
     ],
     whyChooseUs: [

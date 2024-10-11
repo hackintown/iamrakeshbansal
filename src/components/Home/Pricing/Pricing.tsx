@@ -68,11 +68,11 @@ const pricingData: PricingPlan[] = [
     ),
   },
   {
-    title: "Index/Option",
+    title: "Option & Intraday",
     monthlyPrice: "1999",
-    yearlyPrice: "19999",
+    yearlyPrice: "20000",
     description: "For professionals",
-    href: "/subscriptions/options-plan",
+    href: "/subscriptions/option-intraday",
     features: [
       { name: "Monthly 10-15 Calls", included: true },
       { name: "Entry Price", included: true },
