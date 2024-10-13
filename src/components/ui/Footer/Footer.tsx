@@ -107,7 +107,7 @@ export default function Footer() {
               alt="Logo"
               width={180}
               height={60}
-              className="mb-6"
+              className="mb-6 w-full h-auto"
             />
             <p className="text-sm mb-6 text-center sm:text-left">
               Empowering your financial journey with innovative solutions and

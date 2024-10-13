@@ -1,103 +1,56 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Star } from "lucide-react";
 import { FaQuoteLeft } from "react-icons/fa";
 import VideoTestimonials from "./VideoTestimonials";
 import { MdPlayArrow } from "react-icons/md";
+import Slider from "react-slick";
 
 interface Testimonial {
+  id: number;
   quote: string;
   name: string;
   title: string;
   rating: number;
   imageUrl: string;
 }
+interface Post {
+  id: number;
+  content: {
+    rendered: string;
+  };
+}
 
-const testimonials: Testimonial[] = [
-  {
-    quote:
-      "Rakesh Bansal Ventures has completely transformed my trading strategy. Their accurate recommendations and disciplined approach have significantly improved my market performance. I highly recommend their services to anyone looking to succeed in stock trading!",
-    name: "Prakash Choudhary",
-    title: "Self-Investor",
-    rating: 5,
-    imageUrl: "/testimonial/prakash-chaudhary.webp",
-  },
-  {
-    quote:
-      "After being with Rakesh Bansal Ventures for 9 months, I’m thrilled with their services. Their analysis is always spot-on, and their signals have helped me navigate the markets with confidence. Absolutely worth the investment!",
-    name: "Vipul Prajapati",
-    title: "Full-time Trader",
-    rating: 5,
-    imageUrl: "/testimonial/vipul-prajapati.webp",
-  },
-  {
-    quote:
-      "The future segment recommendations are top-notch, but I believe there’s room for further improvement. I look forward to seeing even better performance in this area. Overall, I’ve been impressed with the results.",
-    name: "Mrs. Venna",
-    title: "Equity Investor",
-    rating: 4,
-    imageUrl: "/testimonial/veena.webp",
-  },
-  {
-    quote:
-      "While the stock performance is good, focusing on 2-3 monthly stocks that deliver over 25% returns would be ideal. For small investors, the subscription fee is high, but the profits are still rewarding in the long run.",
-    name: "Raju Aggrawal",
-    title: "Retail Investor",
-    rating: 4,
-    imageUrl: "/testimonial/raju-aggarwal.webp",
-  },
-  {
-    quote:
-      "The stock selection process is reliable, and I have been highly satisfied with the membership. I’ve earned considerable profits through their guidance and trust their expertise for future gains. No one can match their service!",
-    name: "Pankaj Agrawal",
-    title: "Retail Investor",
-    rating: 5,
-    imageUrl: "/testimonial/pankaj-agrawal.webp",
-  },
-  {
-    quote:
-      "I’ve followed Rakesh Sir for over a year and finally joined his advisory service 4 months ago. Within the last month, I’ve earned 50k! The calls are precise, and even when a stop loss hits, I’ve managed to profit.",
-    name: "Nikunj Marvaniya",
-    title: "Option Trader",
-    rating: 5,
-    imageUrl: "/testimonial/nikunj-marvaniya.webp",
-  },
-  {
-    quote:
-      "The option segment could benefit from more concentrated and premium-quality calls. The IGL call on Zee Business was exceptional, and I hope to see more calls like that in the future. Keep up the great work!",
-    name: "Dr. RC Chaudhary",
-    title: "Stock Trader",
-    rating: 4,
-    imageUrl: "/testimonial/dr-rc-choudhary.webp",
-  },
-  {
-    quote:
-      "I appreciate the clarity in Rakesh Sir’s intraday calls, including entry prices, stop loss, and targets. Adding a monthly holding call for potential breakout stocks would add even more value to the service.",
-    name: "Deep Jyoti",
-    title: "Day Trader",
-    rating: 5,
-    imageUrl: "/testimonial/deepjyoti.webp",
-  },
-  {
-    quote:
-      "Rakesh Bansal Ventures’ customer support is responsive and knowledgeable. They address my queries quickly, and I feel supported in my trading journey. Their service is a must for serious traders looking for solid guidance.",
-    name: "Darshan",
-    title: "Investor",
-    rating: 5,
-    imageUrl: "/testimonial/darshan.webp",
-  },
-  {
-    quote:
-      "Rakesh Bansal Ventures’ customer support is responsive and knowledgeable. They address my queries quickly, and I feel supported in my trading journey. Their service is a must for serious traders looking for solid guidance.",
-    name: "Ashwani Kansal",
-    title: "Investor",
-    rating: 5,
-    imageUrl: "/testimonial/ashwani-kansal.webp",
-  },
-];
+// Extract TestimonialData From Wordpress CMS
+const extractTestimonialData = (post: Post): Testimonial => {
+  const content = post.content.rendered;
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(content, "text/html");
+
+  const imageUrl =
+    doc.querySelector("img")?.src || "/placeholder.svg?height=300&width=300";
+  const name = doc.querySelector("h1")?.textContent || "";
+
+  let title = "";
+  let rating = 5;
+
+  doc.querySelectorAll("p strong").forEach((element) => {
+    if (element.textContent?.trim() === "Title:") {
+      title = element.nextSibling?.textContent?.trim() || "";
+    }
+    if (element.textContent?.trim() === "Rating:") {
+      const stars = element.nextSibling?.textContent?.match(/⭐/g);
+      rating = stars ? stars.length : 5;
+    }
+  });
+
+  const quote = doc.querySelector("blockquote p")?.textContent || "";
+
+  return { id: post.id, name, title, rating, quote, imageUrl };
+};
 
 interface TestimonialCardProps extends Testimonial {
   isActive: boolean;
@@ -155,22 +108,44 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 
 const Testimonials: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const sliderRef = useRef<HTMLDivElement>(null);
-
-  const nextSlide = useCallback(() => {
-    setCurrentSlide((prevSlide) => (prevSlide + 1) % testimonials.length);
-  }, []);
-
-  const prevSlide = useCallback(() => {
-    setCurrentSlide(
-      (prevSlide) => (prevSlide - 1 + testimonials.length) % testimonials.length
-    );
-  }, []);
+  const sliderRef = useRef<Slider>(null);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 5000);
-    return () => clearInterval(interval);
-  }, [nextSlide]);
+    fetch(
+      "https://public-api.wordpress.com/wp/v2/sites/237367158/posts?categories=14224206"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const extractedTestimonials = data.map(extractTestimonialData);
+        setTestimonials(extractedTestimonials);
+      });
+  }, []);
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    arrows: false,
+    beforeChange: (_oldIndex: number, newIndex: number) =>
+      setCurrentSlide(newIndex),
+  };
+
+  const goToPrev = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickPrev();
+    }
+  };
+
+  const goToNext = () => {
+    if (sliderRef.current) {
+      sliderRef.current.slickNext();
+    }
+  };
 
   return (
     <div className="relative overflow-hidden py-10 bg-white">
@@ -236,27 +211,27 @@ const Testimonials: React.FC = () => {
           <VideoTestimonials />
         </div>
 
-        <div
-          className="relative md:h-[250px] mb-4 md:mb-8 lg:mb-10"
-          ref={sliderRef}
-        >
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard
-              key={index}
-              {...testimonial}
-              isActive={index === currentSlide}
-            />
-          ))}
+        <div className="relative md:h-[250px] mb-4 md:mb-8 lg:mb-10">
+          <Slider ref={sliderRef} {...settings}>
+            {testimonials.map((testimonial, index) => (
+              <TestimonialCard
+                key={index}
+                {...testimonial}
+                isActive={index === currentSlide}
+              />
+            ))}
+          </Slider>
+
           <div className=" absolute right-3 flex -bottom-16 border border-purple-200 overflow-hidden">
             <button
-              onClick={prevSlide}
+              onClick={goToPrev}
               className="bg-purple-600 cursor-pointer p-1 flex items-center justify-center"
               aria-label="Previous slide"
             >
               <MdPlayArrow className="text-white size-8 rotate-180" />
             </button>
             <button
-              onClick={nextSlide}
+              onClick={goToNext}
               className="bg-purple-600 border-l  cursor-pointer p-1 flex items-center justify-center"
               aria-label="Next slide"
             >
@@ -269,7 +244,7 @@ const Testimonials: React.FC = () => {
           {testimonials.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentSlide(index)}
+              onClick={() => sliderRef.current?.slickGoTo(index)}
               className={cn(
                 "w-3 h-3 rounded-full transition-all duration-300",
                 currentSlide === index

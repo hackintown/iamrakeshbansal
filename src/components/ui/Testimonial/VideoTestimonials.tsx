@@ -90,7 +90,9 @@ export default function VideoTestimonials() {
       }
 
       if (video.paused) {
-        video.play();
+        video.play().catch((error) => {
+          console.error("Error playing video:", error);
+        });
         setPlayingIndex(index);
       } else {
         video.pause();
