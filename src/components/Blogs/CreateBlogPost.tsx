@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
-import { WithContext as ReactTags } from "react-tag-input";
 import Image from "next/image";
 import "react-quill/dist/quill.snow.css";
 
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false })
 
 interface CreateBlogPostProps {
   onPostCreated: () => void;
@@ -15,7 +14,6 @@ interface CreateBlogPostProps {
 export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [tags, setTags] = useState<{ id: string; text: string }[]>([]);
   const [image, setImage] = useState<File | null>(null);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -27,7 +25,6 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("tags", JSON.stringify(tags.map((tag) => tag.text)));
     if (image) {
       formData.append("image", image);
     }
@@ -43,7 +40,6 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
         console.log("Blog post created:", result);
         setTitle("");
         setContent("");
-        setTags([]);
         setImage(null);
         setPreviewImage(null);
         onPostCreated();
@@ -69,13 +65,6 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
     }
   };
 
-  const handleAddTag = (tag: { id: string; text: string }) => {
-    setTags([...tags, tag]);
-  };
-
-  const handleDeleteTag = (i: number) => {
-    setTags(tags.filter((tag, index) => index !== i));
-  };
 
   const modules = {
     toolbar: [
@@ -142,28 +131,6 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
             modules={modules}
             formats={formats}
             className="h-64 mb-12"
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="tags"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
-            Tags
-          </label>
-          <ReactTags
-            tags={tags}
-            handleDelete={handleDeleteTag}
-            handleAddition={handleAddTag}
-            inputFieldPosition="bottom"
-            autocomplete
-            classNames={{
-              tags: "flex flex-wrap gap-2",
-              tagInput:
-                "w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500",
-              tag: "bg-purple-100 text-purple-800 px-2 py-1 rounded-md flex items-center",
-              remove: "ml-2 text-purple-600 hover:text-purple-800",
-            }}
           />
         </div>
         <div>

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Db, MongoClient, ObjectId } from "mongodb";
+import { Db, MongoClient } from "mongodb";
 import { writeFile } from "fs/promises";
 import path from "path";
 import fs from "fs/promises";
@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
 
         const filename = Date.now() + "-" + image.name;
         imagePath = `/uploads/${filename}`;
-        await writeFile(path.join(uploadDir, filename), buffer);
+        await writeFile(path.join(uploadDir, filename), new Uint8Array(buffer))
       } catch (error) {
         console.error("Error saving image:", error);
         return NextResponse.json(
