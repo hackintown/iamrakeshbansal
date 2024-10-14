@@ -1,23 +1,23 @@
-"use client"
-import React, { useEffect, useState } from 'react'
-import CreateBlogPost from './CreateBlogPost'
-import PopularBlogPosts from './PopularBlogs'
-import AllBlogs from './AllBlogs'
+"use client";
+import React, { useEffect, useState } from "react";
+import CreateBlogPost from "./CreateBlogPost";
+import PopularBlogPosts from "./PopularBlogs";
+import AllBlogs from "./AllBlogs";
 interface BlogPost {
-    _id: string;
-    title: string;
-    content: string;
-    image: string;
-    tags: string[];
-    createdAt: string;
-  }
+  _id: string;
+  title: string;
+  content: string;
+  image: string;
+  tags: string[];
+  createdAt: string;
+}
 
 const BlogCMS = () => {
-    const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [error, setError] = useState<string | null>(null);
-    
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     fetchBlogPosts();
   }, []);
@@ -49,11 +49,11 @@ const BlogCMS = () => {
   }
   return (
     <div className="container space-y-12 px-4">
-    <CreateBlogPost onPostCreated={fetchBlogPosts} />
-    <PopularBlogPosts posts={blogPosts.slice(0, 3)} />
-    <AllBlogs posts={blogPosts.slice(3)} />
-  </div>
-  )
-}
+      <CreateBlogPost onPostCreated={fetchBlogPosts} />
+      <PopularBlogPosts posts={blogPosts.slice(0, 3)} />
+      <AllBlogs posts={blogPosts.slice(3)} />
+    </div>
+  );
+};
 
-export default BlogCMS
+export default BlogCMS;

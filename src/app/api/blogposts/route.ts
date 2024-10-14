@@ -76,7 +76,7 @@ export async function POST(request: NextRequest) {
 
         const filename = Date.now() + "-" + image.name;
         imagePath = `/uploads/${filename}`;
-        await writeFile(path.join(uploadDir, filename), new Uint8Array(buffer))
+        await writeFile(path.join(uploadDir, filename), new Uint8Array(buffer));
       } catch (error) {
         console.error("Error saving image:", error);
         return NextResponse.json(
