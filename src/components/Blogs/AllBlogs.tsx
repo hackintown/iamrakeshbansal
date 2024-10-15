@@ -28,7 +28,7 @@ export default function AllBlogs({ posts }: AllBlogPostsProps) {
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
-        className="text-4xl font-bold text-center text-purple-400 mb-8"
+        className="text-4xl font-bold  text-cyan-500"
       >
         All Blog Posts
       </motion.h2>

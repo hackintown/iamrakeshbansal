@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
-import { Loader2, Search, ArrowUp, Menu, X } from "lucide-react";
+import { Loader2, Search, ArrowUp} from "lucide-react";
 import PopularBlogPosts from "./PopularBlogs";
 import AllBlogs from "./AllBlogs";
 
@@ -21,7 +21,6 @@ export default function Blog() {
   const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
 
   const { scrollYProgress } = useScroll();
@@ -75,7 +74,6 @@ export default function Blog() {
 
   const allTags = Array.from(new Set(blogPosts.flatMap((post) => post.tags)));
 
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   if (isLoading) {
     return (
@@ -109,7 +107,7 @@ export default function Blog() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="min-h-screen bg-gradient-to-br from-black to-purple-900 text-white"
+        className="bg-gradient-to-br from-black to-purple-500 text-white py-10"
       >
         <motion.div
           className="fixed top-0 left-0 right-0 h-1 bg-cyan-500 z-50"
@@ -125,7 +123,7 @@ export default function Blog() {
               className="lg:w-1/4 space-y-8"
             >
               <div className="bg-purple-800 bg-opacity-50 p-6 rounded-lg shadow-lg">
-                <h2 className="text-2xl font-bold mb-4 text-cyan-400">
+                <h2 className="text-2xl font-semibold mb-4 text-cyan-400">
                   Search
                 </h2>
                 <div className="relative">
@@ -140,7 +138,7 @@ export default function Blog() {
                 </div>
               </div>
               <div className="bg-purple-800 bg-opacity-50 p-6 rounded-lg shadow-lg">
-                <h2 className="text-2xl font-bold mb-4 text-cyan-400">Tags</h2>
+                <h2 className="text-2xl font-semibold mb-4 text-cyan-400">Tags</h2>
                 <div className="flex flex-wrap gap-2">
                   {allTags.map((tag) => (
                     <button
@@ -168,43 +166,14 @@ export default function Blog() {
               className="lg:w-3/4"
             >
               <PopularBlogPosts posts={filteredPosts.slice(0, 3)} />
+              <div className="mt-8">
               <AllBlogs posts={filteredPosts.slice(3)} />
+              </div>
             </motion.div>
           </div>
         </main>
 
-        <motion.footer
-          initial={{ y: 100 }}
-          animate={{ y: 0 }}
-          transition={{ type: "spring", stiffness: 100 }}
-          className="bg-gradient-to-r from-purple-900 to-cyan-900 py-8 px-4 mt-16"
-        >
-          <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center">
-            <p className="text-center lg:text-left text-gray-300">
-              &copy; 2023 Trending Mentor. All rights reserved.
-            </p>
-            <div className="flex space-x-4 mt-4 lg:mt-0">
-              <a
-                href="#"
-                className="text-gray-300 hover:text-cyan-400 transition-colors duration-200"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-cyan-400 transition-colors duration-200"
-              >
-                Terms of Service
-              </a>
-              <a
-                href="#"
-                className="text-gray-300 hover:text-cyan-400 transition-colors duration-200"
-              >
-                Contact Us
-              </a>
-            </div>
-          </div>
-        </motion.footer>
+
 
         <AnimatePresence>
           {showScrollToTop && (

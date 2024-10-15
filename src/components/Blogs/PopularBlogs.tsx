@@ -28,7 +28,7 @@ export default function PopularBlogPosts({ posts }: PopularBlogPostsProps) {
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-        className="text-4xl font-bold text-center text-cyan-300 mb-8"
+        className="text-4xl font-bold text-cyan-300 mb-8"
       >
         Popular Blog Posts
       </motion.h2>
