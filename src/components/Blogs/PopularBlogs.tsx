@@ -22,16 +22,17 @@ export default function PopularBlogPosts({ posts }: PopularBlogPostsProps) {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="space-y-8"
+      className="space-y-3"
     >
-      <motion.h2
+      <motion.div
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-        className="text-4xl font-bold text-cyan-300 mb-8"
+        className="flex items-center justify-between mb-4 sm:mb-6"
       >
-        Popular Blog Posts
-      </motion.h2>
+        <h2 className="text-2xl sm:text-4xl font-bold text-blue-300">Featured Insights</h2>
+        <div className="h-1 flex-grow mx-4 bg-gradient-to-r from-blue-500 to-purple-500"></div>
+      </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post, index) => (
           <motion.div
@@ -41,7 +42,7 @@ export default function PopularBlogPosts({ posts }: PopularBlogPostsProps) {
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
             <Link href={`/blog/${post._id}`}>
-              <BlogPostCard post={post} />
+              <BlogPostCard post={post} featured={index === 0} />
             </Link>
           </motion.div>
         ))}

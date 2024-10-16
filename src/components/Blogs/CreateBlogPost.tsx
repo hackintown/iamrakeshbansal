@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDropzone } from "react-dropzone";
-import { Loader2, X, Upload, Tag } from "lucide-react";
+import { Loader2, X, Upload, Tag, Pencil, Trash2 } from "lucide-react";
 import "react-quill/dist/quill.snow.css";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
@@ -13,7 +13,13 @@ const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 interface CreateBlogPostProps {
   onPostCreated: () => void;
 }
-
+interface BlogPost {
+  _id: string;
+  title: string;
+  content: string;
+  tags: string[];
+  image?: string;
+}
 export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -23,6 +29,24 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [currentTag, setCurrentTag] = useState("");
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
+
+  useEffect(() => {
+    fetchBlogPosts();
+  }, []);
+
+  const fetchBlogPosts = async () => {
+    try {
+      const response = await fetch("/api/blogposts");
+      if (response.ok) {
+        const posts = await response.json();
+        setBlogPosts(posts);
+      }
+    } catch (error) {
+      console.error("Error fetching blog posts:", error);
+    }
+  };
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0]) {
@@ -55,29 +79,65 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
     }
 
     try {
-      const response = await fetch("/api/blogposts", {
-        method: "POST",
+      const url = editingPost ? `/api/blogposts/${editingPost._id}` : "/api/blogposts";
+      const method = editingPost ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method: method,
         body: formData,
       });
 
       if (response.ok) {
         const result = await response.json();
-        console.log("Blog post created:", result);
-        setTitle("");
-        setContent("");
-        setImage(null);
-        setPreviewImage(null);
-        setTags([]);
+        console.log("Blog post operation successful:", result);
+        resetForm();
         onPostCreated();
+        fetchBlogPosts();
       } else {
         const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to create blog post");
+        throw new Error(errorData.error || "Failed to process blog post");
       }
     } catch (error) {
-      console.error("Error creating blog post:", error);
-      setError("Failed to create blog post. Please try again.");
+      console.error("Error processing blog post:", error);
+      setError("Failed to process blog post. Please try again.");
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const resetForm = () => {
+    setTitle("");
+    setContent("");
+    setImage(null);
+    setPreviewImage(null);
+    setTags([]);
+    setEditingPost(null);
+  };
+
+  const handleEdit = (post: BlogPost) => {
+    setEditingPost(post);
+    setTitle(post.title);
+    setContent(post.content);
+    setTags(post.tags);
+    setPreviewImage(post.image || null);
+    window.scrollTo(0, 0);
+  };
+
+  const handleDelete = async (postId: string) => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      try {
+        const response = await fetch(`/api/blogposts/${postId}`, {
+          method: "DELETE",
+        });
+        if (response.ok) {
+          fetchBlogPosts();
+        } else {
+          throw new Error("Failed to delete blog post");
+        }
+      } catch (error) {
+        console.error("Error deleting blog post:", error);
+        setError("Failed to delete blog post. Please try again.");
+      }
     }
   };
 
@@ -129,7 +189,7 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
       className="bg-white p-8 rounded-lg shadow-lg"
     >
       <h1 className="text-4xl font-bold text-gray-900 mb-8">
-        Create New Blog Post
+        {editingPost ? "Edit Blog Post" : "Create New Blog Post"}
       </h1>
       <AnimatePresence>
         {error && (
@@ -274,11 +334,46 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
         >
           {isSubmitting ? (
             <Loader2 className="animate-spin mr-2" size={20} />
+          ) : editingPost ? (
+            "Update Post"
           ) : (
             "Create Post"
           )}
         </motion.button>
+        {editingPost && (
+          <button
+            type="button"
+            onClick={resetForm}
+            className="mt-4 w-full bg-gray-300 text-gray-700 py-2 px-4 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-colors duration-300"
+          >
+            Cancel Edit
+          </button>
+        )}
       </form>
+
+      <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Existing Blog Posts</h2>
+      <div className="space-y-4">
+        {blogPosts.map((post) => (
+          <div key={post._id} className="border p-4 rounded-md">
+            <h3 className="text-xl font-semibold">{post.title}</h3>
+            <p className="text-gray-600 mt-2">{post.content.substring(0, 100)}...</p>
+            <div className="mt-4 flex space-x-2">
+              <button
+                onClick={() => handleEdit(post)}
+                className="bg-blue-500 text-white py-1 px-3 rounded-md hover:bg-blue-600 transition-colors duration-200 flex items-center"
+              >
+                <Pencil size={16} className="mr-1" /> Edit
+              </button>
+              <button
+                onClick={() => handleDelete(post._id)}
+                className="bg-red-500 text-white py-1 px-3 rounded-md hover:bg-red-600 transition-colors duration-200 flex items-center"
+              >
+                <Trash2 size={16} className="mr-1" /> Delete
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
     </motion.div>
   );
 }

@@ -22,16 +22,17 @@ export default function AllBlogs({ posts }: AllBlogPostsProps) {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="space-y-8"
+      className="space-y-6 lg:space-y-12 mt-12 lg:mt-16"
     >
-      <motion.h2
+      <motion.div
         initial={{ x: 100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
-        className="text-4xl font-bold  text-cyan-500"
+        className="flex items-center justify-between mb-4"
       >
-        All Blog Posts
-      </motion.h2>
+        <h2 className="text-2xl lg:text-4xl font-bold text-blue-300">More Trading Wisdom</h2>
+        <div className="h-1 flex-grow mx-4 bg-gradient-to-r from-purple-500 to-blue-500"></div>
+      </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {posts.map((post, index) => (
           <motion.div

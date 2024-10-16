@@ -7,7 +7,6 @@ import fs from "fs/promises";
 const uri = process.env.MONGODB_URI || "";
 const client = new MongoClient(uri);
 
-// Connect to the database once and keep the connection open
 let db: Db;
 
 async function connectToDatabase() {
@@ -40,7 +39,6 @@ export async function POST(request: NextRequest) {
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
 
-    // Check if tags exist before parsing
     let tags = [];
     const tagsData = formData.get("tags");
     if (tagsData) {
@@ -71,7 +69,6 @@ export async function POST(request: NextRequest) {
         const buffer = Buffer.from(bytes);
         const uploadDir = path.join(process.cwd(), "public", "uploads");
 
-        // Ensure the uploads directory exists
         await fs.mkdir(uploadDir, { recursive: true });
 
         const filename = Date.now() + "-" + image.name;
