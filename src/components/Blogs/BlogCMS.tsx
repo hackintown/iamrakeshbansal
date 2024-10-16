@@ -18,11 +18,10 @@ const BlogCMS = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState<string | null>(null);
 
-  const baseUrl = process.env.NODE_ENV === 'production'
-  ? process.env.NEXT_PUBLIC_PRODUCTION_URL
-  : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
-
-
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_PRODUCTION_URL
+      : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
 
   useEffect(() => {
     fetchBlogPosts();

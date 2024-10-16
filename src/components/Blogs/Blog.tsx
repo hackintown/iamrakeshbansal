@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader2 } from "lucide-react";
+// import { Loader2 } from "lucide-react";
 import PopularBlogPosts from "./PopularBlogs";
 import AllBlogs from "./AllBlogs";
 import BlogHeader from "./BlogHeader";
@@ -15,11 +15,10 @@ interface BlogPost {
   tags: string[];
   createdAt: string;
 }
-const baseUrl = process.env.NODE_ENV === 'production'
-? process.env.NEXT_PUBLIC_PRODUCTION_URL
-: process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
-
-
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_PRODUCTION_URL
+    : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
@@ -58,18 +57,18 @@ export default function Blog() {
 
   const allTags = Array.from(new Set(blogPosts.flatMap((post) => post.tags)));
 
-  if (isLoading) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="flex justify-center items-center h-screen bg-gradient-to-br from-gray-900 to-blue-900"
-      >
-        <Loader2 className="h-16 w-16 animate-spin text-blue-500" />
-      </motion.div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
+  //     <motion.div
+  //       initial={{ opacity: 0 }}
+  //       animate={{ opacity: 1 }}
+  //       exit={{ opacity: 0 }}
+  //       className="flex justify-center items-center h-screen bg-gradient-to-br from-gray-900 to-blue-900"
+  //     >
+  //       <Loader2 className="h-16 w-16 animate-spin text-blue-500" />
+  //     </motion.div>
+  //   );
+  // }
 
   if (error) {
     return (
@@ -101,8 +100,14 @@ export default function Blog() {
         />
 
         <main className="container mx-auto px-4 py-6 sm:py-8 md:py-16">
-          <PopularBlogPosts posts={filteredPosts.slice(0, 3)} />
-          <AllBlogs posts={filteredPosts.slice(3)} />
+          {isLoading ? (
+            <p className="text-white text-xl">Loading blog posts...</p> // Placeholder message
+          ) : (
+            <>
+              <PopularBlogPosts posts={filteredPosts.slice(0, 3)} />
+              <AllBlogs posts={filteredPosts.slice(3)} />
+            </>
+          )}
         </main>
       </motion.div>
     </AnimatePresence>

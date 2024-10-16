@@ -1,11 +1,20 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaRegBookmark, FaBookmark, FaRegComment, FaShare, FaEllipsisV } from 'react-icons/fa';
-import { IoMdArrowBack } from 'react-icons/io';
-import Link from 'next/link';
+"use client";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+  FaRegBookmark,
+  FaBookmark,
+  FaRegComment,
+  FaShare,
+  FaEllipsisV,
+} from "react-icons/fa";
+import { IoMdArrowBack } from "react-icons/io";
+import Link from "next/link";
 
 interface BlogPost {
   title: string;
@@ -28,14 +37,14 @@ export default function BlogPostPage() {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<string[]>([]);
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const params = useParams();
   const slug = params?.slug as string;
-  const baseUrl = process.env.NODE_ENV === 'production'
-  ? process.env.NEXT_PUBLIC_PRODUCTION_URL
-  : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
-
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_PRODUCTION_URL
+      : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -48,7 +57,9 @@ export default function BlogPostPage() {
 
       try {
         console.log("Fetching post with slug:", slug);
-        const response = await fetch(`${baseUrl}/api/blogposts?slug=${encodeURIComponent(slug)}`);
+        const response = await fetch(
+          `${baseUrl}/api/blogposts?slug=${encodeURIComponent(slug)}`
+        );
         if (response.ok) {
           const data = await response.json();
           console.log("Fetched post:", data);
@@ -67,7 +78,7 @@ export default function BlogPostPage() {
     };
 
     fetchPost();
-  }, [slug]);
+  }, [slug, baseUrl]);
 
   const handleBookmark = () => {
     setIsBookmarked(!isBookmarked);
@@ -76,28 +87,34 @@ export default function BlogPostPage() {
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
-    let shareUrl = '';
+    let shareUrl = "";
 
     switch (platform) {
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+          url
+        )}`;
         break;
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(post?.title || '')}`;
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+          url
+        )}&text=${encodeURIComponent(post?.title || "")}`;
         break;
-      case 'linkedin':
-        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(post?.title || '')}`;
+      case "linkedin":
+        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+          url
+        )}&title=${encodeURIComponent(post?.title || "")}`;
         break;
     }
 
-    window.open(shareUrl, '_blank');
+    window.open(shareUrl, "_blank");
   };
 
   const handleCommentSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newComment.trim()) {
       setComments([...comments, newComment]);
-      setNewComment('');
+      setNewComment("");
       // TODO: Implement server-side comment submission
     }
   };
@@ -133,9 +150,20 @@ export default function BlogPostPage() {
             <IoMdArrowBack className="w-6 h-6" />
           </Link>
           <div className="flex space-x-4">
-            <ShareButton icon={<FaShare />} color="bg-gray-600" onClick={() => { }} />
-            <button className="text-gray-500 hover:text-gray-700" onClick={handleBookmark}>
-              {isBookmarked ? <FaBookmark className="w-6 h-6" /> : <FaRegBookmark className="w-6 h-6" />}
+            <ShareButton
+              icon={<FaShare />}
+              color="bg-gray-600"
+              onClick={() => {}}
+            />
+            <button
+              className="text-gray-500 hover:text-gray-700"
+              onClick={handleBookmark}
+            >
+              {isBookmarked ? (
+                <FaBookmark className="w-6 h-6" />
+              ) : (
+                <FaRegBookmark className="w-6 h-6" />
+              )}
             </button>
             <button className="text-gray-500 hover:text-gray-700">
               <FaEllipsisV className="w-6 h-6" />
@@ -153,14 +181,16 @@ export default function BlogPostPage() {
             className="relative h-[60vh]"
           >
             <Image
-              src={post?.image || ''}
-              alt={post?.title || ''}
+              src={post?.image || ""}
+              alt={post?.title || ""}
               fill
-              className='object-cover'
+              className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
             <div className="absolute bottom-0 left-0 right-0 p-4 md:p-8 text-white">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3">{post?.title}</h1>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3">
+                {post?.title}
+              </h1>
               <p className="text-xl md:text-2xl mb-6">{post?.subtitle}</p>
               <div className="flex items-center">
                 <Image
@@ -173,11 +203,15 @@ export default function BlogPostPage() {
                 <div>
                   <p className="font-semibold">Rakesh Bansal</p>
                   <p className="text-sm opacity-80">
-                    {new Date(post?.createdAt || '').toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })} • {post?.readingTime} min read
+                    {new Date(post?.createdAt || "").toLocaleDateString(
+                      "en-US",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      }
+                    )}{" "}
+                    • {post?.readingTime} min read
                   </p>
                 </div>
               </div>
@@ -191,11 +225,15 @@ export default function BlogPostPage() {
               transition={{ delay: 0.5 }}
               className="mb-6"
             >
-              {post?.tags && post.tags.map((tag, index) => (
-                <span key={index} className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #{tag}
-                </span>
-              ))}
+              {post?.tags &&
+                post.tags.map((tag, index) => (
+                  <span
+                    key={index}
+                    className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                  >
+                    #{tag}
+                  </span>
+                ))}
             </motion.div>
 
             <motion.div
@@ -203,7 +241,7 @@ export default function BlogPostPage() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.6 }}
               className="prose prose-lg max-w-none text-sm sm:text-base md:text-lg"
-              dangerouslySetInnerHTML={{ __html: post?.content || '' }}
+              dangerouslySetInnerHTML={{ __html: post?.content || "" }}
             />
 
             <motion.div
@@ -213,16 +251,31 @@ export default function BlogPostPage() {
               className="mt-12 flex flex-col sm:flex-row justify-between items-center border-t border-b py-6"
             >
               <div className="flex space-x-4 mb-4 sm:mb-0">
-                <ShareButton icon={<FaFacebookF />} color="bg-blue-600" onClick={() => handleShare('facebook')} />
-                <ShareButton icon={<FaTwitter />} color="bg-sky-400" onClick={() => handleShare('twitter')} />
-                <ShareButton icon={<FaLinkedinIn />} color="bg-blue-700" onClick={() => handleShare('linkedin')} />
+                <ShareButton
+                  icon={<FaFacebookF />}
+                  color="bg-blue-600"
+                  onClick={() => handleShare("facebook")}
+                />
+                <ShareButton
+                  icon={<FaTwitter />}
+                  color="bg-sky-400"
+                  onClick={() => handleShare("twitter")}
+                />
+                <ShareButton
+                  icon={<FaLinkedinIn />}
+                  color="bg-blue-700"
+                  onClick={() => handleShare("linkedin")}
+                />
               </div>
               <button
                 onClick={handleSubscribe}
-                className={`py-2 px-6 rounded-full transition-colors ${isSubscribed ? 'bg-green-500 text-white' : 'bg-blue-500 text-white hover:bg-blue-600'
-                  }`}
+                className={`py-2 px-6 rounded-full transition-colors ${
+                  isSubscribed
+                    ? "bg-green-500 text-white"
+                    : "bg-blue-500 text-white hover:bg-blue-600"
+                }`}
               >
-                {isSubscribed ? 'Subscribed' : 'Subscribe for Updates'}
+                {isSubscribed ? "Subscribed" : "Subscribe for Updates"}
               </button>
             </motion.div>
 
@@ -238,18 +291,21 @@ export default function BlogPostPage() {
                 className="mb-4 text-blue-500 hover:text-blue-600 flex items-center"
               >
                 <FaRegComment className="mr-2" />
-                {showComments ? 'Hide Comments' : 'Show Comments'}
+                {showComments ? "Hide Comments" : "Show Comments"}
               </button>
               <AnimatePresence>
                 {showComments && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
                     {comments.map((comment, index) => (
-                      <div key={index} className="bg-gray-50 rounded-lg p-4 mb-4">
+                      <div
+                        key={index}
+                        className="bg-gray-50 rounded-lg p-4 mb-4"
+                      >
                         <p>{comment}</p>
                       </div>
                     ))}
@@ -261,7 +317,10 @@ export default function BlogPostPage() {
                         placeholder="Add a comment..."
                         rows={4}
                       />
-                      <button type="submit" className="mt-2 bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-colors">
+                      <button
+                        type="submit"
+                        className="mt-2 bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-colors"
+                      >
                         Post Comment
                       </button>
                     </form>
@@ -276,7 +335,15 @@ export default function BlogPostPage() {
   );
 }
 
-function ShareButton({ icon, color, onClick }: { icon: React.ReactNode; color: string; onClick: () => void }) {
+function ShareButton({
+  icon,
+  color,
+  onClick,
+}: {
+  icon: React.ReactNode;
+  color: string;
+  onClick: () => void;
+}) {
   return (
     <button
       className={`${color} text-white p-2 rounded-full hover:opacity-80 transition-opacity`}
@@ -307,7 +374,9 @@ function ErrorMessage({ message }: { message: string }) {
 function NotFound() {
   return (
     <div className="max-w-3xl mx-auto px-4 py-8 text-center">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">Article not found</h2>
+      <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        Article not found
+      </h2>
       <p className="text-gray-600">The requested article could not be found.</p>
     </div>
   );

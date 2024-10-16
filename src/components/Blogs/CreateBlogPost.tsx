@@ -33,16 +33,14 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
 
-
-  const baseUrl = process.env.NODE_ENV === 'production'
-  ? process.env.NEXT_PUBLIC_PRODUCTION_URL
-  : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
-
+  const baseUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.NEXT_PUBLIC_PRODUCTION_URL
+      : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
 
   useEffect(() => {
     fetchBlogPosts();
   }, []);
-  
 
   const fetchBlogPosts = async () => {
     try {
@@ -87,7 +85,9 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
     }
 
     try {
-      const url = editingPost ? `${baseUrl}/api/blogposts/${editingPost._id}` : `${baseUrl}/api/blogposts`;
+      const url = editingPost
+        ? `${baseUrl}/api/blogposts/${editingPost._id}`
+        : `${baseUrl}/api/blogposts`;
       const method = editingPost ? "PUT" : "POST";
 
       const response = await fetch(url, {
@@ -359,12 +359,16 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
         )}
       </form>
 
-      <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Existing Blog Posts</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">
+        Existing Blog Posts
+      </h2>
       <div className="space-y-4">
         {blogPosts.map((post) => (
           <div key={post._id} className="border p-4 rounded-md">
             <h3 className="text-xl font-semibold">{post.title}</h3>
-            <p className="text-gray-600 mt-2">{post.content.substring(0, 100)}...</p>
+            <p className="text-gray-600 mt-2">
+              {post.content.substring(0, 100)}...
+            </p>
             <div className="mt-4 flex space-x-2">
               <button
                 onClick={() => handleEdit(post)}
