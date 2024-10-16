@@ -15,6 +15,11 @@ interface BlogPost {
   tags: string[];
   createdAt: string;
 }
+const baseUrl = process.env.NODE_ENV === 'production'
+? process.env.NEXT_PUBLIC_PRODUCTION_URL
+: process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
+
+
 
 export default function Blog() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
@@ -31,7 +36,7 @@ export default function Blog() {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fetch("/api/blogposts");
+      const response = await fetch(`${baseUrl}/api/blogposts`);
       if (!response.ok) {
         throw new Error("Failed to fetch blog posts");
       }
