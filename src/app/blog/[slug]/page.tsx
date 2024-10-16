@@ -32,6 +32,10 @@ export default function BlogPostPage() {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const params = useParams();
   const slug = params?.slug as string;
+  const baseUrl = process.env.NODE_ENV === 'production'
+  ? process.env.NEXT_PUBLIC_PRODUCTION_URL
+  : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
+
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -44,7 +48,7 @@ export default function BlogPostPage() {
 
       try {
         console.log("Fetching post with slug:", slug);
-        const response = await fetch(`/api/blogposts?slug=${encodeURIComponent(slug)}`);
+        const response = await fetch(`${baseUrl}/api/blogposts?slug=${encodeURIComponent(slug)}`);
         if (response.ok) {
           const data = await response.json();
           console.log("Fetched post:", data);

@@ -18,6 +18,12 @@ const BlogCMS = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState<string | null>(null);
 
+  const baseUrl = process.env.NODE_ENV === 'production'
+  ? process.env.NEXT_PUBLIC_PRODUCTION_URL
+  : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
+
+
+
   useEffect(() => {
     fetchBlogPosts();
   }, []);
@@ -26,7 +32,7 @@ const BlogCMS = () => {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fetch("/api/blogposts");
+      const response = await fetch(`${baseUrl}/api/blogposts`);
       if (!response.ok) {
         throw new Error("Failed to fetch blog posts");
       }
