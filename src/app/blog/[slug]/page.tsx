@@ -63,7 +63,16 @@ export default function BlogPostPage() {
         if (response.ok) {
           const data = await response.json();
           console.log("Fetched post:", data);
-          setPost(data);
+          // Filter the fetched data to find the post with the matching slug
+          const foundPost = data.find(
+            (post: BlogPost) =>
+              post.title.toLowerCase().replace(/\s+/g, "-") === slug
+          );
+          if (foundPost) {
+            setPost(foundPost);
+          } else {
+            setError("Post not found");
+          }
         } else {
           const errorData = await response.json();
           console.error("Error response:", errorData);
