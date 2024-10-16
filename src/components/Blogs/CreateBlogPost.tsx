@@ -20,6 +20,7 @@ interface BlogPost {
   tags: string[];
   image?: string;
 }
+
 export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -32,13 +33,20 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
 
+
+  const baseUrl = process.env.NODE_ENV === 'production'
+  ? process.env.NEXT_PUBLIC_PRODUCTION_URL
+  : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
+
+
   useEffect(() => {
     fetchBlogPosts();
   }, []);
+  
 
   const fetchBlogPosts = async () => {
     try {
-      const response = await fetch("/api/blogposts");
+      const response = await fetch(`${baseUrl}/api/blogposts`);
       if (response.ok) {
         const posts = await response.json();
         setBlogPosts(posts);
@@ -79,7 +87,7 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
     }
 
     try {
-      const url = editingPost ? `/api/blogposts/${editingPost._id}` : "/api/blogposts";
+      const url = editingPost ? `${baseUrl}/api/blogposts/${editingPost._id}` : `${baseUrl}/api/blogposts`;
       const method = editingPost ? "PUT" : "POST";
 
       const response = await fetch(url, {
@@ -126,7 +134,7 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
   const handleDelete = async (postId: string) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try {
-        const response = await fetch(`/api/blogposts/${postId}`, {
+        const response = await fetch(`${baseUrl}/api/blogposts/${postId}`, {
           method: "DELETE",
         });
         if (response.ok) {
