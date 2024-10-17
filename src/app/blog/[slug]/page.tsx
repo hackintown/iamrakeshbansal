@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import BlogSlug from '@/components/BlogSlug';
+import { generateSlug } from '@/lib/utils';
 
 interface BlogPost {
   title: string;
@@ -16,18 +17,16 @@ interface BlogPost {
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const baseUrl = process.env.NODE_ENV === "production"
-    ? process.env.NEXT_PUBLIC_PRODUCTION_URL
-    : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
   try {
-    const response = await fetch(`${baseUrl}/api/blogposts?slug=${encodeURIComponent(slug)}`, { cache: 'no-store' });
+    const response = await fetch(`${baseUrl}/api/blogposts`, { cache: 'no-store' });
     if (!response.ok) {
-      throw new Error('Failed to fetch blog post');
+      throw new Error('Failed to fetch blog posts');
     }
     const data = await response.json();
     const foundPost = data.find(
-      (post: BlogPost) => post.title.toLowerCase().replace(/\s+/g, "-") === slug
+      (post: BlogPost) => generateSlug(post.title) === slug
     );
     return foundPost || null;
   } catch (error) {
@@ -37,7 +36,7 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = await getBlogPost(params.slug);
+  const post = await getBlogPost(decodeURIComponent(params.slug));
 
   if (!post) {
     notFound();

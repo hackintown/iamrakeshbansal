@@ -3,25 +3,21 @@
 import { useState, useCallback, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useDropzone } from "react-dropzone";
 import { Loader2, X, Upload, Tag, Pencil, Trash2 } from "lucide-react";
 import "react-quill/dist/quill.snow.css";
+import { BlogPost } from "@/types";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface CreateBlogPostProps {
-  onPostCreated: () => void;
-}
-interface BlogPost {
-  _id: string;
-  title: string;
-  content: string;
-  tags: string[];
-  image?: string;
+  onPostCreated: (post: BlogPost) => void;
+  onPostUpdated: (post: BlogPost) => void;
+  onPostDeleted: (postId: string) => void;
 }
 
-export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
+export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDeleted }: CreateBlogPostProps) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -33,26 +29,26 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
 
-  const baseUrl =
-    process.env.NODE_ENV === "production"
-      ? process.env.NEXT_PUBLIC_PRODUCTION_URL
-      : process.env.NEXT_PUBLIC_DEVELOPMENT_URL;
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
 
   useEffect(() => {
     fetchBlogPosts();
   }, []);
 
-  const fetchBlogPosts = async () => {
+  const fetchBlogPosts = useCallback(async () => {
     try {
-      const response = await fetch(`${baseUrl}/api/blogposts`);
+      const response = await fetch(`${baseUrl}/blogposts`);
       if (response.ok) {
         const posts = await response.json();
         setBlogPosts(posts);
+      } else {
+        throw new Error("Failed to fetch blog posts");
       }
     } catch (error) {
       console.error("Error fetching blog posts:", error);
+      setError("Failed to fetch blog posts. Please try again.");
     }
-  };
+  }, [baseUrl]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0]) {
@@ -85,21 +81,28 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
     }
 
     try {
-      const url = editingPost
-        ? `${baseUrl}/api/blogposts/${editingPost._id}`
-        : `${baseUrl}/api/blogposts`;
-      const method = editingPost ? "PUT" : "POST";
-
-      const response = await fetch(url, {
-        method: method,
-        body: formData,
-      });
+      let response;
+      if (editingPost) {
+        response = await fetch(`${baseUrl}/blogposts/${editingPost._id}`, {
+          method: "PUT",
+          body: formData,
+        });
+      } else {
+        response = await fetch(`${baseUrl}/blogposts`, {
+          method: "POST",
+          body: formData,
+        });
+      }
 
       if (response.ok) {
         const result = await response.json();
         console.log("Blog post operation successful:", result);
         resetForm();
-        onPostCreated();
+        if (editingPost) {
+          onPostUpdated(result);
+        } else {
+          onPostCreated(result);
+        }
         fetchBlogPosts();
       } else {
         const errorData = await response.json();
@@ -134,10 +137,11 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
   const handleDelete = async (postId: string) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try {
-        const response = await fetch(`${baseUrl}/api/blogposts/${postId}`, {
+        const response = await fetch(`${baseUrl}/blogposts/${postId}`, {
           method: "DELETE",
         });
         if (response.ok) {
+          onPostDeleted(postId);
           fetchBlogPosts();
         } else {
           throw new Error("Failed to delete blog post");
@@ -164,12 +168,7 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
     toolbar: [
       [{ header: [1, 2, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        { indent: "-1" },
-        { indent: "+1" },
-      ],
+      [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
       ["link", "image"],
       ["clean"],
     ],
@@ -213,10 +212,7 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
       </AnimatePresence>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label
-            htmlFor="title"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
             Title
           </label>
           <input
@@ -229,10 +225,7 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
           />
         </div>
         <div>
-          <label
-            htmlFor="content"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+          <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
             Content
           </label>
           <ReactQuill
@@ -251,9 +244,7 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
           <div
             {...getRootProps()}
             className={`border-2 border-dashed rounded-md p-4 text-center cursor-pointer transition-colors duration-200 ${
-              isDragActive
-                ? "border-purple-500 bg-purple-50"
-                : "border-gray-300"
+              isDragActive ? "border-purple-500 bg-purple-50" : "border-gray-300"
             }`}
           >
             <input {...getInputProps()} />
@@ -287,10 +278,7 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
           </div>
         </div>
         <div>
-          <label
-            htmlFor="tags"
-            className="block text-sm font-medium text-gray-700 mb-1"
-          >
+          <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-1">
             Tags
           </label>
           <div className="flex items-center space-x-2">
@@ -299,7 +287,7 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
               type="text"
               value={currentTag}
               onChange={(e) => setCurrentTag(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && addTag()}
+              onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
               className="flex-grow px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200"
               placeholder="Add a tag"
             />
@@ -359,16 +347,12 @@ export default function CreateBlogPost({ onPostCreated }: CreateBlogPostProps) {
         )}
       </form>
 
-      <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">
-        Existing Blog Posts
-      </h2>
+      <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Existing Blog Posts</h2>
       <div className="space-y-4">
         {blogPosts.map((post) => (
           <div key={post._id} className="border p-4 rounded-md">
             <h3 className="text-xl font-semibold">{post.title}</h3>
-            <p className="text-gray-600 mt-2">
-              {post.content.substring(0, 100)}...
-            </p>
+            <p className="text-gray-600 mt-2">{post.content.substring(0, 100)}...</p>
             <div className="mt-4 flex space-x-2">
               <button
                 onClick={() => handleEdit(post)}
