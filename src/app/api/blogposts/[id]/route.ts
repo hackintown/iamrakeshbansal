@@ -48,21 +48,7 @@ export async function PUT(
     const formData = await request.formData();
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
-
-    let tags = [];
-    const tagsData = formData.get("tags");
-    if (tagsData) {
-      try {
-        tags = JSON.parse(tagsData as string);
-      } catch (e) {
-        console.error("Error parsing tags:", e);
-        return NextResponse.json(
-          { error: "Invalid tags format" },
-          { status: 400 }
-        );
-      }
-    }
-
+    const tags = JSON.parse(formData.get("tags") as string || "[]");
     const image = formData.get("image") as File | null;
 
     if (!title || !content) {
@@ -82,29 +68,7 @@ export async function PUT(
 
     let imagePath = existingPost.image;
     if (image) {
-      try {
-        const bytes = await image.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const uploadDir = path.join(process.cwd(), "public", "uploads");
-
-        await fs.mkdir(uploadDir, { recursive: true });
-
-        const filename = Date.now() + "-" + image.name;
-        imagePath = `/uploads/${filename}`;
-        await writeFile(path.join(uploadDir, filename), new Uint8Array(buffer));
-
-        // Delete the old image if it exists
-        if (existingPost.image) {
-          const oldImagePath = path.join(process.cwd(), "public", existingPost.image);
-          await unlink(oldImagePath).catch(console.error);
-        }
-      } catch (error) {
-        console.error("Error saving image:", error);
-        return NextResponse.json(
-          { error: "Failed to save image", details: (error as Error).message },
-          { status: 500 }
-        );
-      }
+      imagePath = await saveImage(image, existingPost.image);
     }
 
     const result = await collection.updateOne(
@@ -147,10 +111,8 @@ export async function DELETE(
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
 
-    // Delete the associated image if it exists
     if (post.image) {
-      const imagePath = path.join(process.cwd(), "public", post.image);
-      await unlink(imagePath).catch(console.error);
+      await deleteImage(post.image);
     }
 
     const result = await collection.deleteOne({ _id: new ObjectId(params.id) });
@@ -167,4 +129,27 @@ export async function DELETE(
       { status: 500 }
     );
   }
+}
+
+async function saveImage(image: File, oldImagePath: string | null): Promise<string> {
+  const bytes = await image.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+  const uploadDir = path.join(process.cwd(), "public", "uploads");
+
+  await fs.mkdir(uploadDir, { recursive: true });
+
+  const filename = `${Date.now()}-${image.name}`;
+  const imagePath = `/uploads/${filename}`;
+  await writeFile(path.join(uploadDir, filename), buffer);
+
+  if (oldImagePath) {
+    await deleteImage(oldImagePath);
+  }
+
+  return imagePath;
+}
+
+async function deleteImage(imagePath: string) {
+  const fullPath = path.join(process.cwd(), "public", imagePath);
+  await unlink(fullPath).catch(console.error);
 }

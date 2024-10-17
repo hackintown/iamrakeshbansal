@@ -21,13 +21,17 @@ export async function GET() {
     await connectToDatabase();
     const collection = db.collection("posts");
 
-    const posts = await collection.find({}).sort({ createdAt: -1 }).toArray();
+    const posts = await collection
+      .find({}, { projection: { title: 1, content: 1, tags: 1, image: 1, createdAt: 1 } })
+      .sort({ createdAt: -1 })
+      .limit(20)
+      .toArray();
 
     return NextResponse.json(posts);
   } catch (error) {
     console.error("Error fetching blog posts:", error);
     return NextResponse.json(
-      { error: "Internal Server Error", details: (error as Error).message },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }
@@ -38,21 +42,7 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
-
-    let tags = [];
-    const tagsData = formData.get("tags");
-    if (tagsData) {
-      try {
-        tags = JSON.parse(tagsData as string);
-      } catch (e) {
-        console.error("Error parsing tags:", e);
-        return NextResponse.json(
-          { error: "Invalid tags format" },
-          { status: 400 }
-        );
-      }
-    }
-
+    const tags = JSON.parse(formData.get("tags") as string || "[]");
     const image = formData.get("image") as File | null;
 
     if (!title || !content) {
@@ -64,23 +54,7 @@ export async function POST(request: NextRequest) {
 
     let imagePath = "";
     if (image) {
-      try {
-        const bytes = await image.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        const uploadDir = path.join(process.cwd(), "public", "uploads");
-
-        await fs.mkdir(uploadDir, { recursive: true });
-
-        const filename = Date.now() + "-" + image.name;
-        imagePath = `/uploads/${filename}`;
-        await writeFile(path.join(uploadDir, filename), new Uint8Array(buffer));
-      } catch (error) {
-        console.error("Error saving image:", error);
-        return NextResponse.json(
-          { error: "Failed to save image", details: (error as Error).message },
-          { status: 500 }
-        );
-      }
+      imagePath = await saveImage(image);
     }
 
     await connectToDatabase();
@@ -98,8 +72,22 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error("Error creating blog post:", error);
     return NextResponse.json(
-      { error: "Internal Server Error", details: (error as Error).message },
+      { error: "Internal Server Error" },
       { status: 500 }
     );
   }
+}
+
+async function saveImage(image: File): Promise<string> {
+  const bytes = await image.arrayBuffer();
+  const buffer = Buffer.from(bytes);
+  const uploadDir = path.join(process.cwd(), "public", "uploads");
+
+  await fs.mkdir(uploadDir, { recursive: true });
+
+  const filename = `${Date.now()}-${image.name}`;
+  const imagePath = `/uploads/${filename}`;
+  await writeFile(path.join(uploadDir, filename), buffer);
+
+  return imagePath;
 }
