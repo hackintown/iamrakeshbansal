@@ -17,7 +17,13 @@ interface BlogPost {
   createdAt: string;
 }
 
-export default function BlogPostCard({ post, featured = false }: { post: BlogPost; featured?: boolean }) {
+export default function BlogPostCard({
+  post,
+  featured = false,
+}: {
+  post: BlogPost;
+  featured?: boolean;
+}) {
   const [isHovered, setIsHovered] = useState(false);
 
   const formatDate = (dateString?: string) => {
@@ -39,19 +45,22 @@ export default function BlogPostCard({ post, featured = false }: { post: BlogPos
   };
 
   const generateSlug = (title: string): string => {
-    return encodeURIComponent(title
-      .toLowerCase()
-      .replace(/[^\w\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .trim()
+    return encodeURIComponent(
+      title
+        .toLowerCase()
+        .replace(/[^\w\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .trim()
     );
-  }
+  };
 
-  const slug = generateSlug(post.title || '');
+  const slug = generateSlug(post.title || "");
 
   return (
     <motion.div
-      className={`bg-gradient-to-br from-gray-800 to-blue-900 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full`}
+      className={`bg-gradient-to-br from-gray-800 to-blue-900 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col h-full ${
+        featured ? "border-2 border-yellow-400" : ""
+      }`}
       whileHover={{ scale: 1.03 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
@@ -76,7 +85,6 @@ export default function BlogPostCard({ post, featured = false }: { post: BlogPos
               Read More
             </Button>
           </Link>
-
         </motion.div>
       </div>
       <div className="p-6 flex flex-col flex-grow">
@@ -93,7 +101,9 @@ export default function BlogPostCard({ post, featured = false }: { post: BlogPos
           </div>
           <div className="flex items-center">
             <Clock className="w-4 h-4 mr-2 text-blue-400" />
-            <span className="font-light">{estimateReadTime(post.content)} min read</span>
+            <span className="font-light">
+              {estimateReadTime(post.content)} min read
+            </span>
           </div>
         </div>
         <div className="text-gray-300 mb-6 overflow-hidden line-clamp-3 text-sm flex-grow">
@@ -115,6 +125,11 @@ export default function BlogPostCard({ post, featured = false }: { post: BlogPos
             Continue Reading
           </span>
         </Link>
+        {featured && (
+          <div className="absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded">
+            Featured
+          </div>
+        )}
       </div>
     </motion.div>
   );

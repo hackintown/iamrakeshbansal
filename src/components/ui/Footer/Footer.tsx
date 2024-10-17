@@ -195,12 +195,12 @@ export default function Footer() {
                   whileHover={{ scale: 1.05 }}
                 >
                   <Icon className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <a
+                  <Link
                     href={href}
                     className="hover:text-purple-400 transition-colors text-sm"
                   >
                     {text}
-                  </a>
+                  </Link>
                 </motion.li>
               ))}
             </ul>

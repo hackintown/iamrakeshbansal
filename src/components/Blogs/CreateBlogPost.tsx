@@ -17,7 +17,11 @@ interface CreateBlogPostProps {
   onPostDeleted: (postId: string) => void;
 }
 
-export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDeleted }: CreateBlogPostProps) {
+export default function CreateBlogPost({
+  onPostCreated,
+  onPostUpdated,
+  onPostDeleted,
+}: CreateBlogPostProps) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
@@ -29,7 +33,8 @@ export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDel
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
 
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
 
   useEffect(() => {
     fetchBlogPosts();
@@ -168,7 +173,12 @@ export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDel
     toolbar: [
       [{ header: [1, 2, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
-      [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }],
+      [
+        { list: "ordered" },
+        { list: "bullet" },
+        { indent: "-1" },
+        { indent: "+1" },
+      ],
       ["link", "image"],
       ["clean"],
     ],
@@ -212,7 +222,10 @@ export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDel
       </AnimatePresence>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="title"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Title
           </label>
           <input
@@ -225,7 +238,10 @@ export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDel
           />
         </div>
         <div>
-          <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="content"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Content
           </label>
           <ReactQuill
@@ -244,7 +260,9 @@ export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDel
           <div
             {...getRootProps()}
             className={`border-2 border-dashed rounded-md p-4 text-center cursor-pointer transition-colors duration-200 ${
-              isDragActive ? "border-purple-500 bg-purple-50" : "border-gray-300"
+              isDragActive
+                ? "border-purple-500 bg-purple-50"
+                : "border-gray-300"
             }`}
           >
             <input {...getInputProps()} />
@@ -278,7 +296,10 @@ export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDel
           </div>
         </div>
         <div>
-          <label htmlFor="tags" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="tags"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Tags
           </label>
           <div className="flex items-center space-x-2">
@@ -287,7 +308,9 @@ export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDel
               type="text"
               value={currentTag}
               onChange={(e) => setCurrentTag(e.target.value)}
-              onKeyPress={(e) => e.key === "Enter" && (e.preventDefault(), addTag())}
+              onKeyPress={(e) =>
+                e.key === "Enter" && (e.preventDefault(), addTag())
+              }
               className="flex-grow px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 transition-colors duration-200"
               placeholder="Add a tag"
             />
@@ -347,12 +370,16 @@ export default function CreateBlogPost({ onPostCreated, onPostUpdated, onPostDel
         )}
       </form>
 
-      <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">Existing Blog Posts</h2>
+      <h2 className="text-2xl font-bold text-gray-900 mt-12 mb-4">
+        Existing Blog Posts
+      </h2>
       <div className="space-y-4">
         {blogPosts.map((post) => (
           <div key={post._id} className="border p-4 rounded-md">
             <h3 className="text-xl font-semibold">{post.title}</h3>
-            <p className="text-gray-600 mt-2">{post.content.substring(0, 100)}...</p>
+            <p className="text-gray-600 mt-2">
+              {post.content.substring(0, 100)}...
+            </p>
             <div className="mt-4 flex space-x-2">
               <button
                 onClick={() => handleEdit(post)}

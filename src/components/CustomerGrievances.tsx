@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, Phone, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 export default function CustomerGrievances() {
   return (
@@ -32,12 +33,12 @@ export default function CustomerGrievances() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Mail size={24} />
-                <a
+                <Link
                   href="mailto:wecare@iamrakeshbansal.com"
                   className="hover:underline"
                 >
                   wecare@iamrakeshbansal.com
-                </a>
+                </Link>
               </motion.div>
               <motion.div
                 className="flex items-center space-x-3 text-green-600"
@@ -45,9 +46,9 @@ export default function CustomerGrievances() {
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
               >
                 <Phone size={24} />
-                <a href="tel:+919560884223" className="hover:underline">
+                <Link href="tel:+919560884223" className="hover:underline">
                   +91-9560884223
-                </a>
+                </Link>
               </motion.div>
             </div>
           </section>

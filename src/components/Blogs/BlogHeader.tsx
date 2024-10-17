@@ -37,9 +37,10 @@ export default function BlogHeader({
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-base md:text-lg text-blue-200 max-w-2xl mx-auto text-center mb-4"
         >
-          Discover expert strategies, market analysis, and trading wisdom to elevate your financial game.
+          Discover expert strategies, market analysis, and trading wisdom to
+          elevate your financial game.
         </motion.p>
-        
+
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -56,16 +57,20 @@ export default function BlogHeader({
             />
             <Search className="absolute left-4 top-3.5 h-5 w-5 text-blue-200" />
           </div>
-          
+
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <button
               onClick={() => setIsFilterOpen(!isFilterOpen)}
               className="w-full sm:w-auto px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               <span className="mr-2">Filter by Tags</span>
-              <ChevronDown className={`h-5 w-5 transition-transform duration-300 ${isFilterOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`h-5 w-5 transition-transform duration-300 ${
+                  isFilterOpen ? "rotate-180" : ""
+                }`}
+              />
             </button>
-            
+
             {selectedTag && (
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -85,12 +90,12 @@ export default function BlogHeader({
           </div>
         </motion.div>
       </div>
-      
+
       <AnimatePresence>
         {isFilterOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="bg-blue-800 bg-opacity-90 backdrop-blur-sm"

@@ -15,6 +15,7 @@ import {
   Mail,
   ChevronDown,
 } from "lucide-react";
+import Link from "next/link";
 
 const PrivacyPolicy = () => {
   const [activeSection, setActiveSection] = useState<number | null>(null);
@@ -196,12 +197,12 @@ const PrivacyPolicy = () => {
             whileTap={{ scale: 0.95 }}
           >
             <Mail className="w-5 h-5 sm:w-6 sm:h-6 mr-3" />
-            <a
+            <Link
               href="mailto:info@iamrakeshbansal.com"
               className="hover:underline"
             >
               info@iamrakeshbansal.com
-            </a>
+            </Link>
           </motion.div>
         </motion.div>
 

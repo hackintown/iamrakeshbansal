@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import BlogPostCard from "./BlogPostCard";
-import Link from "next/link";
 
 interface BlogPost {
   _id: string;
@@ -30,7 +29,9 @@ export default function AllBlogs({ posts }: AllBlogPostsProps) {
         transition={{ delay: 0.4, type: "spring", stiffness: 100 }}
         className="flex items-center justify-between mb-4"
       >
-        <h2 className="text-2xl lg:text-4xl font-bold text-blue-300">More Trading Wisdom</h2>
+        <h2 className="text-2xl lg:text-4xl font-bold text-blue-300">
+          More Trading Wisdom
+        </h2>
         <div className="h-1 flex-grow mx-4 bg-gradient-to-r from-purple-500 to-blue-500"></div>
       </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -41,9 +42,7 @@ export default function AllBlogs({ posts }: AllBlogPostsProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
           >
-            <Link href={`/blog/${post._id}`}>
-              <BlogPostCard post={post} />
-            </Link>
+            <BlogPostCard post={post} />
           </motion.div>
         ))}
       </div>

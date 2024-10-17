@@ -1,6 +1,6 @@
-import { notFound } from 'next/navigation';
-import BlogSlug from '@/components/BlogSlug';
-import { generateSlug } from '@/lib/utils';
+import { notFound } from "next/navigation";
+import BlogSlug from "@/components/BlogSlug";
+import { generateSlug } from "@/lib/utils";
 
 interface BlogPost {
   title: string;
@@ -17,12 +17,14 @@ interface BlogPost {
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
 
   try {
-    const response = await fetch(`${baseUrl}/api/blogposts`, { cache: 'no-store' });
+    const response = await fetch(`${baseUrl}/api/blogposts`, {
+      cache: "no-store",
+    });
     if (!response.ok) {
-      throw new Error('Failed to fetch blog posts');
+      throw new Error("Failed to fetch blog posts");
     }
     const data = await response.json();
     const foundPost = data.find(
@@ -30,12 +32,16 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
     );
     return foundPost || null;
   } catch (error) {
-    console.error('Error fetching blog post:', error);
+    console.error("Error fetching blog post:", error);
     return null;
   }
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const post = await getBlogPost(decodeURIComponent(params.slug));
 
   if (!post) {

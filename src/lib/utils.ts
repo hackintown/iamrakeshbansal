@@ -5,10 +5,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function truncate(str: string | undefined | null, length: number): string {
-  if (!str) return ""
-  const stripped = str.replace(/<[^>]*>/g, "")
-  return stripped.length > length ? stripped.slice(0, length) + "..." : stripped
+export function truncate(
+  str: string | undefined | null,
+  length: number
+): string {
+  if (!str) return "";
+  const stripped = str.replace(/<[^>]*>/g, "");
+  return stripped.length > length
+    ? stripped.slice(0, length) + "..."
+    : stripped;
 }
 
 export function formatDate(dateString: string): string {
@@ -16,15 +21,16 @@ export function formatDate(dateString: string): string {
     year: "numeric",
     month: "long",
     day: "numeric",
-  }
-  return new Date(dateString).toLocaleDateString(undefined, options)
+  };
+  return new Date(dateString).toLocaleDateString(undefined, options);
 }
 
 export const generateSlug = (title: string): string => {
-  return encodeURIComponent(title
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .trim()
+  return encodeURIComponent(
+    title
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .trim()
   );
-}
+};

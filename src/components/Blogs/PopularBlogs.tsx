@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import BlogPostCard from "./BlogPostCard";
-import Link from "next/link";
 
 interface BlogPost {
   _id: string;
@@ -30,7 +29,9 @@ export default function PopularBlogPosts({ posts }: PopularBlogPostsProps) {
         transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
         className="flex items-center justify-between mb-4 sm:mb-6"
       >
-        <h2 className="text-2xl sm:text-4xl font-bold text-blue-300">Featured Insights</h2>
+        <h2 className="text-2xl sm:text-4xl font-bold text-blue-300">
+          Featured Insights
+        </h2>
         <div className="h-1 flex-grow mx-4 bg-gradient-to-r from-blue-500 to-purple-500"></div>
       </motion.div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -41,9 +42,7 @@ export default function PopularBlogPosts({ posts }: PopularBlogPostsProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <Link href={`/blog/${post._id}`}>
-              <BlogPostCard post={post} featured={index === 0} />
-            </Link>
+            <BlogPostCard post={post} featured={index === 0} />
           </motion.div>
         ))}
       </div>

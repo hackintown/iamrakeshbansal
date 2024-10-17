@@ -18,16 +18,24 @@ const BlogCMS: React.FC<BlogCMSProps> = ({ initialBlogPosts }) => {
   };
 
   const handlePostUpdated = (updatedPost: BlogPost) => {
-    setBlogPosts(blogPosts.map(post => post._id === updatedPost._id ? updatedPost : post));
+    setBlogPosts(
+      blogPosts.map((post) =>
+        post._id === updatedPost._id ? updatedPost : post
+      )
+    );
   };
 
   const handlePostDeleted = (deletedPostId: string) => {
-    setBlogPosts(blogPosts.filter(post => post._id !== deletedPostId));
+    setBlogPosts(blogPosts.filter((post) => post._id !== deletedPostId));
   };
 
   return (
     <div className="container space-y-12 px-4">
-      <CreateBlogPost onPostCreated={handlePostCreated} onPostUpdated={handlePostUpdated} onPostDeleted={handlePostDeleted} />
+      <CreateBlogPost
+        onPostCreated={handlePostCreated}
+        onPostUpdated={handlePostUpdated}
+        onPostDeleted={handlePostDeleted}
+      />
       <PopularBlogPosts posts={blogPosts.slice(0, 3)} />
       <AllBlogs posts={blogPosts.slice(3)} />
     </div>

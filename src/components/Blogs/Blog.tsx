@@ -1,45 +1,45 @@
-'use client'
+"use client";
 
-import React, { useEffect, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import PopularBlogPosts from "./PopularBlogs"
-import AllBlogs from "./AllBlogs"
-import BlogHeader from "./BlogHeader"
+import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import PopularBlogPosts from "./PopularBlogs";
+import AllBlogs from "./AllBlogs";
+import BlogHeader from "./BlogHeader";
 
 interface BlogPost {
-  _id: string
-  title: string
-  content: string
-  image: string
-  tags: string[]
-  createdAt: string
+  _id: string;
+  title: string;
+  content: string;
+  image: string;
+  tags: string[];
+  createdAt: string;
 }
 
 interface BlogClientProps {
-  initialBlogPosts: BlogPost[]
+  initialBlogPosts: BlogPost[];
 }
 
 export default function BlogClient({ initialBlogPosts }: BlogClientProps) {
-  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedTag, setSelectedTag] = useState<string | null>(null)
-  const [isClient, setIsClient] = useState(false)
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setBlogPosts(initialBlogPosts)
-    setIsClient(true)
-  }, [initialBlogPosts])
+    setBlogPosts(initialBlogPosts);
+    setIsClient(true);
+  }, [initialBlogPosts]);
 
   const filteredPosts = blogPosts.filter(
     (post) =>
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (!selectedTag || post.tags.includes(selectedTag))
-  )
+  );
 
-  const allTags = Array.from(new Set(blogPosts.flatMap((post) => post.tags)))
+  const allTags = Array.from(new Set(blogPosts.flatMap((post) => post.tags)));
 
   if (!isClient) {
-    return null // or a loading indicator
+    return null; // or a loading indicator
   }
   return (
     <AnimatePresence>
@@ -63,5 +63,5 @@ export default function BlogClient({ initialBlogPosts }: BlogClientProps) {
         </main>
       </motion.div>
     </AnimatePresence>
-  )
+  );
 }
