@@ -1,9 +1,20 @@
-import React from "react";
+"use client";
 
+import { BlogPost } from "@/types";
+import React, { useState } from "react";
+import PopularBlogPosts from "../Blogs/PopularBlogs";
+import Link from "next/link";
+import { Button } from "../ui/button";
 
-const Blog = () => {
+interface BlogProps {
+  initialBlogPosts: BlogPost[];
+}
+
+const Blog: React.FC<BlogProps> = ({ initialBlogPosts }) => {
+  const [blogPosts] = useState<BlogPost[]>(initialBlogPosts);
+
   return (
-    <div className="relative h-[500px]">
+    <section className="relative py-8 lg:py-12 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-purple-900 to-green-900">
         <svg
           className="absolute inset-0 w-full h-full"
@@ -40,10 +51,25 @@ const Blog = () => {
           <rect x="0" y="0" width="100%" height="100%" fill="url(#blog-dots)" />
         </svg>
       </div>
-      <div className="container px-4 relative">
-     
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
+            Our Latest Blog Posts
+          </h2>
+          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+            Stay updated with our latest insights and stories
+          </p>
+        </div>
+        <PopularBlogPosts posts={blogPosts.slice(0, 3)} />
+        <div className="mt-12 text-center">
+          <Link href="/blog" passHref>
+            <Button variant="gradient" size="custom">
+              View All Posts
+            </Button>
+          </Link>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

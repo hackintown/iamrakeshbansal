@@ -34,11 +34,7 @@ export default function CreateBlogPost({
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api";
-
-  useEffect(() => {
-    fetchBlogPosts();
-  }, []);
+    process.env.NEXT_PUBLIC_PRODUCTION_URL || "http://localhost:3000/api";
 
   const fetchBlogPosts = useCallback(async () => {
     try {
@@ -54,6 +50,10 @@ export default function CreateBlogPost({
       setError("Failed to fetch blog posts. Please try again.");
     }
   }, [baseUrl]);
+
+  useEffect(() => {
+    fetchBlogPosts();
+  }, [fetchBlogPosts]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles[0]) {

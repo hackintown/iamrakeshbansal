@@ -21,32 +21,64 @@ import "swiper/css/pagination";
 
 const testimonials = [
   {
-    videoUrl:
-      "https://www.iamrakeshbansal.com/wp-content/uploads/2024/01/RKB-23DEC-MEDIABYTES-05.mp4",
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial1.mp4",
     name: "John Doe",
     company: "Tech Innovators",
     review:
       "This product revolutionized our workflow. Highly recommended for any tech team!",
   },
   {
-    videoUrl:
-      "https://www.iamrakeshbansal.com/wp-content/uploads/2024/01/RKB-23DEC-MEDIABYTES-04.mp4",
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial2.mp4",
     name: "Jane Smith",
     company: "Creative Solutions",
     review:
       "The customer support is outstanding. They went above and beyond to help us.",
   },
   {
-    videoUrl:
-      "https://www.iamrakeshbansal.com/wp-content/uploads/2024/01/RKB-23DEC-MEDIABYTES-10.mp4",
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial3.mp4",
     name: "Mike Johnson",
     company: "Global Enterprises",
     review:
       "We've seen a 50% increase in productivity since implementing this solution.",
   },
   {
-    videoUrl:
-      "https://www.iamrakeshbansal.com/wp-content/uploads/2024/01/RKB-23DEC-MEDIABYTES-11.mp4",
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial4.mp4",
+    name: "Emily Brown",
+    company: "Startup Accelerator",
+    review: "Perfect for startups! Easy to use and scales well as we grow.",
+  },
+  {
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial5.mp4",
+    name: "Emily Brown",
+    company: "Startup Accelerator",
+    review: "Perfect for startups! Easy to use and scales well as we grow.",
+  },
+  {
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial6.mp4",
+    name: "Emily Brown",
+    company: "Startup Accelerator",
+    review: "Perfect for startups! Easy to use and scales well as we grow.",
+  },
+  {
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial7.mp4",
+    name: "Emily Brown",
+    company: "Startup Accelerator",
+    review: "Perfect for startups! Easy to use and scales well as we grow.",
+  },
+  {
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial8.mp4",
+    name: "Emily Brown",
+    company: "Startup Accelerator",
+    review: "Perfect for startups! Easy to use and scales well as we grow.",
+  },
+  {
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial9.mp4",
+    name: "Emily Brown",
+    company: "Startup Accelerator",
+    review: "Perfect for startups! Easy to use and scales well as we grow.",
+  },
+  {
+    videoUrl: "https://32watts.com/iamrakeshbansal/testimonial10.mp4",
     name: "Emily Brown",
     company: "Startup Accelerator",
     review: "Perfect for startups! Easy to use and scales well as we grow.",
@@ -120,7 +152,7 @@ export default function VideoTestimonials() {
   }, [playingIndex]);
 
   return (
-    <div className="relative mb-10 px-4 sm:px-6 lg:px-8">
+    <div className="relative mb-10  sm:px-6">
       <Swiper
         onSwiper={setSwiperInstance}
         effect={"coverflow"}

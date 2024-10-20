@@ -73,7 +73,7 @@ export default function BlogPostCard({
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparen" />
         <motion.div
           className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
           initial={{ opacity: 0 }}
@@ -87,7 +87,7 @@ export default function BlogPostCard({
           </Link>
         </motion.div>
       </div>
-      <div className="p-6 flex flex-col flex-grow">
+      <div className=" relative p-6 flex flex-col flex-grow">
         <Link href={`/blog/${encodeURIComponent(slug)}`}>
           <h3 className="text-2xl font-semibold text-blue-300 mb-4 line-clamp-2 hover:text-blue-400 transition-colors duration-200">
             {post.title || "Untitled Post"}
@@ -126,7 +126,7 @@ export default function BlogPostCard({
           </span>
         </Link>
         {featured && (
-          <div className="absolute top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded">
+          <div className="absolute -top-2 left-2 bg-yellow-500 text-white text-xs px-2 py-1 rounded">
             Featured
           </div>
         )}

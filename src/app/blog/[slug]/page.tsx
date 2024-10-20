@@ -17,7 +17,8 @@ interface BlogPost {
 }
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
+  const baseUrl =
+    process.env.NEXT_PUBLIC_PRODUCTION_URL || "http://localhost:3000";
 
   try {
     const response = await fetch(`${baseUrl}/api/blogposts`, {

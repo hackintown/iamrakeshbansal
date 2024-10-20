@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   FaFacebookF,
   FaTwitter,
@@ -13,8 +13,8 @@ import {
   FaRegComment,
   FaShare,
   FaEllipsisV,
-} from 'react-icons/fa';
-import { IoMdArrowBack } from 'react-icons/io';
+} from "react-icons/fa";
+import { IoMdArrowBack } from "react-icons/io";
 
 interface BlogPost {
   title: string;
@@ -39,7 +39,7 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<string[]>([]);
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
 
   const handleBookmark = () => {
@@ -49,28 +49,34 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
-    let shareUrl = '';
+    let shareUrl = "";
 
     switch (platform) {
-      case 'facebook':
-        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+          url
+        )}`;
         break;
-      case 'twitter':
-        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(post.title)}`;
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+          url
+        )}&text=${encodeURIComponent(post.title)}`;
         break;
-      case 'linkedin':
-        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(url)}&title=${encodeURIComponent(post.title)}`;
+      case "linkedin":
+        shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+          url
+        )}&title=${encodeURIComponent(post.title)}`;
         break;
     }
 
-    window.open(shareUrl, '_blank');
+    window.open(shareUrl, "_blank");
   };
 
   const handleCommentSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newComment.trim()) {
       setComments([...comments, newComment]);
-      setNewComment('');
+      setNewComment("");
       // TODO: Implement server-side comment submission
     }
   };
@@ -147,11 +153,11 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
                 <div>
                   <p className="font-semibold">Rakesh Bansal</p>
                   <p className="text-sm opacity-80">
-                    {new Date(post.createdAt).toLocaleDateString('en-US', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}{' '}
+                    {new Date(post.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}{" "}
                     • {post.readingTime} min read
                   </p>
                 </div>
@@ -194,28 +200,28 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
                 <ShareButton
                   icon={<FaFacebookF />}
                   color="bg-blue-600"
-                  onClick={() => handleShare('facebook')}
+                  onClick={() => handleShare("facebook")}
                 />
                 <ShareButton
                   icon={<FaTwitter />}
                   color="bg-sky-400"
-                  onClick={() => handleShare('twitter')}
+                  onClick={() => handleShare("twitter")}
                 />
                 <ShareButton
                   icon={<FaLinkedinIn />}
                   color="bg-blue-700"
-                  onClick={() => handleShare('linkedin')}
+                  onClick={() => handleShare("linkedin")}
                 />
               </div>
               <button
                 onClick={handleSubscribe}
                 className={`py-2 px-6 rounded-full transition-colors ${
                   isSubscribed
-                    ? 'bg-green-500 text-white'
-                    : 'bg-blue-500 text-white hover:bg-blue-600'
+                    ? "bg-green-500 text-white"
+                    : "bg-blue-500 text-white hover:bg-blue-600"
                 }`}
               >
-                {isSubscribed ? 'Subscribed' : 'Subscribe for Updates'}
+                {isSubscribed ? "Subscribed" : "Subscribe for Updates"}
               </button>
             </motion.div>
 
@@ -231,13 +237,13 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
                 className="mb-4 text-blue-500 hover:text-blue-600 flex items-center"
               >
                 <FaRegComment className="mr-2" />
-                {showComments ? 'Hide Comments' : 'Show Comments'}
+                {showComments ? "Hide Comments" : "Show Comments"}
               </button>
               <AnimatePresence>
                 {showComments && (
                   <motion.div
                     initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
