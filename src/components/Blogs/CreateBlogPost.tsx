@@ -34,11 +34,11 @@ export default function CreateBlogPost({
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_PRODUCTION_URL || "http://localhost:3000/api";
+    process.env.NEXT_PUBLIC_PRODUCTION_URL || "http://localhost:3000";
 
   const fetchBlogPosts = useCallback(async () => {
     try {
-      const response = await fetch(`${baseUrl}/blogposts`);
+      const response = await fetch(`${baseUrl}/api/blogposts`);
       if (response.ok) {
         const posts = await response.json();
         setBlogPosts(posts);
