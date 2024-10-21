@@ -17,7 +17,7 @@ import {
 import { IoMdArrowBack } from "react-icons/io";
 
 interface BlogPost {
-  _id: any;
+  _id: string;
   title: string;
   subtitle: string;
   content: string;
@@ -39,7 +39,9 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
   const [post] = useState<BlogPost>(initialPost);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState<Array<{ _id: string; content: string; author: string; createdAt: string }>>([]);
+  const [comments, setComments] = useState<
+    Array<{ _id: string; content: string; author: string; createdAt: string }>
+  >([]);
   const [newComment, setNewComment] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [commentAuthor, setCommentAuthor] = useState("");
@@ -53,7 +55,7 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
           setComments(fetchedComments);
         }
       } catch (error) {
-        console.error('Error fetching comments:', error);
+        console.error("Error fetching comments:", error);
       }
     };
 
@@ -94,10 +96,10 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
     e.preventDefault();
     if (newComment.trim() && commentAuthor.trim()) {
       try {
-        const response = await fetch('/api/comments', {
-          method: 'POST',
+        const response = await fetch("/api/comments", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             blogPostId: post._id,
@@ -108,19 +110,22 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
 
         if (response.ok) {
           const result = await response.json();
-          setComments([...comments, { 
-            _id: result.id, 
-            content: newComment, 
-            author: commentAuthor,
-            createdAt: new Date().toISOString()
-          }]);
+          setComments([
+            ...comments,
+            {
+              _id: result.id,
+              content: newComment,
+              author: commentAuthor,
+              createdAt: new Date().toISOString(),
+            },
+          ]);
           setNewComment("");
           setCommentAuthor("");
         } else {
-          console.error('Failed to submit comment');
+          console.error("Failed to submit comment");
         }
       } catch (error) {
-        console.error('Error submitting comment:', error);
+        console.error("Error submitting comment:", error);
       }
     }
   };

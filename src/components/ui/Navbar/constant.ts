@@ -2,6 +2,7 @@ export interface NavItem {
   id: string;
   name: string;
   href: string;
+  isPdf?: boolean;
 }
 
 export interface NavGroup {
@@ -91,10 +92,15 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
       },
       {
         id: "investor-charter",
-        name: "investor Charter",
-        href: "",
+        name: "Investor Charter",
+        href: "/investor-charter",
+        isPdf: true,
       },
     ],
+  },
+  {
+    title: "Blog",
+    items: [],
   },
   {
     title: "Contact Us",

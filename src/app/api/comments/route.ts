@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Db, MongoClient, ObjectId } from "mongodb";
+import { Db, MongoClient } from "mongodb";
 
 const uri = process.env.MONGODB_URI || "";
 const client = new MongoClient(uri);
@@ -63,4 +63,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
