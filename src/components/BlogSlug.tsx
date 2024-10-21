@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -17,6 +17,7 @@ import {
 import { IoMdArrowBack } from "react-icons/io";
 
 interface BlogPost {
+  _id: any;
   title: string;
   subtitle: string;
   content: string;
@@ -38,9 +39,26 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
   const [post] = useState<BlogPost>(initialPost);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [showComments, setShowComments] = useState(false);
-  const [comments, setComments] = useState<string[]>([]);
+  const [comments, setComments] = useState<Array<{ _id: string; content: string; author: string; createdAt: string }>>([]);
   const [newComment, setNewComment] = useState("");
   const [isSubscribed, setIsSubscribed] = useState(false);
+  const [commentAuthor, setCommentAuthor] = useState("");
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const response = await fetch(`/api/comments?blogPostId=${post._id}`);
+        if (response.ok) {
+          const fetchedComments = await response.json();
+          setComments(fetchedComments);
+        }
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    };
+
+    fetchComments();
+  }, [post._id]);
 
   const handleBookmark = () => {
     setIsBookmarked(!isBookmarked);
@@ -72,12 +90,38 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
     window.open(shareUrl, "_blank");
   };
 
-  const handleCommentSubmit = (e: React.FormEvent) => {
+  const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (newComment.trim()) {
-      setComments([...comments, newComment]);
-      setNewComment("");
-      // TODO: Implement server-side comment submission
+    if (newComment.trim() && commentAuthor.trim()) {
+      try {
+        const response = await fetch('/api/comments', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            blogPostId: post._id,
+            content: newComment,
+            author: commentAuthor,
+          }),
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          setComments([...comments, { 
+            _id: result.id, 
+            content: newComment, 
+            author: commentAuthor,
+            createdAt: new Date().toISOString()
+          }]);
+          setNewComment("");
+          setCommentAuthor("");
+        } else {
+          console.error('Failed to submit comment');
+        }
+      } catch (error) {
+        console.error('Error submitting comment:', error);
+      }
     }
   };
 
@@ -157,7 +201,7 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
                       year: "numeric",
                       month: "long",
                       day: "numeric",
-                    })}{" "}
+                    })}
                     • {post.readingTime} min read
                   </p>
                 </div>
@@ -247,21 +291,34 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
                     exit={{ height: 0, opacity: 0 }}
                     transition={{ duration: 0.3 }}
                   >
-                    {comments.map((comment, index) => (
+                    {comments.map((comment) => (
                       <div
-                        key={index}
+                        key={comment._id}
                         className="bg-gray-50 rounded-lg p-4 mb-4"
                       >
-                        <p>{comment}</p>
+                        <p className="font-semibold">{comment.author}</p>
+                        <p>{comment.content}</p>
+                        <p className="text-sm text-gray-500 mt-2">
+                          {new Date(comment.createdAt).toLocaleString()}
+                        </p>
                       </div>
                     ))}
                     <form onSubmit={handleCommentSubmit} className="mt-6">
+                      <input
+                        type="text"
+                        value={commentAuthor}
+                        onChange={(e) => setCommentAuthor(e.target.value)}
+                        className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4"
+                        placeholder="Your Name"
+                        required
+                      />
                       <textarea
                         value={newComment}
                         onChange={(e) => setNewComment(e.target.value)}
                         className="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Add a comment..."
                         rows={4}
+                        required
                       />
                       <button
                         type="submit"

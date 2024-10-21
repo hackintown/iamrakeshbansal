@@ -3,6 +3,7 @@ import BlogSlug from "@/components/BlogSlug";
 import { generateSlug } from "@/lib/utils";
 
 interface BlogPost {
+  _id: string;
   title: string;
   subtitle: string;
   content: string;
@@ -49,5 +50,9 @@ export default async function BlogPostPage({
     notFound();
   }
 
-  return <BlogSlug initialPost={post} />;
+  return (
+    <div>
+      <BlogSlug initialPost={post} />
+    </div>
+  );
 }
