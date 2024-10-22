@@ -50,7 +50,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         <span className="flex items-center justify-center">
           <span className="truncate">{children}</span>
           {showArrow && (
-            <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0 md:h-5 md:w-5 lg:h-6 lg:w-6" />
+            <ArrowRight className="ml-2 h-4 w-4 flex-shrink-0 md:h-5 md:w-5 " />
           )}
         </span>
       </Comp>

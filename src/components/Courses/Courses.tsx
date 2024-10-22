@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import {
   Book,
@@ -10,6 +10,8 @@ import {
   GraduationCap,
   ChevronDown,
   ChevronUp,
+  Phone,
+  Mail,
 } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -17,69 +19,12 @@ import { FaInstagram, FaTwitter, FaLinkedin, FaYoutube } from "react-icons/fa";
 
 export default function CoursePage() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [selectedPlan, setSelectedPlan] = useState(1);
 
   const features = [
-    { icon: Book, text: "20+ HOURS OF CONTENT" },
-    { icon: Users, text: "GROUP LIVE Q&A SESSIONS" },
-    { icon: RefreshCcw, text: "100% REFUND POLICY" },
-    { icon: GraduationCap, text: "25,117+ STUDENTS" },
-  ];
-
-  const curriculum = [
-    { title: "Introduction to YouTube", duration: "2 hours" },
-    { title: "Content Creation Strategies", duration: "4 hours" },
-    { title: "Growing Your Audience", duration: "3 hours" },
-    { title: "Monetization Techniques", duration: "3 hours" },
-    { title: "Advanced YouTube Strategies", duration: "5 hours" },
-  ];
-
-  const faqs = [
-    {
-      question: "Who is this course for?",
-      answer:
-        "This course is designed for both beginners and intermediate content creators who want to grow their YouTube channel and start earning as creators.",
-    },
-    {
-      question: "How long do I have access to the course?",
-      answer:
-        "You will have lifetime access to the course content, including any future updates.",
-    },
-    {
-      question: "Is there a money-back guarantee?",
-      answer:
-        "Yes, we offer a 30-day money-back guarantee if youre not satisfied with the course.",
-    },
-  ];
-
-  const pricingPlans = [
-    {
-      name: "Basic",
-      price: 199,
-      features: [
-        "20+ hours of content",
-        "Lifetime access",
-        "Certificate of completion",
-      ],
-    },
-    {
-      name: "Pro",
-      price: 299,
-      features: [
-        "Everything in Basic",
-        "Group live Q&A sessions",
-        "Private community access",
-      ],
-    },
-    {
-      name: "Premium",
-      price: 499,
-      features: [
-        "Everything in Pro",
-        "1-on-1 coaching session",
-        "Priority support",
-      ],
-    },
+    { icon: Book, text: "5+ HOURS OF CONTENT" },
+    { icon: Users, text: "GROUP Q&A SESSIONS" },
+    { icon: RefreshCcw, text: "course Completion Certificate" },
+    { icon: GraduationCap, text: "10,526+ STUDENTS" },
   ];
 
   const toggleSection = (section: string) => {
@@ -88,21 +33,29 @@ export default function CoursePage() {
 
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      <nav className="bg-purple-100 p-4 sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto flex justify-center space-x-6">
-          {["Curriculum", "Instructor", "Pricing", "FAQ"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-purple-800 hover:text-purple-600 transition-colors"
-            >
-              {item}
-            </a>
-          ))}
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+        className="bg-gradient-to-r from-purple-100 to-indigo-100 p-4 sticky top-0 z-20 shadow-sm border-b border-purple-200"
+      >
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center space-x-3">
+            <span className="text-purple-600 font-bold text-2xl">🚀</span>
+            <h1 className="text-purple-800 font-semibold text-lg">Kurukshetra: Win The Battle</h1>
+          </div>
+          <Button
+            variant="gradient"
+            size="custom"
+            showArrow
+            className="flex items-center space-x-2 py-1 lg:text-base lg:px-3"
+          >
+            Enroll Now
+          </Button>
         </div>
-      </nav>
+      </motion.div>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="container px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
         <section className="mb-16">
           <div className="bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg overflow-hidden">
@@ -112,18 +65,27 @@ export default function CoursePage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-4xl lg:text-5xl font-bold mb-4 text-purple-900"
+                  className="text-4xl font-bold mb-6 text-purple-900 leading-tight"
                 >
-                  HOW TO <span className="text-green-600">YOUTUBE</span>
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+                    How to
+                  </span>
+                  <br />
+                  <span className="text-green-600 text-5xl">
+                    Enter and Exit
+                  </span>
+                  <br />
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
+                    in the Stock Market
+                  </span>
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-lg mb-6 text-gray-700"
+                  className="text-sm font-light mb-6 text-gray-700"
                 >
-                  The complete guide to 100K subscribers on YouTube and start
-                  earning as a creator.
+                  Embark on your journey into the world of financial markets with this comprehensive course designed specifically for beginners who wish to master the art of technical analysis from the ground up. Led by the esteemed *Dr. Rakesh Bansal*, a seasoned expert in the field, this course provides you with the knowledge and tools necessary to analyze market trends, make informed decisions, and achieve your trading and investment goals
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -174,50 +136,108 @@ export default function CoursePage() {
           </div>
         </section>
 
-        {/* Curriculum Section */}
-        <section id="curriculum" className="mb-16">
-          <h2 className="text-3xl font-bold text-purple-900 mb-6">
-            Course Curriculum
-          </h2>
-          <div className="space-y-4">
-            {curriculum.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-purple-50 rounded-lg p-4 flex justify-between items-center"
-              >
-                <div className="flex items-center">
-                  <Book className="w-6 h-6 text-green-500 mr-3" />
-                  <span className="font-medium">{item.title}</span>
-                </div>
-                <span className="text-sm text-gray-600">{item.duration}</span>
-              </motion.div>
-            ))}
-          </div>
+        {/* About Kurukshetra Win the Battle Section */}
+        <section id="about-course" className="mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-bold text-purple-900 mb-6"
+          >
+            About Kurukshetra: Win The Battle
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg overflow-hidden p-6"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {[
+                {
+                  title: "Interactive Learning",
+                  content: "Engage with quizzes and exercises that reinforce your understanding and prepare you for real-world trading.",
+                  icon: Users,
+                },
+                {
+                  title: "Expert Insights",
+                  content: "Dr. Rakesh Bansal shares his personal preferences and techniques used in his own trading.",
+                  icon: GraduationCap,
+                },
+                {
+                  title: "Foundational Learning",
+                  content: "Start with the basics, ensuring no prior knowledge is required.",
+                  icon: Book,
+                },
+                {
+                  title: "Comprehensive Coverage",
+                  content: "Every relevant topic in technical analysis is covered, from chart patterns to indicators.",
+                  icon: RefreshCcw,
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                  className="flex items-start space-x-4"
+                >
+                  <div className="bg-purple-200 rounded-full p-3">
+                    <item.icon className="w-6 h-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-purple-800 mb-2">{item.title}</h3>
+                    <p className="text-gray-600">{item.content}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="mt-8 bg-purple-50 border-l-4 border-purple-500 p-4"
+            >
+              <p className="text-purple-800">
+                Additionally, upon purchasing the course, you will have the opportunity to ask your doubts and receive answers directly. If a significant number of questions arise, we will organize a webinar where Dr. Rakesh Bansal will address your queries and provide further clarification.
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="mt-8"
+            >
+              <h3 className="text-xl font-semibold text-purple-900 mb-4">What You'll Get</h3>
+              <ul className="space-y-2">
+                {[
+                  "Practical applications with real-world trading examples",
+                  "Guidance from Dr. Rakesh Bansal, a respected expert in the field",
+                  "Ongoing support through discussion forums",
+                  "A comprehensive foundation in technical analysis",
+                ].map((item, index) => (
+                  <motion.li
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+                    className="flex items-center space-x-2"
+                  >
+                    <CheckIcon className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    <span>{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </motion.div>
         </section>
 
         {/* Instructor Section */}
         <section id="instructor" className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">Know Your</h2>
+          <h2 className="text-3xl font-bold text-purple-900 mb-6">Know Your</h2>
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="flex flex-col md:flex-row items-center">
-              <div className="md:w-1/3 p-6">
-                <motion.div
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="relative w-64 h-64 mx-auto md:mx-0"
-                >
-                  <Image
-                    src="/images/avatar.webp"
-                    alt="Rakesh Bansal"
-                    fill
-                    className="object-cover object-top"
-                  />
-                </motion.div>
-              </div>
+
               <div className="md:w-2/3 p-6">
                 <h3 className="text-4xl font-bold mb-2 text-gray-900">
                   Coach, Guide & Mentor
@@ -259,106 +279,246 @@ export default function CoursePage() {
                   </Button>
                 </Link>
               </div>
+              <div className="md:w-1/3 p-6">
+                <motion.div
+                  initial={{ scale: 0.9, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative w-64 h-64 mx-auto md:mx-0"
+                >
+                  <Image
+                    src="/images/avatar.webp"
+                    alt="Rakesh Bansal"
+                    fill
+                    className="object-cover object-top"
+                  />
+                </motion.div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Pricing Section */}
-        <section id="pricing" className="mb-16">
-          <h2 className="text-3xl font-bold text-purple-900 mb-6">Pricing</h2>
-          <div className="flex flex-col md:flex-row justify-between space-y-6 md:space-y-0 md:space-x-6">
-            {pricingPlans.map((plan, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className={`bg-purple-50 rounded-lg p-6 text-center flex-1 ${
-                  selectedPlan === index ? "ring-2 ring-purple-600" : ""
-                }`}
-              >
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-4xl font-bold text-green-600 mb-4">
-                  ${plan.price}
-                </p>
-                <ul className="text-left mb-6">
-                  {plan.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center mb-2">
-                      <CheckIcon className="w-5 h-5 text-green-500 mr-2" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className={`w-full py-3 px-6 rounded-lg transition-colors ${
-                    selectedPlan === index
-                      ? "bg-green-500 hover:bg-green-600 text-white"
-                      : "bg-purple-200 hover:bg-purple-300 text-purple-800"
-                  }`}
-                  onClick={() => setSelectedPlan(index)}
+        {/* Chapter Description Section */}
+        <section id="chapter-description" className="mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-bold text-purple-900 mb-6"
+          >
+            Chapter Description
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg overflow-hidden p-6"
+          >
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {[
+                {
+                  title: "Introduction",
+                  content: "This chapter serves as your gateway to the world of technical analysis, providing a solid foundation for the concepts and techniques that will be covered throughout the course. By the end of this chapter, you will have a clear overview of the topics and tools that will empower you to make informed trading and investment decisions.",
+                },
+                {
+                  title: "Single Candlestick Patterns",
+                  content: "Dive deep into the world of individual candlestick formations, where a single candle can reveal significant insights into market sentiment. This chapter covers crucial patterns like Doji, Hammer, and Marubozu, each of which plays a pivotal role in indicating potential price reversals or continuations. You will learn how to interpret these patterns within various market contexts, understanding what they signal about buyer and seller dynamics. Mastering these patterns will allow you to make quick, informed decisions based on concise, visual information.",
+                },
+                {
+                  title: "Double Candlestick Patterns",
+                  content: "Expand your analytical toolkit with double candlestick patterns, which offer more nuanced insights into market behavior than single candlesticks. This chapter explores key patterns such as Bullish/Bearish Engulfing and Piercing/Dark Cloud Cover, which are particularly effective in identifying potential trend reversals. Through detailed examples, you will learn how to recognize these formations and interpret their implications, enhancing your ability to anticipate market shifts and make timely trading decisions.",
+                },
+                {
+                  title: "Multiple Candlestick Patterns",
+                  content: "Take your understanding to the next level by studying multiple candlestick patterns that involve three or more consecutive candles. This chapter focuses on formations like Morning Star, Evening Star, and Three White Soldiers, which are powerful indicators of trend reversals or continuations. You will learn how to spot these patterns in real-time, understanding their significance within broader market trends. By mastering these complex patterns, you will be equipped to identify critical turning points in the market, allowing for more strategic entry and exit points.",
+                },
+                {
+                  title: "Dow Theory",
+                  content: "This chapter introduces you to the foundational principles of Dow Theory, the bedrock of modern technical analysis. You will explore the core concepts, including the identification of primary, secondary, and minor trends, and the phases of market movements. Understanding Dow Theory will provide you with a structured approach to analyzing market behavior over different time frames, helping you to identify the underlying trend and position yourself accordingly in the market.",
+                },
+                {
+                  title: "Dow Theory - Examples",
+                  content: "Building on the theoretical knowledge from the previous chapter, this section offers practical examples and real-world case studies to illustrate the application of Dow Theory. You will analyze historical market data and learn how to apply the principles of Dow Theory to identify trends and make informed trading decisions. These examples will reinforce your understanding and provide a framework for implementing Dow Theory in your trading strategy.",
+                },
+                {
+                  title: "Chart Patterns & Triangles",
+                  content: "In this chapter, you will delve into the study of chart patterns, with a particular focus on triangles—one of the most common and reliable patterns in technical analysis. By understanding the formation and significance of these patterns, you will be better equipped to predict and capitalize on price movements, whether they indicate a continuation or a reversal of the current trend.",
+                },
+                {
+                  title: "Continuation Chart Patterns",
+                  content: "This chapter is dedicated to continuation patterns, which signal that the existing trend is likely to persist after a brief consolidation. You will explore key patterns such as Flags, Pennants, and Rectangles, understanding how they form and what they indicate about market sentiment. By mastering these patterns, you will learn how to spot opportunities to ride the trend, maximizing your profits by staying in the market during periods of trend continuation.",
+                },
+                {
+                  title: "Reversal Chart Patterns",
+                  content: "Here, you will study reversal chart patterns, which are crucial for identifying when a trend is about to change direction. This chapter covers patterns such as Head and Shoulders, Rounding Tops, and Rounding Bottoms, each of which provides strong signals that the prevailing trend is weakening and may soon reverse. You will learn how to recognize these patterns early and position yourself to take advantage of the new trend, whether it is bullish or bearish.",
+                },
+                {
+                  title: "Technical Indicators - Lagging Indicators",
+                  content: "This chapter introduces you to lagging indicators, which are essential tools for confirming trends that have already begun. You will learn about Moving Averages, MACD, and other lagging indicators that help you stay on the right side of the market by providing reliable signals based on historical data. By understanding the strengths and limitations of these indicators, you will be able to incorporate them into your trading strategy to reduce the risk of false signals and improve your timing.",
+                },
+                {
+                  title: "Technical Indicators - Leading & Volatility Indicators",
+                  content: "Explore the world of leading and volatility indicators, which are designed to predict future price movements and assess market volatility. This chapter covers leading indicators such as RSI and Stochastic, which help you anticipate market turns before they occur. Additionally, you will learn about volatility indicators like Bollinger Bands, which measure the market's volatility and can signal potential breakouts or breakdowns. By integrating these indicators into your analysis, you will gain a more comprehensive view of market dynamics and enhance your ability to make proactive trading decisions.",
+                },
+                {
+                  title: "Support & Resistance",
+                  content: "This chapter focuses on the critical concepts of support and resistance, which are key to understanding price movements in any market. You will learn how to identify these levels on a chart and how they act as barriers that the price may struggle to break through. Understanding support and resistance will enable you to predict potential price reversals or continuations, helping you to set effective entry and exit points in your trades.",
+                },
+                {
+                  title: "Breakout & Breakdown",
+                  content: "Learn how to identify and trade breakouts and breakdowns, which occur when the price moves above a resistance level or below a support level. This chapter teaches you the techniques for spotting these critical moments when the market is likely to make a significant move. You will explore the factors that contribute to breakouts and breakdowns, and how to confirm these signals to avoid false breakouts. Mastering this concept will allow you to capitalize on new trends as they begin to unfold.",
+                },
+                {
+                  title: "Trendlines",
+                  content: "In this chapter, you will learn the art of drawing and interpreting trendlines, one of the most fundamental tools in technical analysis. Trendlines help you identify the direction and strength of a trend, providing a visual representation of market sentiment. You will practice drawing trendlines across various time frames and understand how to use them to confirm trends, spot potential reversals, and make informed trading decisions.",
+                },
+                {
+                  title: "Fibonacci Retracement and Gaps",
+                  content: "This chapter explores the use of Fibonacci retracement levels as potential support and resistance levels in the market. You will learn how to apply these levels to identify areas where the price may reverse or continue. Additionally, you will study the significance of price gaps, which can signal strong momentum and provide opportunities for trading breakouts and trend continuations.",
+                },
+                {
+                  title: "Conclusion",
+                  content: "The course concludes by reinforcing the importance of technical analysis as a vital tool for making informed trading and investment decisions. The conclusion also emphasizes the ongoing nature of learning and the importance of practice and continuous improvement in mastering technical analysis.",
+                },
+              ].map((chapter, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                  className="bg-white rounded-lg shadow p-6"
                 >
-                  {selectedPlan === index ? "Selected" : "Select Plan"}
-                </button>
-              </motion.div>
-            ))}
-          </div>
-          <div className="mt-8">
-            <label
-              htmlFor="price-slider"
-              className="block text-sm font-medium text-gray-700 mb-2"
-            >
-              Adjust your budget
-            </label>
-            <input
-              type="range"
-              id="price-slider"
-              min="0"
-              max="2"
-              step="1"
-              value={selectedPlan}
-              onChange={(e) => setSelectedPlan(parseInt(e.target.value))}
-              className="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer"
-            />
-            <div className="flex justify-between mt-2">
-              <span className="text-sm text-gray-600">$199</span>
-              <span className="text-sm text-gray-600">$299</span>
-              <span className="text-sm text-gray-600">$499</span>
+                  <h3 className="text-xl font-semibold text-purple-800 mb-3">{chapter.title}</h3>
+                  <p className="text-gray-700">{chapter.content}</p>
+                </motion.div>
+              ))}
             </div>
-          </div>
-          <div className="mt-8 text-center">
-            <Button variant="gradient" size="custom">
-              Enroll Now for ${pricingPlans[selectedPlan].price}
-            </Button>
-          </div>
+          </motion.div>
         </section>
 
         {/* FAQ Section */}
         <section id="faq" className="mb-16">
-          <h2 className="text-3xl font-bold text-purple-900 mb-6">
-            Frequently Asked Questions
-          </h2>
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border-b border-gray-200 pb-4">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-bold text-purple-900 mb-6 text-center"
+          >
+            Education FAQs
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-4 grid grid-cols-1 md:grid-cols-2 gap-4"
+          >
+            {[
+              {
+                question: "Who is this course designed for?",
+                answer: "This course is specifically designed for beginners who want to learn technical analysis from scratch. No prior knowledge or experience is required."
+              },
+              {
+                question: "How long do I have access to the course?",
+                answer: "You will have access to the course for 90 days from the date of purchase. During this period, you can watch the videos and review the materials as many times as you like."
+              },
+              {
+                question: "Can I cancel my purchase or get a refund?",
+                answer: "No, all purchases are final. Once you have purchased the course, no cancellations or refunds will be issued."
+              },
+              {
+                question: "Is there a discount available?",
+                answer: "Yes, a special discount is available for subscribers of the annual membership of Options, Futures, or Mentorship advisory by Dr. Rakesh Bansal. Please check the course purchase page for details on how to apply this discount."
+              },
+              {
+                question: "How do I access the course materials?",
+                answer: "You can access the course on the Rakesh Bansal Ventures application."
+              },
+              {
+                question: "What topics are covered in the course?",
+                answer: "The course covers all relevant topics in technical analysis, starting from the basics. Topics include candlestick patterns, Dow Theory, chart patterns, technical indicators, support and resistance levels, trendlines, and more."
+              },
+              {
+                question: "Will I receive a certificate upon completion?",
+                answer: "Yes, you will receive a certificate of completion upon completion of 80% of the course materials."
+              },
+              {
+                question: "Will I receive support during the course?",
+                answer: "Yes, the course includes access to a discussion forum where you can post your queries. All questions will be answered by course instructors or peers, ensuring you receive the support you need throughout your learning journey."
+              },
+              {
+                question: "Can I download the course materials?",
+                answer: "The course materials are designed for online access only. You can watch the videos and review the materials as many times as you like."
+              },
+              {
+                question: "What should I do if I have technical issues accessing the course?",
+                answer: "If you encounter any technical issues, please contact our support team via email or the support form on our website. We are here to help you resolve any problems as quickly as possible."
+              }
+            ].map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                className="bg-white rounded-lg shadow-md overflow-hidden"
+              >
                 <button
-                  className="flex justify-between items-center w-full text-left"
+                  className="flex justify-between items-center w-full text-left p-4 focus:outline-none"
                   onClick={() => toggleSection(`faq-${index}`)}
                 >
-                  <span className="text-lg font-medium text-gray-900">
-                    {faq.question}
-                  </span>
+                  <span className="text-lg font-medium text-purple-900">{faq.question}</span>
                   {activeSection === `faq-${index}` ? (
-                    <ChevronUp className="w-5 h-5 text-purple-600" />
+                    <ChevronUp className="w-5 h-5 text-purple-600 flex-shrink-0" />
                   ) : (
-                    <ChevronDown className="w-5 h-5 text-purple-600" />
+                    <ChevronDown className="w-5 h-5 text-purple-600 flex-shrink-0" />
                   )}
                 </button>
-                {activeSection === `faq-${index}` && (
-                  <p className="mt-2 text-gray-600">{faq.answer}</p>
-                )}
-              </div>
+                <AnimatePresence>
+                  {activeSection === `faq-${index}` && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="px-4 pb-4"
+                    >
+                      <p className="text-gray-600">{faq.answer}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            className="mt-8 bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg p-8 text-center"
+          >
+            <h3 className="text-2xl font-semibold text-purple-900 mb-6">Contact Information</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-lg p-4 shadow-md">
+                <h4 className="text-lg font-medium text-purple-800 mb-3">Payment & Enrollment</h4>
+                <Link href="tel:+919560884223" className="flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors">
+                  <Phone className="w-5 h-5" />
+                  <span>+91 95608 84223</span>
+                </Link>
+              </div>
+              <div className="bg-white rounded-lg p-4 shadow-md">
+                <h4 className="text-lg font-medium text-purple-800 mb-3">General Inquiries</h4>
+                <Link href="tel:+918851475191" className="flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors">
+                  <Phone className="w-5 h-5" />
+                  <span>+91 88514 75191</span>
+                </Link>
+              </div>
+              <div className="bg-white rounded-lg p-4 shadow-md">
+                <h4 className="text-lg font-medium text-purple-800 mb-3">Email Support</h4>
+                <Link href="mailto:wecare@iamrakeshbansal.com" className="flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors">
+                  <Mail className="w-5 h-5" />
+                  <span>wecare@iamrakeshbansal.com</span>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
         </section>
 
         {/* CTA Section */}

@@ -8,11 +8,8 @@ import {
   FaFacebookF,
   FaTwitter,
   FaLinkedinIn,
-  FaRegBookmark,
-  FaBookmark,
   FaRegComment,
   FaShare,
-  FaEllipsisV,
 } from "react-icons/fa";
 import { IoMdArrowBack } from "react-icons/io";
 
@@ -37,7 +34,6 @@ interface BlogPostClientProps {
 
 export default function BlogSlug({ initialPost }: BlogPostClientProps) {
   const [post] = useState<BlogPost>(initialPost);
-  const [isBookmarked, setIsBookmarked] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<
     Array<{ _id: string; content: string; author: string; createdAt: string }>
@@ -62,10 +58,6 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
     fetchComments();
   }, [post._id]);
 
-  const handleBookmark = () => {
-    setIsBookmarked(!isBookmarked);
-    // TODO: Implement server-side bookmarking logic
-  };
 
   const handleShare = (platform: string) => {
     const url = window.location.href;
@@ -152,21 +144,8 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
             <ShareButton
               icon={<FaShare />}
               color="bg-gray-600"
-              onClick={() => {}}
+              onClick={() => { }}
             />
-            <button
-              className="text-gray-500 hover:text-gray-700"
-              onClick={handleBookmark}
-            >
-              {isBookmarked ? (
-                <FaBookmark className="w-6 h-6" />
-              ) : (
-                <FaRegBookmark className="w-6 h-6" />
-              )}
-            </button>
-            <button className="text-gray-500 hover:text-gray-700">
-              <FaEllipsisV className="w-6 h-6" />
-            </button>
           </div>
         </div>
       </header>
@@ -264,11 +243,10 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
               </div>
               <button
                 onClick={handleSubscribe}
-                className={`py-2 px-6 rounded-full transition-colors ${
-                  isSubscribed
+                className={`py-2 px-6 rounded-full transition-colors ${isSubscribed
                     ? "bg-green-500 text-white"
                     : "bg-blue-500 text-white hover:bg-blue-600"
-                }`}
+                  }`}
               >
                 {isSubscribed ? "Subscribed" : "Subscribe for Updates"}
               </button>
