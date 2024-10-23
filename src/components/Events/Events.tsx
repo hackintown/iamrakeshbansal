@@ -6,8 +6,10 @@ import { motion, useAnimation, useInView } from "framer-motion";
 import { Calendar, MapPin, Users, Play } from "lucide-react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Masonry from "react-masonry-css";
 import Link from "next/link";
+import Slider from "react-slick";
 
 interface EventCardProps {
   title: string;
@@ -34,8 +36,8 @@ const EventCard: React.FC<EventCardProps> = ({
     whileHover={{ scale: 1.05 }}
     className="bg-white rounded-lg shadow-lg overflow-hidden border border-purple-200"
   >
-    <div className="relative h-48">
-      <Image src={image} alt={title} layout="fill" objectFit="cover" />
+    <div className="relative h-60">
+      <Image src={image} alt={title} fill className="object-cover object-top" />
     </div>
     <div className="p-4">
       <h3 className="text-xl font-semibold mb-2 text-purple-800">{title}</h3>
@@ -94,6 +96,65 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
   );
 };
 
+const VideoSlider: React.FC = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 2,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true,
+    arrows: true,
+    customPaging: function (i: number) {
+      return (
+        <div className="w-3 h-3 mx-1 rounded-full bg-purple-300 hover:bg-purple-500 transition-colors duration-300" />
+      );
+    },
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          arrows: false,
+        },
+      },
+    ],
+  };
+
+  const videos = [
+    "https://32watts.com/iamrakeshbansal/testimonial1.mp4",
+    "https://32watts.com/iamrakeshbansal/testimonial2.mp4",
+    "https://32watts.com/iamrakeshbansal/testimonial3.mp4",
+    "https://32watts.com/iamrakeshbansal/testimonial4.mp4",
+    "https://32watts.com/iamrakeshbansal/testimonial5.mp4",
+    "https://32watts.com/iamrakeshbansal/testimonial6.mp4",
+    "https://32watts.com/iamrakeshbansal/testimonial7.mp4",
+    "https://32watts.com/iamrakeshbansal/testimonial8.mp4",
+    "https://32watts.com/iamrakeshbansal/testimonial9.mp4",
+    "https://32watts.com/iamrakeshbansal/testimonial10.mp4",
+  ];
+
+  return (
+    <Slider {...settings}>
+      {videos.map((video, index) => (
+        <div key={index} className="px-2">
+          <VideoPlayer src={video} />
+        </div>
+      ))}
+    </Slider>
+  );
+};
+
 const AnimatedSection: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -122,10 +183,240 @@ const AnimatedSection: React.FC<{ children: React.ReactNode }> = ({
     </motion.div>
   );
 };
+const ahmedabadEvents: GalleryImageProps[] = [
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad.webp",
+    alt: "Ahmedabad Events 1",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad1.webp",
+    alt: "Ahmedabad Events 2",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad2.webp",
+    alt: "Ahmedabad Events 3",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad3.webp",
+    alt: "Ahmedabad Events 4",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad4.webp",
+    alt: "Ahmedabad Events 5",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad5.webp",
+    alt: "Ahmedabad Events 6",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad6.webp",
+    alt: "Ahmedabad Events 7",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad7.webp",
+    alt: "Ahmedabad Events 8",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad8.webp",
+    alt: "Ahmedabad Events 9",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad9.webp",
+    alt: "Ahmedabad Events 10",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad10.webp",
+    alt: "Ahmedabad Events 11",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad11.webp",
+    alt: "Ahmedabad Events 12",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad12.webp",
+    alt: "Ahmedabad Events 13",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad13.webp",
+    alt: "Ahmedabad Events 14",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad14.webp",
+    alt: "Ahmedabad Events 15",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad15.webp",
+    alt: "Ahmedabad Events 16",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad16.webp",
+    alt: "Ahmedabad Events 17",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad17.webp",
+    alt: "Ahmedabad Events 18",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad18.webp",
+    alt: "Ahmedabad Events 19",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad19.webp",
+    alt: "Ahmedabad Events 20",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad20.webp",
+    alt: "Ahmedabad Events 21",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad21.webp",
+    alt: "Ahmedabad Events 22",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad22.webp",
+    alt: "Ahmedabad Events 23",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad23.webp",
+    alt: "Ahmedabad Events 24",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad24.webp",
+    alt: "Ahmedabad Events 25",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/ahmedabad/Ahemdabad25.webp",
+    alt: "Ahmedabad Events 26",
+  },
+];
+const delhiImages: GalleryImageProps[] = [
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent.webp",
+    alt: "Delhi Events",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent1.webp",
+    alt: "Delhi Events 1",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent2.webp",
+    alt: "Delhi Events 2",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent3.webp",
+    alt: "Delhi Events 3",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent4.webp",
+    alt: "Delhi Events 4",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent5.webp",
+    alt: "Delhi Events 5",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent6.webp",
+    alt: "Delhi Events 6",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent7.webp",
+    alt: "Delhi Events 7",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent8.webp",
+    alt: "Delhi Events 8",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent9.webp",
+    alt: "Delhi Events 9",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent10.webp",
+    alt: "Delhi Events 10",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent11.webp",
+    alt: "Delhi Events 11",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent12.webp",
+    alt: "Delhi Events 12",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent13.webp",
+    alt: "Delhi Events 13",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent14.webp",
+    alt: "Delhi Events 14",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent15.webp",
+    alt: "Delhi Events 15",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent16.webp",
+    alt: "Delhi Events 16",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent17.webp",
+    alt: "Delhi Events 17",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent18.webp",
+    alt: "Delhi Events 18",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent19.webp",
+    alt: "Delhi Events 19",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent20.webp",
+    alt: "Delhi Events 20",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent21.webp",
+    alt: "Delhi Events 21",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent22.webp",
+    alt: "Delhi Events 22",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent23.webp",
+    alt: "Delhi Events 23",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent24.webp",
+    alt: "Delhi Events 24",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent25.webp",
+    alt: "Delhi Events 25",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent26.webp",
+    alt: "Delhi Events 26",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent27.webp",
+    alt: "Delhi Events 27",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent28.webp",
+    alt: "Delhi Events 28",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent29.webp",
+    alt: "Delhi Events 29",
+  },
+  {
+    src: "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent30.webp",
+    alt: "Delhi Events 30",
+  },
+];
 
-const ProfessionalGallery: React.FC<{ images: GalleryImageProps[] }> = ({
-  images,
-}) => {
+const BansalGallery: React.FC<{ images: GalleryImageProps[] }> = () => {
   const breakpointColumnsObj = {
     default: 4,
     1100: 3,
@@ -133,197 +424,228 @@ const ProfessionalGallery: React.FC<{ images: GalleryImageProps[] }> = ({
     500: 1,
   };
 
-  return (
-    <Masonry
-      breakpointCols={breakpointColumnsObj}
-      className="flex w-auto -ml-4"
-      columnClassName="pl-4 bg-clip-padding"
-    >
-      {images.map((image, index) => (
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: index * 0.1 }}
-          className="mb-4"
-        >
-          <div className="relative overflow-hidden rounded-lg shadow-lg">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={600}
-              height={400}
-              className="object-cover w-full h-full"
-            />
-            <div className="absolute inset-0 bg-purple-900 bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-              <h3 className="text-white text-xl font-bold">{image.alt}</h3>
-            </div>
-          </div>
-        </motion.div>
-      ))}
-    </Masonry>
-  );
-};
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true,
+    customPaging: function (i: number) {
+      return (
+        <div className="w-3 h-3 mx-1 rounded-full bg-purple-300 hover:bg-purple-500 transition-colors duration-300" />
+      );
+    },
+  };
 
-const HeroSection: React.FC = () => {
   return (
-    <div className="relative h-[50vh] min-h-[400px] overflow-hidden">
-      <Image
-        src="https://32watts.com/iamrakeshbansal/events/event3.webp"
-        alt="Event background"
-        fill
-        className="object-cover object-center"
-        quality={100}
-      />
-      <div className="absolute inset-0 bg-white bg-opacity-80" />
-      <div className="absolute inset-0 flex flex-col justify-center items-center text-gray-800 px-4">
-        <motion.h1
+    <Slider {...settings}>
+      <div>
+        <motion.h3
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold text-center mb-4 text-purple-800"
+          className="text-3xl font-bold text-center mb-8 text-purple-800"
         >
-          Elevate Your Trading Experience
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-xl md:text-2xl text-center mb-8 max-w-2xl text-gray-600"
+          Ahmedabad Events
+        </motion.h3>
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="flex w-auto -ml-4"
+          columnClassName="pl-4 bg-clip-padding"
         >
-          Join our exclusive events featuring industry experts, cutting-edge
-          strategies, and networking opportunities
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex space-x-4"
-        >
-          <Link
-            href="#events"
-            className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-md transition duration-300 shadow-md"
-          >
-            Explore Events
-          </Link>
-          <Link
-            href="#subscribe"
-            className="bg-transparent hover:bg-purple-100 text-purple-600 font-semibold py-3 px-6 rounded-md border-2 border-purple-600 transition duration-300 shadow-md"
-          >
-            Subscribe
-          </Link>
-        </motion.div>
+          {ahmedabadEvents.map((image, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="mb-4"
+            >
+              <div className="relative overflow-hidden rounded-lg shadow-lg">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={600}
+                  height={400}
+                  className="object-cover w-full h-full"
+                />
+                <div className="absolute inset-0 bg-purple-900 bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                  <h3 className="text-white text-xl font-bold">{image.alt}</h3>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </Masonry>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
+      <div>
+        <motion.h3
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-3xl font-bold text-center mb-8 text-green-700"
+        >
+          Delhi Events
+        </motion.h3>
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="flex w-auto -ml-4"
+          columnClassName="pl-4 bg-clip-padding"
+        >
+          {delhiImages.map((image, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="mb-4"
+            >
+              <div className="relative overflow-hidden rounded-lg shadow-lg">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={600}
+                  height={400}
+                  className="object-cover w-full h-full"
+                />
+                <div className="absolute inset-0 bg-green-900 bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                  <h3 className="text-white text-xl font-bold">{image.alt}</h3>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </Masonry>
+      </div>
+    </Slider>
+  );
+};
+const CustomArrow = ({
+  direction,
+  onClick,
+}: {
+  direction: "prev" | "next";
+  onClick?: () => void;
+}) => (
+  <button
+    onClick={onClick}
+    className={`absolute top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-50 hover:bg-opacity-75 text-gray-800 p-2 rounded-full transition-all duration-300 ${
+      direction === "prev" ? "left-4" : "right-4"
+    }`}
+  >
+    {direction === "prev" ? (
+      <FaChevronLeft size={20} />
+    ) : (
+      <FaChevronRight size={20} />
+    )}
+  </button>
+);
+
+const HeroSection: React.FC = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true,
+    prevArrow: <CustomArrow direction="prev" />,
+    nextArrow: <CustomArrow direction="next" />,
+  };
+
+  const banners = [
+    {
+      image: "https://32watts.com/iamrakeshbansal/events/event3.webp",
+      title: "Elevate Your Trading Experience",
+      subtitle: "Join our exclusive events featuring industry experts",
+    },
+    {
+      image: "https://32watts.com/iamrakeshbansal/events/event9.webp",
+      title: "Ahmedabad Events",
+      subtitle: "Learn from the best in the industry",
+    },
+    {
+      image: "https://32watts.com/iamrakeshbansal/events/event15.webp",
+      title: "Delhi Events",
+      subtitle: "Expand your connections and opportunities",
+    },
+  ];
+
+  return (
+    <div className="relative h-[60vh] lg:h-[80vh] min-h-[300px] max-h-[500px] overflow-hidden">
+      <Slider {...settings}>
+        {banners.map((banner, index) => (
+          <div
+            key={index}
+            className="relative h-[60vh] lg:h-[80vh] min-h-[300px] max-h-[500px]"
+          >
+            <Image
+              src={banner.image}
+              alt={`Event banner ${index + 1}`}
+              fill
+              className="object-cover object-center"
+              quality={100}
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-50" />
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-white px-4">
+              <motion.h1
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-2 md:mb-4"
+              >
+                {banner.title}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-lg md:text-xl text-center mb-4 md:mb-6 max-w-2xl"
+              >
+                {banner.subtitle}
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
+                <Link
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdBP02jUowk_c0cgx2cEpt-8fup2hhfnIYiAx3L6Qkk2D0cNA/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 md:py-3 md:px-8 rounded-md transition duration-300 shadow-md inline-block"
+                >
+                  Register Now
+                </Link>
+              </motion.div>
+            </div>
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };
 
 export default function EventsPage() {
-  const dummyEvents: EventCardProps[] = [
+  const recentEvents: EventCardProps[] = [
     {
-      title: "Advanced Trading Strategies",
+      title: "Ahmedabad Events",
       date: "June 15, 2023",
-      location: "New York, NY",
+      location: "Ahmedabad, India",
       attendees: 150,
-      image: "https://32watts.com/iamrakeshbansal/events/event9.webp",
+      image:
+        "https://32watts.com/iamrakeshbansal/events/ahmedabad/AhmedabadEvent.webp",
     },
     {
-      title: "Crypto Trading Masterclass",
+      title: "Delhi Events",
       date: "July 2, 2023",
-      location: "London, UK",
+      location: "Delhi, India",
       attendees: 200,
-      image: "https://32watts.com/iamrakeshbansal/events/event10.webp",
-    },
-    {
-      title: "Risk Management Workshop",
-      date: "July 20, 2023",
-      location: "Tokyo, Japan",
-      attendees: 100,
-      image: "https://32watts.com/iamrakeshbansal/events/event11.webp",
-    },
-  ];
-
-  const dummyGalleryImages: GalleryImageProps[] = [
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event1.webp",
-      alt: "Gallery Image 1",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event2.webp",
-      alt: "Gallery Image 2",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event3.webp",
-      alt: "Gallery Image 3",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event4.webp",
-      alt: "Gallery Image 4",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event5.webp",
-      alt: "Gallery Image 5",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event6.webp",
-      alt: "Gallery Image 6",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event7.webp",
-      alt: "Gallery Image 7",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event8.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event8.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event9.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event10.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event11.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event12.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event13.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event14.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event15.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event16.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event17.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event18.webp",
-      alt: "Gallery Image 8",
-    },
-    {
-      src: "https://32watts.com/iamrakeshbansal/events/event19.webp",
-      alt: "Gallery Image 8",
+      image:
+        "https://32watts.com/iamrakeshbansal/events/delhi/DelhiEvent3.webp",
     },
   ];
 
@@ -333,12 +655,12 @@ export default function EventsPage() {
 
       {/* Recent Events Section */}
       <AnimatedSection>
-        <section id="events" className="py-16 px-4 md:px-8 bg-white">
+        <section className="py-16 px-4 md:px-8 bg-white">
           <h2 className="text-4xl font-bold text-center mb-12 text-purple-800">
             Recent Events
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {dummyEvents.map((event, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {recentEvents.map((event, index) => (
               <EventCard key={index} {...event} />
             ))}
           </div>
@@ -348,10 +670,10 @@ export default function EventsPage() {
       {/* Professional Event Gallery Section */}
       <AnimatedSection>
         <section id="gallery" className="py-16 px-4 md:px-8 bg-gray-100">
-          <h2 className="text-4xl font-bold text-center mb-12 text-purple-800">
+          <h2 className="text-4xl font-bold text-center mb-4 text-purple-800">
             Event Gallery
           </h2>
-          <ProfessionalGallery images={dummyGalleryImages} />
+          <BansalGallery images={ahmedabadEvents} />
         </section>
       </AnimatedSection>
 
@@ -361,55 +683,8 @@ export default function EventsPage() {
           <h2 className="text-4xl font-bold text-center mb-12 text-purple-800">
             Event Highlights
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <VideoPlayer
-              src="https://32watts.com/iamrakeshbansal/testimonial1.mp4"
-            />
-            <VideoPlayer
-              src="https://32watts.com/iamrakeshbansal/testimonial2.mp4"
-            />
-          </div>
-        </section>
-      </AnimatedSection>
-
-      {/* Upcoming Events Section */}
-      <AnimatedSection>
-        <section className="py-16 px-4 md:px-8 bg-gray-100">
-          <h2 className="text-4xl font-bold text-center mb-12 text-purple-800">
-            Upcoming Events
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {dummyEvents.map((event, index) => (
-              <EventCard key={index} {...event} />
-            ))}
-          </div>
-        </section>
-      </AnimatedSection>
-
-      {/* Newsletter Section */}
-      <AnimatedSection>
-        <section id="subscribe" className="py-16 px-4 md:px-8 bg-purple-50">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6 text-purple-800">
-              Stay Updated
-            </h2>
-            <p className="text-xl mb-8 text-gray-700">
-              Subscribe to our newsletter for the latest event updates and
-              trading insights.
-            </p>
-            <form className="flex flex-col md:flex-row gap-4 justify-center">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="px-4 py-3 border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 flex-grow"
-              />
-              <button
-                type="submit"
-                className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-md transition duration-300"
-              >
-                Subscribe
-              </button>
-            </form>
+          <div className="container">
+            <VideoSlider />
           </div>
         </section>
       </AnimatedSection>

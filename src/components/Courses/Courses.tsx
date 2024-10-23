@@ -16,6 +16,11 @@ import {
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { FaInstagram, FaTwitter, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 
 export default function CoursePage() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -42,7 +47,9 @@ export default function CoursePage() {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-3">
             <span className="text-purple-600 font-bold text-2xl">🚀</span>
-            <h1 className="text-purple-800 font-semibold text-lg">Kurukshetra: Win The Battle</h1>
+            <h1 className="text-purple-800 font-semibold text-lg">
+              Kurukshetra: Win The Battle
+            </h1>
           </div>
           <Button
             variant="gradient"
@@ -59,7 +66,7 @@ export default function CoursePage() {
         {/* Hero Section */}
         <section className="mb-16">
           <div className="bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg overflow-hidden">
-            <div className="flex flex-col lg:flex-row items-stretch">
+            <div className="flex flex-col lg:flex-row">
               <div className="lg:w-1/2 p-6 lg:p-12 flex flex-col justify-center">
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
@@ -85,7 +92,15 @@ export default function CoursePage() {
                   transition={{ duration: 0.5, delay: 0.1 }}
                   className="text-sm sm:text-base font-light mb-6 text-gray-700"
                 >
-                  Embark on your journey into the world of financial markets with this comprehensive course designed specifically for beginners who wish to master the art of technical analysis from the ground up. Led by the esteemed <span className="font-semibold">Dr. Rakesh Bansal</span>, a seasoned expert in the field, this course provides you with the knowledge and tools necessary to analyze market trends, make informed decisions, and achieve your trading and investment goals.
+                  Embark on your journey into the world of financial markets
+                  with this comprehensive course designed specifically for
+                  beginners who wish to master the art of technical analysis
+                  from the ground up. Led by the esteemed{" "}
+                  <span className="font-semibold">Dr. Rakesh Bansal</span>, a
+                  seasoned expert in the field, this course provides you with
+                  the knowledge and tools necessary to analyze market trends,
+                  make informed decisions, and achieve your trading and
+                  investment goals.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -114,26 +129,54 @@ export default function CoursePage() {
                     </motion.div>
                   ))}
                 </div>
-                <Button variant="gradient" size="custom" className="w-full sm:w-auto">
+                <Button
+                  variant="gradient"
+                  size="custom"
+                  className="w-full sm:w-auto"
+                >
                   ENROLL NOW
                 </Button>
               </div>
               <div className="lg:w-1/2 relative">
-                <div className="aspect-video h-full">
-                  <iframe
-                    src={`https://www.youtube.com/embed/ozfP9JbESWM`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    className="w-full h-full object-cover"
-                  ></iframe>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-30"></div>
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <h3 className="text-xl font-semibold mb-2">Watch the Course Preview</h3>
-                  <p className="text-sm">Get a glimpse of what you'll learn in this comprehensive course.</p>
-                </div>
+                <Swiper
+                  modules={[Pagination, Navigation]}
+                  pagination={{ clickable: true }}
+                  navigation
+                  className="h-full"
+                >
+                  <SwiperSlide>
+                    <div className="aspect-video h-full relative">
+                      <Image
+                        src="/images/course-preview.jpg"
+                        alt="Course Preview"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-30"></div>
+                      <div className="absolute bottom-4 left-4 right-4 text-white">
+                        <h3 className="text-xl font-semibold mb-2">
+                          Course Preview Image
+                        </h3>
+                        <p className="text-sm">
+                          Get a glimpse of what you'll learn in this
+                          comprehensive course.
+                        </p>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div className="aspect-video h-full">
+                      <iframe
+                        src={`https://www.youtube.com/embed/ozfP9JbESWM`}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="w-full h-full object-cover"
+                      ></iframe>
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
               </div>
             </div>
           </div>
@@ -159,22 +202,26 @@ export default function CoursePage() {
               {[
                 {
                   title: "Interactive Learning",
-                  content: "Engage with quizzes and exercises that reinforce your understanding and prepare you for real-world trading.",
+                  content:
+                    "Engage with quizzes and exercises that reinforce your understanding and prepare you for real-world trading.",
                   icon: Users,
                 },
                 {
                   title: "Expert Insights",
-                  content: "Dr. Rakesh Bansal shares his personal preferences and techniques used in his own trading.",
+                  content:
+                    "Dr. Rakesh Bansal shares his personal preferences and techniques used in his own trading.",
                   icon: GraduationCap,
                 },
                 {
                   title: "Foundational Learning",
-                  content: "Start with the basics, ensuring no prior knowledge is required.",
+                  content:
+                    "Start with the basics, ensuring no prior knowledge is required.",
                   icon: Book,
                 },
                 {
                   title: "Comprehensive Coverage",
-                  content: "Every relevant topic in technical analysis is covered, from chart patterns to indicators.",
+                  content:
+                    "Every relevant topic in technical analysis is covered, from chart patterns to indicators.",
                   icon: RefreshCcw,
                 },
               ].map((item, index) => (
@@ -189,7 +236,9 @@ export default function CoursePage() {
                     <item.icon className="w-6 h-6 text-purple-600" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-purple-800 mb-2">{item.title}</h3>
+                    <h3 className="text-lg font-semibold text-purple-800 mb-2">
+                      {item.title}
+                    </h3>
                     <p className="text-gray-600">{item.content}</p>
                   </div>
                 </motion.div>
@@ -202,7 +251,11 @@ export default function CoursePage() {
               className="mt-8 bg-purple-50 border-l-4 border-purple-500 p-4"
             >
               <p className="text-purple-800">
-                Additionally, upon purchasing the course, you will have the opportunity to ask your doubts and receive answers directly. If a significant number of questions arise, we will organize a webinar where Dr. Rakesh Bansal will address your queries and provide further clarification.
+                Additionally, upon purchasing the course, you will have the
+                opportunity to ask your doubts and receive answers directly. If
+                a significant number of questions arise, we will organize a
+                webinar where Dr. Rakesh Bansal will address your queries and
+                provide further clarification.
               </p>
             </motion.div>
             <motion.div
@@ -211,7 +264,9 @@ export default function CoursePage() {
               transition={{ duration: 0.5, delay: 0.7 }}
               className="mt-8"
             >
-              <h3 className="text-xl font-semibold text-purple-900 mb-4">What You'll Get</h3>
+              <h3 className="text-xl font-semibold text-purple-900 mb-4">
+                What You'll Get
+              </h3>
               <ul className="space-y-2">
                 {[
                   "Practical applications with real-world trading examples",
@@ -240,7 +295,6 @@ export default function CoursePage() {
           <h2 className="text-3xl font-bold text-purple-900 mb-6">Know Your</h2>
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="flex flex-col md:flex-row items-center">
-
               <div className="md:w-2/3 p-6">
                 <h3 className="text-4xl font-bold mb-2 text-gray-900">
                   Coach, Guide & Mentor
@@ -321,67 +375,84 @@ export default function CoursePage() {
               {[
                 {
                   title: "Introduction",
-                  content: "This chapter serves as your gateway to the world of technical analysis, providing a solid foundation for the concepts and techniques that will be covered throughout the course. By the end of this chapter, you will have a clear overview of the topics and tools that will empower you to make informed trading and investment decisions.",
+                  content:
+                    "This chapter serves as your gateway to the world of technical analysis, providing a solid foundation for the concepts and techniques that will be covered throughout the course. By the end of this chapter, you will have a clear overview of the topics and tools that will empower you to make informed trading and investment decisions.",
                 },
                 {
                   title: "Single Candlestick Patterns",
-                  content: "Dive deep into the world of individual candlestick formations, where a single candle can reveal significant insights into market sentiment. This chapter covers crucial patterns like Doji, Hammer, and Marubozu, each of which plays a pivotal role in indicating potential price reversals or continuations. You will learn how to interpret these patterns within various market contexts, understanding what they signal about buyer and seller dynamics. Mastering these patterns will allow you to make quick, informed decisions based on concise, visual information.",
+                  content:
+                    "Dive deep into the world of individual candlestick formations, where a single candle can reveal significant insights into market sentiment. This chapter covers crucial patterns like Doji, Hammer, and Marubozu, each of which plays a pivotal role in indicating potential price reversals or continuations. You will learn how to interpret these patterns within various market contexts, understanding what they signal about buyer and seller dynamics. Mastering these patterns will allow you to make quick, informed decisions based on concise, visual information.",
                 },
                 {
                   title: "Double Candlestick Patterns",
-                  content: "Expand your analytical toolkit with double candlestick patterns, which offer more nuanced insights into market behavior than single candlesticks. This chapter explores key patterns such as Bullish/Bearish Engulfing and Piercing/Dark Cloud Cover, which are particularly effective in identifying potential trend reversals. Through detailed examples, you will learn how to recognize these formations and interpret their implications, enhancing your ability to anticipate market shifts and make timely trading decisions.",
+                  content:
+                    "Expand your analytical toolkit with double candlestick patterns, which offer more nuanced insights into market behavior than single candlesticks. This chapter explores key patterns such as Bullish/Bearish Engulfing and Piercing/Dark Cloud Cover, which are particularly effective in identifying potential trend reversals. Through detailed examples, you will learn how to recognize these formations and interpret their implications, enhancing your ability to anticipate market shifts and make timely trading decisions.",
                 },
                 {
                   title: "Multiple Candlestick Patterns",
-                  content: "Take your understanding to the next level by studying multiple candlestick patterns that involve three or more consecutive candles. This chapter focuses on formations like Morning Star, Evening Star, and Three White Soldiers, which are powerful indicators of trend reversals or continuations. You will learn how to spot these patterns in real-time, understanding their significance within broader market trends. By mastering these complex patterns, you will be equipped to identify critical turning points in the market, allowing for more strategic entry and exit points.",
+                  content:
+                    "Take your understanding to the next level by studying multiple candlestick patterns that involve three or more consecutive candles. This chapter focuses on formations like Morning Star, Evening Star, and Three White Soldiers, which are powerful indicators of trend reversals or continuations. You will learn how to spot these patterns in real-time, understanding their significance within broader market trends. By mastering these complex patterns, you will be equipped to identify critical turning points in the market, allowing for more strategic entry and exit points.",
                 },
                 {
                   title: "Dow Theory",
-                  content: "This chapter introduces you to the foundational principles of Dow Theory, the bedrock of modern technical analysis. You will explore the core concepts, including the identification of primary, secondary, and minor trends, and the phases of market movements. Understanding Dow Theory will provide you with a structured approach to analyzing market behavior over different time frames, helping you to identify the underlying trend and position yourself accordingly in the market.",
+                  content:
+                    "This chapter introduces you to the foundational principles of Dow Theory, the bedrock of modern technical analysis. You will explore the core concepts, including the identification of primary, secondary, and minor trends, and the phases of market movements. Understanding Dow Theory will provide you with a structured approach to analyzing market behavior over different time frames, helping you to identify the underlying trend and position yourself accordingly in the market.",
                 },
                 {
                   title: "Dow Theory - Examples",
-                  content: "Building on the theoretical knowledge from the previous chapter, this section offers practical examples and real-world case studies to illustrate the application of Dow Theory. You will analyze historical market data and learn how to apply the principles of Dow Theory to identify trends and make informed trading decisions. These examples will reinforce your understanding and provide a framework for implementing Dow Theory in your trading strategy.",
+                  content:
+                    "Building on the theoretical knowledge from the previous chapter, this section offers practical examples and real-world case studies to illustrate the application of Dow Theory. You will analyze historical market data and learn how to apply the principles of Dow Theory to identify trends and make informed trading decisions. These examples will reinforce your understanding and provide a framework for implementing Dow Theory in your trading strategy.",
                 },
                 {
                   title: "Chart Patterns & Triangles",
-                  content: "In this chapter, you will delve into the study of chart patterns, with a particular focus on triangles—one of the most common and reliable patterns in technical analysis. By understanding the formation and significance of these patterns, you will be better equipped to predict and capitalize on price movements, whether they indicate a continuation or a reversal of the current trend.",
+                  content:
+                    "In this chapter, you will delve into the study of chart patterns, with a particular focus on triangles—one of the most common and reliable patterns in technical analysis. By understanding the formation and significance of these patterns, you will be better equipped to predict and capitalize on price movements, whether they indicate a continuation or a reversal of the current trend.",
                 },
                 {
                   title: "Continuation Chart Patterns",
-                  content: "This chapter is dedicated to continuation patterns, which signal that the existing trend is likely to persist after a brief consolidation. You will explore key patterns such as Flags, Pennants, and Rectangles, understanding how they form and what they indicate about market sentiment. By mastering these patterns, you will learn how to spot opportunities to ride the trend, maximizing your profits by staying in the market during periods of trend continuation.",
+                  content:
+                    "This chapter is dedicated to continuation patterns, which signal that the existing trend is likely to persist after a brief consolidation. You will explore key patterns such as Flags, Pennants, and Rectangles, understanding how they form and what they indicate about market sentiment. By mastering these patterns, you will learn how to spot opportunities to ride the trend, maximizing your profits by staying in the market during periods of trend continuation.",
                 },
                 {
                   title: "Reversal Chart Patterns",
-                  content: "Here, you will study reversal chart patterns, which are crucial for identifying when a trend is about to change direction. This chapter covers patterns such as Head and Shoulders, Rounding Tops, and Rounding Bottoms, each of which provides strong signals that the prevailing trend is weakening and may soon reverse. You will learn how to recognize these patterns early and position yourself to take advantage of the new trend, whether it is bullish or bearish.",
+                  content:
+                    "Here, you will study reversal chart patterns, which are crucial for identifying when a trend is about to change direction. This chapter covers patterns such as Head and Shoulders, Rounding Tops, and Rounding Bottoms, each of which provides strong signals that the prevailing trend is weakening and may soon reverse. You will learn how to recognize these patterns early and position yourself to take advantage of the new trend, whether it is bullish or bearish.",
                 },
                 {
                   title: "Technical Indicators - Lagging Indicators",
-                  content: "This chapter introduces you to lagging indicators, which are essential tools for confirming trends that have already begun. You will learn about Moving Averages, MACD, and other lagging indicators that help you stay on the right side of the market by providing reliable signals based on historical data. By understanding the strengths and limitations of these indicators, you will be able to incorporate them into your trading strategy to reduce the risk of false signals and improve your timing.",
+                  content:
+                    "This chapter introduces you to lagging indicators, which are essential tools for confirming trends that have already begun. You will learn about Moving Averages, MACD, and other lagging indicators that help you stay on the right side of the market by providing reliable signals based on historical data. By understanding the strengths and limitations of these indicators, you will be able to incorporate them into your trading strategy to reduce the risk of false signals and improve your timing.",
                 },
                 {
-                  title: "Technical Indicators - Leading & Volatility Indicators",
-                  content: "Explore the world of leading and volatility indicators, which are designed to predict future price movements and assess market volatility. This chapter covers leading indicators such as RSI and Stochastic, which help you anticipate market turns before they occur. Additionally, you will learn about volatility indicators like Bollinger Bands, which measure the market's volatility and can signal potential breakouts or breakdowns. By integrating these indicators into your analysis, you will gain a more comprehensive view of market dynamics and enhance your ability to make proactive trading decisions.",
+                  title:
+                    "Technical Indicators - Leading & Volatility Indicators",
+                  content:
+                    "Explore the world of leading and volatility indicators, which are designed to predict future price movements and assess market volatility. This chapter covers leading indicators such as RSI and Stochastic, which help you anticipate market turns before they occur. Additionally, you will learn about volatility indicators like Bollinger Bands, which measure the market's volatility and can signal potential breakouts or breakdowns. By integrating these indicators into your analysis, you will gain a more comprehensive view of market dynamics and enhance your ability to make proactive trading decisions.",
                 },
                 {
                   title: "Support & Resistance",
-                  content: "This chapter focuses on the critical concepts of support and resistance, which are key to understanding price movements in any market. You will learn how to identify these levels on a chart and how they act as barriers that the price may struggle to break through. Understanding support and resistance will enable you to predict potential price reversals or continuations, helping you to set effective entry and exit points in your trades.",
+                  content:
+                    "This chapter focuses on the critical concepts of support and resistance, which are key to understanding price movements in any market. You will learn how to identify these levels on a chart and how they act as barriers that the price may struggle to break through. Understanding support and resistance will enable you to predict potential price reversals or continuations, helping you to set effective entry and exit points in your trades.",
                 },
                 {
                   title: "Breakout & Breakdown",
-                  content: "Learn how to identify and trade breakouts and breakdowns, which occur when the price moves above a resistance level or below a support level. This chapter teaches you the techniques for spotting these critical moments when the market is likely to make a significant move. You will explore the factors that contribute to breakouts and breakdowns, and how to confirm these signals to avoid false breakouts. Mastering this concept will allow you to capitalize on new trends as they begin to unfold.",
+                  content:
+                    "Learn how to identify and trade breakouts and breakdowns, which occur when the price moves above a resistance level or below a support level. This chapter teaches you the techniques for spotting these critical moments when the market is likely to make a significant move. You will explore the factors that contribute to breakouts and breakdowns, and how to confirm these signals to avoid false breakouts. Mastering this concept will allow you to capitalize on new trends as they begin to unfold.",
                 },
                 {
                   title: "Trendlines",
-                  content: "In this chapter, you will learn the art of drawing and interpreting trendlines, one of the most fundamental tools in technical analysis. Trendlines help you identify the direction and strength of a trend, providing a visual representation of market sentiment. You will practice drawing trendlines across various time frames and understand how to use them to confirm trends, spot potential reversals, and make informed trading decisions.",
+                  content:
+                    "In this chapter, you will learn the art of drawing and interpreting trendlines, one of the most fundamental tools in technical analysis. Trendlines help you identify the direction and strength of a trend, providing a visual representation of market sentiment. You will practice drawing trendlines across various time frames and understand how to use them to confirm trends, spot potential reversals, and make informed trading decisions.",
                 },
                 {
                   title: "Fibonacci Retracement and Gaps",
-                  content: "This chapter explores the use of Fibonacci retracement levels as potential support and resistance levels in the market. You will learn how to apply these levels to identify areas where the price may reverse or continue. Additionally, you will study the significance of price gaps, which can signal strong momentum and provide opportunities for trading breakouts and trend continuations.",
+                  content:
+                    "This chapter explores the use of Fibonacci retracement levels as potential support and resistance levels in the market. You will learn how to apply these levels to identify areas where the price may reverse or continue. Additionally, you will study the significance of price gaps, which can signal strong momentum and provide opportunities for trading breakouts and trend continuations.",
                 },
                 {
                   title: "Conclusion",
-                  content: "The course concludes by reinforcing the importance of technical analysis as a vital tool for making informed trading and investment decisions. The conclusion also emphasizes the ongoing nature of learning and the importance of practice and continuous improvement in mastering technical analysis.",
+                  content:
+                    "The course concludes by reinforcing the importance of technical analysis as a vital tool for making informed trading and investment decisions. The conclusion also emphasizes the ongoing nature of learning and the importance of practice and continuous improvement in mastering technical analysis.",
                 },
               ].map((chapter, index) => (
                 <motion.div
@@ -391,7 +462,9 @@ export default function CoursePage() {
                   transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
                   className="bg-white rounded-lg shadow p-6"
                 >
-                  <h3 className="text-xl font-semibold text-purple-800 mb-3">{chapter.title}</h3>
+                  <h3 className="text-xl font-semibold text-purple-800 mb-3">
+                    {chapter.title}
+                  </h3>
                   <p className="text-gray-700">{chapter.content}</p>
                 </motion.div>
               ))}
@@ -418,44 +491,55 @@ export default function CoursePage() {
             {[
               {
                 question: "Who is this course designed for?",
-                answer: "This course is specifically designed for beginners who want to learn technical analysis from scratch. No prior knowledge or experience is required."
+                answer:
+                  "This course is specifically designed for beginners who want to learn technical analysis from scratch. No prior knowledge or experience is required.",
               },
               {
                 question: "How long do I have access to the course?",
-                answer: "You will have access to the course for 90 days from the date of purchase. During this period, you can watch the videos and review the materials as many times as you like."
+                answer:
+                  "You will have access to the course for 90 days from the date of purchase. During this period, you can watch the videos and review the materials as many times as you like.",
               },
               {
                 question: "Can I cancel my purchase or get a refund?",
-                answer: "No, all purchases are final. Once you have purchased the course, no cancellations or refunds will be issued."
+                answer:
+                  "No, all purchases are final. Once you have purchased the course, no cancellations or refunds will be issued.",
               },
               {
                 question: "Is there a discount available?",
-                answer: "Yes, a special discount is available for subscribers of the annual membership of Options, Futures, or Mentorship advisory by Dr. Rakesh Bansal. Please check the course purchase page for details on how to apply this discount."
+                answer:
+                  "Yes, a special discount is available for subscribers of the annual membership of Options, Futures, or Mentorship advisory by Dr. Rakesh Bansal. Please check the course purchase page for details on how to apply this discount.",
               },
               {
                 question: "How do I access the course materials?",
-                answer: "You can access the course on the Rakesh Bansal Ventures application."
+                answer:
+                  "You can access the course on the Rakesh Bansal Ventures application.",
               },
               {
                 question: "What topics are covered in the course?",
-                answer: "The course covers all relevant topics in technical analysis, starting from the basics. Topics include candlestick patterns, Dow Theory, chart patterns, technical indicators, support and resistance levels, trendlines, and more."
+                answer:
+                  "The course covers all relevant topics in technical analysis, starting from the basics. Topics include candlestick patterns, Dow Theory, chart patterns, technical indicators, support and resistance levels, trendlines, and more.",
               },
               {
                 question: "Will I receive a certificate upon completion?",
-                answer: "Yes, you will receive a certificate of completion upon completion of 80% of the course materials."
+                answer:
+                  "Yes, you will receive a certificate of completion upon completion of 80% of the course materials.",
               },
               {
                 question: "Will I receive support during the course?",
-                answer: "Yes, the course includes access to a discussion forum where you can post your queries. All questions will be answered by course instructors or peers, ensuring you receive the support you need throughout your learning journey."
+                answer:
+                  "Yes, the course includes access to a discussion forum where you can post your queries. All questions will be answered by course instructors or peers, ensuring you receive the support you need throughout your learning journey.",
               },
               {
                 question: "Can I download the course materials?",
-                answer: "The course materials are designed for online access only. You can watch the videos and review the materials as many times as you like."
+                answer:
+                  "The course materials are designed for online access only. You can watch the videos and review the materials as many times as you like.",
               },
               {
-                question: "What should I do if I have technical issues accessing the course?",
-                answer: "If you encounter any technical issues, please contact our support team via email or the support form on our website. We are here to help you resolve any problems as quickly as possible."
-              }
+                question:
+                  "What should I do if I have technical issues accessing the course?",
+                answer:
+                  "If you encounter any technical issues, please contact our support team via email or the support form on our website. We are here to help you resolve any problems as quickly as possible.",
+              },
             ].map((faq, index) => (
               <motion.div
                 key={index}
@@ -468,7 +552,9 @@ export default function CoursePage() {
                   className="flex justify-between items-center w-full text-left p-4 focus:outline-none"
                   onClick={() => toggleSection(`faq-${index}`)}
                 >
-                  <span className="text-lg font-medium text-purple-900">{faq.question}</span>
+                  <span className="text-lg font-medium text-purple-900">
+                    {faq.question}
+                  </span>
                   {activeSection === `faq-${index}` ? (
                     <ChevronUp className="w-5 h-5 text-purple-600 flex-shrink-0" />
                   ) : (
@@ -497,25 +583,42 @@ export default function CoursePage() {
             transition={{ duration: 0.5, delay: 1.2 }}
             className="mt-8 bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg p-8 text-center"
           >
-            <h3 className="text-2xl font-semibold text-purple-900 mb-6">Contact Information</h3>
+            <h3 className="text-2xl font-semibold text-purple-900 mb-6">
+              Contact Information
+            </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-white rounded-lg p-4 shadow-md">
-                <h4 className="text-lg font-medium text-purple-800 mb-3">Payment & Enrollment</h4>
-                <Link href="tel:+919560884223" className="flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors">
+                <h4 className="text-lg font-medium text-purple-800 mb-3">
+                  Payment & Enrollment
+                </h4>
+                <Link
+                  href="tel:+919560884223"
+                  className="flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors"
+                >
                   <Phone className="w-5 h-5" />
                   <span>+91 95608 84223</span>
                 </Link>
               </div>
               <div className="bg-white rounded-lg p-4 shadow-md">
-                <h4 className="text-lg font-medium text-purple-800 mb-3">General Inquiries</h4>
-                <Link href="tel:+918851475191" className="flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors">
+                <h4 className="text-lg font-medium text-purple-800 mb-3">
+                  General Inquiries
+                </h4>
+                <Link
+                  href="tel:+918851475191"
+                  className="flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors"
+                >
                   <Phone className="w-5 h-5" />
                   <span>+91 88514 75191</span>
                 </Link>
               </div>
               <div className="bg-white rounded-lg p-4 shadow-md">
-                <h4 className="text-lg font-medium text-purple-800 mb-3">Email Support</h4>
-                <Link href="mailto:wecare@iamrakeshbansal.com" className="flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors">
+                <h4 className="text-lg font-medium text-purple-800 mb-3">
+                  Email Support
+                </h4>
+                <Link
+                  href="mailto:wecare@iamrakeshbansal.com"
+                  className="flex items-center justify-center space-x-2 text-purple-600 hover:text-purple-800 transition-colors"
+                >
                   <Mail className="w-5 h-5" />
                   <span>wecare@iamrakeshbansal.com</span>
                 </Link>
@@ -527,10 +630,12 @@ export default function CoursePage() {
         {/* CTA Section */}
         <section className="bg-purple-100 rounded-lg p-8 text-center">
           <h2 className="text-3xl font-bold mb-4 text-purple-900">
-            You're Just One Step Away from Unlocking the Secrets to Stock Market Success!
+            You're Just One Step Away from Unlocking the Secrets to Stock Market
+            Success!
           </h2>
           <p className="text-lg mb-6 text-gray-700">
-            Join over 10,000 successful traders who have transformed their trading strategies with this course.
+            Join over 10,000 successful traders who have transformed their
+            trading strategies with this course.
           </p>
           <Button variant="gradient" size="custom">
             Enroll Now and take your trading to the next level today!
