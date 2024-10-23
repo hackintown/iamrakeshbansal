@@ -57,10 +57,9 @@ const EventCard: React.FC<EventCardProps> = ({
 
 interface VideoPlayerProps {
   src: string;
-  poster: string;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, poster }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ src }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -80,7 +79,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ src, poster }) => {
       <video
         ref={videoRef}
         src={src}
-        poster={poster}
         className="w-full h-full object-cover"
         onClick={togglePlay}
       />
@@ -171,10 +169,10 @@ const HeroSection: React.FC = () => {
   return (
     <div className="relative h-[50vh] min-h-[400px] overflow-hidden">
       <Image
-        src="https://dummyimage.com/1920x1080/f0f0f0/333333&text=Professional+Event+Background"
+        src="https://32watts.com/iamrakeshbansal/events/event3.webp"
         alt="Event background"
-        layout="fill"
-        objectFit="cover"
+        fill
+        className="object-cover object-center"
         quality={100}
       />
       <div className="absolute inset-0 bg-white bg-opacity-80" />
@@ -228,55 +226,103 @@ export default function EventsPage() {
       date: "June 15, 2023",
       location: "New York, NY",
       attendees: 150,
-      image: "https://dummyimage.com/600x400/000/fff&text=Event+1",
+      image: "https://32watts.com/iamrakeshbansal/events/event9.webp",
     },
     {
       title: "Crypto Trading Masterclass",
       date: "July 2, 2023",
       location: "London, UK",
       attendees: 200,
-      image: "https://dummyimage.com/600x400/000/fff&text=Event+2",
+      image: "https://32watts.com/iamrakeshbansal/events/event10.webp",
     },
     {
       title: "Risk Management Workshop",
       date: "July 20, 2023",
       location: "Tokyo, Japan",
       attendees: 100,
-      image: "https://dummyimage.com/600x400/000/fff&text=Event+3",
+      image: "https://32watts.com/iamrakeshbansal/events/event11.webp",
     },
   ];
 
   const dummyGalleryImages: GalleryImageProps[] = [
     {
-      src: "https://dummyimage.com/600x400/000/fff&text=Gallery+1",
+      src: "https://32watts.com/iamrakeshbansal/events/event1.webp",
       alt: "Gallery Image 1",
     },
     {
-      src: "https://dummyimage.com/600x800/000/fff&text=Gallery+2",
+      src: "https://32watts.com/iamrakeshbansal/events/event2.webp",
       alt: "Gallery Image 2",
     },
     {
-      src: "https://dummyimage.com/800x600/000/fff&text=Gallery+3",
+      src: "https://32watts.com/iamrakeshbansal/events/event3.webp",
       alt: "Gallery Image 3",
     },
     {
-      src: "https://dummyimage.com/600x600/000/fff&text=Gallery+4",
+      src: "https://32watts.com/iamrakeshbansal/events/event4.webp",
       alt: "Gallery Image 4",
     },
     {
-      src: "https://dummyimage.com/800x800/000/fff&text=Gallery+5",
+      src: "https://32watts.com/iamrakeshbansal/events/event5.webp",
       alt: "Gallery Image 5",
     },
     {
-      src: "https://dummyimage.com/600x400/000/fff&text=Gallery+6",
+      src: "https://32watts.com/iamrakeshbansal/events/event6.webp",
       alt: "Gallery Image 6",
     },
     {
-      src: "https://dummyimage.com/800x600/000/fff&text=Gallery+7",
+      src: "https://32watts.com/iamrakeshbansal/events/event7.webp",
       alt: "Gallery Image 7",
     },
     {
-      src: "https://dummyimage.com/600x800/000/fff&text=Gallery+8",
+      src: "https://32watts.com/iamrakeshbansal/events/event8.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event8.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event9.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event10.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event11.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event12.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event13.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event14.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event15.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event16.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event17.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event18.webp",
+      alt: "Gallery Image 8",
+    },
+    {
+      src: "https://32watts.com/iamrakeshbansal/events/event19.webp",
       alt: "Gallery Image 8",
     },
   ];
@@ -317,12 +363,10 @@ export default function EventsPage() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <VideoPlayer
-              src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-              poster="https://dummyimage.com/600x400/000/fff&text=Video+1"
+              src="https://32watts.com/iamrakeshbansal/testimonial1.mp4"
             />
             <VideoPlayer
-              src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-              poster="https://dummyimage.com/600x400/000/fff&text=Video+2"
+              src="https://32watts.com/iamrakeshbansal/testimonial2.mp4"
             />
           </div>
         </section>

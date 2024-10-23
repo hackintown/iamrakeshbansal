@@ -88,7 +88,7 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
       {
         id: "customer-grievances",
         name: "Customer Grievances",
-        href: "customer-grievances",
+        href: "/customer-grievances",
       },
       {
         id: "investor-charter",

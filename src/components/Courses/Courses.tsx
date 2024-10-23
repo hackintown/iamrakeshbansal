@@ -59,33 +59,33 @@ export default function CoursePage() {
         {/* Hero Section */}
         <section className="mb-16">
           <div className="bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg overflow-hidden">
-            <div className="flex flex-col lg:flex-row items-center">
-              <div className="lg:w-1/2 p-6 lg:p-12">
+            <div className="flex flex-col lg:flex-row items-stretch">
+              <div className="lg:w-1/2 p-6 lg:p-12 flex flex-col justify-center">
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-4xl font-bold mb-6 text-purple-900 leading-tight"
+                  className="text-4xl sm:text-5xl font-bold mb-6 text-purple-900 leading-tight"
                 >
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-                    How to
+                    Master the Art of
                   </span>
                   <br />
-                  <span className="text-green-600 text-5xl">
-                    Enter and Exit
+                  <span className="text-green-600 text-5xl sm:text-6xl">
+                    Stock Market
                   </span>
                   <br />
                   <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-purple-600">
-                    in the Stock Market
+                    Entry and Exit
                   </span>
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-sm font-light mb-6 text-gray-700"
+                  className="text-sm sm:text-base font-light mb-6 text-gray-700"
                 >
-                  Embark on your journey into the world of financial markets with this comprehensive course designed specifically for beginners who wish to master the art of technical analysis from the ground up. Led by the esteemed *Dr. Rakesh Bansal*, a seasoned expert in the field, this course provides you with the knowledge and tools necessary to analyze market trends, make informed decisions, and achieve your trading and investment goals
+                  Embark on your journey into the world of financial markets with this comprehensive course designed specifically for beginners who wish to master the art of technical analysis from the ground up. Led by the esteemed <span className="font-semibold">Dr. Rakesh Bansal</span>, a seasoned expert in the field, this course provides you with the knowledge and tools necessary to analyze market trends, make informed decisions, and achieve your trading and investment goals.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -93,7 +93,7 @@ export default function CoursePage() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="bg-green-100 border-l-4 border-green-500 p-4 mb-6"
                 >
-                  <p className="text-sm text-green-800">
+                  <p className="text-sm sm:text-base text-green-800">
                     Insights from Rakesh Bansal and his team that grew the
                     channel from 7K subscribers to 4M+ subscribers in 4 years.
                   </p>
@@ -108,28 +108,31 @@ export default function CoursePage() {
                       className="flex items-center space-x-2"
                     >
                       <feature.icon className="w-5 h-5 text-purple-600" />
-                      <span className="text-xs font-medium text-gray-700">
+                      <span className="text-xs sm:text-sm font-medium text-gray-700">
                         {feature.text}
                       </span>
                     </motion.div>
                   ))}
                 </div>
-                <Button variant="gradient" size="custom" className="w-full">
+                <Button variant="gradient" size="custom" className="w-full sm:w-auto">
                   ENROLL NOW
                 </Button>
               </div>
               <div className="lg:w-1/2 relative">
-                <div className="aspect-video">
+                <div className="aspect-video h-full">
                   <iframe
-                    width="100%"
-                    height="100%"
                     src={`https://www.youtube.com/embed/ozfP9JbESWM`}
                     title="YouTube video player"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
-                    className="w-full h-full"
+                    className="w-full h-full object-cover"
                   ></iframe>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-30"></div>
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <h3 className="text-xl font-semibold mb-2">Watch the Course Preview</h3>
+                  <p className="text-sm">Get a glimpse of what you'll learn in this comprehensive course.</p>
                 </div>
               </div>
             </div>
@@ -524,14 +527,13 @@ export default function CoursePage() {
         {/* CTA Section */}
         <section className="bg-purple-100 rounded-lg p-8 text-center">
           <h2 className="text-3xl font-bold mb-4 text-purple-900">
-            Ready to Start Your YouTube Journey?
+            You're Just One Step Away from Unlocking the Secrets to Stock Market Success!
           </h2>
           <p className="text-lg mb-6 text-gray-700">
-            Join thousands of successful creators and start your path to YouTube
-            stardom today!
+            Join over 10,000 successful traders who have transformed their trading strategies with this course.
           </p>
           <Button variant="gradient" size="custom">
-            Enroll Now and Transform Your Channel
+            Enroll Now and take your trading to the next level today!
           </Button>
         </section>
       </main>
