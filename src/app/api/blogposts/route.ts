@@ -20,18 +20,11 @@ export async function GET() {
   try {
     await connectToDatabase();
     const collection = db.collection("posts");
-
     const posts = await collection
-      .find(
-        {},
-        {
-          projection: { title: 1, content: 1, tags: 1, image: 1, createdAt: 1 },
-        }
-      )
+      .find({})
       .sort({ createdAt: -1 })
       .limit(20)
       .toArray();
-
     return NextResponse.json(posts);
   } catch (error) {
     console.error("Error fetching blog posts:", error);
