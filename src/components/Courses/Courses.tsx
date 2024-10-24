@@ -626,11 +626,6 @@ export default function CoursePage() {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <style jsx>{`
-              .feedback-swiper .swiper-pagination {
-                bottom: 10px; // Adjust the bottom position of the pagination dots
-              }
-            `}</style>
           </motion.div>
         </section>
 
