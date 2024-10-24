@@ -12,6 +12,16 @@ export interface NavGroup {
 
 export const NAVBAR_CONSTANT: NavGroup[] = [
   {
+    title: "Home",
+    items: [
+      {
+        id: "home",
+        name: "Home",
+        href: "/",
+      },
+    ],
+  },
+  {
     title: "Research Services",
     items: [
       {
@@ -73,6 +83,16 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
     ],
   },
   {
+    title: "Blogs",
+    items: [
+      {
+        id: "blogs",
+        name: "Blogs",
+        href: "/blogs", // Ensure this is set correctly
+      },
+    ],
+  },
+  {
     title: "Disclaimer",
     items: [
       {
@@ -103,10 +123,7 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
       },
     ],
   },
-  {
-    title: "Blog",
-    items: [],
-  },
+
   {
     title: "Contact Us",
     items: [

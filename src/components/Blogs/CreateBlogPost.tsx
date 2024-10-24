@@ -34,11 +34,11 @@ export default function CreateBlogPost({
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
 
   const baseUrl =
-    process.env.NEXT_PUBLIC_PRODUCTION_URL || "http://localhost:3000";
+    process.env.NEXT_PUBLIC_PRODUCTION_URL || "http://localhost:3000/api";
 
   const fetchBlogPosts = useCallback(async () => {
     try {
-      const response = await fetch(`${baseUrl}/api/blogposts`);
+      const response = await fetch(`${baseUrl}/blogposts`);
       if (response.ok) {
         const posts = await response.json();
         setBlogPosts(posts);
@@ -88,12 +88,12 @@ export default function CreateBlogPost({
     try {
       let response;
       if (editingPost) {
-        response = await fetch(`${baseUrl}/api/blogposts/${editingPost._id}`, {
+        response = await fetch(`${baseUrl}/blogposts/${editingPost._id}`, {
           method: "PUT",
           body: formData,
         });
       } else {
-        response = await fetch(`${baseUrl}/api/blogposts`, {
+        response = await fetch(`${baseUrl}/blogposts`, {
           method: "POST",
           body: formData,
         });
@@ -142,7 +142,7 @@ export default function CreateBlogPost({
   const handleDelete = async (postId: string) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       try {
-        const response = await fetch(`${baseUrl}/api/blogposts/${postId}`, {
+        const response = await fetch(`${baseUrl}/blogposts/${postId}`, {
           method: "DELETE",
         });
         if (response.ok) {

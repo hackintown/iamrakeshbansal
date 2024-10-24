@@ -22,7 +22,12 @@ export async function GET() {
     const collection = db.collection("posts");
 
     const posts = await collection
-      .find({}, { projection: { title: 1, content: 1, tags: 1, image: 1, createdAt: 1 } })
+      .find(
+        {},
+        {
+          projection: { title: 1, content: 1, tags: 1, image: 1, createdAt: 1 },
+        }
+      )
       .sort({ createdAt: -1 })
       .limit(20)
       .toArray();
@@ -42,7 +47,7 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
-    const tags = JSON.parse(formData.get("tags") as string || "[]");
+    const tags = JSON.parse((formData.get("tags") as string) || "[]");
     const image = formData.get("image") as File | null;
 
     if (!title || !content) {

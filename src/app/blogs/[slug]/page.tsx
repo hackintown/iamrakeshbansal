@@ -50,9 +50,5 @@ export default async function BlogPostPage({
     notFound();
   }
 
-  return (
-    <div>
-      <BlogSlug initialPost={post} />
-    </div>
-  );
+  return <BlogSlug initialPost={post} />;
 }

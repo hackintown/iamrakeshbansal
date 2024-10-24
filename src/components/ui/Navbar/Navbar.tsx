@@ -72,14 +72,16 @@ export default function Navbar() {
             />
           </Link>
           <div className="hidden lg:flex space-x-6">
-            <Link
-              href="/"
-              className="text-base font-medium text-foreground hover:text-purple-600 transition-colors duration-200"
-            >
-              Home
-            </Link>
             {NAVBAR_CONSTANT.map((group) =>
-              group.items.length > 0 ? (
+              group.title === "Home" || group.title === "Blogs" ? (
+                <Link
+                  key={group.title}
+                  href={group.items[0].href}
+                  className="text-base font-medium text-foreground hover:text-purple-600 transition-colors duration-200"
+                >
+                  {group.title}
+                </Link>
+              ) : (
                 <div key={group.title} className="relative group">
                   <button className="text-base font-medium text-foreground hover:text-purple-600 transition-colors duration-200 flex items-center gap-x-1">
                     {group.title}
@@ -103,14 +105,6 @@ export default function Navbar() {
                     ))}
                   </div>
                 </div>
-              ) : (
-                <Link
-                  key={group.title}
-                  href={group.title === "Blog" ? "/blog" : "#"}
-                  className="text-base font-medium text-foreground hover:text-purple-600 transition-colors duration-200"
-                >
-                  {group.title}
-                </Link>
               )
             )}
           </div>
@@ -142,15 +136,17 @@ export default function Navbar() {
                 </button>
               </div>
               <div className="flex flex-col px-8 pt-8 space-y-4 overflow-y-auto max-h-[calc(100vh-80px)]">
-                <Link
-                  href="/"
-                  className="text-lg font-medium text-black hover:text-purple-600 transition-colors duration-200"
-                  onClick={toggleMenu}
-                >
-                  HOME
-                </Link>
                 {NAVBAR_CONSTANT.map((group) =>
-                  group.items.length > 0 ? (
+                  group.title === "Home" || group.title === "Blogs" ? (
+                    <Link
+                      key={group.title}
+                      href={group.items[0].href}
+                      className="text-lg font-medium text-black hover:text-purple-600 transition-colors duration-200"
+                      onClick={toggleMenu}
+                    >
+                      {group.title}
+                    </Link>
+                  ) : (
                     <div key={group.title} className="w-full">
                       <button
                         onClick={() => toggleSubmenu(group.title)}
@@ -185,15 +181,6 @@ export default function Navbar() {
                         )}
                       </AnimatePresence>
                     </div>
-                  ) : (
-                    <Link
-                      key={group.title}
-                      href={group.title === "Blog" ? "/blog" : "#"}
-                      className="text-lg font-medium text-black hover:text-purple-600 transition-colors duration-200"
-                      onClick={toggleMenu}
-                    >
-                      {group.title.toUpperCase()}
-                    </Link>
                   )
                 )}
               </div>

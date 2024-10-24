@@ -48,7 +48,7 @@ export async function PUT(
     const formData = await request.formData();
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
-    const tags = JSON.parse(formData.get("tags") as string || "[]");
+    const tags = JSON.parse((formData.get("tags") as string) || "[]");
     const image = formData.get("image") as File | null;
 
     if (!title || !content) {
@@ -61,7 +61,9 @@ export async function PUT(
     await connectToDatabase();
     const collection = db.collection("posts");
 
-    const existingPost = await collection.findOne({ _id: new ObjectId(params.id) });
+    const existingPost = await collection.findOne({
+      _id: new ObjectId(params.id),
+    });
     if (!existingPost) {
       return NextResponse.json({ error: "Post not found" }, { status: 404 });
     }
@@ -118,7 +120,10 @@ export async function DELETE(
     const result = await collection.deleteOne({ _id: new ObjectId(params.id) });
 
     if (result.deletedCount === 0) {
-      return NextResponse.json({ error: "Failed to delete post" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Failed to delete post" },
+        { status: 400 }
+      );
     }
 
     return NextResponse.json({ success: true });
@@ -131,7 +136,10 @@ export async function DELETE(
   }
 }
 
-async function saveImage(image: File, oldImagePath: string | null): Promise<string> {
+async function saveImage(
+  image: File,
+  oldImagePath: string | null
+): Promise<string> {
   const bytes = await image.arrayBuffer();
   const buffer = Buffer.from(bytes);
   const uploadDir = path.join(process.cwd(), "public", "uploads");

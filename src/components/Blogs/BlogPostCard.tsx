@@ -65,13 +65,13 @@ export default function BlogPostCard({
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <div className="relative h-48 overflow-hidden">
+      <div className="relative h-52 overflow-hidden">
         <Image
           src={post.image || "/placeholder.svg"}
           alt={post.title || "Blog post"}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
-          className="object-cover"
+          className="object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparen" />
         <motion.div
