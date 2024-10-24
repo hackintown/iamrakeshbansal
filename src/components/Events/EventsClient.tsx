@@ -323,12 +323,12 @@ const HeroSection: React.FC<{ banners: Banner[] }> = ({ banners }) => {
   };
 
   return (
-    <div className="relative h-[60vh] lg:h-[85vh] min-h-[300px] max-h-[800px] overflow-hidden">
+    <div className="relative h-[60vh] lg:h-[95vh] min-h-[300px] max-h-[800px] overflow-hidden">
       <Slider {...settings}>
         {banners.map((banner, index) => (
           <div
             key={index}
-            className="relative h-[60vh] lg:h-[85vh] min-h-[300px] max-h-[800px]"
+            className="relative h-[60vh] lg:h-[95vh] min-h-[300px] max-h-[800px]"
           >
             <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdBP02jUowk_c0cgx2cEpt-8fup2hhfnIYiAx3L6Qkk2D0cNA/viewform">
               <Image

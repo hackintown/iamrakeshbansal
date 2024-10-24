@@ -310,7 +310,7 @@ export default function CoursePage() {
                 <h3 className="text-4xl font-bold mb-2 text-gray-900">
                   Coach, Guide & Mentor
                 </h3>
-                <h4 className="text-3xl font-bold mb-6 text-red-500">
+                <h4 className="text-3xl font-bold mb-6 text-green-500">
                   Dr. Rakesh Bansal
                 </h4>
                 <div className="flex flex-wrap gap-4 mb-6">
@@ -495,7 +495,7 @@ export default function CoursePage() {
             transition={{ duration: 0.5 }}
             className="text-3xl font-bold text-purple-900 mb-6 text-center"
           >
-            Course Feedback
+            What Our Students Say
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -520,6 +520,7 @@ export default function CoursePage() {
                 },
               }}
               className="feedback-swiper"
+              style={{ paddingBottom: "40px" }} // Add padding to the bottom
             >
               {[
                 {
@@ -625,6 +626,11 @@ export default function CoursePage() {
                 </SwiperSlide>
               ))}
             </Swiper>
+            <style jsx>{`
+              .feedback-swiper .swiper-pagination {
+                bottom: 10px; // Adjust the bottom position of the pagination dots
+              }
+            `}</style>
           </motion.div>
         </section>
 

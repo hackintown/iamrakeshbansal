@@ -82,16 +82,16 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
       },
     ],
   },
-  {
-    title: "Blogs",
-    items: [
-      {
-        id: "blogs",
-        name: "Blogs",
-        href: "/blogs", // Ensure this is set correctly
-      },
-    ],
-  },
+  // {
+  //   title: "Blogs",
+  //   items: [
+  //     {
+  //       id: "blogs",
+  //       name: "Blogs",
+  //       href: "/blogs", // Ensure this is set correctly
+  //     },
+  //   ],
+  // },
   {
     title: "Disclaimer",
     items: [
