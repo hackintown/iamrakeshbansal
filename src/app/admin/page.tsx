@@ -10,9 +10,9 @@ export default function AdminLogin() {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === "admin" && password === "admin") {
+    if (username === "iamprakashchy" && password === "Prakash@Manoj") {
       localStorage.setItem("adminLoggedIn", "true");
-      router.push("/admin/dashboard");
+      router.push("/admin/dashboard"); // Navigates to dashboard on successful login
     } else {
       setError("Invalid username or password");
     }

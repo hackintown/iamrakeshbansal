@@ -12,15 +12,18 @@ import {
   ChevronUp,
   Phone,
   Mail,
+  Star,
+  Quote,
 } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { FaInstagram, FaTwitter, FaLinkedin, FaYoutube } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper/modules";
+import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/autoplay";
 
 export default function CoursePage() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -42,13 +45,12 @@ export default function CoursePage() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="bg-gradient-to-r from-purple-100 to-indigo-100 p-4 sticky top-0 z-20 shadow-sm border-b border-purple-200"
+        className="bg-gradient-to-r from-purple-100 to-indigo-100 p-4 fixed top-[66px] w-full z-20 shadow-sm border-b border-purple-200"
       >
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-3">
-            <span className="text-purple-600 font-bold text-2xl">🚀</span>
             <h1 className="text-purple-800 font-semibold text-lg">
-              Kurukshetra: Win The Battle
+              Kurukshetra- Win The Battle
             </h1>
           </div>
           <Link href="https://iamrakeshbansal.ck.page/kurukshetra" passHref>
@@ -61,15 +63,14 @@ export default function CoursePage() {
               Enroll Now
             </Button>
           </Link>
-
         </div>
       </motion.div>
 
-      <main className="container px-4 sm:px-6 lg:px-8 py-12">
+      <main className="container px-4 sm:px-6 py-28 sm:py-20 lg:py-16">
         {/* Hero Section */}
         <section className="mb-16">
           <div className="bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2 items-center p-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 items-center p-4 gap-5">
               <div className="flex flex-col justify-center">
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
@@ -131,7 +132,11 @@ export default function CoursePage() {
                     </motion.div>
                   ))}
                 </div>
-                <Link href="https://iamrakeshbansal.ck.page/kurukshetra" className="w-full block" passHref>
+                <Link
+                  href="https://iamrakeshbansal.ck.page/kurukshetra"
+                  className="w-full block"
+                  passHref
+                >
                   <Button
                     variant="gradient"
                     size="custom"
@@ -141,12 +146,16 @@ export default function CoursePage() {
                   </Button>
                 </Link>
               </div>
-              <div className="flex flex-col items-center justify-center h-full">
-                <div className="w-full max-w-md">
+              <div className="flex flex-col items-center justify-between h-full">
+                <div className="w-full">
                   <Swiper
-                    modules={[Pagination, Navigation]}
-                    pagination={{ clickable: true }}
-                    navigation
+                    modules={[Pagination]}
+                    pagination={{
+                      clickable: true,
+                      renderBullet: (index, className) => {
+                        return `<span class="${className} w-3 h-3 mx-1 mt-4 rounded-full bg-purple-300 hover:bg-purple-500 transition-colors duration-300"></span>`;
+                      },
+                    }}
                     className="h-[400px]"
                   >
                     <SwiperSlide className="flex items-center justify-center">
@@ -154,11 +163,10 @@ export default function CoursePage() {
                         <Image
                           src="/images/course-thumbnail.webp"
                           alt="Course Preview"
-                          layout="fill"
-                          objectFit="cover"
+                          fill
+                          className="object-fill"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-30"></div>
-
                       </div>
                     </SwiperSlide>
                     <SwiperSlide className="flex items-center justify-center">
@@ -175,8 +183,12 @@ export default function CoursePage() {
                     </SwiperSlide>
                   </Swiper>
                 </div>
-                <div className="mt-12 w-full max-w-md">
-                  <Link href="https://iamrakeshbansal.ck.page/kurukshetra" className="w-full block" passHref>
+                <div className="mt-14 w-full">
+                  <Link
+                    href="https://iamrakeshbansal.ck.page/kurukshetra"
+                    className="w-full block"
+                    passHref
+                  >
                     <Button
                       variant="gradient"
                       size="custom"
@@ -211,37 +223,44 @@ export default function CoursePage() {
               {[
                 {
                   title: "Foundational Learning",
-                  content: "The course begins with the very basics, ensuring that no prior knowledge is required. Whether you're new to the financial markets or just to technical analysis, you'll find the material accessible and easy to understand.",
+                  content:
+                    "The course begins with the very basics, ensuring that no prior knowledge is required. Whether you're new to the financial markets or just to technical analysis, you'll find the material accessible and easy to understand.",
                   icon: Book,
                 },
                 {
                   title: "Comprehensive Coverage",
-                  content: "Every relevant topic in technical analysis is covered, from chart patterns and indicators. The curriculum is structured to build your knowledge step by step, ensuring a solid understanding of each concept.",
+                  content:
+                    "Every relevant topic in technical analysis is covered, from chart patterns and indicators. The curriculum is structured to build your knowledge step by step, ensuring a solid understanding of each concept.",
                   icon: RefreshCcw,
                 },
                 {
                   title: "Expert Insights",
-                  content: "Dr. Rakesh Bansal not only teaches the concepts but also shares his personal preferences and techniques that he uses in his own trading. These expert insights provide added value, offering you a glimpse into the strategies that work in real-world trading scenarios.",
+                  content:
+                    "Dr. Rakesh Bansal not only teaches the concepts but also shares his personal preferences and techniques that he uses in his own trading. These expert insights provide added value, offering you a glimpse into the strategies that work in real-world trading scenarios.",
                   icon: GraduationCap,
                 },
                 {
                   title: "Practical Applications",
-                  content: "The course goes beyond theory by providing practical examples and case studies that show how technical analysis is applied in actual trading situations. This hands-on approach helps you connect the dots between what you learn and how you can use it in your trading.",
+                  content:
+                    "The course goes beyond theory by providing practical examples and case studies that show how technical analysis is applied in actual trading situations. This hands-on approach helps you connect the dots between what you learn and how you can use it in your trading.",
                   icon: Users,
                 },
                 {
                   title: "Interactive Learning",
-                  content: "Engage with interactive quizzes and exercises that reinforce your understanding and help you retain the key concepts. These tools are designed to test your knowledge and prepare you for real-world trading.",
+                  content:
+                    "Engage with interactive quizzes and exercises that reinforce your understanding and help you retain the key concepts. These tools are designed to test your knowledge and prepare you for real-world trading.",
                   icon: Users,
                 },
                 {
                   title: "Guidance from a Pro",
-                  content: "Dr. Bansal is not just a teacher but a mentor. His passion for the subject and his desire to see his students succeed are evident throughout the course. You'll benefit from his years of experience and his unique perspective on the markets.",
+                  content:
+                    "Dr. Bansal is not just a teacher but a mentor. His passion for the subject and his desire to see his students succeed are evident throughout the course. You'll benefit from his years of experience and his unique perspective on the markets.",
                   icon: GraduationCap,
                 },
                 {
                   title: "Ongoing Support",
-                  content: "Throughout the course, you'll have access to a discussion forum where you can ask questions and receive timely answers from instructors and peers, ensuring you never feel lost or unsupported.",
+                  content:
+                    "Throughout the course, you'll have access to a discussion forum where you can ask questions and receive timely answers from instructors and peers, ensuring you never feel lost or unsupported.",
                   icon: RefreshCcw,
                 },
               ].map((item, index) => (
@@ -271,7 +290,10 @@ export default function CoursePage() {
               className="mt-8 bg-purple-50 border-l-4 border-purple-500 p-4"
             >
               <p className="text-purple-800">
-                This course is your gateway to mastering technical analysis, guided by one of the most respected names in the field. Whether your goal is to trade actively or invest wisely, the skills you acquire here will serve you for a lifetime.
+                This course is your gateway to mastering technical analysis,
+                guided by one of the most respected names in the field. Whether
+                your goal is to trade actively or invest wisely, the skills you
+                acquire here will serve you for a lifetime.
               </p>
             </motion.div>
           </motion.div>
@@ -282,12 +304,14 @@ export default function CoursePage() {
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-2/3 p-6">
-                <h2 className="text-4xl font-bold text-purple-900 mb-2">Know Your</h2>
+                <h2 className="text-4xl font-bold text-purple-900 mb-2">
+                  Know Your
+                </h2>
                 <h3 className="text-4xl font-bold mb-2 text-gray-900">
                   Coach, Guide & Mentor
                 </h3>
                 <h4 className="text-3xl font-bold mb-6 text-red-500">
-                  Rakesh Bansal
+                  Dr. Rakesh Bansal
                 </h4>
                 <div className="flex flex-wrap gap-4 mb-6">
                   {[
@@ -303,10 +327,14 @@ export default function CoursePage() {
                     },
                     {
                       Icon: FaLinkedin,
-                      followers: "2.3M+",
+                      followers: "13k+",
                       platform: "LinkedIn",
                     },
-                    { Icon: FaYoutube, followers: "400.8K+", platform: "YouTube" },
+                    {
+                      Icon: FaYoutube,
+                      followers: "400.8K+",
+                      platform: "YouTube",
+                    },
                   ].map((social, index) => (
                     <div key={index} className="flex items-center space-x-2">
                       <social.Icon className="w-6 h-6 md:w-8 md:h-8 text-gray-600" />
@@ -331,10 +359,10 @@ export default function CoursePage() {
                   className="relative w-64 h-64 mx-auto md:mx-0"
                 >
                   <Image
-                    src="/images/avatar.webp"
+                    src="https://32watts.com/iamrakeshbansal/courses/course-page.webp"
                     alt="Rakesh Bansal"
                     fill
-                    className="object-cover object-top"
+                    className="object-cover object-top rounded-md"
                   />
                 </motion.div>
               </div>
@@ -456,6 +484,147 @@ export default function CoursePage() {
                 </motion.div>
               ))}
             </div>
+          </motion.div>
+        </section>
+
+        {/* Feedback Section */}
+        <section id="feedback" className="mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-bold text-purple-900 mb-6 text-center"
+          >
+            Course Feedback
+          </motion.h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg overflow-hidden p-6"
+          >
+            <Swiper
+              modules={[Pagination, Navigation, Autoplay]}
+              pagination={{ clickable: true }}
+              navigation
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              loop={true}
+              spaceBetween={30}
+              slidesPerView={1}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2,
+                },
+                1024: {
+                  slidesPerView: 3,
+                },
+              }}
+              className="feedback-swiper"
+            >
+              {[
+                {
+                  name: "Donda Pradip",
+                  image: "/feedback/pradip-donda.webp",
+                  feedback:
+                    "This course has been incredibly useful for my trading. It has helped me better understand how to set stop losses and manage risks in the market. The technical analysis taught in the course is especially helpful for making informed trading decisions. Highly recommended for traders!",
+                  rating: 5,
+                },
+                {
+                  name: "Sourav Banerjee",
+                  image: "/feedback/sourav-banerjee.webp",
+                  feedback:
+                    "The course content is excellent, but I would suggest adding more examples using real-time charts of various companies. This would provide a clearer understanding of how to apply the concepts in actual market situations and improve practical knowledge for better trading decisions.",
+                  rating: 4,
+                },
+                {
+                  name: "Neha Gupta",
+                  image: "/feedback/neha-gupta.webp",
+                  feedback:
+                    "Rakesh Sir's teaching style is excellent. He explains the basics thoroughly, such as when a pattern works and when it doesn't. For example, in the piercing pattern, he clearly explained how the second green candle opens below the red. Overall, Sir has explained everything very well.",
+                  rating: 5,
+                },
+                {
+                  name: "Shashank M Hiremath",
+                  image: "/feedback/sharkshank.webp",
+                  feedback:
+                    "The overall content of the Kurukshetra course was excellent. Each module was systematically handled, and the quiz questions helped identify areas of improvement. I've watched the course videos multiple times, which has significantly enhanced my trading and investment skills. Thank you, Bansal Sir.",
+                  rating: 4,
+                },
+                {
+                  name: "Ajay Ramjiyavan Chaudhari",
+                  image: "/feedback/ajay-chaudhary.webp",
+                  feedback:
+                    "For me, it was my first attempt at learning, and the experience was fantastic. The course covered the basics clearly and was kept simple throughout. The chart explanations were very effective, making the overall learning process smooth and easy to follow. Highly recommend for beginners!",
+                  rating: 5,
+                },
+                {
+                  name: "Madhura D H",
+                  image: "/feedback/madhura-harinath.webp",
+                  feedback:
+                    "I always wanted to learn from Rakesh Sir, and his trading style is truly exciting. I'm grateful to have learned from him through this course. I hope for an opportunity to meet him in person, especially as I’m from Bangalore, Karnataka. It would be wonderful if he visits the city!",
+                  rating: 5,
+                },
+                {
+                  name: "Manish kumar Sinha",
+                  image: "/feedback/manish-sinha.webp",
+                  feedback:
+                    "The course is well-structured and easy to follow, providing clear explanations that enhance understanding of key concepts. It effectively breaks down complex topics, making learning accessible and enjoyable. Participants will gain valuable insights and clarity, enabling them to grasp and apply the material confidently.",
+                  rating: 5,
+                },
+                {
+                  name: "Trushit Patel",
+                  image: "/feedback/trushit patel.webp",
+                  feedback:
+                    "The course was wonderful! It used simple, easy-to-understand language and provided perfect examples that clarified the concepts. The content was valuable and definitely worth the investment. I appreciate the effort put into making the material accessible and engaging. Thank you for a great learning experience!",
+                  rating: 4,
+                },
+              ].map((testimonial, index) => (
+                <SwiperSlide key={index}>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.1 * index }}
+                    className="bg-white rounded-lg shadow-md p-6 h-full flex flex-col"
+                  >
+                    <div className="flex items-center mb-4">
+                      <Image
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        width={60}
+                        height={60}
+                        className="rounded-full mr-4 w-20 h-20 object-cover object-center"
+                      />
+                      <div>
+                        <h3 className="text-lg font-semibold text-purple-900">
+                          {testimonial.name}
+                        </h3>
+                        <div className="flex">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`w-4 h-4 ${
+                                i < testimonial.rating
+                                  ? "text-yellow-400"
+                                  : "text-gray-300"
+                              }`}
+                              fill={
+                                i < testimonial.rating ? "currentColor" : "none"
+                              }
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-gray-600 flex-grow">
+                      {testimonial.feedback}
+                    </p>
+                    <div className="mt-4 text-purple-600">
+                      <Quote className="w-6 h-6 inline-block mr-2" />
+                    </div>
+                  </motion.div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </motion.div>
         </section>
 
@@ -629,7 +798,6 @@ export default function CoursePage() {
               Enroll Now and take your trading to the next level today!
             </Button>
           </Link>
-
         </section>
       </main>
     </div>

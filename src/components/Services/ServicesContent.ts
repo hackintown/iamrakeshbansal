@@ -162,7 +162,7 @@ export const serviceContent: Record<
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
       { duration: "Monthly", price: "Rs- 1,999/-" },
-      { duration: "Yearly", price: "Rs- 20,000/-" },
+      { duration: "Yearly", price: "Rs- 19,999/-" },
     ],
     href: "https://rakeshbansal.rpy.club/pick-package/NjXQphqSS",
   },
@@ -226,7 +226,7 @@ export const serviceContent: Record<
       "Registration granted by SEBI, membership of a SEBI recognized supervisory body (if any) and certification from NISM in no way guarantee performance of the intermediary or provide any assurance of returns to investors",
     plans: [
       { duration: "Monthly", price: "Rs- 1,999/-" },
-      { duration: "Yearly", price: "Rs- 20,000/-" },
+      { duration: "Yearly", price: "Rs- 19,999/-" },
     ],
   },
   Futures: {
@@ -393,10 +393,6 @@ export const serviceContent: Record<
       {
         title: "Direct Access to Rakesh Bansal Ventures’ Senior Team:",
         info: "Get the facility to connect with a senior representative of the Rakesh Bansal Ventures team for personalized insights and discussions.",
-      },
-      {
-        title: "One-on-One Consultations:",
-        info: "Exclusive one-on-one consultations with Dr. Rakesh Bansal may be available based on slot bookings and advisor discretion.",
       },
     ],
     disclaimer: [

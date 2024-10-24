@@ -1,6 +1,12 @@
 import React from "react";
 import { getEventsMediaData } from "@/lib/events-media/api";
-import { EventCard, VideoSlider, AnimatedSection, BansalGallery, HeroSection } from "./EventsClient";
+import {
+  EventCard,
+  VideoSlider,
+  AnimatedSection,
+  BansalGallery,
+  HeroSection,
+} from "./EventsClient";
 
 export default async function EventsPage() {
   const mediaData = await getEventsMediaData();
@@ -22,7 +28,6 @@ export default async function EventsPage() {
               ))}
             </div>
           </div>
-
         </section>
       </AnimatedSection>
 
@@ -38,9 +43,11 @@ export default async function EventsPage() {
             </h2>
           </div>
           <div className="container">
-            <BansalGallery ahmedabadEvents={mediaData.ahmedabadEvents} delhiEvents={mediaData.delhiEvents} />
+            <BansalGallery
+              ahmedabadEvents={mediaData.ahmedabadEvents}
+              delhiEvents={mediaData.delhiEvents}
+            />
           </div>
-
         </section>
       </AnimatedSection>
 

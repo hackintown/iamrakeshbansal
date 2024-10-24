@@ -65,6 +65,11 @@ export const NAVBAR_CONSTANT: NavGroup[] = [
         name: "About Dr. Rakesh Bansal",
         href: "/about-us",
       },
+      {
+        id: "events",
+        name: "Events",
+        href: "/events",
+      },
     ],
   },
   {

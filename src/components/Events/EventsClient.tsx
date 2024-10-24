@@ -176,7 +176,10 @@ const AnimatedSection: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-const BansalGallery: React.FC<{ ahmedabadEvents: GalleryImageProps[], delhiEvents: GalleryImageProps[] }> = ({ ahmedabadEvents, delhiEvents }) => {
+const BansalGallery: React.FC<{
+  ahmedabadEvents: GalleryImageProps[];
+  delhiEvents: GalleryImageProps[];
+}> = ({ ahmedabadEvents, delhiEvents }) => {
   const breakpointColumnsObj = {
     default: 4,
     1100: 3,
@@ -202,45 +205,6 @@ const BansalGallery: React.FC<{ ahmedabadEvents: GalleryImageProps[], delhiEvent
 
   return (
     <Slider {...settings}>
-      <div>
-        <motion.h3
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-3xl font-bold text-center mb-8 text-green-700"
-        >
-          Ahmedabad Events
-        </motion.h3>
-        <Masonry
-          breakpointCols={breakpointColumnsObj}
-          className="flex w-auto -ml-4"
-          columnClassName="pl-4 bg-clip-padding"
-        >
-          {ahmedabadEvents.map((image, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="mb-4"
-            >
-              <div className="relative overflow-hidden rounded-lg shadow-lg">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  width={600}
-                  height={400}
-                  priority
-                  className="object-cover w-full h-full"
-                />
-                <div className="absolute inset-0 bg-purple-900 bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
-                  <h3 className="text-white text-xl font-bold">{image.alt}</h3>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </Masonry>
-      </div>
       <div>
         <motion.h3
           initial={{ opacity: 0, y: -20 }}
@@ -280,6 +244,45 @@ const BansalGallery: React.FC<{ ahmedabadEvents: GalleryImageProps[], delhiEvent
           ))}
         </Masonry>
       </div>
+      <div>
+        <motion.h3
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-3xl font-bold text-center mb-8 text-green-700"
+        >
+          Ahmedabad Events
+        </motion.h3>
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="flex w-auto -ml-4"
+          columnClassName="pl-4 bg-clip-padding"
+        >
+          {ahmedabadEvents.map((image, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="mb-4"
+            >
+              <div className="relative overflow-hidden rounded-lg shadow-lg">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  width={600}
+                  height={400}
+                  priority
+                  className="object-cover w-full h-full"
+                />
+                <div className="absolute inset-0 bg-purple-900 bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300">
+                  <h3 className="text-white text-xl font-bold">{image.alt}</h3>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </Masonry>
+      </div>
     </Slider>
   );
 };
@@ -293,8 +296,9 @@ const CustomArrow = ({
 }) => (
   <button
     onClick={onClick}
-    className={`absolute top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-50 hover:bg-opacity-75 text-gray-800 p-2 rounded-full transition-all duration-300 ${direction === "prev" ? "left-4" : "right-4"
-      }`}
+    className={`absolute top-1/2 -translate-y-1/2 z-10 bg-white bg-opacity-50 hover:bg-opacity-75 text-gray-800 p-2 rounded-full transition-all duration-300 ${
+      direction === "prev" ? "left-4" : "right-4"
+    }`}
   >
     {direction === "prev" ? (
       <FaChevronLeft size={20} />
@@ -319,38 +323,57 @@ const HeroSection: React.FC<{ banners: Banner[] }> = ({ banners }) => {
   };
 
   return (
-    <div className="relative h-[60vh] lg:h-[85vh] min-h-[300px] max-h-[500px] overflow-hidden">
+    <div className="relative h-[60vh] lg:h-[85vh] min-h-[300px] max-h-[800px] overflow-hidden">
       <Slider {...settings}>
         {banners.map((banner, index) => (
           <div
             key={index}
-            className="relative h-[60vh] lg:h-[85vh] min-h-[300px] max-h-[500px]"
+            className="relative h-[60vh] lg:h-[85vh] min-h-[300px] max-h-[800px]"
           >
             <Link href="https://docs.google.com/forms/d/e/1FAIpQLSdBP02jUowk_c0cgx2cEpt-8fup2hhfnIYiAx3L6Qkk2D0cNA/viewform">
               <Image
                 src={banner.image}
                 alt={`Event banner ${index + 1}`}
                 fill
-                className="object-cover object-center"
-                quality={100}
-
+                className="object-fill object-center"
               />
             </Link>
 
-            <div className="absolute inset-0 bg-black bg-opacity-50" />
-            <div className="absolute inset-0 flex flex-col justify-center items-center text-white px-4">
+            <div className="absolute inset-0 bg-black bg-opacity-20" />
+            <div className="absolute bottom-28 inset-0 flex flex-col justify-end items-center text-white px-4">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
+                whileHover={{ scale: 1.1 }}
               >
                 <Link
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdBP02jUowk_c0cgx2cEpt-8fup2hhfnIYiAx3L6Qkk2D0cNA/viewform"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-6 md:py-3 md:px-8 rounded-md transition duration-300 shadow-md inline-block"
+                  className="inline-block"
                 >
-                  Register Now
+                  <button
+                    type="submit"
+                    className="flex justify-center text-green-700 hover:text-white gap-2 items-center mx-auto shadow-xl text-lg bg-gray-50 backdrop-blur-md
+                     lg:font-semibold
+                     isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-600 before:hover:w-full before:-left-full
+                      before:hover:left-0 before:rounded-full before:bg-purple-500  before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700
+                       relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group"
+                  >
+                    Click here to register
+                    <svg
+                      className="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50
+                       text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
+                      viewBox="0 0 16 19"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                        className="fill-green-800 group-hover:fill-purple-800"
+                      ></path>
+                    </svg>
+                  </button>
                 </Link>
               </motion.div>
             </div>
@@ -360,4 +383,12 @@ const HeroSection: React.FC<{ banners: Banner[] }> = ({ banners }) => {
     </div>
   );
 };
-export { EventCard, VideoPlayer, VideoSlider, AnimatedSection, BansalGallery, CustomArrow, HeroSection };
+export {
+  EventCard,
+  VideoPlayer,
+  VideoSlider,
+  AnimatedSection,
+  BansalGallery,
+  CustomArrow,
+  HeroSection,
+};

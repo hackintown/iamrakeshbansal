@@ -58,7 +58,6 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
     fetchComments();
   }, [post._id]);
 
-
   const handleShare = (platform: string) => {
     const url = window.location.href;
     let shareUrl = "";
@@ -124,7 +123,6 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
 
   const handleSubscribe = () => {
     setIsSubscribed(!isSubscribed);
-    // TODO: Implement server-side subscription logic
   };
 
   return (
@@ -144,7 +142,7 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
             <ShareButton
               icon={<FaShare />}
               color="bg-gray-600"
-              onClick={() => { }}
+              onClick={() => {}}
             />
           </div>
         </div>
@@ -215,7 +213,12 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.6 }}
               className="prose prose-lg max-w-none text-sm sm:text-base md:text-lg"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+              dangerouslySetInnerHTML={{
+                __html: post.content.replace(
+                  /<a /g,
+                  '<a style="color: blue;" '
+                ),
+              }}
             />
 
             <motion.div
@@ -243,10 +246,11 @@ export default function BlogSlug({ initialPost }: BlogPostClientProps) {
               </div>
               <button
                 onClick={handleSubscribe}
-                className={`py-2 px-6 rounded-full transition-colors ${isSubscribed
+                className={`py-2 px-6 rounded-full transition-colors ${
+                  isSubscribed
                     ? "bg-green-500 text-white"
                     : "bg-blue-500 text-white hover:bg-blue-600"
-                  }`}
+                }`}
               >
                 {isSubscribed ? "Subscribed" : "Subscribe for Updates"}
               </button>
