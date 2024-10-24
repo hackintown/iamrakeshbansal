@@ -29,7 +29,7 @@ export default function BlogHeader({
           transition={{ duration: 0.5 }}
           className="text-4xl md:text-6xl font-bold text-center mb-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"
         >
-          Trading Insights
+         Latest Blogs
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 50 }}
@@ -37,8 +37,7 @@ export default function BlogHeader({
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-base md:text-lg text-blue-200 max-w-2xl mx-auto text-center mb-4"
         >
-          Discover expert strategies, market analysis, and trading wisdom to
-          elevate your financial game.
+          Uncover Expert Strategies, In-Depth Market Analysis, and Trading Wisdom to Elevate Your Financial Success
         </motion.p>
 
         <motion.div

@@ -189,16 +189,15 @@ export const serviceContent: Record<
         features: [
           "Monthly 10-15 Calls",
           "Entry Price, Exit Price, and Stop Loss provided for each trade.",
-          "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading.",
-          "Please call me on 9322210907 only after you make payment and I will explain to you as to how to exit the trade the next morning.",
+          "Covers Nifty, Bank Nifty, FINNIFTY, and MIDCPNIFTY for strategic options trading",
         ],
       },
       Intraday: {
         price: "₹999/month",
         features: [
           "Monthly 15-20 Calls",
-          "Entry Price, Exit Price, Stop Loss, and First Target for each signal.",
-          "Focuses on top Nifty 50 companies for effective short-term trading.",
+          "Entry Price, Exit Price, Stop Loss, and First Target for each signal",
+          "Focuses on top Nifty 50 companies for effective short-term trading.",
         ],
       },
     },

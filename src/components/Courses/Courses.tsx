@@ -51,14 +51,17 @@ export default function CoursePage() {
               Kurukshetra: Win The Battle
             </h1>
           </div>
-          <Button
-            variant="gradient"
-            size="custom"
-            showArrow
-            className="flex items-center space-x-2 py-1 lg:text-base lg:px-3"
-          >
-            Enroll Now
-          </Button>
+          <Link href="https://iamrakeshbansal.ck.page/kurukshetra" passHref>
+            <Button
+              variant="gradient"
+              size="custom"
+              showArrow
+              className="flex items-center space-x-2 py-1 lg:text-base lg:px-3"
+            >
+              Enroll Now
+            </Button>
+          </Link>
+
         </div>
       </motion.div>
 
@@ -66,19 +69,19 @@ export default function CoursePage() {
         {/* Hero Section */}
         <section className="mb-16">
           <div className="bg-gradient-to-br from-purple-100 to-white rounded-lg shadow-lg overflow-hidden">
-            <div className="flex flex-col lg:flex-row">
-              <div className="lg:w-1/2 p-6 lg:p-12 flex flex-col justify-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 items-center p-4">
+              <div className="flex flex-col justify-center">
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="text-4xl sm:text-5xl font-bold mb-6 text-purple-900 leading-tight"
+                  className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 text-purple-900 leading-tight"
                 >
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+                  <span className="text-xl sm:text-2xl md:text-3xl bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
                     Master the Art of
                   </span>
                   <br />
-                  <span className="text-green-600 text-5xl sm:text-6xl">
+                  <span className="text-green-600 text-xl sm:text-4xl md:text-5xl">
                     Stock Market
                   </span>
                   <br />
@@ -95,12 +98,7 @@ export default function CoursePage() {
                   Embark on your journey into the world of financial markets
                   with this comprehensive course designed specifically for
                   beginners who wish to master the art of technical analysis
-                  from the ground up. Led by the esteemed{" "}
-                  <span className="font-semibold">Dr. Rakesh Bansal</span>, a
-                  seasoned expert in the field, this course provides you with
-                  the knowledge and tools necessary to analyze market trends,
-                  make informed decisions, and achieve your trading and
-                  investment goals.
+                  from the ground up.
                 </motion.p>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -109,8 +107,12 @@ export default function CoursePage() {
                   className="bg-green-100 border-l-4 border-green-500 p-4 mb-6"
                 >
                   <p className="text-sm sm:text-base text-green-800">
-                    Insights from Rakesh Bansal and his team that grew the
-                    channel from 7K subscribers to 4M+ subscribers in 4 years.
+                    Led by the esteemed&nbsp;
+                    <span className="font-semibold">Dr. Rakesh Bansal</span>, a
+                    seasoned expert in the field, this course provides you with
+                    the knowledge and tools necessary to analyze market trends,
+                    make informed decisions, and achieve your trading and
+                    investment goals.
                   </p>
                 </motion.div>
                 <div className="grid grid-cols-2 gap-4 mb-6">
@@ -129,54 +131,61 @@ export default function CoursePage() {
                     </motion.div>
                   ))}
                 </div>
-                <Button
-                  variant="gradient"
-                  size="custom"
-                  className="w-full sm:w-auto"
-                >
-                  ENROLL NOW
-                </Button>
+                <Link href="https://iamrakeshbansal.ck.page/kurukshetra" className="w-full block" passHref>
+                  <Button
+                    variant="gradient"
+                    size="custom"
+                    className="w-auto sm:w-full"
+                  >
+                    ENROLL NOW
+                  </Button>
+                </Link>
               </div>
-              <div className="lg:w-1/2 relative">
-                <Swiper
-                  modules={[Pagination, Navigation]}
-                  pagination={{ clickable: true }}
-                  navigation
-                  className="h-full"
-                >
-                  <SwiperSlide>
-                    <div className="aspect-video h-full relative">
-                      <Image
-                        src="/images/course-preview.jpg"
-                        alt="Course Preview"
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-30"></div>
-                      <div className="absolute bottom-4 left-4 right-4 text-white">
-                        <h3 className="text-xl font-semibold mb-2">
-                          Course Preview Image
-                        </h3>
-                        <p className="text-sm">
-                          Get a glimpse of what you'll learn in this
-                          comprehensive course.
-                        </p>
+              <div className="flex flex-col items-center justify-center h-full">
+                <div className="w-full max-w-md">
+                  <Swiper
+                    modules={[Pagination, Navigation]}
+                    pagination={{ clickable: true }}
+                    navigation
+                    className="h-[400px]"
+                  >
+                    <SwiperSlide className="flex items-center justify-center">
+                      <div className="w-full h-full relative">
+                        <Image
+                          src="/images/course-thumbnail.webp"
+                          alt="Course Preview"
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-purple-900 to-transparent opacity-30"></div>
+
                       </div>
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className="aspect-video h-full">
-                      <iframe
-                        src={`https://www.youtube.com/embed/ozfP9JbESWM`}
-                        title="YouTube video player"
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        className="w-full h-full object-cover"
-                      ></iframe>
-                    </div>
-                  </SwiperSlide>
-                </Swiper>
+                    </SwiperSlide>
+                    <SwiperSlide className="flex items-center justify-center">
+                      <div className="w-full h-full">
+                        <iframe
+                          src={`https://www.youtube.com/embed/ozfP9JbESWM`}
+                          title="YouTube video player"
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                        ></iframe>
+                      </div>
+                    </SwiperSlide>
+                  </Swiper>
+                </div>
+                <div className="mt-12 w-full max-w-md">
+                  <Link href="https://iamrakeshbansal.ck.page/kurukshetra" className="w-full block" passHref>
+                    <Button
+                      variant="gradient"
+                      size="custom"
+                      className="w-auto sm:w-full"
+                    >
+                      For Demo Class Click Here
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -190,7 +199,7 @@ export default function CoursePage() {
             transition={{ duration: 0.5 }}
             className="text-3xl font-bold text-purple-900 mb-6"
           >
-            About Kurukshetra: Win The Battle
+            About Kurukshetra - Win The Battle
           </motion.h2>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -201,27 +210,38 @@ export default function CoursePage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
-                  title: "Interactive Learning",
-                  content:
-                    "Engage with quizzes and exercises that reinforce your understanding and prepare you for real-world trading.",
-                  icon: Users,
-                },
-                {
-                  title: "Expert Insights",
-                  content:
-                    "Dr. Rakesh Bansal shares his personal preferences and techniques used in his own trading.",
-                  icon: GraduationCap,
-                },
-                {
                   title: "Foundational Learning",
-                  content:
-                    "Start with the basics, ensuring no prior knowledge is required.",
+                  content: "The course begins with the very basics, ensuring that no prior knowledge is required. Whether you're new to the financial markets or just to technical analysis, you'll find the material accessible and easy to understand.",
                   icon: Book,
                 },
                 {
                   title: "Comprehensive Coverage",
-                  content:
-                    "Every relevant topic in technical analysis is covered, from chart patterns to indicators.",
+                  content: "Every relevant topic in technical analysis is covered, from chart patterns and indicators. The curriculum is structured to build your knowledge step by step, ensuring a solid understanding of each concept.",
+                  icon: RefreshCcw,
+                },
+                {
+                  title: "Expert Insights",
+                  content: "Dr. Rakesh Bansal not only teaches the concepts but also shares his personal preferences and techniques that he uses in his own trading. These expert insights provide added value, offering you a glimpse into the strategies that work in real-world trading scenarios.",
+                  icon: GraduationCap,
+                },
+                {
+                  title: "Practical Applications",
+                  content: "The course goes beyond theory by providing practical examples and case studies that show how technical analysis is applied in actual trading situations. This hands-on approach helps you connect the dots between what you learn and how you can use it in your trading.",
+                  icon: Users,
+                },
+                {
+                  title: "Interactive Learning",
+                  content: "Engage with interactive quizzes and exercises that reinforce your understanding and help you retain the key concepts. These tools are designed to test your knowledge and prepare you for real-world trading.",
+                  icon: Users,
+                },
+                {
+                  title: "Guidance from a Pro",
+                  content: "Dr. Bansal is not just a teacher but a mentor. His passion for the subject and his desire to see his students succeed are evident throughout the course. You'll benefit from his years of experience and his unique perspective on the markets.",
+                  icon: GraduationCap,
+                },
+                {
+                  title: "Ongoing Support",
+                  content: "Throughout the course, you'll have access to a discussion forum where you can ask questions and receive timely answers from instructors and peers, ensuring you never feel lost or unsupported.",
                   icon: RefreshCcw,
                 },
               ].map((item, index) => (
@@ -251,51 +271,18 @@ export default function CoursePage() {
               className="mt-8 bg-purple-50 border-l-4 border-purple-500 p-4"
             >
               <p className="text-purple-800">
-                Additionally, upon purchasing the course, you will have the
-                opportunity to ask your doubts and receive answers directly. If
-                a significant number of questions arise, we will organize a
-                webinar where Dr. Rakesh Bansal will address your queries and
-                provide further clarification.
+                This course is your gateway to mastering technical analysis, guided by one of the most respected names in the field. Whether your goal is to trade actively or invest wisely, the skills you acquire here will serve you for a lifetime.
               </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              className="mt-8"
-            >
-              <h3 className="text-xl font-semibold text-purple-900 mb-4">
-                What You'll Get
-              </h3>
-              <ul className="space-y-2">
-                {[
-                  "Practical applications with real-world trading examples",
-                  "Guidance from Dr. Rakesh Bansal, a respected expert in the field",
-                  "Ongoing support through discussion forums",
-                  "A comprehensive foundation in technical analysis",
-                ].map((item, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-                    className="flex items-center space-x-2"
-                  >
-                    <CheckIcon className="w-5 h-5 text-green-500 flex-shrink-0" />
-                    <span>{item}</span>
-                  </motion.li>
-                ))}
-              </ul>
             </motion.div>
           </motion.div>
         </section>
 
         {/* Instructor Section */}
         <section id="instructor" className="mb-16">
-          <h2 className="text-3xl font-bold text-purple-900 mb-6">Know Your</h2>
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             <div className="flex flex-col md:flex-row items-center">
               <div className="md:w-2/3 p-6">
+                <h2 className="text-4xl font-bold text-purple-900 mb-2">Know Your</h2>
                 <h3 className="text-4xl font-bold mb-2 text-gray-900">
                   Coach, Guide & Mentor
                 </h3>
@@ -306,12 +293,12 @@ export default function CoursePage() {
                   {[
                     {
                       Icon: FaInstagram,
-                      followers: "3.5M+",
+                      followers: "653K+",
                       platform: "Instagram",
                     },
                     {
                       Icon: FaTwitter,
-                      followers: "600K+",
+                      followers: "310.7K+",
                       platform: "Twitter",
                     },
                     {
@@ -319,10 +306,10 @@ export default function CoursePage() {
                       followers: "2.3M+",
                       platform: "LinkedIn",
                     },
-                    { Icon: FaYoutube, followers: "5M+", platform: "YouTube" },
+                    { Icon: FaYoutube, followers: "400.8K+", platform: "YouTube" },
                   ].map((social, index) => (
                     <div key={index} className="flex items-center space-x-2">
-                      <social.Icon className="w-6 h-6 text-gray-600" />
+                      <social.Icon className="w-6 h-6 md:w-8 md:h-8 text-gray-600" />
                       <span className="text-lg font-bold">
                         {social.followers}
                       </span>
@@ -588,7 +575,7 @@ export default function CoursePage() {
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-white rounded-lg p-4 shadow-md">
-                <h4 className="text-lg font-medium text-purple-800 mb-3">
+                <h4 className="text-lg font-semibold text-purple-800 mb-3">
                   Payment & Enrollment
                 </h4>
                 <Link
@@ -600,7 +587,7 @@ export default function CoursePage() {
                 </Link>
               </div>
               <div className="bg-white rounded-lg p-4 shadow-md">
-                <h4 className="text-lg font-medium text-purple-800 mb-3">
+                <h4 className="text-lg font-semibold text-purple-800 mb-3">
                   General Inquiries
                 </h4>
                 <Link
@@ -612,7 +599,7 @@ export default function CoursePage() {
                 </Link>
               </div>
               <div className="bg-white rounded-lg p-4 shadow-md">
-                <h4 className="text-lg font-medium text-purple-800 mb-3">
+                <h4 className="text-lg font-semibold text-purple-800 mb-3">
                   Email Support
                 </h4>
                 <Link
@@ -637,30 +624,14 @@ export default function CoursePage() {
             Join over 10,000 successful traders who have transformed their
             trading strategies with this course.
           </p>
-          <Button variant="gradient" size="custom">
-            Enroll Now and take your trading to the next level today!
-          </Button>
+          <Link href="https://com.rpy.club/cop/k01M4Phela" passHref>
+            <Button variant="gradient" size="custom">
+              Enroll Now and take your trading to the next level today!
+            </Button>
+          </Link>
+
         </section>
       </main>
     </div>
-  );
-}
-
-function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M5 13l4 4L19 7"
-      />
-    </svg>
   );
 }
